@@ -1,0 +1,107 @@
+/* Login */
+.login 
+{
+    width: 18%;
+    font-family: Arial, sans-serif;
+    font-size: 11pt;
+	position: fixed;
+	top: 5%;
+	right: 10%;
+}
+.user 
+{
+	width: 18%;
+    font-family: Arial, sans-serif;
+    font-size: 11pt;
+	position: fixed;
+	top: 5%;
+	right: 10%;
+}
+.user tr
+{
+    text-decoration:none;
+	visibility:hidden;
+}
+.user:hover tr
+{
+	visibility:visible;
+}
+.user tr:hover
+{
+	visibility:visible;
+	background-color:rgba(255,0,0,0.1);
+}
+
+/* Menu */
+#menu ul 
+{
+    list-style-type: none;
+    width: 14%;
+    font-family: Arial, sans-serif;
+    font-size: 11pt;
+	position: fixed;
+	top: 30%;
+}
+#menu ul li 
+{
+    background-color: #666;
+}
+#menu ul li a 
+{
+    color: #ccc;
+    text-decoration: none;
+    text-transform: uppercase;
+    display: block;
+    padding: 10px 10px 10px 20px;
+}
+#menu ul li a:hover 
+{
+    background: #000;
+    border-left: 10px solid #333;
+    color: #fff;
+}
+
+/* Contenido */
+#contenido 
+{
+	position: fixed;
+	top: 31%;
+	left: 23%;
+	font-family: Arial, sans-serif;
+    font-size: 11pt
+}
+#contenido div tr
+{
+    background-color: red;
+}
+#contenido div tr:hover
+{
+	background-color: #666;
+}
+
+/* Contacto */
+.contactar
+{
+	width:0%;
+	height:5%;
+	position:absolute;
+	bottom:0;
+	left:50%;
+}
+
+body 
+{
+    background-color: #66ff55;
+}
+
+h1 
+{
+    color: orange;
+    text-align: center;
+}
+
+p 
+{
+    font-family: "Times New Roman";
+    font-size: 20px;
+}
