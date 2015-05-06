@@ -179,19 +179,33 @@
 							vbuscarborrar($_GET['busqueda'],$_GET['buscar']);
 							vcancionesborrar($canciones);
 							break;
-						case 2://autor
-						case 3://disco
+                                                    case 2:$autores=  mbuscarautor($_GET['busqueda']);//autor
+                                                            vbuscarborrar($_GET['busqueda'],$_GET['buscar']);
+                                                            vautorborrar($autores);
+                                                        break;
+                                                    case 3:$albumnes=mbuscaralbum($_GET['busqueda']);//album(disco)
+                                                            vbuscarborrar($_GET['busqueda'],$_GET['buscar']);
+                                                            valbumborrar($albumnes);
+                                                            break;
 					}
 					break;
-				case 3: if (mborrarCancion($_GET['idcancion']))
-							echo "eliminado con exito";
-						else
-							echo 'fallo al eliminar';
+                                case 3: if (mborrarCancion($_GET['idcancion'])){
+                                            echo "eliminado con exito";
+                                            vmostrarAmenu();
+                                        }else{
+                                            echo 'fallo al eliminar';
+                                            vbuscarborrar($_GET['busqueda'],$_GET['buscar']);
+                                        }
 					break;
-				case 4://eliminar disco
-				case 5://eliminar album
-				case 6://comfirmar
-			}
+                                case 4:$cancionesaborrar=cancionesautor($_GET['autor']);//confirmar borrar autor
+                                        $_SESSION['cancionesborrar']=$cancionesaborrar;
+                                        vmostrarconfirmacion($cancionesaborrar);
+                                case 5:$cancionesaborrar=cancionesalbum($_GET['album']);//confirmar borrar disco
+                                        $_SESSION['cancionesborrar']=$cancionesaborrar;
+                                        vmostrarconfirmacion($cancionesaborrar);//TODO continuar
+                                case 6://eliminar canciones  @TODO eliminar cancion
+                                    //@todo hacer
+                                }//fin switch $id
 		}else{
 			echo "necesitas ser administrador";
 		}
