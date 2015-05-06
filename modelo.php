@@ -1,6 +1,5 @@
 <?php
 /* dudas:
- * crear conexion en cada llamada a la db o pasarlo como parametro? (o que esto sea un clase mejor)
  * obtener valoracion semanal de canciones/playlist
  * limpiar datos antes de llamar a la db o hacerlo en el controlador?
  */
@@ -19,7 +18,7 @@
         $usuario = addslashes($uid);
         $contraseña = addslashes($pw);
 		$con = conexion();
-        $resultado = mysql_query("SELECT count(id) FROM usuarios WHERE usuario='" . $usuario . "' and contraseina='" . md5($contraseña) . "'",$con) or die("Error en: " . mysql_error());
+        $resultado = mysql_query("SELECT count(id) FROM usuarios WHERE usuario='" . $usuario . "' and contraseña='" . md5($contraseña) . "'",$con) or die("Error en: " . mysql_error());
 		$comprobacion = mysql_fetch_array($resultado);
         if ($comprobacion[0] == 1)
         {
@@ -101,7 +100,7 @@
             $con=conexion();
             mysql_real_escape_string($admin);
             mysql_real_escape_string($contraseña);
-            $cifrado=sha1($contraseña);//sha2 seria mejor, pero no esta en php...
+            $cifrado=sha1($contraseña);
             $consulta="select usuario from administradores where contraseña='$cifrado' and usuario='$admin'";
             $resultado=mysql_query($consulta,$con);
             $fusuario = mysql_fetch_assoc($resultado);
@@ -154,7 +153,7 @@
      }
      function mbuscarautor($palabra){
         $con = conexion();
-	$resultado = mysql_query("select * from canciones WHERE autor ='%$palabra%'",$con);
+	$resultado = mysql_query("select autor,count(distinct album) albumnes,count(id) canciones from canciones where autor like '%$palabra%' group by autor;",$con);
 	$i=0;
         $aux=null;
         if ($resultado!==false) {
@@ -167,7 +166,7 @@
      }
     function mbuscaralbum($palabra){
         $con = conexion();
-	$resultado = mysql_query("select * from canciones WHERE album ='%$palabra%'",$con);
+	$resultado = mysql_query("select autor, album,count(id) canciones from canciones where album like '%$palabra%' group by album;",$con);
 	$i=0;
         $aux=null;
         if ($resultado!==false) {
@@ -199,5 +198,31 @@
               unlink("caratulas/".$datos['album'].".jpg");
         }
         return true;
+     }
+     function cancionesautor($autor){
+        $con = conexion();
+	$resultado = mysql_query("select * from canciones where autor like '$autor'",$con);
+	$i=0;
+        $aux=null;
+        if ($resultado!==false) {
+            while ($cancion = mysql_fetch_assoc($resultado)) {
+                $aux[$i]=$cancion;
+                $i++;
+            }
+        }
+        return $aux; 
+     }
+     function cancionesalbum($album){
+        $con = conexion();
+	$resultado = mysql_query("select * from canciones where album like '$album'",$con);
+	$i=0;
+        $aux=null;
+        if ($resultado!==false) {
+            while ($cancion = mysql_fetch_assoc($resultado)) {
+                $aux[$i]=$cancion;
+                $i++;
+            }
+        }
+        return $aux; 
      }
 ?>

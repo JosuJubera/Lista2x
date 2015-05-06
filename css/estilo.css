@@ -33,7 +33,7 @@
 }
 
 /* Menu */
-#menu ul 
+.menu ul 
 {
     list-style-type: none;
     width: 14%;
@@ -42,11 +42,11 @@
 	position: fixed;
 	top: 30%;
 }
-#menu ul li 
+.menu ul li 
 {
     background-color: #666;
 }
-#menu ul li a 
+.menu ul li a 
 {
     color: #ccc;
     text-decoration: none;
@@ -54,7 +54,7 @@
     display: block;
     padding: 10px 10px 10px 20px;
 }
-#menu ul li a:hover 
+.menu ul li a:hover 
 {
     background: #000;
     border-left: 10px solid #333;
@@ -77,6 +77,37 @@
 #contenido div tr:hover
 {
 	background-color: #666;
+}
+
+/* Cambia la lista por estrellas */
+#contenido .star-rating {
+  list-style: none;
+  margin-left: 5px !important;
+  padding: 0px;
+  width: 80px;
+  height: 16px;
+  position: relative;
+  background: url(../img/star.gif) top left repeat-x;
+}
+/* Mete en las estrellas links */
+.star-rating li a {
+  display: block;
+  width: 8px;
+  height: 16px;
+  text-decoration: none;
+  text-indent: -9000px;
+  outline: none;
+  z-index: 20;
+  position: absolute;
+  padding: 0px;
+}
+.star-rating li.current-rating {
+  background: url(../img/star.gif) left center;
+  position: absolute;
+  height: 16px;
+  display: block;
+  text-indent: -9000px;
+  z-index: 1;
 }
 
 /* Contacto */
