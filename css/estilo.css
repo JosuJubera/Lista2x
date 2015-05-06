@@ -31,6 +31,17 @@
 	visibility:visible;
 	background-color:rgba(255,0,0,0.1);
 }
+/* Busqueda */
+.busqueda
+{
+	position:fixed;
+	top:10%;
+	left:4%;
+}
+.busqueda .buscar .submit
+{
+	background: url(../img/buscar.png);
+}
 
 /* Menu */
 .menu ul 
@@ -62,7 +73,7 @@
 }
 
 /* Contenido */
-#contenido 
+.contenido 
 {
 	position: fixed;
 	top: 31%;
@@ -70,17 +81,17 @@
 	font-family: Arial, sans-serif;
     font-size: 11pt
 }
-#contenido div tr
+.contenido div tr
 {
     background-color: red;
 }
-#contenido div tr:hover
+.contenido div tr:hover
 {
 	background-color: #666;
 }
 
 /* Cambia la lista por estrellas */
-#contenido .star-rating {
+.contenido .star-rating {
   list-style: none;
   margin-left: 5px !important;
   padding: 0px;
