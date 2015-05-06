@@ -20,21 +20,27 @@
         echo $partes[0] . $partes[2];
     }
 	
+	function vmostrarPreferencias()
+    {
+        $aux = leerfichero("fonts/preferencias.html");
+        echo $aux;
+    }
+	
 	function vmostrarRecuperar()
 	{
-		$aux = file_get_contents("fonts/recuperar.html");
+		$aux = leerfichero("fonts/recuperar.html");
 		echo $aux;
 	}
 	
 	function vmostrarRegistro()
 	{
-		$aux = file_get_contents("fonts/alta.html");
+		$aux = leerfichero("fonts/alta.html");
 		echo $aux;
 	}
 	
 	function vmostrarBuscardor()
 	{
-		$aux = file_get_contents("fonts/buscar.html");
+		$aux = leerfichero("fonts/buscar.html");
 		echo $aux;
 	}
     
@@ -143,30 +149,30 @@
 	
 	function vmostrarContactar()
 	{
-		$aux = file_get_contents("fonts/contactar.html");
+		$aux = leerfichero("fonts/contactar.html");
 		echo $aux;
 	}
 	function vmostrarContacto()
 	{
-		$aux = file_get_contents("fonts/contacto.html");
+		$aux = leerfichero("fonts/contacto.html");
 		echo $aux;
 	}
 	
 	function valtacancion(){
-            $aux=  file_get_contents('admin/altacancion.html');
+            $aux=  leerfichero('admin/altacancion.html');
             echo $aux;
         }
 	/////////////////////////////////////////////////////////////
 	function vloginadmin(){
-		$aux=  file_get_contents('admin/adminlogin.html');
+		$aux=  leerfichero('admin/adminlogin.html');
 		echo $aux;
 	}
 	function vmostrarAmenu(){
-		$aux=  file_get_contents('admin/menu.html');
+		$aux=  leerfichero('admin/menu.html');
 		echo $aux;
 	}
 	function vbuscarborrar($buscar="",$tipo=1){
-		$aux=file_get_contents('admin/buscar.html');
+		$aux=leerfichero('admin/buscar.html');
 		$aux =str_replace("##BUSCAR##", $buscar, $aux);
 		switch ($tipo){ //1 titulo, 2 autor 3 disco
 			case 1:$aux=str_replace("##TCHK##", 'checked', $aux);

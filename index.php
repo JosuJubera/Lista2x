@@ -28,6 +28,12 @@
 		}	
     }
 	
+	if ($accion == "PREF")
+	{
+		vmostrarPreferencias();
+		vmostrarContactar();
+	}
+	
 	if ($accion == "REC")
 	{
 		vmostrarRecuperar();
