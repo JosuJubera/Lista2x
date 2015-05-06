@@ -33,28 +33,28 @@
 	function mToplistas()
 	{
 		$con = conexion();
-		$resultado = mysql_query("select * from playlist order by valoracion desc limit 20;",$con);
+		$resultado = mysql_query("select *, (ValoracionSemanal * 8) as ValoracionSemanal from playlist order by valoracion desc limit 20;",$con);
 		return $resultado;   
 	}
 	
 	function mTopcanciones()
 	{
 		$con = conexion();
-		$resultado=mysql_query("select * from canciones order by valoracion desc limit 20;",$con);
+		$resultado=mysql_query("select *, (ValoracionSemanal * 8) as ValoracionSemanal from canciones order by valoracion desc limit 20;",$con);
 		return $resultado;
 	}
 	
 	function mMislistas($usuario)
 	{
 		$con = conexion();
-		$resultado = mysql_query("select * from playlist WHERE usuario ='" . $usuario . "' order by valoracion desc limit 20;",$con);
+		$resultado = mysql_query("select *, (Valoracion * 8) as Valoracion from playlist WHERE usuario ='" . $usuario . "' order by valoracion desc limit 20;",$con);
 		return $resultado;   
 	}
 	
 	function mMisfavoritos($usuario)
 	{
 		$con = conexion();
-		$resultado = mysql_query("select * from puntuacioncanciones WHERE usuario ='" . $usuario . "' order by puntuacion desc limit 20;",$con);
+		$resultado = mysql_query("select *, (Valoracion * 8) as Valoracion from puntuacioncanciones WHERE usuario ='" . $usuario . "' order by puntuacion desc limit 20;",$con);
 		return $resultado;   
 	}
 
