@@ -26,6 +26,24 @@
         echo $aux;
     }
 	
+	function vmostrarCambiocontraseña()
+	{
+		$aux = leerfichero("fonts/prefcontraseina.html");
+        echo $aux;
+	}
+	
+	function vmostrarCambiocorreo()
+	{
+		$aux = leerfichero("fonts/prefemail.html");
+        echo $aux;
+	}
+	
+	function vmostrarEliminarcuenta()
+	{
+		$aux = leerfichero("fonts/prefeliminar.html");
+        echo $aux;
+	}
+	
 	function vmostrarRecuperar()
 	{
 		$aux = leerfichero("fonts/recuperar.html");

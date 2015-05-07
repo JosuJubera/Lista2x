@@ -28,9 +28,24 @@
 		}	
     }
 	
-	if ($accion == "PREF")
+	if ($accion == "CC")
 	{
 		vmostrarPreferencias();
+		vmostrarCambiocontraseña();
+		vmostrarContactar();
+	}
+	
+	if ($accion == "CE")
+	{
+		vmostrarPreferencias();
+		vmostrarCambiocorreo();
+		vmostrarContactar();
+	}
+	
+	if ($accion == "EC")
+	{
+		vmostrarPreferencias();
+		vmostrarEliminarcuenta();
 		vmostrarContactar();
 	}
 	

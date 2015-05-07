@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="es">
+    <head>
+		<title>Cambiar email</title>
+        <meta charset="utf-8">
+        <link rel="stylesheet" type="text/css" href="css/estilo.css">
+    </head>
+    <body>
+        <div class="contenido">
+			<form id="email" method="post" action="index.php?accion=CE&id=1">
+				<label for="uid">Nombre de usuario:</label>
+                <input name="uid" id="uid" type="text" required="" size="10"><br/>
+				<label for="cu">Correo electronico antiguo:</label>
+                <input name="cu" id="cu" type="email" required="" size="10"><br/>
+				<label for="cau">Correo electronico nuevo:</label>
+                <input name="cau" id="cau" type="email" required="" size="10"><br/>
+				<input name="submit" type="submit" id="submit" value="Enviar">
+            </form>
+        </div>
+    </body>
+</html>
