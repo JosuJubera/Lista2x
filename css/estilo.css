@@ -138,8 +138,10 @@ body
 
 h1 
 {
-    color: orange;
-    text-align: center;
+    color: black;
+	position: fixed;
+	top: 15%;
+	left: 23%;
 }
 
 p 
