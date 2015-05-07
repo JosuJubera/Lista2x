@@ -9,16 +9,18 @@
     	<table class="contenido">
     		<h1 class="titulo">Mis favoritos</h1>
 			<tr><th>Titulo</th><th>Autor</th><th>Nº</th><th>Album</th><th>Valoracion</th></tr>
-			 <!-- Posiblemente aqui valla un div para cada fila, ya veremos-->
     		##FILALISTA##
-    		<tr><a href="/index.php?accion=VC&id=1&cid=##ID##">
-    			<td>##TITULO##</td>
-    			<td>##AUTOR##</td>
-    			<td>##N##</td>
-    			<td>##ALBUM##</td>
-    			<td><ul class="star-rating"> <li style="width: ##VALORACION##px;" id="current-rating" class="current-rating"></li></ul</td>
-    			</a>
-    		</tr>	
+			<div>
+				<tr><a href="/index.php?accion=VC&id=1&cid=##ID##">
+					<td>##TITULO##</td>
+					<td>##AUTOR##</td>
+					<td>##GENERO##</td>
+					<td>##ALBUM##</td>
+					<td>##AÑO##</td>
+					<td><ul class="star-rating"> <li style="width: ##VALORACION##px;" id="current-rating" class="current-rating"></li></ul</td>
+					</a>
+				</tr>
+			</div>
     		##FILALISTA##
     	</table>
     </body>

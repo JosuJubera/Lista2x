@@ -86,6 +86,7 @@
 		while ($datos = mysql_fetch_assoc($consulta))
 		{
 			$lista = $partes[1];
+			$lista = str_replace("##ID##", $datos["Id"], $lista);
 			$lista = str_replace("##POSICION##", $i, $lista);
 			$lista = str_replace("##NOMBRE##", $datos["Titulo"], $lista);
 			$lista = str_replace("##ASUNTO##", $datos["Asunto"], $lista);
@@ -108,11 +109,13 @@
 		while ($datos = mysql_fetch_assoc($consulta))
 		{
 			$lista = $partes[1];
+			$lista = str_replace("##ID##", $datos["Id"], $lista);
 			$lista = str_replace("##POSICION##", $i, $lista);
 			$lista = str_replace("##TITULO##", $datos["Titulo"], $lista);
 			$lista = str_replace("##AUTOR##", $datos["Autor"], $lista);
-			$lista = str_replace("##N##", $datos[3], $lista);
+			$lista = str_replace("##GENERO##", $datos["Genero"], $lista);
 			$lista = str_replace("##ALBUM##", $datos["Album"], $lista);
+			$lista = str_replace("##AÑO##", $datos["Año"], $lista);
 			$lista = str_replace("##VALORACION##", $datos["ValoracionSemanal"], $lista);
 			$contenido .= $lista;
 			$i++;
@@ -130,15 +133,13 @@
 		while ($datos = mysql_fetch_assoc($consulta))
 		{
 			$lista = $partes[1];
-			$lista = str_replace("##POSICION##", $i, $lista);
 			$lista = str_replace("##ID##", $datos["Id"], $lista);
 			$lista = str_replace("##NOMBRE##", $datos["Nombre"], $lista);
 			$lista = str_replace("##ASUNTO##", $datos["Asunto"], $lista);
-			$lista = str_replace("##N##", $datos[6], $lista);
+			$lista = str_replace("##N##", $datos["Canciones"], $lista);
 			$lista = str_replace("##AUTOR##", $datos["Autor"], $lista);
 			$lista = str_replace("##VALORACION##", $datos["Valoracion"], $lista);
 			$contenido .= $lista;
-			$i++;
 		}
         echo $partes[0] . $contenido . $partes[2];
 	}
@@ -153,6 +154,7 @@
 		while ($datos = mysql_fetch_assoc($consulta))
 		{
 			$lista = $partes[1];
+			$lista = str_replace("##ID##", $datos["Id"], $lista);
 			$lista = str_replace("##POSICION##", $i, $lista);
 			$lista = str_replace("##TITULO##", $datos["Titulo"], $lista);
 			$lista = str_replace("##Autor##", $datos["Autor"], $lista);
