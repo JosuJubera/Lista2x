@@ -230,4 +230,24 @@
 			echo "<p> No se han encontrado canciones con ese criterio</p>";
 		}
 	}
+        function confimacionBorrar($canciones){
+            if ($canciones===true){
+                mostrarInfo("Se han eliminado las canciones correctamente");
+                vmostrarAmenu();
+            }else{
+                mostrarError("Fallo a la hora de eliminar las canciones","No se han podido eliminar las canciones seleccionadas"); //TODO cambiar a un mensaje de error 
+                vcancionesborrar($canciones);
+            }
+        }
+        function mostrarError($titulo,$cuerpo){
+            $aux=leerfichero('admin/error.html');
+            $aux=str_replace("##TITULOERROR##", $titulo, $aux);
+            $aux=str_replace("##CUERPO##", $cuerpo, $aux);
+            echo $aux;
+        }
+        function mostrarInfo($cuerpo){
+          $aux=leerfichero('admin/info.html');
+           $aux=str_replace("##CUERPO##", $cuerpo, $aux);
+           echo $aux;  
+        }
 ?>

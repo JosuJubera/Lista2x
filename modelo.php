@@ -225,4 +225,19 @@
         }
         return $aux; 
      }
+     function mborrarCanciones($canciones){
+         $i=0;
+         $j=0;
+         $sinborrar=null;
+         while($i<count($canciones)){
+             if (!mborrarCancion($canciones[$i])){
+                 $sinborrar[$j]=$canciones[$i];
+                 $j++;
+             }
+             $i++;
+         }
+         return true;
+     }
+
+     
 ?>

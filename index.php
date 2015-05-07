@@ -194,14 +194,14 @@
 							vbuscarborrar($_GET['busqueda'],$_GET['buscar']);
 							vcancionesborrar($canciones);
 							break;
-                                                    case 2:$autores=  mbuscarautor($_GET['busqueda']);//autor
-                                                            vbuscarborrar($_GET['busqueda'],$_GET['buscar']);
-                                                            vautorborrar($autores);
+                                                case 2:$autores=  mbuscarautor($_GET['busqueda']);//autor
+                                                        vbuscarborrar($_GET['busqueda'],$_GET['buscar']);
+                                                        vautorborrar($autores);
                                                         break;
-                                                    case 3:$albumnes=mbuscaralbum($_GET['busqueda']);//album(disco)
-                                                            vbuscarborrar($_GET['busqueda'],$_GET['buscar']);
-                                                            valbumborrar($albumnes);
-                                                            break;
+                                                case 3:$albumnes=mbuscaralbum($_GET['busqueda']);//album(disco)
+                                                        vbuscarborrar($_GET['busqueda'],$_GET['buscar']);
+                                                        valbumborrar($albumnes);
+                                                        break;
 					}
 					break;
                                 case 3: if (mborrarCancion($_GET['idcancion'])){
@@ -215,11 +215,15 @@
                                 case 4:$cancionesaborrar=cancionesautor($_GET['autor']);//confirmar borrar autor
                                         $_SESSION['cancionesborrar']=$cancionesaborrar;
                                         vmostrarconfirmacion($cancionesaborrar);
+                                        break;
                                 case 5:$cancionesaborrar=cancionesalbum($_GET['album']);//confirmar borrar disco
                                         $_SESSION['cancionesborrar']=$cancionesaborrar;
-                                        vmostrarconfirmacion($cancionesaborrar);//TODO continuar
-                                case 6://eliminar canciones  @TODO eliminar cancion
-                                    //@todo hacer
+                                        vmostrarconfirmacion($cancionesaborrar);
+                                        break;
+                                case 6:$res=mborrarCanciones($_SESSION['cancionesborrar']);
+                                        vmostrarExito($res);
+                                        break;
+                                    
                                 }//fin switch $id
 		}else{
 			echo "necesitas ser administrador";
