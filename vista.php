@@ -134,10 +134,10 @@
 		{
 			$lista = $partes[1];
 			$lista = str_replace("##ID##", $datos["Id"], $lista);
-			$lista = str_replace("##NOMBRE##", $datos["Nombre"], $lista);
+			$lista = str_replace("##NOMBRE##", $datos["Titulo"], $lista);
 			$lista = str_replace("##ASUNTO##", $datos["Asunto"], $lista);
 			$lista = str_replace("##N##", $datos["Canciones"], $lista);
-			$lista = str_replace("##AUTOR##", $datos["Autor"], $lista);
+			$lista = str_replace("##AUTOR##", $datos["Usuario"], $lista);
 			$lista = str_replace("##VALORACION##", $datos["Valoracion"], $lista);
 			$contenido .= $lista;
 		}
