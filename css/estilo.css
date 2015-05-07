@@ -31,6 +31,16 @@
 	visibility:visible;
 	background-color:rgba(255,0,0,0.1);
 }
+
+/* Alta */
+.alta
+{
+    color: black;
+	position: fixed;
+	top: 15%;
+	left: 23%;
+}
+
 /* Busqueda */
 .busqueda
 {
@@ -73,6 +83,14 @@
 }
 
 /* Contenido */
+.titulo
+{
+    color: black;
+	position: fixed;
+	font-family: Arial, sans-serif;
+	top: 15%;
+	left: 23%;
+}
 .contenido 
 {
 	position: fixed;
@@ -135,16 +153,7 @@ body
 {
     background-color: #66ff55;
 }
-
-h1 
-{
-    color: black;
-	position: fixed;
-	top: 15%;
-	left: 23%;
-}
-
-p 
+	p 
 {
     font-family: "Times New Roman";
     font-size: 20px;
