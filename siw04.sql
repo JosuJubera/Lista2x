@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 08-05-2015 a las 23:04:41
+-- Tiempo de generación: 08-05-2015 a las 23:32:51
 -- Versión del servidor: 5.6.21
 -- Versión de PHP: 5.6.3
 
@@ -93,14 +93,14 @@ CREATE TABLE IF NOT EXISTS `comentarios` (
   `Comentario` text COLLATE utf8_bin NOT NULL,
   `Playlist` int(11) NOT NULL,
   `Ignorado` tinyint(1) NOT NULL DEFAULT '0'
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
 
 --
 -- Volcado de datos para la tabla `comentarios`
 --
 
 INSERT INTO `comentarios` (`id`, `Usuario`, `Reportes`, `Comentario`, `Playlist`, `Ignorado`) VALUES
-(1, 'Usergio', 0, 'Cabron!', 5, 0);
+(3, 'Usergio', 5, 'cabron!', 4, 0);
 
 -- --------------------------------------------------------
 
@@ -239,7 +239,7 @@ MODIFY `Id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=5;
 -- AUTO_INCREMENT de la tabla `comentarios`
 --
 ALTER TABLE `comentarios`
-MODIFY `id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=2;
+MODIFY `id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=4;
 --
 -- AUTO_INCREMENT de la tabla `playlist`
 --
