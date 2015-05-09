@@ -33,28 +33,28 @@
 	function mToplistas()
 	{
 		$con = conexion();
-		$resultado = mysql_query("select p.Id, p.Titulo, p.Asunto, count(Cancion) as Canciones, p.Usuario, (p.ValoracionSemanal * 8) as ValoracionSemanal from playlist p, cancionesplaylist c where p.id = c.playlist order by valoracion desc limit 20",$con);
+		$resultado = mysql_query("select p.Id, p.Titulo, p.Asunto, count(Cancion) as Canciones, p.Usuario, (p.ValoracionSemanal * 8) as ValoracionSemanal from playlist p, cancionesplaylist c where p.id = c.playlist order by ValoracionSemanal desc limit 20",$con);
 		return $resultado;   
 	}
 	
 	function mTopcanciones()
 	{
 		$con = conexion();
-		$resultado=mysql_query("select *, (ValoracionSemanal * 8) as ValoracionSemanal from canciones order by valoracion desc limit 20;",$con);
+		$resultado=mysql_query("select *, (ValoracionSemanal * 8) as ValoracionSemanal from canciones order by ValoracionSemanal desc limit 20;",$con);
 		return $resultado;
 	}
 	
 	function mMislistas($usuario)
 	{
 		$con = conexion();
-		$resultado = mysql_query("select p.Id, p.Titulo, p.Asunto, count(Cancion) as Canciones, p.Usuario, (p.Valoracion * 8) as Valoracion from playlist p, cancionesplaylist c where p.id = c.playlist order by valoracion desc limit 20",$con);
+		$resultado = mysql_query("select p.Id, p.Titulo, p.Asunto, count(Cancion) as Canciones, p.Usuario, (p.Valoracion * 8) as Valoracion from playlist p, cancionesplaylist c WHERE p.id = c.playlist order by valoracion desc limit 20",$con);
 		return $resultado;   
 	}
 	
 	function mMisfavoritos($usuario)
 	{
 		$con = conexion();
-		$resultado = mysql_query("select *, (Valoracion * 8) as Valoracion from puntuacioncanciones WHERE usuario ='" . $usuario . "' order by puntuacion desc limit 20;",$con);
+		$resultado = mysql_query("select c.Titulo, c.Autor, c.Genero, c.Album, (p.Valoracion * 8) as Valoracion from canciones c, puntuacioncanciones p WHERE c.id = p.cancion and p.usuario ='" . $usuario . "' order by puntuacion desc limit 20;",$con);
 		return $resultado;   
 	}
 

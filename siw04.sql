@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 05-05-2015 a las 21:48:18
+-- Tiempo de generación: 09-05-2015 a las 12:35:12
 -- Versión del servidor: 5.6.21
 -- Versión de PHP: 5.6.3
 
@@ -34,14 +34,15 @@ CREATE TABLE IF NOT EXISTS `administradores` (
   `Usuario` varchar(30) COLLATE utf8_bin NOT NULL,
   `Correo` varchar(30) COLLATE utf8_bin NOT NULL,
   `Contraseña` varchar(50) COLLATE utf8_bin NOT NULL
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
 
 --
 -- Volcado de datos para la tabla `administradores`
 --
 
 INSERT INTO `administradores` (`id`, `Nombre`, `Apellido1`, `Apellido2`, `Usuario`, `Correo`, `Contraseña`) VALUES
-(1, 'ser', 'ser', 'ser', 'usergio', 'asd.asd.asd', '8cb2237d0679ca88db6464eac60da96345513964');
+(1, 'ser', 'ser', 'ser', 'usergio', 'asd.asd.asd', '8cb2237d0679ca88db6464eac60da96345513964'),
+(2, '', '', '', 'Jub3r', '', '7110eda4d09e062aa5e4a390b0a572ac0d2c0220');
 
 -- --------------------------------------------------------
 
@@ -65,10 +66,10 @@ CREATE TABLE IF NOT EXISTS `canciones` (
 --
 
 INSERT INTO `canciones` (`Id`, `Titulo`, `Autor`, `Album`, `Genero`, `Año`, `Valoracion`, `ValoracionSemanal`) VALUES
-(1, 'asd', 'yo', 'album', 'asd', 1995, 0, 0),
-(2, 'dsa', 'yo', 'album', '<zx', 1995, 0, 0),
-(3, 'dws', 'yo', 'otroalbum', 'iug', 1995, 0, 0),
-(4, 'juu', 'otro', 'otromas', 'ghjv', 1995, 0, 0);
+(1, 'asd', 'yo', 'album', 'asd', 1995, 5, 7),
+(2, 'dsa', 'yo', 'album', '<zx', 1995, 2, 4),
+(3, 'dws', 'yo', 'otroalbum', 'iug', 1995, 9, 2),
+(4, 'juu', 'otro', 'otromas', 'ghjv', 1995, 3, 3);
 
 -- --------------------------------------------------------
 
@@ -160,6 +161,7 @@ CREATE TABLE IF NOT EXISTS `usuarios` (
 
 INSERT INTO `usuarios` (`id`, `Nombre`, `Apellido1`, `Apellido2`, `Usuario`, `Correo`, `Contraseña`) VALUES
 (1, 'sergio', '', '', 'usergio', 'asd@asd.asd', '8cb2237d0679ca88db6464eac60da96345513964'),
+(2, '', '', '', 'Jub3r', '', '81dc9bdb52d04dc20036dbd8313ed055'),
 (3, 'muyñ', '', '', 'muyñ', 'asd@asd.asd', '8cb2237d0679ca88db6464eac60da96345513964');
 
 --
@@ -222,7 +224,7 @@ ALTER TABLE `usuarios`
 -- AUTO_INCREMENT de la tabla `administradores`
 --
 ALTER TABLE `administradores`
-MODIFY `id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=2;
+MODIFY `id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=3;
 --
 -- AUTO_INCREMENT de la tabla `canciones`
 --

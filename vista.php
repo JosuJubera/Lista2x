@@ -158,7 +158,7 @@
 			$lista = str_replace("##POSICION##", $i, $lista);
 			$lista = str_replace("##TITULO##", $datos["Titulo"], $lista);
 			$lista = str_replace("##Autor##", $datos["Autor"], $lista);
-			$lista = str_replace("##N##", $datos[3], $lista);
+			$lista = str_replace("##GENERO##", $datos["Genero"], $lista);
 			$lista = str_replace("##ALBUM##", $datos["Album"], $lista);
 			$lista = str_replace("##VALORACION##", $datos["Valoracion"], $lista);
 			$contenido .= $lista;
