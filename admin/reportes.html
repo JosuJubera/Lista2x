@@ -15,18 +15,14 @@ and open the template in the editor.
         <table>
             <tr><th>Autor</th><th>Nº de reportes</th><th>Comentario</th></tr>
             ##FILALISTA##
-            <div class="reporte">
-                <tr>
-                    <td>##USUARIO##</td>
-                    <td>##NREPORTES##</td>
-                    <td>##COMENTARIO##</td>
-                    <a href="index.php?accion=AR&id=2&idcomentario=##IDCOMENTARIO##">B <!--- Aqui iria una imagen de borrar--></a>
-                    <a href="index.php?accion=AR&id=3&ignorar=##IDCOMENTARIO##">Ignorar </a>
-                </tr>
-            </div>
+            <tr>
+                <td>##AUTOR##</td>
+                <td>##NREPORTES##</td>
+                <td>##COMENTARIO##</td>
+                <a href="/index.php?accion=BC&id=2&idcomentario=##IDCOMENTARIO##">B <!--- Aqui iria una imagen de borrar--> 
+                </a>
+            </tr>	
             ##FILALISTA##
-            <a href="index.php?accion=AR&id=1&verignorados=1">Ver Reportes Ignorados</a>
         </table>
-         <a href="index.php?accion=AR&id=1">Volver</a>
     </body>
 </html>

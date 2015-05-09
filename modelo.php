@@ -17,17 +17,17 @@
     {
         $usuario = addslashes($uid);
         $contraseña = addslashes($pw);
-	$con = conexion();
-        $resultado = mysql_query("SELECT count(id) FROM usuarios WHERE usuario='" . $usuario . "' and contraseña='" . sha1($contraseña) . "'",$con) or die("Error en: " . mysql_error());
-        $comprobacion = mysql_fetch_array($resultado);
+		$con = conexion();
+        $resultado = mysql_query("SELECT count(id) FROM usuarios WHERE usuario='" . $usuario . "' and contraseña='" . md5($contraseña) . "'",$con) or die("Error en: " . mysql_error());
+		$comprobacion = mysql_fetch_array($resultado);
         if ($comprobacion[0] == 1)
         {
-            return $usuario;
+			return $usuario;
         }
-        else
-        {
-            return false;
-        }
+		else
+		{
+			return false;
+		}
     }
 	
 	function mToplistas()
@@ -140,7 +140,6 @@
         }
      function mbuscartitulo($palabra){
         $con = conexion();
-        mysql_real_escape_string($palabra);
 	$resultado = mysql_query("select * from canciones WHERE titulo like '%$palabra%'",$con);
 	$i=0;
         $aux=null;
@@ -154,7 +153,6 @@
      }
      function mbuscarautor($palabra){
         $con = conexion();
-        mysql_real_escape_string($palabra);
 	$resultado = mysql_query("select autor,count(distinct album) albumnes,count(id) canciones from canciones where autor like '%$palabra%' group by autor;",$con);
 	$i=0;
         $aux=null;
@@ -168,7 +166,6 @@
      }
     function mbuscaralbum($palabra){
         $con = conexion();
-        mysql_real_escape_string($palabra);
 	$resultado = mysql_query("select autor, album,count(id) canciones from canciones where album like '%$palabra%' group by album;",$con);
 	$i=0;
         $aux=null;
@@ -239,48 +236,8 @@
              }
              $i++;
          }
-         return $sinborrar;
+         return true;
      }
-     function mobtenerReportes(){
-        $con = conexion();
-	$resultado = mysql_query("select Id,Usuario,Comentario,Reportes from comentarios where ignorado='0' and Reportes>'0' order by reportes desc",$con);
-	$i=0;
-        $aux=null;
-        if ($resultado!==false) {
-            while ($cancion = mysql_fetch_assoc($resultado)) {
-                $aux[$i]=$cancion;
-                $i++;
-            }
-        }
-        return $aux; 
-     }
-        function mobtenerReportesIgnorados(){
-        $con = conexion();
-	$resultado = mysql_query("select Id,Usuario,Comentario from comentarios where ignorado=1 order by reportes desc",$con);
-	$i=0;
-        $aux=null;
-        if ($resultado!==false) {
-            while ($cancion = mysql_fetch_assoc($resultado)) {
-                $aux[$i]=$cancion;
-                $i++;
-            }
-        }
-        return $aux; 
-     }
-     function mignorar($id){
-        $con = conexion();
-        mysql_escape_string($id);
-	mysql_query("update comentarios set Ignorado='1' where Id='$id'",$con);
-     }
-     function mborrarComentario($id){
-        $con = conexion();
-        mysql_escape_string($id);
-        $otro = mysql_query("delete from comentarios where id='$id'",$con);
-        if ($otro===false){
-            return false;
-        }else{
-            return true;
-        }
-     }
+
      
 ?>

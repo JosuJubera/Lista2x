@@ -230,13 +230,13 @@
 			echo "<p> No se han encontrado canciones con ese criterio</p>";
 		}
 	}
-        function confimacionBorrar($sinborrar){
-            if ($sinborrar==null){
+        function confimacionBorrar($canciones){
+            if ($canciones===true){
                 mostrarInfo("Se han eliminado las canciones correctamente");
                 vmostrarAmenu();
             }else{
                 mostrarError("Fallo a la hora de eliminar las canciones","No se han podido eliminar las canciones seleccionadas"); //TODO cambiar a un mensaje de error 
-                vcancionesborrar($sinborrar);
+                vcancionesborrar($canciones);
             }
         }
         function mostrarError($titulo,$cuerpo){
@@ -249,43 +249,5 @@
           $aux=leerfichero('admin/info.html');
            $aux=str_replace("##CUERPO##", $cuerpo, $aux);
            echo $aux;  
-        }
-        function vmostrarReportes($reportes){
-            $aux = leerfichero("admin/reportes.html");
-            $partes = explode("##FILALISTA##", $aux);
-            $contenido = "";
-            $lista = "";
-            if ($reportes!=null){
-                foreach ($reportes as $reporte) {
-                        $lista = $partes[1];
-                        $lista = str_replace("##USUARIO##", $reporte['Usuario'], $lista);
-                        $lista = str_replace("##NREPORTES##", $reporte['Reportes'], $lista);
-                        $lista = str_replace("##COMENTARIO##",$reporte['Comentario'], $lista);
-                        $lista = str_replace("##IDCOMENTARIO##",$reporte['Id'], $lista);
-                        $contenido .= $lista;
-                }
-                echo $partes[0] . $contenido . $partes[2];
-            }else{
-                echo "<p> No hay comentarios reportados ¡Buen trabajo!</p>";
-            }
-        }
-        function vmostrarReportesIgnorados($ignorados){
-            $aux = leerfichero("admin/reportesIgnorados.html");
-            $partes = explode("##FILALISTA##", $aux);
-            $contenido = "";
-            $lista = "";
-            if ($ignorados!=null){
-                foreach ($ignorados as $reporte) {
-                        $lista = $partes[1];
-                        $lista = str_replace("##USUARIO##", $reporte['Usuario'], $lista);
-                        $lista = str_replace("##NREPORTES##", $reporte['Reportes'], $lista);
-                        $lista = str_replace("##COMENTARIO##",$reporte['Comentario'], $lista);
-                        $lista = str_replace("##IDCOMENTARIO##",$reporte['Id'], $lista);
-                        $contenido .= $lista;
-                }
-                echo $partes[0] . $contenido . $partes[2];
-            }else{
-                echo "<p> No hay comentarios ignorados</p>";
-            }
         }
 ?>
