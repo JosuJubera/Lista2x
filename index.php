@@ -51,8 +51,14 @@
 	
 	if ($accion == "REC")
 	{
-		vmostrarRecuperar();
-		vmostrarContactar();
+		switch($id)
+		{
+			case 1:		vmostrarRecuperar();
+						vmostrarContactar();
+						break;
+			case 2:		mensajeOK();
+						break;
+		}
 	}
 	
 	if($accion == "ALTA")
@@ -80,6 +86,27 @@
 	if ($accion == "C")
 	{
 		vmostrarContacto();
+	}
+	
+	if (($accion = "buscar") and (isset($_GET["buscar"])))
+	{
+		$datos = mBuscar($_GET["buscar"],$_GET["tipo"]);
+		switch($_GET["tipo"])
+		{
+			case 0:		vmostrarUsuario($_SESSION["usuario"]);
+						vmostrarBuscardor();
+						vmostrarRmenu();
+						vmostrarToplistas($datos);
+						vmostrarContactar();
+						break;
+			
+			case 1:		vmostrarUsuario($_SESSION["usuario"]);
+						vmostrarBuscardor();
+						vmostrarRmenu();
+						vmostrarTopcanciones($datos);
+						vmostrarContactar();
+						break;
+		}
 	}
 	
     if($accion == "TL")

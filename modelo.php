@@ -30,6 +30,19 @@
 		}
     }
 	
+	function mBuscar($buscar,$tipo)
+	{
+		$con = conexion();
+		switch($tipo)
+		{
+			case 0:		$resultado = mysql_query("select p.Id, p.Nombre, p.Asunto, count(Cancion) as Canciones, p.Usuario, p.Fecha, (p.ValoracionSemanal * 8) as ValoracionSemanal from playlist p, cancionesplaylist c where p.id = c.playlist order by ValoracionSemanal desc limit 20",$con);
+						break;
+			case 1:		$resultado = mysql_query("select Id, Titulo, Artista, Genero, Album, Año, (ValoracionSemanal * 8) as ValoracionSemanal from canciones where Titulo like '%$buscar%' or Artista like '%$buscar%' or Album like '%$buscar%' order by ValoracionSemanal desc limit 20;",$con);
+						break;
+		}
+		return $resultado;
+	}
+	
 	function mToplistas()
 	{
 		$con = conexion();
@@ -47,7 +60,7 @@
 	function mTopcanciones()
 	{
 		$con = conexion();
-		$resultado=mysql_query("select *, (ValoracionSemanal * 8) as ValoracionSemanal from canciones order by ValoracionSemanal desc limit 20;",$con);
+		$resultado=mysql_query("select Id, Titulo, Artista, Genero, Album, Año, (ValoracionSemanal * 8) as ValoracionSemanal from canciones order by ValoracionSemanal desc limit 20;",$con);
 		return $resultado;
 	}
 	
@@ -154,8 +167,8 @@
         }
      function mbuscartitulo($palabra){
         $con = conexion();
-	$resultado = mysql_query("select * from canciones WHERE titulo like '%$palabra%'",$con);
-	$i=0;
+		$resultado = mysql_query("select * from canciones WHERE titulo like '%$palabra%'",$con);
+		$i=0;
         $aux=null;
         if ($resultado!==false) {
             while ($cancion = mysql_fetch_assoc($resultado)) {
@@ -167,8 +180,8 @@
      }
      function mbuscarautor($palabra){
         $con = conexion();
-	$resultado = mysql_query("select autor,count(distinct album) albumnes,count(id) canciones from canciones where autor like '%$palabra%' group by autor;",$con);
-	$i=0;
+		$resultado = mysql_query("select autor,count(distinct album) albumnes,count(id) canciones from canciones where autor like '%$palabra%' group by autor;",$con);
+		$i=0;
         $aux=null;
         if ($resultado!==false) {
             while ($cancion = mysql_fetch_assoc($resultado)) {
@@ -180,8 +193,8 @@
      }
     function mbuscaralbum($palabra){
         $con = conexion();
-	$resultado = mysql_query("select autor, album,count(id) canciones from canciones where album like '%$palabra%' group by album;",$con);
-	$i=0;
+		$resultado = mysql_query("select autor, album,count(id) canciones from canciones where album like '%$palabra%' group by album;",$con);
+		$i=0;
         $aux=null;
         if ($resultado!==false) {
             while ($cancion = mysql_fetch_assoc($resultado)) {
@@ -197,7 +210,7 @@
             return false;
         }
         mysql_real_escape_string($id);
-	$resultado = mysql_query("SELECT album,count(id) 'n' from canciones where album=(select album from canciones where id='$id') group by album",$con);
+		$resultado = mysql_query("SELECT album,count(id) 'n' from canciones where album=(select album from canciones where id='$id') group by album",$con);
         if ($resultado===false || mysql_num_rows($resultado)!=1) {
             return false;//no existe el id
         }
@@ -215,8 +228,8 @@
      }
      function cancionesautor($autor){
         $con = conexion();
-	$resultado = mysql_query("select * from canciones where autor like '$autor'",$con);
-	$i=0;
+		$resultado = mysql_query("select * from canciones where autor like '$autor'",$con);
+		$i=0;
         $aux=null;
         if ($resultado!==false) {
             while ($cancion = mysql_fetch_assoc($resultado)) {
@@ -228,8 +241,8 @@
      }
      function cancionesalbum($album){
         $con = conexion();
-	$resultado = mysql_query("select * from canciones where album like '$album'",$con);
-	$i=0;
+		$resultado = mysql_query("select * from canciones where album like '$album'",$con);
+		$i=0;
         $aux=null;
         if ($resultado!==false) {
             while ($cancion = mysql_fetch_assoc($resultado)) {

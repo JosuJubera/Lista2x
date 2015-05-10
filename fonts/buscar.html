@@ -7,12 +7,12 @@
     </head>
     <body>
         <div class="busqueda">
-            <form class="buscar" method="post" action="../index.php">
-                <input name="busqueda" id="busqueda" type="text" required="" size="10" value="buscar" onFocus="this.value=''">
+            <form class="buscar" method="get" action="index.php?accion=buscar">
+                <input name="buscar" id="buscar" type="text" required="" size="10" value="buscar" onFocus="this.value=''">
                 <input name="submit" type="submit" class="submit" value="">
                 <br/>
-                <input type="radio" name="buscar" value="lista" checked>Lista
-                <input type="radio" name="buscar" value="cancion">Canción
+                <input type="radio" name="tipo" value="0" checked>Lista
+                <input type="radio" name="tipo" value="1">Canción
             </form>
         </div>
     </body>
