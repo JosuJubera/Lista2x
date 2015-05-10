@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 10-05-2015 a las 14:20:07
+-- Tiempo de generación: 10-05-2015 a las 14:51:54
 -- Versión del servidor: 5.6.21
 -- Versión de PHP: 5.6.3
 
@@ -66,7 +66,7 @@ CREATE TABLE IF NOT EXISTS `canciones` (
 --
 
 INSERT INTO `canciones` (`Id`, `Titulo`, `Artista`, `Album`, `Genero`, `Año`, `Valoracion`, `ValoracionSemanal`) VALUES
-(1, 'asd', 'yo', 'album', 'asd', 1995, 5, 7),
+(1, 'Sugar', 'Maroon 5', 'V', 'Disco', 2015, 9, 10),
 (2, 'dsa', 'yo', 'album', '<zx', 1995, 2, 4),
 (3, 'dws', 'yo', 'otroalbum', 'iug', 1995, 9, 2),
 (4, 'juu', 'otro', 'otromas', 'ghjv', 1995, 3, 3);
