@@ -35,7 +35,7 @@
 		$con = conexion();
 		switch($tipo)
 		{
-			case 0:		$resultado = mysql_query("select p.Id, p.Nombre, p.Asunto, count(Cancion) as Canciones, p.Usuario, p.Fecha, (p.ValoracionSemanal * 8) as ValoracionSemanal from playlist p, cancionesplaylist c where p.id = c.playlist and p.Nombre ='%$buscar%' order by ValoracionSemanal desc limit 20",$con);
+			case 0:		$resultado = mysql_query("select p.Id, p.Nombre, p.Asunto, count(Cancion) as Canciones, p.Usuario, p.Fecha, (p.ValoracionSemanal * 8) as ValoracionSemanal from playlist p, cancionesplaylist c where p.id = c.playlist and p.Nombre like '%$buscar%' order by ValoracionSemanal desc limit 20",$con);
 						break;
 			case 1:		$resultado = mysql_query("select Id, Titulo, Artista, Genero, Album, Año, (ValoracionSemanal * 8) as ValoracionSemanal from canciones where Titulo like '%$buscar%' or Artista like '%$buscar%' or Album like '%$buscar%' order by ValoracionSemanal desc limit 20;",$con);
 						break;
