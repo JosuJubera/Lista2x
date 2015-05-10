@@ -249,6 +249,7 @@
 			$lista = str_replace("##N##", $datos["Canciones"], $lista);
 			$lista = str_replace("##USUARIO##", $datos["Usuario"], $lista);
 			$lista = str_replace("##FECHA##", $datos["Fecha"], $lista);
+			$lista = str_replace("##VALORACION##", $datos["ValoracionSemanal"], $lista);
 			$contenido .= $lista;
 			$i++;
 		}
