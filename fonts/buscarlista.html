@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="es">
+    <head>
+		<title>Busqueda listas</title>
+        <meta charset="utf-8">
+        <link rel="stylesheet" type="text/css" href="css/estilo.css">
+    </head>
+	<body>
+		<table class="contenido">
+			<h1 class="titulo">Busqueda de ##BUSCAR##</h1>
+			<tr><th>#</th><th>Nombre</th><th>Asunto</th><th>Nº</th><th>Usuario</th><th>Fecha</th><th>Valoración</th></tr>
+			##FILALISTA##
+			<div>
+				<tr class="lista" onclick="location='index.php?accion=VP&id=1&pid=##ID##'">
+					<td>##POSICION##</td>
+					<td>##NOMBRE##</td>
+					<td>##ASUNTO##</td>
+					<td>##N##</td>
+					<td>##USUARIO##</td>
+					<td>##FECHA##</td>
+					<td><ul class="star-rating"> <li style="width: ##VALORACION##px;" id="current-rating" class="current-rating"></li></ul></td>
+				</tr>
+			</div>
+			##FILALISTA##
+		</table>
+	</body>
+</html>
