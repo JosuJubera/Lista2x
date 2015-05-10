@@ -100,7 +100,7 @@
         echo $partes[0] . $contenido . $partes[2];
     }
 	
-	function vmostrarBuscarlistas($consulta)
+	function vmostrarBuscarlistas($buscar,$consulta)
     {
         $aux = leerfichero("fonts/buscarlista.html");
         $partes = explode("##FILALISTA##", $aux);
@@ -110,6 +110,7 @@
 		while ($datos = mysql_fetch_assoc($consulta))
 		{
 			$lista = $partes[1];
+			$partes[0] = str_replace("##BUSCAR##", $buscar, $partes[0]);
 			$lista = str_replace("##ID##", $datos["Id"], $lista);
 			$lista = str_replace("##POSICION##", $i, $lista);
 			$lista = str_replace("##NOMBRE##", $datos["Nombre"], $lista);
@@ -148,7 +149,7 @@
         echo $partes[0] . $contenido . $partes[2];
     }
 	
-	function vmostrarBuscarcanciones($consulta)
+	function vmostrarBuscarcanciones($buscar,$consulta)
     {
 		$aux = leerfichero("fonts/buscarcancion.html");
         $partes = explode("##FILALISTA##", $aux);
@@ -158,6 +159,7 @@
 		while ($datos = mysql_fetch_assoc($consulta))
 		{
 			$lista = $partes[1];
+			$partes[0] = str_replace("##BUSCAR##", $buscar, $partes[0]);
 			$lista = str_replace("##ID##", $datos["Id"], $lista);
 			$lista = str_replace("##POSICION##", $i, $lista);
 			$lista = str_replace("##TITULO##", $datos["Titulo"], $lista);

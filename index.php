@@ -88,7 +88,7 @@
 		vmostrarContacto();
 	}
 	
-	if (($accion == "buscar") and (isset($_GET["buscar"])))
+	if (($accion == "B") and (isset($_GET["buscar"])))
 	{
 		$datos = mBuscar($_GET["buscar"],$_GET["tipo"]);
 		switch($_GET["tipo"])
@@ -96,14 +96,14 @@
 			case 0:		vmostrarUsuario($_SESSION["usuario"]);
 						vmostrarBuscardor();
 						vmostrarRmenu();
-						vmostrarBuscarlistas($datos);
+						vmostrarBuscarlistas($_GET["buscar"],$datos);
 						vmostrarContactar();
 						break;
 			
 			case 1:		vmostrarUsuario($_SESSION["usuario"]);
 						vmostrarBuscardor();
 						vmostrarRmenu();
-						vmostrarBuscarcanciones($datos);
+						vmostrarBuscarcanciones($_GET["buscar"],$datos);
 						vmostrarContactar();
 						break;
 		}

@@ -7,8 +7,9 @@
     </head>
     <body>
         <div class="busqueda">
-            <form class="buscar" method="get" action="index.php?accion=buscar">
+            <form class="buscar" method="get" action="index.php?accion=B">
                 <input name="buscar" id="buscar" type="text" required="" size="10" value="buscar" onFocus="this.value=''">
+				<input type="hidden" name="accion" value="B" /> 
                 <input name="submit" type="submit" class="submit" value="">
                 <br/>
                 <input type="radio" name="tipo" value="0" checked>Lista
