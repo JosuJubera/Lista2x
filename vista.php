@@ -88,10 +88,11 @@
 			$lista = $partes[1];
 			$lista = str_replace("##ID##", $datos["Id"], $lista);
 			$lista = str_replace("##POSICION##", $i, $lista);
-			$lista = str_replace("##NOMBRE##", $datos["Titulo"], $lista);
+			$lista = str_replace("##NOMBRE##", $datos["Nombre"], $lista);
 			$lista = str_replace("##ASUNTO##", $datos["Asunto"], $lista);
 			$lista = str_replace("##N##", $datos["Canciones"], $lista);
-			$lista = str_replace("##AUTOR##", $datos["Usuario"], $lista);
+			$lista = str_replace("##USUARIO##", $datos["Usuario"], $lista);
+			$lista = str_replace("##FECHA##", $datos["Fecha"], $lista);
 			$lista = str_replace("##VALORACION##", $datos["ValoracionSemanal"], $lista);
 			$contenido .= $lista;
 			$i++;
@@ -112,7 +113,7 @@
 			$lista = str_replace("##ID##", $datos["Id"], $lista);
 			$lista = str_replace("##POSICION##", $i, $lista);
 			$lista = str_replace("##TITULO##", $datos["Titulo"], $lista);
-			$lista = str_replace("##AUTOR##", $datos["Autor"], $lista);
+			$lista = str_replace("##ARTISTA##", $datos["Artista"], $lista);
 			$lista = str_replace("##GENERO##", $datos["Genero"], $lista);
 			$lista = str_replace("##ALBUM##", $datos["Album"], $lista);
 			$lista = str_replace("##AÑO##", $datos["Año"], $lista);
@@ -134,10 +135,11 @@
 		{
 			$lista = $partes[1];
 			$lista = str_replace("##ID##", $datos["Id"], $lista);
-			$lista = str_replace("##NOMBRE##", $datos["Titulo"], $lista);
+			$lista = str_replace("##NOMBRE##", $datos["Nombre"], $lista);
 			$lista = str_replace("##ASUNTO##", $datos["Asunto"], $lista);
 			$lista = str_replace("##N##", $datos["Canciones"], $lista);
-			$lista = str_replace("##AUTOR##", $datos["Usuario"], $lista);
+			$lista = str_replace("##USUARIO##", $datos["Usuario"], $lista);
+			$lista = str_replace("##FECHA##", $datos["Fecha"], $lista);
 			$lista = str_replace("##VALORACION##", $datos["Valoracion"], $lista);
 			$contenido .= $lista;
 		}
@@ -155,16 +157,52 @@
 		{
 			$lista = $partes[1];
 			$lista = str_replace("##ID##", $datos["Id"], $lista);
-			$lista = str_replace("##POSICION##", $i, $lista);
 			$lista = str_replace("##TITULO##", $datos["Titulo"], $lista);
-			$lista = str_replace("##Autor##", $datos["Autor"], $lista);
+			$lista = str_replace("##ARTISTA##", $datos["Artista"], $lista);
 			$lista = str_replace("##GENERO##", $datos["Genero"], $lista);
 			$lista = str_replace("##ALBUM##", $datos["Album"], $lista);
+			$lista = str_replace("##AÑO##", $datos["Año"], $lista);
 			$lista = str_replace("##VALORACION##", $datos["Valoracion"], $lista);
 			$contenido .= $lista;
 			$i++;
 		}
         echo $partes[0] . $contenido . $partes[2];
+	}
+	
+	function vmostrarCancion($consulta1,$consulta2)
+	{
+		$aux = leerfichero("fonts/cancion.html");
+		$partes = explode("##FILALISTA##", $aux);
+		$contenido = "";
+		$lista = "";
+		$i = 1;
+		
+		while ($datos = mysql_fetch_assoc($consulta1))
+		{
+			$lista = $partes[0];
+			$lista = str_replace("##IDC##", $datos["Id"], $lista);
+			$lista = str_replace("##TITULO##", $datos["Titulo"], $lista);
+			$lista = str_replace("##ARTISTA##", $datos["Artista"], $lista);
+			$lista = str_replace("##GENERO##", $datos["Genero"], $lista);
+			$lista = str_replace("##ALBUM##", $datos["Album"], $lista);
+			$lista = str_replace("##AÑO##", $datos["Año"], $lista);
+			$contenido .= $lista;
+		}
+		
+		while ($datos = mysql_fetch_assoc($consulta2))
+		{
+			$lista = $partes[1];
+			$lista = str_replace("##IDP##", $datos["Id"], $lista);
+			$lista = str_replace("##POSICION##", $i, $lista);
+			$lista = str_replace("##NOMBRE##", $datos["Nombre"], $lista);
+			$lista = str_replace("##ASUNTO##", $datos["Asunto"], $lista);
+			$lista = str_replace("##N##", $datos["Canciones"], $lista);
+			$lista = str_replace("##USUARIO##", $datos["Usuario"], $lista);
+			$lista = str_replace("##FECHA##", $datos["Fecha"], $lista);
+			$contenido .= $lista;
+			$i++;
+		}
+        echo $contenido . $partes[2];
 	}
 	
 	function vmostrarContactar()

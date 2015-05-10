@@ -8,16 +8,16 @@
     <body>
 		<table class="contenido">
 			<h1 class="titulo">Mis listas</h1>
-			<tr><th>Nombre</th><th>Asunto</th><th>Nº</th><th>Autor</th><th>Valoracion</th></tr>
+			<tr><th>Nombre</th><th>Asunto</th><th>Nº</th><th>Usuario</th><th>Fecha</th><th>Valoracion</th></tr>
 			##FILALISTA##
 			<div>
-				<tr><a href="/index.php?accion=VP&id=1&pid=##ID##">
+				<tr class="lista" onclick="location='index.php?accion=VP&id=1&pid=##ID##'">
 					<td>##NOMBRE##</td>
 					<td>##ASUNTO##</td>
 					<td>##N##</td>
-					<td>##AUTOR##</td>
+					<td>##USUARIO##</td>
+					<td>##FECHA##</td>
 					<td><ul class="star-rating"> <li style="width: ##VALORACION##px;" id="current-rating" class="current-rating"></li></ul</td>
-					</a>
 				</tr>
 			</div>
 			##FILALISTA##

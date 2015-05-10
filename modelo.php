@@ -33,7 +33,14 @@
 	function mToplistas()
 	{
 		$con = conexion();
-		$resultado = mysql_query("select p.Id, p.Titulo, p.Asunto, count(Cancion) as Canciones, p.Usuario, (p.ValoracionSemanal * 8) as ValoracionSemanal from playlist p, cancionesplaylist c where p.id = c.playlist order by ValoracionSemanal desc limit 20",$con);
+		$resultado = mysql_query("select p.Id, p.Nombre, p.Asunto, count(Cancion) as Canciones, p.Usuario, p.Fecha, (p.ValoracionSemanal * 8) as ValoracionSemanal from playlist p, cancionesplaylist c where p.id = c.playlist order by ValoracionSemanal desc limit 20",$con);
+		return $resultado;   
+	}
+	
+	function mToplistascancion($cid)
+	{
+		$con = conexion();
+		$resultado = mysql_query("select p.Id, p.Nombre, p.Asunto, count(Cancion) as Canciones, p.Usuario, p.Fecha, (p.ValoracionSemanal * 8) as ValoracionSemanal from playlist p, cancionesplaylist c where p.id = c.playlist and c.cancion = '$cid' order by ValoracionSemanal desc limit 20",$con);
 		return $resultado;   
 	}
 	
@@ -47,15 +54,22 @@
 	function mMislistas($usuario)
 	{
 		$con = conexion();
-		$resultado = mysql_query("select p.Id, p.Titulo, p.Asunto, count(Cancion) as Canciones, p.Usuario, (p.Valoracion * 8) as Valoracion from playlist p, cancionesplaylist c WHERE p.id = c.playlist order by valoracion desc limit 20",$con);
+		$resultado = mysql_query("select p.Id, p.Nombre, p.Asunto, count(Cancion) as Canciones, p.Usuario, p.Fecha, (p.Valoracion * 8) as Valoracion from playlist p, cancionesplaylist c WHERE p.id = c.playlist order by valoracion desc limit 20",$con);
 		return $resultado;   
 	}
 	
 	function mMisfavoritos($usuario)
 	{
 		$con = conexion();
-		$resultado = mysql_query("select c.Titulo, c.Autor, c.Genero, c.Album, (p.Valoracion * 8) as Valoracion from canciones c, puntuacioncanciones p WHERE c.id = p.cancion and p.usuario ='" . $usuario . "' order by puntuacion desc limit 20;",$con);
+		$resultado = mysql_query("select c.Id, c.Titulo, c.Artista, c.Genero, c.Album, c.Año, (c.Valoracion * 8) as Valoracion from canciones c, puntuacioncanciones p WHERE c.Id = p.Cancion and p.Usuario =2 order by Valoracion desc limit 20;",$con);
 		return $resultado;   
+	}
+	
+	function mCancion($cid)
+	{
+		$con = conexion();
+		$resultado = mysql_query("select Id, Titulo, Artista, Genero, Album, Año from canciones WHERE Id = '$cid'",$con);
+		return $resultado;
 	}
 
 	function mreportes()

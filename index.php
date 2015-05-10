@@ -28,21 +28,21 @@
 		}	
     }
 	
-	if ($accion == "CC")
+	if (($accion == "CC") and (isset($_SESSION["usuario"])))
 	{
 		vmostrarPreferencias();
 		vmostrarCambiocontraseña();
 		vmostrarContactar();
 	}
 	
-	if ($accion == "CE")
+	if (($accion == "CE") and (isset($_SESSION["usuario"])))
 	{
 		vmostrarPreferencias();
 		vmostrarCambiocorreo();
 		vmostrarContactar();
 	}
 	
-	if ($accion == "EC")
+	if (($accion == "EC") and (isset($_SESSION["usuario"])))
 	{
 		vmostrarPreferencias();
 		vmostrarEliminarcuenta();
@@ -137,6 +137,43 @@
 		vmostrarMisfavoritos($datos);
 		vmostrarContactar();
 	}
+	
+	if($accion == "VP")
+    {
+        if (!isset($_SESSION["usuario"]))
+        {
+            vmostrarLogin();
+            vmostrarImenu();
+        }
+        else
+        {
+            vmostrarUsuario($_SESSION["usuario"]);
+            vmostrarBuscardor();
+            vmostrarRmenu();
+        }
+        $datos = mLista();
+        vmostrarLista($datos);
+		vmostrarContactar();
+    }
+	
+	if($accion == "VC")
+    {
+        if (!isset($_SESSION["usuario"]))
+        {
+            vmostrarLogin();
+            vmostrarImenu();
+        }
+        else
+        {
+            vmostrarUsuario($_SESSION["usuario"]);
+            vmostrarBuscardor();
+            vmostrarRmenu();
+        }
+        $datos1 = mCancion($_GET["cid"]);
+		$datos2 = mToplistascancion($_GET["cid"]);
+        vmostrarCancion($datos1,$datos2);
+		vmostrarContactar();
+    }
 	
 	////////////////////////////////////////////////////////////////////////
 	if ($accion=="admin"){//login admin

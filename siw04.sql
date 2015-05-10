@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 09-05-2015 a las 12:35:12
+-- Tiempo de generación: 10-05-2015 a las 14:20:07
 -- Versión del servidor: 5.6.21
 -- Versión de PHP: 5.6.3
 
@@ -53,7 +53,7 @@ INSERT INTO `administradores` (`id`, `Nombre`, `Apellido1`, `Apellido2`, `Usuari
 CREATE TABLE IF NOT EXISTS `canciones` (
 `Id` int(11) NOT NULL,
   `Titulo` varchar(30) COLLATE utf8_bin NOT NULL,
-  `Autor` varchar(30) COLLATE utf8_bin NOT NULL,
+  `Artista` varchar(30) COLLATE utf8_bin NOT NULL,
   `Album` varchar(30) COLLATE utf8_bin NOT NULL,
   `Genero` varchar(30) COLLATE utf8_bin NOT NULL,
   `Año` year(4) NOT NULL,
@@ -65,7 +65,7 @@ CREATE TABLE IF NOT EXISTS `canciones` (
 -- Volcado de datos para la tabla `canciones`
 --
 
-INSERT INTO `canciones` (`Id`, `Titulo`, `Autor`, `Album`, `Genero`, `Año`, `Valoracion`, `ValoracionSemanal`) VALUES
+INSERT INTO `canciones` (`Id`, `Titulo`, `Artista`, `Album`, `Genero`, `Año`, `Valoracion`, `ValoracionSemanal`) VALUES
 (1, 'asd', 'yo', 'album', 'asd', 1995, 5, 7),
 (2, 'dsa', 'yo', 'album', '<zx', 1995, 2, 4),
 (3, 'dws', 'yo', 'otroalbum', 'iug', 1995, 9, 2),
@@ -81,6 +81,14 @@ CREATE TABLE IF NOT EXISTS `cancionesplaylist` (
   `playlist` int(11) NOT NULL,
   `cancion` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
+
+--
+-- Volcado de datos para la tabla `cancionesplaylist`
+--
+
+INSERT INTO `cancionesplaylist` (`playlist`, `cancion`) VALUES
+(1, 1),
+(1, 2);
 
 -- --------------------------------------------------------
 
@@ -105,13 +113,21 @@ CREATE TABLE IF NOT EXISTS `comentarios` (
 CREATE TABLE IF NOT EXISTS `playlist` (
   `Id` int(11) NOT NULL,
   `Usuario` int(11) NOT NULL,
-  `Titulo` varchar(30) COLLATE utf8_bin NOT NULL,
+  `Nombre` varchar(30) COLLATE utf8_bin NOT NULL,
   `Asunto` varchar(60) COLLATE utf8_bin NOT NULL,
   `Descripcion` text COLLATE utf8_bin NOT NULL,
   `Fecha` date NOT NULL,
   `Valoracion` int(11) NOT NULL DEFAULT '0',
   `ValoracionSemanal` int(11) NOT NULL DEFAULT '0'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
+
+--
+-- Volcado de datos para la tabla `playlist`
+--
+
+INSERT INTO `playlist` (`Id`, `Usuario`, `Nombre`, `Asunto`, `Descripcion`, `Fecha`, `Valoracion`, `ValoracionSemanal`) VALUES
+(1, 2, 'Caribe Mix', 'CAnciones verano', 'Las mejores canciones del verano 2015', '2015-05-10', 10, 9),
+(2, 2, 'Caribe Mix', 'CAnciones verano', 'Las mejores canciones del verano 2015', '2015-05-10', 10, 9);
 
 -- --------------------------------------------------------
 
@@ -125,6 +141,13 @@ CREATE TABLE IF NOT EXISTS `puntuacioncanciones` (
   `Fecha` datetime NOT NULL,
   `Puntuacion` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
+
+--
+-- Volcado de datos para la tabla `puntuacioncanciones`
+--
+
+INSERT INTO `puntuacioncanciones` (`Usuario`, `Cancion`, `Fecha`, `Puntuacion`) VALUES
+(2, 1, '2015-05-10 00:00:00', 8);
 
 -- --------------------------------------------------------
 
@@ -178,13 +201,13 @@ ALTER TABLE `administradores`
 -- Indices de la tabla `canciones`
 --
 ALTER TABLE `canciones`
- ADD PRIMARY KEY (`Titulo`,`Autor`), ADD UNIQUE KEY `Id` (`Id`);
+ ADD PRIMARY KEY (`Titulo`,`Artista`), ADD UNIQUE KEY `Id` (`Id`);
 
 --
 -- Indices de la tabla `cancionesplaylist`
 --
 ALTER TABLE `cancionesplaylist`
- ADD PRIMARY KEY (`playlist`,`cancion`);
+ ADD PRIMARY KEY (`playlist`,`cancion`), ADD KEY `fk_cancion` (`cancion`);
 
 --
 -- Indices de la tabla `comentarios`
@@ -243,6 +266,13 @@ MODIFY `id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=4;
 --
 -- Restricciones para tablas volcadas
 --
+
+--
+-- Filtros para la tabla `cancionesplaylist`
+--
+ALTER TABLE `cancionesplaylist`
+ADD CONSTRAINT `fk_cancion` FOREIGN KEY (`cancion`) REFERENCES `canciones` (`Id`),
+ADD CONSTRAINT `fk_playlist` FOREIGN KEY (`playlist`) REFERENCES `playlist` (`Id`);
 
 --
 -- Filtros para la tabla `comentarios`
