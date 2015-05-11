@@ -175,20 +175,20 @@
 	}
 	
 	if($accion == "VP"){
-            if (!isset($_SESSION["usuario"])){
-                vmostrarLogin();
-                vmostrarImenu();
-            }else{
-                vmostrarUsuario($_SESSION["usuario"]);
-                vmostrarBuscardor();
-                vmostrarRmenu();
-            }
-            $datos = minfoplaylist($_GET['pid']);
-            $canciones=mcancionesplaylist($_GET['pid']);
-            $comentarios=mcomplaylist($_GET['pid']);
-            vmostrarLista($datos,$canciones,$comentarios);
-            vmostrarContactar();
-        }
+		if (!isset($_SESSION["usuario"])){
+			vmostrarLogin();
+			vmostrarImenu();
+		}else{
+			vmostrarUsuario($_SESSION["usuario"]);
+			vmostrarBuscardor();
+			vmostrarRmenu();
+		}
+		$datos = minfoplaylist($_GET['pid']);
+		$canciones=mcancionesplaylist($_GET['pid']);
+		$comentarios=mcomplaylist($_GET['pid']);
+		vmostrarLista($datos,$canciones,$comentarios);
+		vmostrarContactar();
+	}
 	
 	if($accion == "VC")
     {

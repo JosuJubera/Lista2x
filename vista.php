@@ -346,7 +346,7 @@
                 return;
             }
             $pagina=str_replace("##PNOMBRE##", $info['Nombre'], $pagina);
-            $pagina=str_replace("##PVALORACION##", $info['Valoracion'], $pagina);
+            $pagina=str_replace("##PVALORACION##", $info['ValoracionSemanal'], $pagina);
             $pagina=str_replace("##PASUNTO##", $info['Asunto'], $pagina);
             $pagina=str_replace("##PAUTOR##", $info['Usuario'], $pagina);
             $pagina=str_replace("##PFECHA##", $info['Fecha'], $pagina);
@@ -374,7 +374,7 @@
                     $lista = str_replace("##CALBUM##", $cancion['Album'], $lista);
                     $lista = str_replace("##CGENERO##",$cancion['Genero'], $lista);
                     $lista = str_replace("##CAÑO##", $cancion['Año'], $lista);
-                    $lista = str_replace("##CVALORACION##", $cancion['Valoracion'], $lista);
+                    $lista = str_replace("##CVALORACION##", $cancion['ValoracionSemanal'], $lista);
                     $lista = str_replace("##ID##", $cancion['Id'], $lista);
                     $contenido .= $lista;
                 }
@@ -399,9 +399,10 @@
             }
             //4º Comentar si es un usuario
             $partes = explode("##COMENTAR##", $pagina);
+			$contenido = $partes[1];
             if (isset($_SESSION['usuario'])){//esta logeado
                 $contenido = str_replace("##UID##", $_SESSION['usuario'], $contenido);
-                $contenido = str_replace("##PID##", $info['id'], $contenido);
+                $contenido = str_replace("##PID##", $info['Id'], $contenido);
                 $pagina=$partes[0] . $contenido . $partes[2]; 
             }else{
                 $contenido = "<p>Logeate para poder comentar. Si no tienes cuenta, registrate!";
