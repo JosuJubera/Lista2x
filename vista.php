@@ -249,7 +249,6 @@
 			$lista = str_replace("##N##", $datos["Canciones"], $lista);
 			$lista = str_replace("##USUARIO##", $datos["Usuario"], $lista);
 			$lista = str_replace("##FECHA##", $datos["Fecha"], $lista);
-			$lista = str_replace("##VALORACION##", $datos["ValoracionSemanal"], $lista);
 			$contenido .= $lista;
 			$i++;
 		}
@@ -338,5 +337,76 @@
           $aux=leerfichero('admin/info.html');
            $aux=str_replace("##CUERPO##", $cuerpo, $aux);
            echo $aux;  
+        }
+        function vmostrarLista($info,$canciones,$comentarios){
+            $pagina = leerfichero("fonts/playlist.html");
+            //1º info de la playlist, si es null es que no existe
+            if ($info==null){
+                echo "<p><b>Error, no existe la playlist seleccionada</b><br/>Utilice el buscador para buscar</p>";
+                return;
+            }
+            $pagina=str_replace("##PNOMBRE##", $info['Nombre'], $pagina);
+            $pagina=str_replace("##PVALORACION##", $info['Valoracion'], $pagina);
+            $pagina=str_replace("##PASUNTO##", $info['Asunto'], $pagina);
+            $pagina=str_replace("##PAUTOR##", $info['Usuario'], $pagina);
+            $pagina=str_replace("##PFECHA##", $info['Fecha'], $pagina);
+            $pagina=str_replace("##PDESCRIPCION##", $info['Descripcion'], $pagina);
+            //opciones para quitar la lista o modificarla
+            $partes = explode("##OPCIONES##", $pagina);
+            if (isSet($_SESSION['usuario']) && $_SESSION['usuario']==$info['Nombre']){
+                $pagina=$partes[0].$partes[1].$partes[2];
+            }else{//no es el autor de la playlist
+                $pagina=$partes[0].$partes[2];
+            }
+            //2º Canciones de la playlist, si es null es que esta vacia
+            $partes = explode("##FILACANCION##", $pagina);
+            if ($canciones==null){
+                $error="<p>No hay canciones en esta playlist</p>";
+                $pagina=$partes[0] . $error . $partes[2];
+            }else{
+                $contenido = "";
+                $lista = "";
+                foreach ($canciones as $cancion) {
+                    $lista = $partes[1];
+                    $lista = str_replace("##CPOSICION##", 1, $lista);
+                    $lista = str_replace("##CTITULO##", $cancion['Titulo'], $lista);
+                    $lista = str_replace("##CAUTOR##", $cancion['Autor'], $lista);
+                    $lista = str_replace("##CALBUM##", $cancion['Album'], $lista);
+                    $lista = str_replace("##CGENERO##",$cancion['Genero'], $lista);
+                    $lista = str_replace("##CAÑO##", $cancion['Año'], $lista);
+                    $lista = str_replace("##CVALORACION##", $cancion['Valoracion'], $lista);
+                    $lista = str_replace("##ID##", $cancion['Id'], $lista);
+                    $contenido .= $lista;
+                }
+                $pagina=$partes[0] . $contenido . $partes[2];
+            }
+            //3ºComentarios de la cancion
+            $partes = explode("##FILACOMENTARIO##", $pagina);
+            if ($comentarios==null){
+                $error="<p>No hay comentarios ¡Escribe el primero!</p>";
+                $pagina=$partes[0] . $error . $partes[2];  
+            }else{
+                $contenido = "";
+                $lista = "";
+                foreach ($comentarios as $comentario) {
+                    $lista = $partes[1];
+                    $lista = str_replace("##COMAUTOR##", $comentario['Autor'], $lista);
+                    $lista = str_replace("##COMCOMENTARIO##", $comentario['Album'], $lista);
+                    $lista = str_replace("##COMID##", $comentario['Id'], $lista);
+                    $contenido .= $lista;
+                }
+                $pagina=$partes[0] . $contenido . $partes[2]; 
+            }
+            //4º Comentar si es un usuario
+            $partes = explode("##COMENTAR##", $pagina);
+            if (isset($_SESSION['usuario'])){//esta logeado
+                $contenido = str_replace("##UID##", $_SESSION['usuario'], $contenido);
+                $contenido = str_replace("##PID##", $info['id'], $contenido);
+                $pagina=$partes[0] . $contenido . $partes[2]; 
+            }else{
+                $contenido = "<p>Logeate para poder comentar. Si no tienes cuenta, registrate!";
+                $pagina=$partes[0] . $contenido . $partes[2]; 
+            }
+            echo $pagina;
         }
 ?>

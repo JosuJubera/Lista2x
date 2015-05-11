@@ -1,7 +1,9 @@
 <?php
     include("modelo.php");
     include("vista.php");
-
+//mirar: orden de las canciones en la playlist, lo guardamos o que cada una salga como quiera 
+//al mostrar la playlist?
+    
 	$accion = "TL";
 	$id = 1;
 
@@ -11,10 +13,17 @@
     {
         $accion = $_GET["accion"];
     }
-
+    if(isset($_POST["accion"]))
+    {
+        $accion = $_POST["accion"];
+    }
     if(isset($_GET["id"]))
     {
          $id = $_GET["id"];
+    }
+    if(isset($_POST["id"]))
+    {
+         $id = $_POST["id"];
     }
     
     if(isset($_POST["uid"],$_POST["pw"]))
@@ -165,23 +174,21 @@
 		vmostrarContactar();
 	}
 	
-	if($accion == "VP")
-    {
-        if (!isset($_SESSION["usuario"]))
-        {
-            vmostrarLogin();
-            vmostrarImenu();
+	if($accion == "VP"){
+            if (!isset($_SESSION["usuario"])){
+                vmostrarLogin();
+                vmostrarImenu();
+            }else{
+                vmostrarUsuario($_SESSION["usuario"]);
+                vmostrarBuscardor();
+                vmostrarRmenu();
+            }
+            $datos = minfoplaylist($_GET['pid']);
+            $canciones=mcancionesplaylist($_GET['pid']);
+            $comentarios=mcomplaylist($_GET['pid']);
+            vmostrarLista($datos,$canciones,$comentarios);
+            vmostrarContactar();
         }
-        else
-        {
-            vmostrarUsuario($_SESSION["usuario"]);
-            vmostrarBuscardor();
-            vmostrarRmenu();
-        }
-        $datos = mLista();
-        vmostrarLista($datos);
-		vmostrarContactar();
-    }
 	
 	if($accion == "VC")
     {

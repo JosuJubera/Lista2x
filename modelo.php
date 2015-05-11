@@ -265,6 +265,51 @@
          }
          return true;
      }
-
      
+    function mcancionesplaylist($id){
+        $con=conexion();
+        if (!is_numeric($id)){//nos la querian colar ¬¬
+            return null;
+        }
+        $resultado=mysql_query("select  Id,Titulo,Artista,Album,Genero,Valoracion from canciones c join cancionesplaylist p on (p.cancion=c.$id) where playlist=1" ,$con);  
+        $i=0;
+        $aux=null;
+        if ($resultado!==false) {
+            while ($cancion = mysql_fetch_assoc($resultado)) {
+                $aux[$i]=$cancion;
+                $i++;
+            }
+        }
+        return $aux; 
+    }
+     
+     function minfoplaylist($id){
+        $con=conexion();
+        if (!is_numeric($id)){//nos la querian colar ¬¬
+            return null;
+        }
+        $info=null;
+        $resultado=mysql_query("SELECT Id,Usuario,Nombre,Asunto,Descripcion,Fecha,Valoracion FROM `playlist` WHERE id='$id'",$con);
+        if ($resultado !== false) {
+            $info = mysql_fetch_assoc($resultado);
+        }
+        return $info;
+    } 
+    
+    function mcomplaylist($id){
+        $con=conexion();
+        if (!is_numeric($id)){//nos la querian colar ¬¬
+            return null;
+        }
+        $resultado=mysql_query("select id,Usuario,Comentario from comentarios where playlist='$id';" ,$con);  
+        $i=0;
+        $aux=null;
+        if ($resultado!==false) {
+            while ($cancion = mysql_fetch_assoc($resultado)) {
+                $aux[$i]=$cancion;
+                $i++;
+            }
+        }
+        return $aux;    
+    }
 ?>

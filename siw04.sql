@@ -27,22 +27,21 @@ SET time_zone = "+00:00";
 --
 
 CREATE TABLE IF NOT EXISTS `administradores` (
-`id` int(11) NOT NULL,
   `Nombre` varchar(30) COLLATE utf8_bin NOT NULL,
   `Apellido1` varchar(30) COLLATE utf8_bin NOT NULL,
   `Apellido2` varchar(30) COLLATE utf8_bin NOT NULL,
   `Usuario` varchar(30) COLLATE utf8_bin NOT NULL,
   `Correo` varchar(30) COLLATE utf8_bin NOT NULL,
   `Contraseña` varchar(50) COLLATE utf8_bin NOT NULL
-) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
 
 --
 -- Volcado de datos para la tabla `administradores`
 --
 
-INSERT INTO `administradores` (`id`, `Nombre`, `Apellido1`, `Apellido2`, `Usuario`, `Correo`, `Contraseña`) VALUES
-(1, 'ser', 'ser', 'ser', 'usergio', 'asd.asd.asd', '8cb2237d0679ca88db6464eac60da96345513964'),
-(2, '', '', '', 'Jub3r', '', '7110eda4d09e062aa5e4a390b0a572ac0d2c0220');
+INSERT INTO `administradores` (`Nombre`, `Apellido1`, `Apellido2`, `Usuario`, `Correo`, `Contraseña`) VALUES
+('ser', 'ser', 'ser', 'usergio', 'asd.asd.asd', '8cb2237d0679ca88db6464eac60da96345513964'),
+('', '', '', 'Jub3r', '', '7110eda4d09e062aa5e4a390b0a572ac0d2c0220');
 
 -- --------------------------------------------------------
 
@@ -98,11 +97,19 @@ INSERT INTO `cancionesplaylist` (`playlist`, `cancion`) VALUES
 
 CREATE TABLE IF NOT EXISTS `comentarios` (
 `id` int(11) NOT NULL,
-  `Usuario` int(11) NOT NULL,
+  `Usuario` varchar(30) COLLATE utf8_bin NOT NULL,
   `Reportes` int(11) NOT NULL,
   `Comentario` text COLLATE utf8_bin NOT NULL,
-  `Playlist` int(11) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
+  `Playlist` int(11) NOT NULL,
+  `Ignorado` tinyint(1) NOT NULL DEFAULT '0'
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
+
+--
+-- Volcado de datos para la tabla `comentarios`
+--
+
+INSERT INTO `comentarios` (`id`, `Usuario`, `Reportes`, `Comentario`, `Playlist`, `Ignorado`) VALUES
+(3, 'Usergio', 5, 'cabron!',2 , 0);
 
 -- --------------------------------------------------------
 
@@ -112,22 +119,22 @@ CREATE TABLE IF NOT EXISTS `comentarios` (
 
 CREATE TABLE IF NOT EXISTS `playlist` (
   `Id` int(11) NOT NULL,
-  `Usuario` int(11) NOT NULL,
+  `Usuario` varchar(30) COLLATE utf8_bin NOT NULL,
   `Nombre` varchar(30) COLLATE utf8_bin NOT NULL,
   `Asunto` varchar(60) COLLATE utf8_bin NOT NULL,
   `Descripcion` text COLLATE utf8_bin NOT NULL,
-  `Fecha` date NOT NULL,
+  `Fecha` datetime DEFAULT CURRENT_TIMESTAMP,
   `Valoracion` int(11) NOT NULL DEFAULT '0',
   `ValoracionSemanal` int(11) NOT NULL DEFAULT '0'
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
+) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
 
 --
 -- Volcado de datos para la tabla `playlist`
 --
 
 INSERT INTO `playlist` (`Id`, `Usuario`, `Nombre`, `Asunto`, `Descripcion`, `Fecha`, `Valoracion`, `ValoracionSemanal`) VALUES
-(1, 2, 'Caribe Mix', 'CAnciones verano', 'Las mejores canciones del verano 2015', '2015-05-10', 10, 9),
-(2, 2, 'Caribe Mix', 'CAnciones verano', 'Las mejores canciones del verano 2015', '2015-05-10', 10, 9);
+(1, 'Jub3r', 'Caribe Mix', 'CAnciones verano', 'Las mejores canciones del verano 2015', '2015-05-10', 10, 9),
+(2, 'Jub3r', 'Caribe Mix', 'CAnciones verano', 'Las mejores canciones del verano 2015', '2015-05-10', 10, 9);
 
 -- --------------------------------------------------------
 
@@ -136,9 +143,9 @@ INSERT INTO `playlist` (`Id`, `Usuario`, `Nombre`, `Asunto`, `Descripcion`, `Fec
 --
 
 CREATE TABLE IF NOT EXISTS `puntuacioncanciones` (
-  `Usuario` int(11) NOT NULL,
+  `Usuario` varchar(30) COLLATE utf8_bin NOT NULL,
   `Cancion` int(11) NOT NULL,
-  `Fecha` datetime NOT NULL,
+  `Fecha` datetime DEFAULT CURRENT_TIMESTAMP,
   `Puntuacion` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
 
@@ -147,7 +154,7 @@ CREATE TABLE IF NOT EXISTS `puntuacioncanciones` (
 --
 
 INSERT INTO `puntuacioncanciones` (`Usuario`, `Cancion`, `Fecha`, `Puntuacion`) VALUES
-(2, 1, '2015-05-10 00:00:00', 8);
+('Jub3r', 1, '2015-05-10 00:00:00', 8);
 
 -- --------------------------------------------------------
 
@@ -156,9 +163,9 @@ INSERT INTO `puntuacioncanciones` (`Usuario`, `Cancion`, `Fecha`, `Puntuacion`) 
 --
 
 CREATE TABLE IF NOT EXISTS `puntuacionesplaylist` (
-  `Usuario` int(11) NOT NULL,
+  `Usuario` varchar(30) COLLATE utf8_bin NOT NULL,
   `Playlist` int(11) NOT NULL,
-  `Fecha` datetime NOT NULL,
+  `Fecha` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
   `Puntuacion` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
 
@@ -169,23 +176,22 @@ CREATE TABLE IF NOT EXISTS `puntuacionesplaylist` (
 --
 
 CREATE TABLE IF NOT EXISTS `usuarios` (
-`id` int(11) NOT NULL,
+  `Usuario` varchar(30) COLLATE utf8_bin NOT NULL,
   `Nombre` varchar(30) COLLATE utf8_bin NOT NULL,
   `Apellido1` varchar(30) COLLATE utf8_bin NOT NULL,
   `Apellido2` varchar(30) COLLATE utf8_bin NOT NULL,
-  `Usuario` varchar(30) COLLATE utf8_bin NOT NULL,
   `Correo` varchar(40) COLLATE utf8_bin NOT NULL,
   `Contraseña` varchar(100) COLLATE utf8_bin NOT NULL
-) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
 
 --
 -- Volcado de datos para la tabla `usuarios`
 --
 
-INSERT INTO `usuarios` (`id`, `Nombre`, `Apellido1`, `Apellido2`, `Usuario`, `Correo`, `Contraseña`) VALUES
-(1, 'sergio', '', '', 'usergio', 'asd@asd.asd', '8cb2237d0679ca88db6464eac60da96345513964'),
-(2, '', '', '', 'Jub3r', '', '81dc9bdb52d04dc20036dbd8313ed055'),
-(3, 'muyñ', '', '', 'muyñ', 'asd@asd.asd', '8cb2237d0679ca88db6464eac60da96345513964');
+INSERT INTO `usuarios` (`Nombre`, `Apellido1`, `Apellido2`, `Usuario`, `Correo`, `Contraseña`) VALUES
+('sergio', '', '', 'Usergio', 'asd@asd.asd', '8cb2237d0679ca88db6464eac60da96345513964'),
+('', '', '', 'Jub3r', '', '81dc9bdb52d04dc20036dbd8313ed055'),
+('muyñ', '', '', 'muyñ', 'asd@asd.asd', '8cb2237d0679ca88db6464eac60da96345513964');
 
 --
 -- Índices para tablas volcadas
@@ -195,7 +201,7 @@ INSERT INTO `usuarios` (`id`, `Nombre`, `Apellido1`, `Apellido2`, `Usuario`, `Co
 -- Indices de la tabla `administradores`
 --
 ALTER TABLE `administradores`
- ADD PRIMARY KEY (`id`), ADD UNIQUE KEY `Usuario` (`Usuario`);
+ ADD PRIMARY KEY (`Nombre`), ADD UNIQUE KEY `Usuario` (`Usuario`);
 
 --
 -- Indices de la tabla `canciones`
@@ -237,17 +243,12 @@ ALTER TABLE `puntuacionesplaylist`
 -- Indices de la tabla `usuarios`
 --
 ALTER TABLE `usuarios`
- ADD PRIMARY KEY (`id`), ADD UNIQUE KEY `Nombre` (`Nombre`);
+ ADD PRIMARY KEY (`Usuario`);
 
 --
 -- AUTO_INCREMENT de las tablas volcadas
 --
 
---
--- AUTO_INCREMENT de la tabla `administradores`
---
-ALTER TABLE `administradores`
-MODIFY `id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=3;
 --
 -- AUTO_INCREMENT de la tabla `canciones`
 --
@@ -259,10 +260,10 @@ MODIFY `Id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=5;
 ALTER TABLE `comentarios`
 MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
 --
--- AUTO_INCREMENT de la tabla `usuarios`
+-- AUTO_INCREMENT de la tabla `playlist`
 --
-ALTER TABLE `usuarios`
-MODIFY `id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=4;
+ALTER TABLE `playlist`
+MODIFY `Id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=5;
 --
 -- Restricciones para tablas volcadas
 --
@@ -278,26 +279,27 @@ ADD CONSTRAINT `fk_playlist` FOREIGN KEY (`playlist`) REFERENCES `playlist` (`Id
 -- Filtros para la tabla `comentarios`
 --
 ALTER TABLE `comentarios`
-ADD CONSTRAINT `comentarios_ibfk_1` FOREIGN KEY (`Usuario`) REFERENCES `usuarios` (`id`);
+ADD CONSTRAINT `comentarios_ibfk_1` FOREIGN KEY (`Usuario`) REFERENCES `usuarios` (`Usuario`),
+ADD CONSTRAINT `fk_playlist_coment` FOREIGN KEY (`Playlist`) REFERENCES `playlist` (`Id`);
 
 --
 -- Filtros para la tabla `playlist`
 --
 ALTER TABLE `playlist`
-ADD CONSTRAINT `playlist_ibfk_1` FOREIGN KEY (`Usuario`) REFERENCES `usuarios` (`id`);
+ADD CONSTRAINT `playlist_ibfk_1` FOREIGN KEY (`Usuario`) REFERENCES `usuarios` (`Usuario`);
 
 --
 -- Filtros para la tabla `puntuacioncanciones`
 --
 ALTER TABLE `puntuacioncanciones`
-ADD CONSTRAINT `puntuacioncanciones_ibfk_1` FOREIGN KEY (`Usuario`) REFERENCES `usuarios` (`id`),
+ADD CONSTRAINT `puntuacioncanciones_ibfk_1` FOREIGN KEY (`Usuario`) REFERENCES `usuarios` (`Usuario`),
 ADD CONSTRAINT `puntuacioncanciones_ibfk_2` FOREIGN KEY (`Cancion`) REFERENCES `canciones` (`Id`);
 
 --
 -- Filtros para la tabla `puntuacionesplaylist`
 --
 ALTER TABLE `puntuacionesplaylist`
-ADD CONSTRAINT `puntuacionesplaylist_ibfk_1` FOREIGN KEY (`Usuario`) REFERENCES `usuarios` (`id`),
+ADD CONSTRAINT `puntuacionesplaylist_ibfk_1` FOREIGN KEY (`Usuario`) REFERENCES `usuarios` (`Usuario`),
 ADD CONSTRAINT `puntuacionesplaylist_ibfk_2` FOREIGN KEY (`Playlist`) REFERENCES `playlist` (`Id`);
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
