@@ -3,6 +3,8 @@
     include("vista.php");
 //mirar: orden de las canciones en la playlist, lo guardamos o que cada una salga como quiera 
 //al mostrar la playlist?
+    //algun sistema de path o algo? que si no la navegacion es dificil.
+    //tras añadir un comentario, no se puede recargar la pagina ¿Como arreglar eso?
     
 	$accion = "TL";
 	$id = 1;
@@ -195,9 +197,9 @@
                 $exito=mpublicarComentario($_POST['uid'],$_POST['pid'],$_POST['comentario']);
                 vmostrarLogin();
 		vmostrarImenu();//hacerlo en nueva pagina o con js sin recargar???
-                $datos = minfoplaylist($_GET['pid']);
-		$canciones=mcancionesplaylist($_GET['pid']);
-		$comentarios=mcomplaylist($_GET['pid']);
+                $datos = minfoplaylist($_POST['pid']);
+		$canciones=mcancionesplaylist($_POST['pid']);
+		$comentarios=mcomplaylist($_POST['pid']);
 		vmostrarLista($datos,$canciones,$comentarios);
 		vmostrarContactar();
             }else{

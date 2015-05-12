@@ -390,9 +390,9 @@
                 $lista = "";
                 foreach ($comentarios as $comentario) {
                     $lista = $partes[1];
-                    $lista = str_replace("##COMAUTOR##", $comentario['Autor'], $lista);
-                    $lista = str_replace("##COMCOMENTARIO##", $comentario['Album'], $lista);
-                    $lista = str_replace("##COMID##", $comentario['Id'], $lista);
+                    $lista = str_replace("##COMAUTOR##", $comentario['Usuario'], $lista);
+                    $lista = str_replace("##COMCOMENTARIO##", $comentario['Comentario'], $lista);
+                    $lista = str_replace("##COMID##", $comentario['id'], $lista);
                     $contenido .= $lista;
                 }
                 $pagina=$partes[0] . $contenido . $partes[2]; 
