@@ -99,6 +99,13 @@
 		return $resultado;   
 	}
 	
+	function mCanciones()
+	{
+		$con = conexion();
+		$resultado=mysql_query("select  Id, Titulo, Artista, Genero, Album, Año from canciones order by Id limit 20;",$con);
+		return $resultado;   
+	}
+	
 	function altausuario($nombre,$apodo,$correo,$ucontraseña)
 	{
 		$con=conexion();

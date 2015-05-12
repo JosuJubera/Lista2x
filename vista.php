@@ -319,10 +319,26 @@
         echo $partes[0] . $contenido . $partes[2];
 	}
 	
-	function vmostrarCanciones()
+	function vmostrarCanciones($consulta)
 	{
 		$aux=  leerfichero('admin/canciones.html');
-		echo $aux;
+		$partes = explode("##FILALISTA##", $aux);
+		$contenido = "";
+		$lista = "";
+		$i = 1;
+		while ($datos = mysql_fetch_assoc($consulta))
+		{
+			$lista = $partes[1];
+			$lista = str_replace("##ID##", $datos["Id"], $lista);
+			$lista = str_replace("##TITULO##", $datos["Titulo"], $lista);
+			$lista = str_replace("##ARTISTA##", $datos["Artista"], $lista);
+			$lista = str_replace("##GENERO##", $datos["Genero"], $lista);
+			$lista = str_replace("##ALBUM##", $datos["Album"], $lista);
+			$lista = str_replace("##AÑO##", $datos["Año"], $lista);
+			$contenido .= $lista;
+			$i++;
+		}
+        echo $partes[0] . $contenido . $partes[2];
 	}
 	
 	function valtacancion()

@@ -282,7 +282,8 @@
 			switch ($id)
 			{
 			case 1: 	vmostrarAmenu();
-						vmostrarCanciones();
+						$datos = mCanciones();
+						vmostrarCanciones($datos);
 						vmostrarUsuario($_SESSION["admin"]);
 						 //mostrar el formulario
 						break;
