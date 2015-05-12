@@ -7,18 +7,21 @@
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
     </head>
     <body>
-        <h1>Gestion de reportes</h1>
-        <table>
-            <tr><th>Autor</th><th>Nº de reportes</th><th>Comentario</th></tr>
-            ##FILALISTA##
-            <tr>
-                <td>##AUTOR##</td>
-                <td>##NREPORTES##</td>
-                <td>##COMENTARIO##</td>
-                <a href="/index.php?accion=BC&id=2&idcomentario=##IDCOMENTARIO##">B <!--- Aqui iria una imagen de borrar--> 
-                </a>
-            </tr>	
-            ##FILALISTA##
         </table>
+		<table class="contenido">
+			<h1 class="titulo">Administrar reportes</h1>
+			<tr><th>Autor</th><th>Nº de reportes</th><th>Comentario</th>
+			##FILALISTA##
+			<div>
+				<tr class="lista" onclick="location='index.php?accion=VR&id=1'">
+					<td>##AUTOR##</td>
+					<td>##NREPORTES##</td>
+					<td>##COMENTARIO##</td>
+					<a href="/index.php?accion=BC&id=2&idcomentario=##IDCOMENTARIO##">B <!--- Aqui iria una imagen de borrar--> 
+					</a>
+				</tr>
+			</div>
+			##FILALISTA##
+		</table>
     </body>
 </html>

@@ -265,11 +265,7 @@
 		$aux = leerfichero("fonts/contacto.html");
 		echo $aux;
 	}
-	
-	function valtacancion(){
-            $aux=  leerfichero('admin/altacancion.html');
-            echo $aux;
-        }
+
 	/////////////////////////////////////////////////////////////
 	function vloginadmin(){
 		$aux=  leerfichero('admin/adminlogin.html');
@@ -279,6 +275,25 @@
 		$aux=  leerfichero('admin/menu.html');
 		echo $aux;
 	}
+	
+	function vmostrarReportes()
+	{
+		$aux=  leerfichero('admin/reportes.html');
+		echo $aux;
+	}
+	
+	function vmostrarUsuarios()
+	{
+		$aux=  leerfichero('admin/usuarios.html');
+		echo $aux;
+	}
+	
+	function valtacancion()
+	{
+		$aux=  leerfichero('admin/altacancion.html');
+		echo $aux;
+	}
+	
 	function vbuscarborrar($buscar="",$tipo=1){
 		$aux=leerfichero('admin/buscar.html');
 		$aux =str_replace("##BUSCAR##", $buscar, $aux);
