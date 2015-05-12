@@ -288,6 +288,12 @@
 		echo $aux;
 	}
 	
+	function vmostrarCanciones()
+	{
+		$aux=  leerfichero('admin/canciones.html');
+		echo $aux;
+	}
+	
 	function valtacancion()
 	{
 		$aux=  leerfichero('admin/altacancion.html');

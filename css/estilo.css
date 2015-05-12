@@ -97,7 +97,7 @@
 	top: 31%;
 	left: 23%;
 	font-family: Arial, sans-serif;
-    font-size: 11pt;
+    font-size: 12pt;
 }
 .contenido .lista
 {
@@ -150,6 +150,13 @@
 	padding-top: 0.5%;
 	z-index: 2;
 	background-color: #66ff55;
+}
+
+/* Admin */
+.contenido .lista .borrar
+{
+	background: url(../img/borrar.png);
+	background-size:100%;
 }
 
 body 

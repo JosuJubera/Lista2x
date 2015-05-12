@@ -6,18 +6,21 @@
         <link rel="stylesheet" type="text/css" href="css/estilo.css">
     </head>
 	<body>
-		<table>
-		<tr><th>Titulo</th><th>Autor</th><th>Album</th><th>Genero</th><th>Año</th></tr>
+		<table class="contenido">
+			<h1 class="titulo">Administrar canciones</h1>
+			<tr><th>Titulo</th><th>Autor</th><th>Album</th><th>Genero</th><th>Año</th>
 			##FILALISTA##
-			<tr>
-				<td>##TITULO##</td>
-				<td>##AUTOR##</td>
-				<td>##ALBUM##</td>
-				<td>##GENERO##</td>
-				<td>##AÑO##</td>
-			<a href="index.php?accion=BC&id=3&idcancion=##IDCANCION##">B <!--- Aqui iria una imagen de borrar--> 
-				</a>
-			</tr>	
+			<div>
+				<tr class="lista" onclick="location='index.php?accion=VC&id=1'">
+					<td>##TITULO##</td>
+					<td>##AUTOR##</td>
+					<td>##ALBUM##</td>
+					<td>##GENERO##</td>
+					<td>##AÑO##</td>
+					<td><a class="borrar" href="/index.php?accion=BC&id=2&idcomentario=##IDCOMENTARIO##"> &nbsp &nbsp &nbsp <!--- Aqui iria una imagen de borrar--> 
+					</a></td>
+				</tr>
+			</div>
 			##FILALISTA##
 		</table>
     </body>
