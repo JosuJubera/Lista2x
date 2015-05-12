@@ -209,17 +209,30 @@
 	
 	if($accion == "VC")
     {
-        if (!isset($_SESSION["usuario"]))
-        {
-            vmostrarLogin();
-            vmostrarImenu();
-        }
-        else
-        {
-            vmostrarUsuario($_SESSION["usuario"]);
-            vmostrarBuscardor();
-            vmostrarRmenu();
-        }
+        switch ($id)
+		{
+			case 1:		if (!isset($_SESSION["usuario"]))
+						{
+							vmostrarLogin();
+							vmostrarImenu();
+						}
+						else
+						{
+							vmostrarUsuario($_SESSION["usuario"]);
+							vmostrarBuscardor();
+							vmostrarRmenu();
+						}
+			case 2:		if (!isset($_SESSION["admin"]))
+						{
+							echo "no eres admin"; 
+						}
+						else
+						{
+							vmostrarUsuario($_SESSION["admin"]);
+							vmostrarBuscardor();
+							vmostrarAmenu();
+						}
+		}
         $datos1 = mCancion($_GET["cid"]);
 		$datos2 = mToplistascancion($_GET["cid"]);
         vmostrarCancion($datos1,$datos2);
