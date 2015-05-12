@@ -36,7 +36,7 @@
 		if ($usuario != false)
 		{
 			$_SESSION["usuario"] = $usuario;
-		}	
+		}
     }
 	
 	if (($accion == "CC") and (isset($_SESSION["usuario"])))
@@ -192,20 +192,20 @@
 		vmostrarContactar();
 	}
         
-        if ($accion=="PC"){
-            if (isset($_POST['uid']) && $_POST['uid']==$_SESSION['usuario']){//es quien dice ser
-                $exito=mpublicarComentario($_POST['uid'],$_POST['pid'],$_POST['comentario']);
-                vmostrarLogin();
-		vmostrarImenu();//hacerlo en nueva pagina o con js sin recargar???
-                $datos = minfoplaylist($_POST['pid']);
-		$canciones=mcancionesplaylist($_POST['pid']);
-		$comentarios=mcomplaylist($_POST['pid']);
-		vmostrarLista($datos,$canciones,$comentarios);
-		vmostrarContactar();
-            }else{
-                echo "no puede hacer eso!";
-            }
-        }
+	if ($accion=="PC"){
+		if (isset($_POST['uid']) && $_POST['uid']==$_SESSION['usuario']){//es quien dice ser
+			$exito=mpublicarComentario($_POST['uid'],$_POST['pid'],$_POST['comentario']);
+			vmostrarLogin();
+	vmostrarImenu();//hacerlo en nueva pagina o con js sin recargar???
+			$datos = minfoplaylist($_POST['pid']);
+	$canciones=mcancionesplaylist($_POST['pid']);
+	$comentarios=mcomplaylist($_POST['pid']);
+	vmostrarLista($datos,$canciones,$comentarios);
+	vmostrarContactar();
+		}else{
+			echo "no puede hacer eso!";
+		}
+	}
 	
 	if($accion == "VC")
     {
@@ -234,7 +234,8 @@
 				{
 					$_SESSION['admin']=$nombre;
 					vmostrarAmenu();
-					vmostrarReportes();
+					$datos = mReportes();
+					vmostrarReportes($datos);
 					vmostrarUsuario($_SESSION["admin"]);
 				}
 				else
@@ -281,27 +282,30 @@
 		if (isset($_SESSION["admin"]) /*&& mIsAdmin($_SESSION["admin"])*/){ //es un admin
 			switch ($id)
 			{
-			case 1: 	vmostrarAmenu();
-						$datos = mCanciones();
-						vmostrarCanciones($datos);
-						vmostrarUsuario($_SESSION["admin"]);
-						 //mostrar el formulario
-						break;
-			case 2: 	valtaCancion();
-						break;
-			
-			case 3: 	if (añadirCancion($_POST['titulo'], $_POST['autor'], $_POST['album'], $_POST['genero'], $_POST['año'], $_FILES["caratula"],$_FILES["cancion"]))
-						{
-						//exito, añadido. mostrar mensaje y pa dejar pa añadir otra
-						echo "cancion añadida con exito";
-						vmostrarAmenu();
-						}
-						else
-						{
-							//fallo, enviar mensajede fallo y k vuelva a intentarlo
-							echo "fallo";
-							valtacancion();
-						}
+				case 1: 	vmostrarAmenu();
+							$datos = mCanciones();
+							vmostrarCanciones($datos);
+							vmostrarUsuario($_SESSION["admin"]);
+							 //mostrar el formulario
+							break;
+				case 2: 	valtaCancion();
+							break;
+				
+				case 3: 	if (añadirCancion($_POST['titulo'], $_POST['autor'], $_POST['album'], $_POST['genero'], $_POST['año'], $_FILES["caratula"],$_FILES["cancion"]))
+							{
+							//exito, añadido. mostrar mensaje y pa dejar pa añadir otra
+							echo "cancion añadida con exito";
+							vmostrarAmenu();
+							}
+							else
+							{
+								//fallo, enviar mensajede fallo y k vuelva a intentarlo
+								echo "fallo";
+								valtacancion();
+							}
+							break;
+				case 4: 	mborrarCancion($_GET["idc"]);
+							break;
 			}
 		}else{
 			echo "necesitas ser administrador";
