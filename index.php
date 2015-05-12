@@ -230,10 +230,15 @@
 	if ($accion=="admin"){//login admin
 		switch ($id){
 			case 2:$nombre=adminlogin($_POST['aid'], $_POST['apw']);
-				if ($nombre!==false){
+				if ($nombre!==false)
+				{
 					$_SESSION['admin']=$nombre;
-					vmostrarAmenu();//aqui iria el menu principal
-				}else{//error ususario incorrecto
+					vmostrarAmenu();
+					vmostrarReportes();
+					vmostrarUsuario($_SESSION["admin"]);
+				}
+				else
+				{//error ususario incorrecto
 					vloginadmin();
 				}
 				break;
@@ -243,25 +248,53 @@
 	if ($accion== "AR"){ //administrar reportes
 		 if (isset($_SESSION["admin"]) /*&& mIsAdmin($_SESSION["admin"])*/){
 			 switch ($id){
-				case 1: vmostrarAmenu(); //mostrar reportes
-						break;
-				case 2://borrar comentario
-				default:vmostrarAmenu();
+				case 1: 	vmostrarAmenu(); //mostrar reportes
+							vmostrarReportes();
+							vmostrarUsuario($_SESSION["admin"]);
+							break;
+				case 2:		//borrar comentario
+				default:	vmostrarAmenu();
 			}
 		 }else{
 			 echo "no eres admin";
 		 }
 	}
+	
+	if ($accion== "AU"){ //administrar usuarios
+		 if (isset($_SESSION["admin"]) /*&& mIsAdmin($_SESSION["admin"])*/){
+			 switch ($id){
+				case 1: 	vmostrarAmenu(); //mostrar usuarios
+							vmostrarUsuarios();
+							vmostrarUsuario($_SESSION["admin"]);
+							break;
+				case 2:		//borrar comentario
+				default:	vmostrarAmenu();
+			}
+		 }else{
+			 echo "no eres admin";
+		 }
+	}
+	
 	if ($accion == "AC"){//alta cancion
 		if (isset($_SESSION["admin"]) /*&& mIsAdmin($_SESSION["admin"])*/){ //es un admin
-			switch ($id){
-				case 1: valtaCancion(); //mostrar el formulario
+			switch ($id)
+			{
+			case 1: 	vmostrarAmenu();
+						vmostrarCanciones();
+						vmostrarUsuario($_SESSION["admin"]);
+						 //mostrar el formulario
 						break;
-				case 2:if (añadirCancion($_POST['titulo'], $_POST['autor'], $_POST['album'], $_POST['genero'], $_POST['año'], $_FILES["caratula"],$_FILES["cancion"])){
-							//exito, añadido. mostrar mensaje y pa dejar pa añadir otra
-							echo "cancion añadida con exito";
-							vmostrarAmenu();
-						}else{
+			case 2: 	valtaCancion();
+						break;
+			
+			case 3: 	if (añadirCancion($_POST['titulo'], $_POST['autor'], $_POST['album'], $_POST['genero'], $_POST['año'], $_FILES["caratula"],$_FILES["cancion"]))
+						{
+						//exito, añadido. mostrar mensaje y pa dejar pa añadir otra
+						echo "cancion añadida con exito";
+						vmostrarAmenu();
+						}
+						else
+						{
 							//fallo, enviar mensajede fallo y k vuelva a intentarlo
 							echo "fallo";
 							valtacancion();
