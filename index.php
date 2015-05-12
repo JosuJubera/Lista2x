@@ -265,7 +265,8 @@
 		 if (isset($_SESSION["admin"]) /*&& mIsAdmin($_SESSION["admin"])*/){
 			 switch ($id){
 				case 1: 	vmostrarAmenu(); //mostrar usuarios
-							vmostrarUsuarios();
+							$datos = mUsuarios();
+							vmostrarUsuarios($datos);
 							vmostrarUsuario($_SESSION["admin"]);
 							break;
 				case 2:		//borrar comentario

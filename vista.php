@@ -298,10 +298,25 @@
         echo $partes[0] . $contenido . $partes[2];
 	}
 	
-	function vmostrarUsuarios()
+	function vmostrarUsuarios($consulta)
 	{
 		$aux=  leerfichero('admin/usuarios.html');
-		echo $aux;
+        $partes = explode("##FILALISTA##", $aux);
+		$contenido = "";
+		$lista = "";
+		$i = 1;
+		while ($datos = mysql_fetch_assoc($consulta))
+		{
+			$lista = $partes[1];
+			$lista = str_replace("##USUARIO##", $datos["Usuario"], $lista);
+			$lista = str_replace("##NOMBRE##", $datos["Nombre"], $lista);
+			$lista = str_replace("##APELLIDO1##", $datos["Apellido1"], $lista);
+			$lista = str_replace("##APELLIDO2##", $datos["Apellido2"], $lista);
+			$lista = str_replace("##CORREO##", $datos["Correo"], $lista);
+			$contenido .= $lista;
+			$i++;
+		}
+        echo $partes[0] . $contenido . $partes[2];
 	}
 	
 	function vmostrarCanciones()

@@ -85,12 +85,20 @@
 		return $resultado;
 	}
 
-	function mreportes()
+	function mReportes()
 	{
 		$con = conexion();
 		$resultado=mysql_query("select Id, Usuario, Reportes, Comentario, Playlist, Ignorado from comentarios order by reportes limit 20;",$con);
 		return $resultado;   
 	}
+	
+	function mUsuarios()
+	{
+		$con = conexion();
+		$resultado=mysql_query("select  Usuario, Nombre, Apellido1, Apellido2, Correo from usuarios order by Usuario limit 20;",$con);
+		return $resultado;   
+	}
+	
 	function altausuario($nombre,$apodo,$correo,$ucontraseña)
 	{
 		$con=conexion();
