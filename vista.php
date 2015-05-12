@@ -413,7 +413,7 @@
                     $lista = $partes[1];
                     $lista = str_replace("##COMAUTOR##", $comentario['Usuario'], $lista);
                     $lista = str_replace("##COMCOMENTARIO##", $comentario['Comentario'], $lista);
-                    $lista = str_replace("##COMID##", $comentario['id'], $lista);
+                    $lista = str_replace("##COMID##", $comentario['Id'], $lista);
                     $contenido .= $lista;
                 }
                 $pagina=$partes[0] . $contenido . $partes[2]; 

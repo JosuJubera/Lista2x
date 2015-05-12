@@ -96,7 +96,7 @@ INSERT INTO `cancionesplaylist` (`playlist`, `cancion`) VALUES
 --
 
 CREATE TABLE IF NOT EXISTS `comentarios` (
-`id` int(11) NOT NULL,
+`Id` int(11) NOT NULL,
   `Usuario` varchar(30) COLLATE utf8_bin NOT NULL,
   `Reportes` int(11) NOT NULL,
   `Comentario` text COLLATE utf8_bin NOT NULL,
