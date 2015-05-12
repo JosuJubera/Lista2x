@@ -301,7 +301,7 @@
         if (!is_numeric($id)){//nos la querian colar ¬¬
             return null;
         }
-        $resultado=mysql_query("select id,Usuario,Comentario from comentarios where playlist='$id';" ,$con);  
+        $resultado=mysql_query("select Id,Usuario,Comentario from comentarios where playlist='$id';" ,$con);  
         $i=0;
         $aux=null;
         if ($resultado!==false) {
