@@ -276,10 +276,26 @@
 		echo $aux;
 	}
 	
-	function vmostrarReportes()
+	function vmostrarReportes($consulta)
 	{
 		$aux=  leerfichero('admin/reportes.html');
-		echo $aux;
+        $partes = explode("##FILALISTA##", $aux);
+		$contenido = "";
+		$lista = "";
+		$i = 1;
+		while ($datos = mysql_fetch_assoc($consulta))
+		{
+			$lista = $partes[1];
+			$lista = str_replace("##ID##", $datos["Id"], $lista);
+			$lista = str_replace("##USUARIO##", $datos["Usuario"], $lista);
+			$lista = str_replace("##NREPORTES##", $datos["Reportes"], $lista);
+			$lista = str_replace("##COMENTARIO##", $datos["Comentario"], $lista);
+			$lista = str_replace("##PLAYLIST##", $datos["Playlist"], $lista);
+			$lista = str_replace("##IGNORADO##", $datos["Ignorado"], $lista);
+			$contenido .= $lista;
+			$i++;
+		}
+        echo $partes[0] . $contenido . $partes[2];
 	}
 	
 	function vmostrarUsuarios()

@@ -17,9 +17,9 @@
     {
         $usuario = addslashes($uid);
         $contraseña = addslashes($pw);
-	$con = conexion();
+		$con = conexion();
         $resultado = mysql_query("SELECT count(Usuario) FROM usuarios WHERE Usuario='" . $usuario . "' and Contraseña='" . sha1($contraseña) . "'",$con) or die("Error en: " . mysql_error());
-	$comprobacion = mysql_fetch_array($resultado);
+		$comprobacion = mysql_fetch_array($resultado);
         if ($comprobacion[0] == 1)
         {
             return $usuario;
@@ -60,7 +60,7 @@
 	function mTopcanciones()
 	{
 		$con = conexion();
-		$resultado=mysql_query("select Id, Titulo, Artista, Genero, Album, Año, (ValoracionSemanal * 8) as ValoracionSemanal from canciones order by ValoracionSemanal desc limit 20;",$con);
+		$resultado = mysql_query("select Id, Titulo, Artista, Genero, Album, Año, (ValoracionSemanal * 8) as ValoracionSemanal from canciones order by ValoracionSemanal desc limit 20;",$con);
 		return $resultado;
 	}
 	
@@ -88,7 +88,7 @@
 	function mreportes()
 	{
 		$con = conexion();
-		$resultado=mysql_query("select * from comentarios order by reportes limit 20;",$con);
+		$resultado=mysql_query("select Id, Usuario, Reportes, Comentario, Playlist, Ignorado from comentarios order by reportes limit 20;",$con);
 		return $resultado;   
 	}
 	function altausuario($nombre,$apodo,$correo,$ucontraseña)
