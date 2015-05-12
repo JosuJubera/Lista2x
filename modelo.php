@@ -17,17 +17,17 @@
     {
         $usuario = addslashes($uid);
         $contraseña = addslashes($pw);
-		$con = conexion();
-        $resultado = mysql_query("SELECT count(id) FROM usuarios WHERE usuario='" . $usuario . "' and contraseña='" . md5($contraseña) . "'",$con) or die("Error en: " . mysql_error());
-		$comprobacion = mysql_fetch_array($resultado);
+	$con = conexion();
+        $resultado = mysql_query("SELECT count(Usuario) FROM usuarios WHERE Usuario='" . $usuario . "' and Contraseña='" . sha1($contraseña) . "'",$con) or die("Error en: " . mysql_error());
+	$comprobacion = mysql_fetch_array($resultado);
         if ($comprobacion[0] == 1)
         {
-			return $usuario;
+            return $usuario;
         }
-		else
-		{
-			return false;
-		}
+        else
+        {
+            return false;
+        }
     }
 	
 	function mBuscar($buscar,$tipo)
@@ -311,5 +311,19 @@
             }
         }
         return $aux;    
+    }
+    function mpublicarComentario($uid,$pid,$comentario){
+        if (!is_numeric($pid) || !is_string($comentario)){
+            return false;
+        }
+        $con=conexion();
+        $comentario=htmlentities($comentario,ENT_SUBSTITUTE);
+        mysql_real_escape_string($comentario);
+        $resultado=mysql_query("insert into comentarios(Usuario,Playlist,Comentario) values ('$uid','$pid','$comentario') " ,$con); 
+        if ($resultado!==false){
+            return true;
+        }else{
+            return false;
+        }
     }
 ?>

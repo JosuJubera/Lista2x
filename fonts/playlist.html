@@ -12,71 +12,68 @@ and open the template in the editor.
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
     </head>
     <body>
-		<div class= contenido>
-			<div class="cabecera">
-				<p><strong>##PNOMBRE##</strong></p>
-				<p><strong>Valoracion</strong></p>
-				<ul class="star-rating"> <li style="width: ##PVALORACION##px;" id="current-rating" class="current-rating"></li></ul>
-			</div>
-			<div class="infoplaylist">
-				<p><b>Asunto: </b>##PASUNTO##</p>
-				<p><b>Autor: </b>##PAUTOR##</p>
-				<p><b>Fecha: </b>##PFECHA##</p>
-				<p><b>Descripcion: </b>##PDESCRIPCION##</p>
-			</div>
-			<!-- hay dos formas de mostrar el boton. Una, que el php mire si es el autor o no, y lo muestre
-			Problema: ¿Como lo meto sin hacer frankenstain?
-			Opcion 2: Enviarlo oculto y que se muestre con js si es necesario
-			Problema: Necesitaria una cookie para saber el nombre del usuario
-			-->
-			##OPCIONES##
-			<div class="opciones">
-				<input id="modificarplaylist" type="button" onclick="location.href='index.php?accion=MP&id=1&playlist=##ID##'" value="Modificar">
-				<input id="eliminarplaylist" class="" type="button" onclick="location.href='index.php?accion=MP&id=1&playlist=##ID##'" value="Eliminar">
-			</div>
-			##OPCIONES##
-			<div class="reproductor">
-					  <!-- A buscarse la vida -->
-			</div>
-			<div class="canciones">
-				<table>
-					<tr><th>#</th><th>Titulo</th><th>Artista</th><th>Genero</th><th>Album</th><th>Año</th><th>Valoracion</th></tr>
-				##FILACANCION##
-				<tr class="lista" onclick="location='index.php?accion=VC&id=1&cid=##ID##'">
-					<td>##CPOSICION##</td>
-					<td>##CTITULO##</td>
-					<td>##CAUTOR##</td>
-					<td>##CALBUM##</td>
-					<td>##CGENERO##</td>
-					<td>##CAÑO##</td>
-					<td><ul class="star-rating"> <li style="width: ##CVALORACION##px;" id="current-rating" class="current-rating"></li></ul></td>
-				</tr>
-				##FILACANCION##
-				</table>
-			</div>
-			<div class="comentarios">
-				##FILACOMENTARIO##
-				<div class="comentario">
-					<p>Autor: ##COMAUTOR##</p><b> <a href="/index.php?accion=RC&id=1&cid=##COMID##">Reportar</a></b><br/>
-					<p>##COMCOMENTARIO##</p>
-				</div>
-				##FILACOMENTARIO##
-			</div>
-			##COMENTAR##
-			<div class="comentar">
-				<form id="nuevocomentario" method="post" action="index.php">
-					<input name="uid" id="uid" type="text" required="" size="10">
-			<label for="cu">Correo electronico:</label>
-					<input name="cu" id="cu" type="email" required="" size="10">
-			<label for="message">Comentario:</label><br />
-			<textarea id="message" class="input" name="message" rows="7" cols="30"></textarea><br />
-					<input type="hidden" value="PC" name="accion">
-					<input type="hidden" value="##UID##" name="uid">
-					<input type="hidden" value="##PID##" name="pid">
-			<input name="submit" type="submit" id="submit" value="Publicar">
-				</form>
-			</div>
-			##COMENTAR##
-		</div>
+        <div class= contenido>
+                <div class="cabecera">
+                        <p><strong>##PNOMBRE##</strong></p>
+                        <p><strong>Valoracion</strong></p>
+                        <ul class="star-rating"> <li style="width: ##PVALORACION##px;" id="current-rating" class="current-rating"></li></ul>
+                </div>
+                <div class="infoplaylist">
+                        <p><b>Asunto: </b>##PASUNTO##</p>
+                        <p><b>Autor: </b>##PAUTOR##</p>
+                        <p><b>Fecha: </b>##PFECHA##</p>
+                        <p><b>Descripcion: </b>##PDESCRIPCION##</p>
+                </div>
+                <!-- hay dos formas de mostrar el boton. Una, que el php mire si es el autor o no, y lo muestre
+                Problema: ¿Como lo meto sin hacer frankenstain?
+                Opcion 2: Enviarlo oculto y que se muestre con js si es necesario
+                Problema: Necesitaria una cookie para saber el nombre del usuario
+                -->
+                ##OPCIONES##
+                <div class="opciones">
+                        <input id="modificarplaylist" type="button" onclick="location.href='index.php?accion=MP&id=1&playlist=##ID##'" value="Modificar">
+                        <input id="eliminarplaylist" class="" type="button" onclick="location.href='index.php?accion=MP&id=1&playlist=##ID##'" value="Eliminar">
+                </div>
+                ##OPCIONES##
+                <div class="reproductor">
+                                  <!-- A buscarse la vida -->
+                </div>
+                <div class="canciones">
+                        <table>
+                                <tr><th>#</th><th>Titulo</th><th>Artista</th><th>Genero</th><th>Album</th><th>Año</th><th>Valoracion</th></tr>
+                        ##FILACANCION##
+                        <tr class="lista" onclick="location='index.php?accion=VC&id=1&cid=##ID##'">
+                                <td>##CPOSICION##</td>
+                                <td>##CTITULO##</td>
+                                <td>##CAUTOR##</td>
+                                <td>##CALBUM##</td>
+                                <td>##CGENERO##</td>
+                                <td>##CAÑO##</td>
+                                <td><ul class="star-rating"> <li style="width: ##CVALORACION##px;" id="current-rating" class="current-rating"></li></ul></td>
+                        </tr>
+                        ##FILACANCION##
+                        </table>
+                </div>
+                <div class="comentarios">
+                        ##FILACOMENTARIO##
+                        <div class="comentario">
+                                <p>Autor: ##COMAUTOR##</p><b> <a href="/index.php?accion=RC&id=1&cid=##COMID##">Reportar</a></b><br/>
+                                <p>##COMCOMENTARIO##</p>
+                        </div>
+                        ##FILACOMENTARIO##
+                </div>
+                <div class="comentar">
+                    ##COMENTAR##
+                    <form id="nuevocomentario" method="post" action="index.php">
+                        <label for="message">Comentario:</label><br />
+                        <textarea id="message" class="input" name="comentario" rows="7" cols="30"></textarea><br />
+                        <input type="hidden" value="PC" name="accion">
+                        <input type="hidden" value="##UID##" name="uid">
+                        <input type="hidden" value="##PID##" name="pid">
+                        <input name="submit" type="submit" id="submit" value="Publicar">
+                    </form>
+                    ##COMENTAR##
+                </div>
+        </div>
     </body>
 </html>

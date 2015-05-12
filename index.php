@@ -189,6 +189,21 @@
 		vmostrarLista($datos,$canciones,$comentarios);
 		vmostrarContactar();
 	}
+        
+        if ($accion=="PC"){
+            if (isset($_POST['uid']) && $_POST['uid']==$_SESSION['usuario']){//es quien dice ser
+                $exito=mpublicarComentario($_POST['uid'],$_POST['pid'],$_POST['comentario']);
+                vmostrarLogin();
+		vmostrarImenu();//hacerlo en nueva pagina o con js sin recargar???
+                $datos = minfoplaylist($_GET['pid']);
+		$canciones=mcancionesplaylist($_GET['pid']);
+		$comentarios=mcomplaylist($_GET['pid']);
+		vmostrarLista($datos,$canciones,$comentarios);
+		vmostrarContactar();
+            }else{
+                echo "no puede hacer eso!";
+            }
+        }
 	
 	if($accion == "VC")
     {
