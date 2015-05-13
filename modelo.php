@@ -193,6 +193,8 @@
         mysql_real_escape_string($palabra);
         $resultado = mysql_query("select * from canciones WHERE titulo like '%$palabra%'",$con);
         $i=0;
+        $resultado = mysql_query("select * from canciones WHERE titulo like '%$palabra%'",$con);
+        $i=0;
         $aux=null;
         if ($resultado!==false) {
             while ($cancion = mysql_fetch_assoc($resultado)) {
