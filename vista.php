@@ -275,29 +275,7 @@
 		$aux=  leerfichero('admin/menu.html');
 		echo $aux;
 	}
-	
-	function vmostrarReportes($consulta)
-	{
-		$aux=  leerfichero('admin/reportes.html');
-        $partes = explode("##FILALISTA##", $aux);
-		$contenido = "";
-		$lista = "";
-		$i = 1;
-		while ($datos = mysql_fetch_assoc($consulta))
-		{
-			$lista = $partes[1];
-			$lista = str_replace("##ID##", $datos["Id"], $lista);
-			$lista = str_replace("##USUARIO##", $datos["Usuario"], $lista);
-			$lista = str_replace("##NREPORTES##", $datos["Reportes"], $lista);
-			$lista = str_replace("##COMENTARIO##", $datos["Comentario"], $lista);
-			$lista = str_replace("##PLAYLIST##", $datos["Playlist"], $lista);
-			$lista = str_replace("##IGNORADO##", $datos["Ignorado"], $lista);
-			$contenido .= $lista;
-			$i++;
-		}
-        echo $partes[0] . $contenido . $partes[2];
-	}
-	
+		
 	function vmostrarUsuarios($consulta)
 	{
 		$aux=  leerfichero('admin/usuarios.html');
@@ -405,6 +383,44 @@
           $aux=leerfichero('admin/info.html');
            $aux=str_replace("##CUERPO##", $cuerpo, $aux);
            echo $aux;  
+        }
+        function vmostrarReportes($reportes){
+            $aux = leerfichero("admin/reportes.html");
+            $partes = explode("##FILALISTA##", $aux);
+            $contenido = "";
+            $lista = "";
+            if ($reportes!=null){
+                foreach ($reportes as $reporte) {
+                        $lista = $partes[1];
+                        $lista = str_replace("##USUARIO##", $reporte['Usuario'], $lista);
+                        $lista = str_replace("##NREPORTES##", $reporte['Reportes'], $lista);
+                        $lista = str_replace("##COMENTARIO##",$reporte['Comentario'], $lista);
+                        $lista = str_replace("##ID##",$reporte['Id'], $lista);
+                        $contenido .= $lista;
+                }
+                echo $partes[0] . $contenido . $partes[2];
+            }else{
+                echo "<p> No hay comentarios reportados ¡Buen trabajo!</p>";
+            }
+        }
+        function vmostrarReportesIgnorados($ignorados){
+            $aux = leerfichero("admin/reportes.html");
+            $partes = explode("##FILALISTA##", $aux);
+            $contenido = "";
+            $lista = "";
+            if ($ignorados!=null){
+                foreach ($ignorados as $reporte) {
+                        $lista = $partes[1];
+                        $lista = str_replace("##USUARIO##", $reporte['Usuario'], $lista);
+                        $lista = str_replace("##NREPORTES##", $reporte['Reportes'], $lista);
+                        $lista = str_replace("##COMENTARIO##",$reporte['Comentario'], $lista);
+                        $lista = str_replace("##IDCOMENTARIO##",$reporte['Id'], $lista);
+                        $contenido .= $lista;
+                }
+                echo $partes[0] . $contenido . $partes[2];
+            }else{
+                echo "<p> No hay comentarios ignorados</p>";
+            }
         }
         function vmostrarLista($info,$canciones,$comentarios){
             $pagina = leerfichero("fonts/playlist.html");
