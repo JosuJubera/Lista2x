@@ -1,7 +1,6 @@
 body 
 {
     background-color: #FFFFFF;
-    height: 100%;
 }
 p 
 {
@@ -104,9 +103,9 @@ p
 }
 .contenido 
 {
-	position: absolute;
-	top: 31%;
-	left: 23%;
+	position: relative ;
+	top: 200px;
+	left: 300px;
 	font-family: Arial, sans-serif;
     font-size: 12pt;
 }
@@ -164,7 +163,7 @@ p
 }
 .hueco
 {
-	height:250px;
+	height:220px;
 }
 
 /* Admin */
