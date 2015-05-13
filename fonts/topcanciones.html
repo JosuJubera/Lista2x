@@ -1,27 +1,17 @@
-<!DOCTYPE html>
-<html lang="es">
-    <head>
-		<title>Top canciones</title>
-        <meta charset="utf-8">
-        <link rel="stylesheet" type="text/css" href="css/estilo.css">
-    </head>
-    <body>
-		<table class="contenido">
-			<h1 class="titulo">Top canciones</h1>
-			<tr><th>#</th><th>Titulo</th><th>Artista</th><th>Genero</th><th>Album</th><th>Año</th><th>Valoracion</th></tr>
-			##FILALISTA##
-			<div>
-				<tr class="lista" onclick="location='index.php?accion=VC&id=1&cid=##ID##'">
-					<td>##POSICION##</td>
-					<td>##TITULO##</td>
-					<td>##ARTISTA##</td>
-					<td>##GENERO##</td>
-					<td>##ALBUM##</td>
-					<td>##AÑO##</td>
-					<td><ul class="star-rating"> <li style="width: ##VALORACION##px;" id="current-rating" class="current-rating"></li></ul></td>
-				</tr>
-			</div>
-			##FILALISTA##
-		</table>
-	</body>
-</html>
+<table class="contenido">
+	<h1 class="titulo">Top canciones</h1>
+	<tr><th>#</th><th>Titulo</th><th>Artista</th><th>Genero</th><th>Album</th><th>Año</th><th>Valoracion</th></tr>
+	##FILALISTA##
+	<div>
+		<tr class="lista" onclick="location='index.php?accion=VC&id=1&cid=##ID##'">
+			<td>##POSICION##</td>
+			<td>##TITULO##</td>
+			<td>##ARTISTA##</td>
+			<td>##GENERO##</td>
+			<td>##ALBUM##</td>
+			<td>##AÑO##</td>
+			<td><ul class="star-rating"> <li style="width: ##VALORACION##px;" id="current-rating" class="current-rating"></li></ul></td>
+		</tr>
+	</div>
+	##FILALISTA##
+</table>

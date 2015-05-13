@@ -1,20 +1,10 @@
-<!DOCTYPE html>
-<html lang="es">
-    <head>
-		<title>Buscar</title>
-        <meta charset="utf-8">
-        <link rel="stylesheet" type="text/css" href="css/estilo.css">
-    </head>
-    <body>
-        <div class="busqueda">
-            <form class="buscar" method="get" action="index.php?accion=B">
-                <input name="buscar" id="buscar" type="text" required="" size="10" value="buscar" onFocus="this.value=''">
-				<input type="hidden" name="accion" value="B" /> 
-                <input name="submit" type="submit" class="submit" value="">
-                <br/>
-                <input type="radio" name="tipo" value="0" checked>Lista
-                <input type="radio" name="tipo" value="1">Canción
-            </form>
-        </div>
-    </body>
-</html>
+<div class="busqueda">
+	<form class="buscar" method="get" action="index.php?accion=B">
+		<input name="buscar" id="buscar" type="text" required="" size="10" value="buscar" onFocus="this.value=''">
+		<input type="hidden" name="accion" value="B" /> 
+		<input name="submit" type="submit" class="submit" value="">
+		<br/>
+		<input type="radio" name="tipo" value="0" checked>Lista
+		<input type="radio" name="tipo" value="1">Canción
+	</form>
+</div>
