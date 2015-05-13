@@ -259,21 +259,6 @@
 			default:vloginadmin();
 		}
 	}
-	if ($accion== "AR"){ //administrar reportes
-		 if (isset($_SESSION["admin"]) /*&& mIsAdmin($_SESSION["admin"])*/){
-			 switch ($id){
-				case 1: 	vmostrarAmenu(); //mostrar reportes
-							$datos = mReportes();
-							vmostrarReportes($datos);
-							vmostrarUsuario($_SESSION["admin"]);
-							break;
-				case 2:		//borrar comentario
-				default:	vmostrarAmenu();
-			}
-		 }else{
-			 echo "no eres admin";
-		 }
-	}
 	
         if ($accion== "AR"){ //administrar reportes
             if (isset($_SESSION["admin"]) /*&& mIsAdmin($_SESSION["admin"])*/){
