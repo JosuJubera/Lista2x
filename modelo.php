@@ -87,9 +87,17 @@
 
 	function mReportes()
 	{
-		$con = conexion();
-		$resultado=mysql_query("select Id, Usuario, Reportes, Comentario, Playlist, Ignorado from comentarios order by reportes limit 20;",$con);
-		return $resultado;   
+            $con = conexion();
+            $resultado=mysql_query("select Id, Usuario, Reportes, Comentario, Playlist, Ignorado from comentarios order by reportes limit 20;",$con);
+            $i=0;
+            $aux=null;
+            if ($resultado!==false) {
+                while ($cancion = mysql_fetch_assoc($resultado)) {
+                $aux[$i]=$cancion;
+                $i++;
+                }
+            }
+            return $aux;     
 	}
 	
 	function mUsuarios()
@@ -182,8 +190,9 @@
         }
      function mbuscartitulo($palabra){
         $con = conexion();
-		$resultado = mysql_query("select * from canciones WHERE titulo like '%$palabra%'",$con);
-		$i=0;
+        mysql_real_escape_string($palabra);
+        $resultado = mysql_query("select * from canciones WHERE titulo like '%$palabra%'",$con);
+        $i=0;
         $aux=null;
         if ($resultado!==false) {
             while ($cancion = mysql_fetch_assoc($resultado)) {
@@ -195,6 +204,7 @@
      }
      function mbuscarautor($palabra){
         $con = conexion();
+        mysql_real_escape_string($palabra);
 		$resultado = mysql_query("select autor,count(distinct album) albumnes,count(id) canciones from canciones where autor like '%$palabra%' group by autor;",$con);
 		$i=0;
         $aux=null;
@@ -208,6 +218,7 @@
      }
     function mbuscaralbum($palabra){
         $con = conexion();
+        mysql_real_escape_string($palabra);
 		$resultado = mysql_query("select autor, album,count(id) canciones from canciones where album like '%$palabra%' group by album;",$con);
 		$i=0;
         $aux=null;
@@ -225,7 +236,7 @@
             return false;
         }
         mysql_real_escape_string($id);
-		$resultado = mysql_query("SELECT album,count(id) 'n' from canciones where album=(select album from canciones where id='$id') group by album",$con);
+        $resultado = mysql_query("SELECT album,count(id) 'n' from canciones where album=(select album from canciones where id='$id') group by album",$con);
         if ($resultado===false || mysql_num_rows($resultado)!=1) {
             return false;//no existe el id
         }
@@ -339,6 +350,47 @@
             return true;
         }else{
             return false;
+        }
+    } 
+    function mobtenerReportes(){
+        $con = conexion();
+	$resultado = mysql_query("select Id,Usuario,Comentario,Reportes from comentarios where ignorado='0' and Reportes>'0' order by reportes desc",$con);
+	$i=0;
+        $aux=null;
+        if ($resultado!==false) {
+            while ($reporte = mysql_fetch_assoc($resultado)) {
+                $aux[$i]=$reporte;
+                $i++;
+            }
+        }
+        return $aux; 
+     }
+    function mobtenerReportesIgnorados(){
+        $con = conexion();
+	$resultado = mysql_query("select Id,Usuario,Comentario from comentarios where ignorado=1 order by reportes desc",$con);
+	$i=0;
+        $aux=null;
+        if ($resultado!==false) {
+            while ($reporte = mysql_fetch_assoc($resultado)) {
+                $aux[$i]=$reporte;
+                $i++;
+            }
+        }
+        return $aux; 
+     }     
+    function mignorar($id){
+        $con = conexion();
+        mysql_escape_string($id);
+	mysql_query("update comentarios set Ignorado='1' where Id='$id'",$con);
+     }
+     function mborrarComentario($id){
+        $con = conexion();
+        mysql_escape_string($id);
+        $otro = mysql_query("delete from comentarios where id='$id'",$con);
+        if ($otro===false){
+            return false;
+        }else{
+            return true;
         }
     }
 ?>
