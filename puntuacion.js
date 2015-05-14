@@ -29,7 +29,7 @@ var con;
 		{
 			if (con.status == 200)
 			{
-				document.getElementById("current-rating").innerHTML = con.responseText;
+				document.getElementById("valoracion").innerHTML = con.responseText;
 			}
 		}
 	}
