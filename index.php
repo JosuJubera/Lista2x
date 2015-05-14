@@ -249,7 +249,8 @@
 		$con = conexion();
 		$resultado = mysql_query("UPDATE puntuacioncanciones SET Valoracion = '$p' WHERE Cancion = '$id' and Usuario = '$usuario';",$con);
 		$resultado = mysql_query("select (p.Valoracion * 8) as Valoracion from puntuacioncanciones p WHERE Cancion = '$id' and Usuario = '$usuario'",$con);
-		return $resultado; 
+		$datos = mysql_fetch_assoc($resultado);
+		echo $datos["Valoracion"];
 	}
 	
 	////////////////////////////////////////////////////////////////////////

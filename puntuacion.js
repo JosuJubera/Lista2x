@@ -30,6 +30,12 @@ var con;
 			if (con.status == 200)
 			{
 				document.getElementById("valoracion").innerHTML = con.responseText;
+				mostrarPuntuacio(document.getElementById("valoracion").innerHTML);
 			}
 		}
 	}
+	
+function mostrarPuntuacio(valor)
+{
+	document.getElementById("valoracion").style.width = valor+"px";
+}
