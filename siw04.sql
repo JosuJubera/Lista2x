@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 10-05-2015 a las 14:51:54
+-- Tiempo de generación: 14-05-2015 a las 17:09:17
 -- Versión del servidor: 5.6.21
 -- Versión de PHP: 5.6.3
 
@@ -40,8 +40,8 @@ CREATE TABLE IF NOT EXISTS `administradores` (
 --
 
 INSERT INTO `administradores` (`Nombre`, `Apellido1`, `Apellido2`, `Usuario`, `Correo`, `Contraseña`) VALUES
-('ser', 'ser', 'ser', 'usergio', 'asd.asd.asd', '8cb2237d0679ca88db6464eac60da96345513964'),
-('', '', '', 'Jub3r', '', '7110eda4d09e062aa5e4a390b0a572ac0d2c0220');
+('', '', '', 'Jub3r', '', '7110eda4d09e062aa5e4a390b0a572ac0d2c0220'),
+('ser', 'ser', 'ser', 'usergio', 'asd.asd.asd', '8cb2237d0679ca88db6464eac60da96345513964');
 
 -- --------------------------------------------------------
 
@@ -58,17 +58,24 @@ CREATE TABLE IF NOT EXISTS `canciones` (
   `Año` year(4) NOT NULL,
   `Valoracion` int(11) NOT NULL DEFAULT '0',
   `ValoracionSemanal` int(11) NOT NULL DEFAULT '0'
-) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
+) ENGINE=InnoDB AUTO_INCREMENT=15 DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
 
 --
 -- Volcado de datos para la tabla `canciones`
 --
 
 INSERT INTO `canciones` (`Id`, `Titulo`, `Artista`, `Album`, `Genero`, `Año`, `Valoracion`, `ValoracionSemanal`) VALUES
+(2, 'Loba', 'Shakira', 'album', 'Pop', 2009, 2, 4),
 (1, 'Sugar', 'Maroon 5', 'V', 'Disco', 2015, 9, 10),
-(2, 'dsa', 'yo', 'album', '<zx', 1995, 2, 4),
 (3, 'dws', 'yo', 'otroalbum', 'iug', 1995, 9, 2),
-(4, 'juu', 'otro', 'otromas', 'ghjv', 1995, 3, 3);
+(5, 'erfqerfc', 'refqerf', 'eqrfqerf', 'qrfqer', 2014, 5, 9),
+(4, 'juu', 'otro', 'otromas', 'ghjv', 1995, 3, 3),
+(14, 'mnbcv', 'bvcb', 'ouyio', 'uioy', 2053, 3, 7),
+(6, 'qwerqwefc', 'bbyujtyujn', 'tyrhyb', 'ehgbeyhty', 2017, 2, 6),
+(9, 'wegvwrgv', 'cvbfgb ', 'rtcwtg rt', 'vtyhvthn', 2014, 9, 6),
+(11, 'wertfwerf', 'gfergvrth', 'gsdvfertyh', 'hethbvertb', 2053, 3, 7),
+(12, 'wtrf vgfer', 'sdfgsfh', 'hjyj', 'htyhr', 2053, 3, 7),
+(13, 'wwrgffer', 'sdfgzcvzdfssfh', 'hsdfgjyj', 'hsdfgsftyhr', 2053, 3, 7);
 
 -- --------------------------------------------------------
 
@@ -102,14 +109,14 @@ CREATE TABLE IF NOT EXISTS `comentarios` (
   `Comentario` text COLLATE utf8_bin NOT NULL,
   `Playlist` int(11) NOT NULL,
   `Ignorado` tinyint(1) NOT NULL DEFAULT '0'
-) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
 
 --
 -- Volcado de datos para la tabla `comentarios`
 --
 
-INSERT INTO `comentarios` (`id`, `Usuario`, `Reportes`, `Comentario`, `Playlist`, `Ignorado`) VALUES
-(3, 'Usergio', 5, 'cabron!',2 , 0);
+INSERT INTO `comentarios` (`Id`, `Usuario`, `Reportes`, `Comentario`, `Playlist`, `Ignorado`) VALUES
+(3, 'Usergio', 5, 'cabron!', 2, 0);
 
 -- --------------------------------------------------------
 
@@ -118,7 +125,7 @@ INSERT INTO `comentarios` (`id`, `Usuario`, `Reportes`, `Comentario`, `Playlist`
 --
 
 CREATE TABLE IF NOT EXISTS `playlist` (
-  `Id` int(11) NOT NULL,
+`Id` int(11) NOT NULL,
   `Usuario` varchar(30) COLLATE utf8_bin NOT NULL,
   `Nombre` varchar(30) COLLATE utf8_bin NOT NULL,
   `Asunto` varchar(60) COLLATE utf8_bin NOT NULL,
@@ -126,15 +133,15 @@ CREATE TABLE IF NOT EXISTS `playlist` (
   `Fecha` datetime DEFAULT CURRENT_TIMESTAMP,
   `Valoracion` int(11) NOT NULL DEFAULT '0',
   `ValoracionSemanal` int(11) NOT NULL DEFAULT '0'
-) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
 
 --
 -- Volcado de datos para la tabla `playlist`
 --
 
 INSERT INTO `playlist` (`Id`, `Usuario`, `Nombre`, `Asunto`, `Descripcion`, `Fecha`, `Valoracion`, `ValoracionSemanal`) VALUES
-(1, 'Jub3r', 'Caribe Mix', 'CAnciones verano', 'Las mejores canciones del verano 2015', '2015-05-10', 10, 9),
-(2, 'Jub3r', 'Caribe Mix', 'CAnciones verano', 'Las mejores canciones del verano 2015', '2015-05-10', 10, 9);
+(1, 'Jub3r', 'Caribe Mix', 'CAnciones verano', 'Las mejores canciones del verano 2015', '2015-05-10 00:00:00', 10, 9),
+(2, 'Jub3r', 'Caribe Mix', 'CAnciones verano', 'Las mejores canciones del verano 2015', '2015-05-10 00:00:00', 10, 9);
 
 -- --------------------------------------------------------
 
@@ -146,15 +153,15 @@ CREATE TABLE IF NOT EXISTS `puntuacioncanciones` (
   `Usuario` varchar(30) COLLATE utf8_bin NOT NULL,
   `Cancion` int(11) NOT NULL,
   `Fecha` datetime DEFAULT CURRENT_TIMESTAMP,
-  `Puntuacion` int(11) NOT NULL
+  `Valoracion` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
 
 --
 -- Volcado de datos para la tabla `puntuacioncanciones`
 --
 
-INSERT INTO `puntuacioncanciones` (`Usuario`, `Cancion`, `Fecha`, `Puntuacion`) VALUES
-('Jub3r', 1, '2015-05-10 00:00:00', 8);
+INSERT INTO `puntuacioncanciones` (`Usuario`, `Cancion`, `Fecha`, `Valoracion`) VALUES
+('Jub3r', 1, '2015-05-10 00:00:00', 5);
 
 -- --------------------------------------------------------
 
@@ -166,7 +173,7 @@ CREATE TABLE IF NOT EXISTS `puntuacionesplaylist` (
   `Usuario` varchar(30) COLLATE utf8_bin NOT NULL,
   `Playlist` int(11) NOT NULL,
   `Fecha` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
-  `Puntuacion` int(11) NOT NULL
+  `Valoracion` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
 
 -- --------------------------------------------------------
@@ -188,10 +195,10 @@ CREATE TABLE IF NOT EXISTS `usuarios` (
 -- Volcado de datos para la tabla `usuarios`
 --
 
-INSERT INTO `usuarios` (`Nombre`, `Apellido1`, `Apellido2`, `Usuario`, `Correo`, `Contraseña`) VALUES
-('sergio', '', '', 'Usergio', 'asd@asd.asd', '8cb2237d0679ca88db6464eac60da96345513964'),
-('', '', '', 'Jub3r', '', '81dc9bdb52d04dc20036dbd8313ed055'),
-('muyñ', '', '', 'muyñ', 'asd@asd.asd', '8cb2237d0679ca88db6464eac60da96345513964');
+INSERT INTO `usuarios` (`Usuario`, `Nombre`, `Apellido1`, `Apellido2`, `Correo`, `Contraseña`) VALUES
+('Jub3r', '', '', '', '', '7110eda4d09e062aa5e4a390b0a572ac0d2c0220'),
+('Usergio', 'sergio', '', '', 'asd@asd.asd', '8cb2237d0679ca88db6464eac60da96345513964'),
+('muyñ', 'muyñ', '', '', 'asd@asd.asd', '8cb2237d0679ca88db6464eac60da96345513964');
 
 --
 -- Índices para tablas volcadas
@@ -219,7 +226,7 @@ ALTER TABLE `cancionesplaylist`
 -- Indices de la tabla `comentarios`
 --
 ALTER TABLE `comentarios`
- ADD PRIMARY KEY (`id`), ADD KEY `Usuario` (`Usuario`);
+ ADD PRIMARY KEY (`Id`), ADD KEY `Usuario` (`Usuario`), ADD KEY `fk_playlist_coment` (`Playlist`);
 
 --
 -- Indices de la tabla `playlist`
@@ -253,17 +260,17 @@ ALTER TABLE `usuarios`
 -- AUTO_INCREMENT de la tabla `canciones`
 --
 ALTER TABLE `canciones`
-MODIFY `Id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=5;
+MODIFY `Id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=15;
 --
 -- AUTO_INCREMENT de la tabla `comentarios`
 --
 ALTER TABLE `comentarios`
-MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+MODIFY `Id` int(11) NOT NULL AUTO_INCREMENT;
 --
 -- AUTO_INCREMENT de la tabla `playlist`
 --
 ALTER TABLE `playlist`
-MODIFY `Id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=5;
+MODIFY `Id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=3;
 --
 -- Restricciones para tablas volcadas
 --
