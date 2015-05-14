@@ -191,7 +191,7 @@
 		vmostrarLista($datos,$canciones,$comentarios);
 		vmostrarContactar();
 	}
-        
+       
 	if ($accion=="PC"){
 		if (isset($_POST['uid']) && $_POST['uid']==$_SESSION['usuario']){//es quien dice ser
 			$exito=mpublicarComentario($_POST['uid'],$_POST['pid'],$_POST['comentario']);
@@ -238,6 +238,18 @@
         vmostrarCancion($datos1,$datos2);
 		vmostrarContactar();
     }
+	
+	/*puntuar*/
+	if($accion == "P")
+	{
+		//mPuntuacion($_GET["id"],$_GET["p"]);
+		$id = $_GET["id"];
+		$p = $_GET["p"];
+		$usuario = $_SESSION['usuario'];
+		$con = conexion();
+		$resultado = mysql_query("UPDATE puntuacioncanciones SET Valoracion = '$p' WHERE Cancion = '$id' and Usuario = '$usuario';",$con);
+		return $resultado; 
+	}
 	
 	////////////////////////////////////////////////////////////////////////
 	if ($accion=="admin"){//login admin
