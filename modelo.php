@@ -74,7 +74,7 @@
 	function mMisfavoritos($usuario)
 	{
 		$con = conexion();
-		$resultado = mysql_query("select c.Id, c.Titulo, c.Artista, c.Genero, c.Album, c.Año, (c.Valoracion * 8) as Valoracion from canciones c, puntuacioncanciones p WHERE c.Id = p.Cancion and p.Usuario = '$usuario' order by Valoracion desc limit 20;",$con);
+		$resultado = mysql_query("select Id, Titulo, Artista, Genero, Album, Año, (p.Valoracion * 8) as Valoracion, (ValoracionSemanal * 8) as ValoracionSemanal from canciones c join puntuacioncanciones p on (id = Cancion) order by ValoracionSemanal desc limit 20;",$con);
 		return $resultado;
 	}
 	
