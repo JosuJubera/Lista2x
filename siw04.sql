@@ -130,7 +130,7 @@ CREATE TABLE IF NOT EXISTS `playlist` (
   `Nombre` varchar(30) COLLATE utf8_bin NOT NULL,
   `Asunto` varchar(60) COLLATE utf8_bin NOT NULL,
   `Descripcion` text COLLATE utf8_bin NOT NULL,
-  `Fecha` datetime DEFAULT CURRENT_TIMESTAMP,
+  `Fecha` datetime,
   `Valoracion` int(11) NOT NULL DEFAULT '0',
   `ValoracionSemanal` int(11) NOT NULL DEFAULT '0'
 ) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
@@ -152,7 +152,7 @@ INSERT INTO `playlist` (`Id`, `Usuario`, `Nombre`, `Asunto`, `Descripcion`, `Fec
 CREATE TABLE IF NOT EXISTS `puntuacioncanciones` (
   `Usuario` varchar(30) COLLATE utf8_bin NOT NULL,
   `Cancion` int(11) NOT NULL,
-  `Fecha` datetime DEFAULT CURRENT_TIMESTAMP,
+  `Fecha` datetime ,
   `Valoracion` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
 
@@ -172,7 +172,7 @@ INSERT INTO `puntuacioncanciones` (`Usuario`, `Cancion`, `Fecha`, `Valoracion`) 
 CREATE TABLE IF NOT EXISTS `puntuacionesplaylist` (
   `Usuario` varchar(30) COLLATE utf8_bin NOT NULL,
   `Playlist` int(11) NOT NULL,
-  `Fecha` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `Fecha` datetime NOT NULL ,
   `Valoracion` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
 

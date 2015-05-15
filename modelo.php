@@ -57,10 +57,10 @@
 		return $resultado;   
 	}
 	
-	function mTopcanciones()
+	function mTopcanciones($usuario)
 	{
 		$con = conexion();
-		$resultado = mysql_query("select Id, Titulo, Artista, Genero, Album, Año, (ValoracionSemanal * 8) as ValoracionSemanal from canciones order by ValoracionSemanal desc limit 20;",$con);
+		$resultado = mysql_query("select Id, Titulo, Artista, Genero, Album, Año, (p.Valoracion * 8) as Valoracion, (ValoracionSemanal * 8) as ValoracionSemanal from canciones c left join puntuacioncanciones p on (id = Cancion) WHERE usuario = '$usuario' order by ValoracionSemanal desc limit 20;",$con);
 		return $resultado;
 	}
 	
@@ -74,7 +74,7 @@
 	function mMisfavoritos($usuario)
 	{
 		$con = conexion();
-		$resultado = mysql_query("select Id, Titulo, Artista, Genero, Album, Año, (p.Valoracion * 8) as Valoracion, (ValoracionSemanal * 8) as ValoracionSemanal from canciones c join puntuacioncanciones p on (id = Cancion) order by ValoracionSemanal desc limit 20;",$con);
+		$resultado = mysql_query("select Id, Titulo, Artista, Genero, Album, Año, (p.Valoracion * 8) as Valoracion, (ValoracionSemanal * 8) as ValoracionSemanal from canciones c join puntuacioncanciones p on (id = Cancion) WHERE usuario = '$usuario' order by Valoracion desc limit 20;",$con);
 		return $resultado;
 	}
 	

@@ -1,4 +1,5 @@
 var con;
+var idG;
 
 	function conexion()
 	{
@@ -18,6 +19,8 @@ var con;
 	function puntuar(valor,id)
 	{
 		conexion();
+		idG = id;
+
 		con.onreadystatechange = respuestapuntuar;
 		con.open("GET", "index.php?accion=P&id="+id+"&p="+valor+"&variable=" + Math.random(), true);
 		con.send(null);
@@ -29,13 +32,20 @@ var con;
 		{
 			if (con.status == 200)
 			{
-				document.getElementById("valoracion").innerHTML = con.responseText;
-				mostrarPuntuacio(document.getElementById("valoracion").innerHTML);
+				if (con.responseText == -1)
+				{
+					mostrarPuntuacion(document.getElementById("valoracion-"+idG).innerHTML,idG);
+				}
+				else
+				{
+					document.getElementById("valoracion-"+idG).innerHTML = con.responseText;
+					mostrarPuntuacion(document.getElementById("valoracion-"+idG).innerHTML, idG);
+				}
 			}
 		}
 	}
 	
-function mostrarPuntuacio(valor)
+function mostrarPuntuacion(valor,id)
 {
-	document.getElementById("valoracion").style.width = valor+"px";
+	document.getElementById("valoracion-"+id).style.width = valor+"px";
 }

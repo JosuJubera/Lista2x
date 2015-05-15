@@ -1,6 +1,6 @@
 <table class="contenido">
 	<h1 class="titulo">Mis favoritos</h1>
-	<tr><th>Titulo</th><th>Artista</th><th>Genero</th><th>Album</th><th>Año</th><th>Valoracion</th><th>Valoracion Semanal</th></tr>
+	<tr><th>Titulo</th><th>Artista</th><th>Genero</th><th>Album</th><th>Año</th><th>Mi valoración</th><th>Valoración semanal</th></tr>
 	##FILALISTA##
 		<tr class="lista">
 			<td onclick="location='index.php?accion=VC&id=1&cid=##ID##'">##TITULO##</td>
@@ -8,8 +8,8 @@
 			<td onclick="location='index.php?accion=VC&id=1&cid=##ID##'">##GENERO##</td>
 			<td onclick="location='index.php?accion=VC&id=1&cid=##ID##'">##ALBUM##</td>
 			<td onclick="location='index.php?accion=VC&id=1&cid=##ID##'">##AÑO##</td>
-			<td><ul onmouseout="javascript:mostrarPuntuacio()" class="star-rating">
-					<li style="width: ##VALORACION##px;" id="valoracion" class="current-rating"></li>
+			<td><ul class="star-rating">
+					<li style="width: ##VALORACION##px;" id="valoracion-##ID##" class="current-rating">##VALORACION##</li>
 					
 					<li><a class="one-star" title="1 estrella de 10" href="javascript:puntuar(1,##ID##)">1</a></li>
 					<li><a class="two-stars" title="2 estrellas de 10" href="javascript:puntuar(2,##ID##)">2</a></li>

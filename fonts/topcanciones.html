@@ -1,6 +1,6 @@
 <h1 class="titulo">Top canciones</h1>
 <table class="contenido">
-	<tr><th>#</th><th>Titulo</th><th>Artista</th><th>Genero</th><th>Album</th><th>Año</th><th>Valoracion</th></tr>
+	<tr><th>#</th><th>Titulo</th><th>Artista</th><th>Genero</th><th>Album</th><th>Año</th><th>Mi valoración</th><th>Valoración semanal</th></tr>
 	##FILALISTA##
 		<tr class="lista">
 			<td>##POSICION##</td>
@@ -9,8 +9,8 @@
 			<td onclick="location='index.php?accion=VC&id=1&cid=##ID##'">##GENERO##</td>
 			<td onclick="location='index.php?accion=VC&id=1&cid=##ID##'">##ALBUM##</td>
 			<td onclick="location='index.php?accion=VC&id=1&cid=##ID##'">##AÑO##</td>
-			<td><ul  class="star-rating">
-					<li style="width: ##VALORACION##px;" id="current-rating" class="current-rating"></li>
+			<td><ul class="star-rating">
+					<li style="width: ##VALORACION##px;" id="valoracion-##ID##" class="current-rating">##VALORACION##</li>
 					
 					<li><a class="one-star" title="1 estrella de 10" href="javascript:puntuar(1,##ID##)">1</a></li>
 					<li><a class="two-stars" title="2 estrellas de 10" href="javascript:puntuar(2,##ID##)">2</a></li>
@@ -24,6 +24,7 @@
 					<li><a class="nine-stars" title="9 estrellas de 10" href="javascript:puntuar(9,##ID##)">9</a></li>
 					<li><a class="ten-stars" title="10 estrellas de 10" href="javascript:puntuar(10,##ID##)">10</a></li>
 				</ul></td>
+			<td><ul class="star-rating"> <li style="width: ##VALORACIONSEMANAL##px;" id="valoracionsemanal" class="current-rating"></li></ul></td>
 		</tr>
 	##FILALISTA##
 </table>

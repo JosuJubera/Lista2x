@@ -151,7 +151,7 @@
             vmostrarBuscardor();
 		    vmostrarRmenu();
         }
-		$datos = mTopcanciones();
+		$datos = mTopcanciones($_SESSION["usuario"]);
 		vmostrarTopcanciones($datos);
 		vmostrarContactar();
     }
@@ -247,10 +247,18 @@
 		$p = $_GET["p"];
 		$usuario = $_SESSION['usuario'];
 		$con = conexion();
-		$resultado = mysql_query("UPDATE puntuacioncanciones SET Valoracion = '$p' WHERE Cancion = '$id' and Usuario = '$usuario';",$con);
-		$resultado = mysql_query("select (p.Valoracion * 8) as Valoracion from puntuacioncanciones p WHERE Cancion = '$id' and Usuario = '$usuario'",$con);
-		$datos = mysql_fetch_assoc($resultado);
-		echo $datos["Valoracion"];
+		/* si no se ha valorau aun insert*/
+		$resultado1 = mysql_query("UPDATE puntuacioncanciones SET Valoracion = '$p' WHERE Cancion = '$id' and Usuario = '$usuario';",$con);
+		$resultado2 = mysql_query("select (p.Valoracion * 8) as Valoracion from puntuacioncanciones p WHERE Cancion = '$id' and Usuario = '$usuario'",$con);
+		$datos = mysql_fetch_assoc($resultado2);
+		if (($resultado1 == false) or ($resultado2 == false))
+		{
+			echo "-1";
+		}
+		else
+		{
+			echo $datos["Valoracion"];
+		}
 	}
 	
 	////////////////////////////////////////////////////////////////////////
