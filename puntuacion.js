@@ -16,13 +16,13 @@ var idG;
 		}
 	}
 	
-	function puntuar(valor,id)
+	function puntuar(valor,id,tipo)
 	{
 		conexion();
 		idG = id;
 
 		con.onreadystatechange = respuestapuntuar;
-		con.open("GET", "index.php?accion=P&id="+id+"&p="+valor+"&variable=" + Math.random(), true);
+		con.open("GET", "index.php?accion=P"+tipo+"&id="+id+"&p="+valor+"&variable=" + Math.random(), true);
 		con.send(null);
 	}
 	

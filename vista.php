@@ -192,6 +192,7 @@
 			$lista = str_replace("##USUARIO##", $datos["Usuario"], $lista);
 			$lista = str_replace("##FECHA##", $datos["Fecha"], $lista);
 			$lista = str_replace("##VALORACION##", $datos["Valoracion"], $lista);
+			$lista = str_replace("##VALORACIONSEMANAL##", $datos["ValoracionSemanal"], $lista);
 			$contenido .= $lista;
 		}
         echo $partes[0] . $contenido . $partes[2];

@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 14-05-2015 a las 17:09:17
+-- Tiempo de generación: 15-05-2015 a las 22:21:45
 -- Versión del servidor: 5.6.21
 -- Versión de PHP: 5.6.3
 
@@ -17,7 +17,7 @@ SET time_zone = "+00:00";
 /*!40101 SET NAMES utf8 */;
 
 --
--- Base de datos: `siw04`
+-- Base de datos: `siw06`
 --
 
 -- --------------------------------------------------------
@@ -56,7 +56,6 @@ CREATE TABLE IF NOT EXISTS `canciones` (
   `Album` varchar(30) COLLATE utf8_bin NOT NULL,
   `Genero` varchar(30) COLLATE utf8_bin NOT NULL,
   `Año` year(4) NOT NULL,
-  `Valoracion` int(11) NOT NULL DEFAULT '0',
   `ValoracionSemanal` int(11) NOT NULL DEFAULT '0'
 ) ENGINE=InnoDB AUTO_INCREMENT=15 DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
 
@@ -64,18 +63,18 @@ CREATE TABLE IF NOT EXISTS `canciones` (
 -- Volcado de datos para la tabla `canciones`
 --
 
-INSERT INTO `canciones` (`Id`, `Titulo`, `Artista`, `Album`, `Genero`, `Año`, `Valoracion`, `ValoracionSemanal`) VALUES
-(2, 'Loba', 'Shakira', 'album', 'Pop', 2009, 2, 4),
-(1, 'Sugar', 'Maroon 5', 'V', 'Disco', 2015, 9, 10),
-(3, 'dws', 'yo', 'otroalbum', 'iug', 1995, 9, 2),
-(5, 'erfqerfc', 'refqerf', 'eqrfqerf', 'qrfqer', 2014, 5, 9),
-(4, 'juu', 'otro', 'otromas', 'ghjv', 1995, 3, 3),
-(14, 'mnbcv', 'bvcb', 'ouyio', 'uioy', 2053, 3, 7),
-(6, 'qwerqwefc', 'bbyujtyujn', 'tyrhyb', 'ehgbeyhty', 2017, 2, 6),
-(9, 'wegvwrgv', 'cvbfgb ', 'rtcwtg rt', 'vtyhvthn', 2014, 9, 6),
-(11, 'wertfwerf', 'gfergvrth', 'gsdvfertyh', 'hethbvertb', 2053, 3, 7),
-(12, 'wtrf vgfer', 'sdfgsfh', 'hjyj', 'htyhr', 2053, 3, 7),
-(13, 'wwrgffer', 'sdfgzcvzdfssfh', 'hsdfgjyj', 'hsdfgsftyhr', 2053, 3, 7);
+INSERT INTO `canciones` (`Id`, `Titulo`, `Artista`, `Album`, `Genero`, `Año`, `ValoracionSemanal`) VALUES
+(2, 'Loba', 'Shakira', 'album', 'Pop', 2009, 4),
+(1, 'Sugar', 'Maroon 5', 'V', 'Disco', 2015, 10),
+(3, 'dws', 'yo', 'otroalbum', 'iug', 1995, 2),
+(5, 'erfqerfc', 'refqerf', 'eqrfqerf', 'qrfqer', 2014, 9),
+(4, 'juu', 'otro', 'otromas', 'ghjv', 1995, 3),
+(14, 'mnbcv', 'bvcb', 'ouyio', 'uioy', 2053, 7),
+(6, 'qwerqwefc', 'bbyujtyujn', 'tyrhyb', 'ehgbeyhty', 2017, 6),
+(9, 'wegvwrgv', 'cvbfgb ', 'rtcwtg rt', 'vtyhvthn', 2014, 6),
+(11, 'wertfwerf', 'gfergvrth', 'gsdvfertyh', 'hethbvertb', 2053, 7),
+(12, 'wtrf vgfer', 'sdfgsfh', 'hjyj', 'htyhr', 2053, 7),
+(13, 'wwrgffer', 'sdfgzcvzdfssfh', 'hsdfgjyj', 'hsdfgsftyhr', 2053, 7);
 
 -- --------------------------------------------------------
 
@@ -109,7 +108,7 @@ CREATE TABLE IF NOT EXISTS `comentarios` (
   `Comentario` text COLLATE utf8_bin NOT NULL,
   `Playlist` int(11) NOT NULL,
   `Ignorado` tinyint(1) NOT NULL DEFAULT '0'
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
 
 --
 -- Volcado de datos para la tabla `comentarios`
@@ -130,7 +129,7 @@ CREATE TABLE IF NOT EXISTS `playlist` (
   `Nombre` varchar(30) COLLATE utf8_bin NOT NULL,
   `Asunto` varchar(60) COLLATE utf8_bin NOT NULL,
   `Descripcion` text COLLATE utf8_bin NOT NULL,
-  `Fecha` datetime,
+  `Fecha` datetime DEFAULT NULL,
   `Valoracion` int(11) NOT NULL DEFAULT '0',
   `ValoracionSemanal` int(11) NOT NULL DEFAULT '0'
 ) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
@@ -152,7 +151,7 @@ INSERT INTO `playlist` (`Id`, `Usuario`, `Nombre`, `Asunto`, `Descripcion`, `Fec
 CREATE TABLE IF NOT EXISTS `puntuacioncanciones` (
   `Usuario` varchar(30) COLLATE utf8_bin NOT NULL,
   `Cancion` int(11) NOT NULL,
-  `Fecha` datetime ,
+  `Fecha` datetime DEFAULT NULL,
   `Valoracion` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
 
@@ -161,7 +160,10 @@ CREATE TABLE IF NOT EXISTS `puntuacioncanciones` (
 --
 
 INSERT INTO `puntuacioncanciones` (`Usuario`, `Cancion`, `Fecha`, `Valoracion`) VALUES
-('Jub3r', 1, '2015-05-10 00:00:00', 5);
+('Jub3r', 1, '2015-05-10 00:00:00', 7),
+('Jub3r', 2, NULL, 6),
+('muyñ', 1, NULL, 1),
+('muyñ', 2, NULL, 2);
 
 -- --------------------------------------------------------
 
@@ -172,7 +174,7 @@ INSERT INTO `puntuacioncanciones` (`Usuario`, `Cancion`, `Fecha`, `Valoracion`) 
 CREATE TABLE IF NOT EXISTS `puntuacionesplaylist` (
   `Usuario` varchar(30) COLLATE utf8_bin NOT NULL,
   `Playlist` int(11) NOT NULL,
-  `Fecha` datetime NOT NULL ,
+  `Fecha` datetime NOT NULL,
   `Valoracion` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
 
@@ -265,7 +267,7 @@ MODIFY `Id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=15;
 -- AUTO_INCREMENT de la tabla `comentarios`
 --
 ALTER TABLE `comentarios`
-MODIFY `Id` int(11) NOT NULL AUTO_INCREMENT;
+MODIFY `Id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=4;
 --
 -- AUTO_INCREMENT de la tabla `playlist`
 --

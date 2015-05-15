@@ -192,20 +192,6 @@
 		vmostrarContactar();
 	}
        
-	if ($accion=="PC"){
-		if (isset($_POST['uid']) && $_POST['uid']==$_SESSION['usuario']){//es quien dice ser
-			$exito=mpublicarComentario($_POST['uid'],$_POST['pid'],$_POST['comentario']);
-			vmostrarLogin();
-	vmostrarImenu();//hacerlo en nueva pagina o con js sin recargar???
-			$datos = minfoplaylist($_POST['pid']);
-	$canciones=mcancionesplaylist($_POST['pid']);
-	$comentarios=mcomplaylist($_POST['pid']);
-	vmostrarLista($datos,$canciones,$comentarios);
-	vmostrarContactar();
-		}else{
-			echo "no puede hacer eso!";
-		}
-	}
 	
 	if($accion == "VC")
     {
@@ -238,18 +224,51 @@
         vmostrarCancion($datos1,$datos2);
 		vmostrarContactar();
     }
+	/*
+	if ($accion=="PC"){
+		if (isset($_POST['uid']) && $_POST['uid']==$_SESSION['usuario']){//es quien dice ser
+			$exito=mpublicarComentario($_POST['uid'],$_POST['pid'],$_POST['comentario']);
+			vmostrarLogin();
+	vmostrarImenu();//hacerlo en nueva pagina o con js sin recargar???
+			$datos = minfoplaylist($_POST['pid']);
+	$canciones=mcancionesplaylist($_POST['pid']);
+	$comentarios=mcomplaylist($_POST['pid']);
+	vmostrarLista($datos,$canciones,$comentarios);
+	vmostrarContactar();
+		}else{
+			echo "no puede hacer eso!";
+		}
+	}*/
 	
 	/*puntuar*/
-	if($accion == "P")
+	if($accion == "PC")
 	{
-		//mPuntuacion($_GET["id"],$_GET["p"]);
 		$id = $_GET["id"];
 		$p = $_GET["p"];
 		$usuario = $_SESSION['usuario'];
-		$con = conexion();
+		//$con = conexion();
 		/* si no se ha valorau aun insert*/
-		$resultado1 = mysql_query("UPDATE puntuacioncanciones SET Valoracion = '$p' WHERE Cancion = '$id' and Usuario = '$usuario';",$con);
-		$resultado2 = mysql_query("select (p.Valoracion * 8) as Valoracion from puntuacioncanciones p WHERE Cancion = '$id' and Usuario = '$usuario'",$con);
+		list($resultado1, $resultado2) = mPuntuacioncancion($id,$p,$usuario);
+		//$resultado1 = mysql_query("UPDATE puntuacioncanciones SET Valoracion = '$p' WHERE Cancion = '$id' and Usuario = '$usuario';",$con);
+		//$resultado2 = mysql_query("select (p.Valoracion * 8) as Valoracion from puntuacioncanciones p WHERE Cancion = '$id' and Usuario = '$usuario'",$con);
+		$datos = mysql_fetch_assoc($resultado2);
+		if (($resultado1 == false) or ($resultado2 == false))
+		{
+			echo "-1";
+		}
+		else
+		{
+			echo $datos["Valoracion"];
+		}
+	}
+	
+	if($accion == "PP")
+	{
+		$id = $_GET["id"];
+		$p = $_GET["p"];
+		$usuario = $_SESSION['usuario'];
+		/* si no se ha valorau aun insert*/
+		list($resultado1, $resultado2) = mPuntuacionplaylist($id,$p,$usuario);
 		$datos = mysql_fetch_assoc($resultado2);
 		if (($resultado1 == false) or ($resultado2 == false))
 		{
