@@ -299,7 +299,7 @@
         if (!is_numeric($id)){//nos la querian colar ¬¬
             return null;
         }
-        $resultado=mysql_query("select  Id,Titulo,Artista,Album,Genero,(ValoracionSemanal * 8) as ValoracionSemanal from canciones c join cancionesplaylist p on (p.cancion=c.$id) where playlist=1" ,$con);  
+        $resultado=mysql_query("select  Id,Titulo,Artista,Album,Genero,(ValoracionSemanal * 8) as ValoracionSemanal from canciones c join cancionesplaylist p on (p.cancion=c.id) where playlist=$id" ,$con);  
         $i=0;
         $aux=null;
         if ($resultado!==false) {
