@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 15-05-2015 a las 22:21:45
+-- Tiempo de generación: 16-05-2015 a las 00:09:24
 -- Versión del servidor: 5.6.21
 -- Versión de PHP: 5.6.3
 
@@ -17,7 +17,7 @@ SET time_zone = "+00:00";
 /*!40101 SET NAMES utf8 */;
 
 --
--- Base de datos: `siw06`
+-- Base de datos: `siw04`
 --
 
 -- --------------------------------------------------------
@@ -130,7 +130,6 @@ CREATE TABLE IF NOT EXISTS `playlist` (
   `Asunto` varchar(60) COLLATE utf8_bin NOT NULL,
   `Descripcion` text COLLATE utf8_bin NOT NULL,
   `Fecha` datetime DEFAULT NULL,
-  `Valoracion` int(11) NOT NULL DEFAULT '0',
   `ValoracionSemanal` int(11) NOT NULL DEFAULT '0'
 ) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
 
@@ -138,9 +137,9 @@ CREATE TABLE IF NOT EXISTS `playlist` (
 -- Volcado de datos para la tabla `playlist`
 --
 
-INSERT INTO `playlist` (`Id`, `Usuario`, `Nombre`, `Asunto`, `Descripcion`, `Fecha`, `Valoracion`, `ValoracionSemanal`) VALUES
-(1, 'Jub3r', 'Caribe Mix', 'CAnciones verano', 'Las mejores canciones del verano 2015', '2015-05-10 00:00:00', 10, 9),
-(2, 'Jub3r', 'Caribe Mix', 'CAnciones verano', 'Las mejores canciones del verano 2015', '2015-05-10 00:00:00', 10, 9);
+INSERT INTO `playlist` (`Id`, `Usuario`, `Nombre`, `Asunto`, `Descripcion`, `Fecha`, `ValoracionSemanal`) VALUES
+(1, 'Jub3r', 'Caribe Mix', 'CAnciones verano', 'Las mejores canciones del verano 2015', '2015-05-10 00:00:00', 9),
+(2, 'Jub3r', 'Lista 2', 'CAnciones verano', 'Las mejores canciones del verano 2015', '2015-05-10 00:00:00', 9);
 
 -- --------------------------------------------------------
 
@@ -160,8 +159,8 @@ CREATE TABLE IF NOT EXISTS `puntuacioncanciones` (
 --
 
 INSERT INTO `puntuacioncanciones` (`Usuario`, `Cancion`, `Fecha`, `Valoracion`) VALUES
-('Jub3r', 1, '2015-05-10 00:00:00', 7),
-('Jub3r', 2, NULL, 6),
+('Jub3r', 1, '2015-05-10 00:00:00', 9),
+('Jub3r', 2, NULL, 9),
 ('muyñ', 1, NULL, 1),
 ('muyñ', 2, NULL, 2);
 
@@ -177,6 +176,14 @@ CREATE TABLE IF NOT EXISTS `puntuacionesplaylist` (
   `Fecha` datetime NOT NULL,
   `Valoracion` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
+
+--
+-- Volcado de datos para la tabla `puntuacionesplaylist`
+--
+
+INSERT INTO `puntuacionesplaylist` (`Usuario`, `Playlist`, `Fecha`, `Valoracion`) VALUES
+('Jub3r', 1, '0000-00-00 00:00:00', 7),
+('Jub3r', 2, '0000-00-00 00:00:00', 3);
 
 -- --------------------------------------------------------
 
