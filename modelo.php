@@ -74,7 +74,7 @@
             $con = conexion();
             //http://www.mysqldiary.com/mysql-left-join/
             //Esta consulta es igual a select ... from canciones c left join puntuacioncanciones using usuario where usuario=$usuario or usuario is null 
-            $resultado = mysql_query("select Id,Titulo,Artista,Album,Valoracion,usuario,Año,Genero from canciones c left join puntuacioncanciones p on p.Cancion=c.id and usuario='$usuario' order by Valoracion desc",$con);
+            $resultado = mysql_query("select Id,Titulo,Artista,Album,(Valoracion * 8) as Valoracion, (ValoracionSemanal * 8) as ValoracionSemanal,usuario,Año,Genero from canciones c left join puntuacioncanciones p on p.Cancion=c.id and usuario='$usuario' order by ValoracionSemanal desc",$con);
             return $resultado;
 	}
 	
