@@ -74,7 +74,7 @@
             $con = conexion();
             //http://www.mysqldiary.com/mysql-left-join/
             //Esta consulta es igual a select ... from canciones c left join puntuacioncanciones using usuario where usuario=$usuario or usuario is null 
-            $resultado = mysql_query("select Titulo,Artista,Album,Valoracion, usuario from canciones c left join puntuacioncanciones p on p.Cancion=c.id and usuario='$usuario' order by Valoracion desc",$con);
+            $resultado = mysql_query("select Id,Titulo,Artista,Album,Valoracion,usuario,Año,Genero from canciones c left join puntuacioncanciones p on p.Cancion=c.id and usuario='$usuario' order by Valoracion desc",$con);
             return $resultado;
 	}
 	
@@ -87,9 +87,9 @@
 	
 	function mMisfavoritos($usuario)
 	{
-		$con = conexion();
-		$resultado = mysql_query("select Id, Titulo, Artista, Genero, Album, Año, (p.Valoracion * 8) as Valoracion, (ValoracionSemanal * 8) as ValoracionSemanal from canciones c join puntuacioncanciones p on (id = Cancion) WHERE usuario = '$usuario' order by Valoracion desc limit 20;",$con);
-		return $resultado;
+            $con = conexion();
+            $resultado = mysql_query("select Id,Titulo,Artista,Album,Valoracion,usuario,Año,Genero from canciones c left join puntuacioncanciones p on p.Cancion=c.id and usuario='$usuario' order by Valoracion desc",$con);
+            return $resultado;
 	}
 	
 	function mCancion($cid)
