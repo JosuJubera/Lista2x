@@ -79,7 +79,7 @@
 	function mMislistas($usuario)
 	{
 		$con = conexion();
-		$resultado = mysql_query("select Id, Nombre, Asunto, count(Cancion) as Canciones, p.Usuario, p.Fecha,(Valoracion * 8) as Valoracion, (ValoracionSemanal * 8) as ValoracionSemanal from playlist p, puntuacionesplaylist pp, cancionesplaylist c WHERE p.id = pp.Playlist and p.id = c.playlist and pp.Playlist = c.playlist and pp.usuario = '$usuario' order by Valoracion desc limit 20",$con);
+		$resultado = mysql_query("select Id, Nombre, Asunto,(select count(*) from cancionesplaylist where playlist=id) Canciones,Fecha, (ValoracionSemanal * 8) as ValoracionSemanal from playlist where usuario like '$usuario' order by Nombre desc limit 20",$con);
 		return $resultado;   
 	}
 	

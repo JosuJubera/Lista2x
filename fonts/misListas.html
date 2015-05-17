@@ -1,13 +1,12 @@
 <table class="contenido">
 	<h1 class="titulo">Mis listas</h1>
-	<tr><th>Nombre</th><th>Asunto</th><th>Nº</th><th>Usuario</th><th>Fecha</th><th>Mi valoración</th><th>Valoración semanal</th></tr>
+	<tr><th>Nombre</th><th>Asunto</th><th>Nº</th><th>Fecha</th><th>Mi valoración</th><th>Valoración semanal</th></tr>
 	##FILALISTA##
 	<div>
 		<tr class="lista">
 			<td onclick="location='index.php?accion=VP&id=1&pid=##ID##'">##NOMBRE##</td>
 			<td onclick="location='index.php?accion=VP&id=1&pid=##ID##'">##ASUNTO##</td>
 			<td onclick="location='index.php?accion=VP&id=1&pid=##ID##'">##N##</td>
-			<td onclick="location='index.php?accion=VP&id=1&pid=##ID##'">##USUARIO##</td>
 			<td onclick="location='index.php?accion=VP&id=1&pid=##ID##'">##FECHA##</td>
 			<td><ul class="star-rating">
 					<li style="width: ##VALORACION##px;" id="valoracion-##ID##" class="current-rating">##VALORACION##</li>
@@ -25,7 +24,9 @@
 					<li><a class="ten-stars" title="10 estrellas de 10" href="javascript:puntuar(10,##ID##,'P')">10</a></li>
 				</ul></td>
 			<td><ul class="star-rating"> <li style="width: ##VALORACIONSEMANAL##px;" id="valoracionsemanal" class="current-rating"></li></ul></td>
+                        <td><a href="index.php?accion=ModL&id=1&pid=##ID##">Modificar</a></td>
 		</tr>
 	</div>
 	##FILALISTA##
 </table>
+<a href="index.php?accion=NL&id=1">Nueva lista</a>

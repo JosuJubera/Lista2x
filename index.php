@@ -39,6 +39,7 @@
 		}
     }
 	
+        //cambiar contraseña
 	if (($accion == "CC") and (isset($_SESSION["usuario"])))
 	{
 		vmostrarPreferencias();
@@ -46,6 +47,7 @@
 		vmostrarContactar();
 	}
 	
+        //cambiar correo
 	if (($accion == "CE") and (isset($_SESSION["usuario"])))
 	{
 		vmostrarPreferencias();
@@ -53,6 +55,7 @@
 		vmostrarContactar();
 	}
 	
+        //eliminar cuenta
 	if (($accion == "EC") and (isset($_SESSION["usuario"])))
 	{
 		vmostrarPreferencias();
@@ -60,6 +63,7 @@
 		vmostrarContactar();
 	}
 	
+        //recuperar contraseña
 	if ($accion == "REC")
 	{
 		switch($id)
@@ -72,6 +76,7 @@
 		}
 	}
 	
+        //alta usuario
 	if($accion == "ALTA")
     {
 		switch($id)
@@ -84,6 +89,7 @@
 		}
 	}
 	
+        //log out (deslogearse)
 	if ($accion == "OUT")
 	{
 		session_destroy();
@@ -94,11 +100,13 @@
 		vmostrarContactar();
 	}
 	
+        //mostrar contacto?????
 	if ($accion == "C")
 	{
 		vmostrarContacto();
 	}
 	
+        //buscar
 	if (($accion == "B") and (isset($_GET["buscar"])))
 	{
 		$datos = mBuscar($_GET["buscar"],$_GET["tipo"]);
@@ -120,6 +128,7 @@
 		}
 	}
 	
+        //mostrar Top Listas
     if($accion == "TL")
     {
         if (!isset($_SESSION["usuario"]))
@@ -138,6 +147,7 @@
 		vmostrarContactar();
     }
 
+    //mostrar Top Canciones
     if($accion == "TC")
     {
         if (!isset($_SESSION["usuario"]))
@@ -156,16 +166,18 @@
 		vmostrarContactar();
     }
 	
+    //mostrar Mis Listas
 	if (($accion == "ML") and (isset($_SESSION["usuario"])))
 	{
-		vmostrarUsuario($_SESSION["usuario"]);
-		vmostrarBuscardor();
-        vmostrarRmenu();
-		$datos = mMislistas($_SESSION["usuario"]);
-		vmostrarMislistas($datos);
-		vmostrarContactar();
+            vmostrarUsuario($_SESSION["usuario"]);
+            vmostrarBuscardor();
+            vmostrarRmenu();
+            $datos = mMislistas($_SESSION["usuario"]);
+            vmostrarMislistas($datos);
+            vmostrarContactar();
 	}
 	
+        //mostrar Mis Favoritos
 	if (($accion == "MF") and (isset($_SESSION["usuario"])))
 	{
 		vmostrarUsuario($_SESSION["usuario"]);
@@ -176,6 +188,7 @@
 		vmostrarContactar();
 	}
 	
+        //Ver Playist (ver una sola lista)
 	if($accion == "VP"){
 		if (!isset($_SESSION["usuario"])){
 			vmostrarLogin();
@@ -191,8 +204,18 @@
 		vmostrarLista($datos,$canciones,$comentarios);
 		vmostrarContactar();
 	}
-       
-	
+        
+       //Nueva Lista
+        if ($accion=="NL"){
+            echo "falta por hacer";
+        }
+        
+        //Modificar Lista
+        if ($accion=="ModL"){
+            echo "falta por hacer";
+        }
+        
+        //Ver Cancion (una sola cancion)
 	if($accion == "VC")
     {
         switch ($id)
@@ -224,23 +247,24 @@
         vmostrarCancion($datos1,$datos2);
 		vmostrarContactar();
     }
-	/*
-	if ($accion=="PC"){
-		if (isset($_POST['uid']) && $_POST['uid']==$_SESSION['usuario']){//es quien dice ser
-			$exito=mpublicarComentario($_POST['uid'],$_POST['pid'],$_POST['comentario']);
-			vmostrarLogin();
-	vmostrarImenu();//hacerlo en nueva pagina o con js sin recargar???
-			$datos = minfoplaylist($_POST['pid']);
-	$canciones=mcancionesplaylist($_POST['pid']);
-	$comentarios=mcomplaylist($_POST['pid']);
-	vmostrarLista($datos,$canciones,$comentarios);
-	vmostrarContactar();
-		}else{
-			echo "no puede hacer eso!";
-		}
-	}*/
+    
+    //Publicar Un comentario
+    if ($accion=="PUC"){
+        if (isset($_POST['uid']) && $_POST['uid']==$_SESSION['usuario']){//es quien dice ser
+            $exito=mpublicarComentario($_POST['uid'],$_POST['pid'],$_POST['comentario']);
+            vmostrarLogin();
+            vmostrarImenu();//hacerlo en nueva pagina o con js sin recargar???
+            $datos = minfoplaylist($_POST['pid']);
+            $canciones=mcancionesplaylist($_POST['pid']);
+            $comentarios=mcomplaylist($_POST['pid']);
+            vmostrarLista($datos,$canciones,$comentarios);
+            vmostrarContactar();
+        }else{
+            echo "no puede hacer eso!";
+        }
+    }
 	
-	/*puntuar*/
+	//Puntuar Cancion
 	if($accion == "PC")
 	{
 		$id = $_GET["id"];
@@ -262,6 +286,7 @@
 		}
 	}
 	
+        //Puntuar Playlist
 	if($accion == "PP")
 	{
 		$id = $_GET["id"];
