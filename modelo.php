@@ -58,7 +58,7 @@
 	function mToplistas($usuario)
 	{
 		$con = conexion();
-		$resultado = mysql_query("select Id, p.Usuario, Nombre, Asunto, (select count(*) from cancionesplaylist where playlist=id) as Canciones, p.Fecha, (Valoracion * 8) as Valoracion, (ValoracionSemanal * 8) as ValoracionSemanal from playlist p left join puntuacionesplaylist pp on id = playlist and pp.usuario='$usuario' order by ValoracionSemanal desc limit 20",$con);
+		$resultado = mysql_query("select Id, p.Usuario, Nombre, Asunto, (select count(*) from cancionesplaylist where playlist=id) as Canciones, p.Fecha, (Valoracion * 8) as Valoracion, (ValoracionSemanal * 8) as ValoracionSemanal from playlist p left join puntuacionesplaylist pp on id = playlist and pp.usuario = '$usuario' order by ValoracionSemanal desc limit 20",$con);
 		return $resultado;   
 	}
 	
@@ -82,7 +82,7 @@
 	function mMislistas($usuario)
 	{
 		$con = conexion();
-		$resultado = mysql_query("select Id, Nombre, Asunto, (select count(*) from cancionesplaylist where playlist=id) as Canciones, p.Usuario, p.Fecha,(Valoracion * 8) as Valoracion, (ValoracionSemanal * 8) as ValoracionSemanal from playlist p, puntuacionesplaylist pp WHERE p.id = pp.Playlist and pp.usuario = '$usuario' order by Valoracion desc limit 20",$con);
+		$resultado = mysql_query("select Id, Nombre, Asunto, (select count(*) from cancionesplaylist where playlist=id) as Canciones, p.Usuario, p.Fecha,(Valoracion * 8) as Valoracion, (ValoracionSemanal * 8) as ValoracionSemanal from playlist p join puntuacionesplaylist pp on id = playlist and pp.usuario = '$usuario' and p.usuario = '$usuario' order by Valoracion desc limit 20",$con);
 		return $resultado;   
 	}
 	
