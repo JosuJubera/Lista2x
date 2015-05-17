@@ -198,7 +198,7 @@
 			$lista = str_replace("##ASUNTO##", $datos["Asunto"], $lista);
 			$lista = str_replace("##N##", $datos["Canciones"], $lista);
 			$lista = str_replace("##FECHA##", $datos["Fecha"], $lista);
-			//$lista = str_replace("##VALORACION##", $datos["Valoracion"], $lista);
+			$lista = str_replace("##VALORACION##", $datos["Valoracion"], $lista);
 			$lista = str_replace("##VALORACIONSEMANAL##", $datos["ValoracionSemanal"], $lista);
 			$contenido .= $lista;
 		}

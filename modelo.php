@@ -81,7 +81,7 @@
 	function mMislistas($usuario)
 	{
 		$con = conexion();
-		$resultado = mysql_query("select Id, Nombre, Asunto,(select count(*) from cancionesplaylist where playlist=id) Canciones,Fecha, (ValoracionSemanal * 8) as ValoracionSemanal from playlist where usuario like '$usuario' order by Nombre desc limit 20",$con);
+		$resultado = mysql_query("select Id, Nombre, Asunto, (select count(*) from cancionesplaylist where playlist=id) as Canciones, p.Usuario, p.Fecha,(Valoracion * 8) as Valoracion, (ValoracionSemanal * 8) as ValoracionSemanal from playlist p, puntuacionesplaylist pp WHERE p.id = pp.Playlist and pp.usuario = '$usuario' order by Valoracion desc limit 20",$con);
 		return $resultado;   
 	}
 	
@@ -131,7 +131,7 @@
 	function mPuntuacioncancion($id,$p,$usuario)
 	{
 		$con = conexion();
-		$resultado1 = mysql_query("UPDATE puntuacioncanciones SET Valoracion = '$p' WHERE Cancion = '$id' and Usuario = '$usuario';",$con);
+		$resultado1 = mysql_query("UPDATE puntuacioncanciones SET Valoracion = '$p' WHERE Cancion = '$id' and Usuario = '$usuario'",$con);
 		$resultado2 = mysql_query("select (p.Valoracion * 8) as Valoracion from puntuacioncanciones p WHERE Cancion = '$id' and Usuario = '$usuario'",$con);
 		return array ($resultado1, $resultado2);
 	}
@@ -139,10 +139,11 @@
 	function mPuntuacionplaylist($id,$p,$usuario)
 	{
 		$con = conexion();
-		$resultado1 = mysql_query("UPDATE puntuacionesplaylist SET Valoracion = '$p' WHERE Playlist = '$id' and Usuario = '$usuario';",$con);
+		$resultado1 = mysql_query("UPDATE puntuacionesplaylist SET Valoracion = '$p' WHERE Playlist = '$id' and Usuario = '$usuario'",$con);
 		$resultado2 = mysql_query("select (p.Valoracion * 8) as Valoracion from puntuacionesplaylist p WHERE Playlist = '$id' and Usuario = '$usuario'",$con);
 		return array ($resultado1, $resultado2);
 	}
+	
 	function altausuario($nombre,$apodo,$correo,$ucontraseña)
 	{
 		$con=conexion();

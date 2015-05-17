@@ -227,7 +227,7 @@
         }
         
         //Modificar Lista
-        if ($accion=="ModL"){
+        if ($accion=="MODL"){
             echo "falta por hacer";
         }
         
