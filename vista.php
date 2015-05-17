@@ -504,4 +504,8 @@
             }
             echo $pagina;
         }
+        function vcrearPlaylist(){
+            $aux=leerfichero('fonts/crearPlaylist.html');
+            echo $aux;  
+        }
 ?>

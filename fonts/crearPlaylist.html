@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<!--
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+-->
+<div class="contenido">
+    <form action="index.php" method="post" name="form">
+        <h1>Crear Playlist</h1>
+        <table>
+            <tr>
+                <td><label for="Ptitulo">Titulo de la playlist:</label></td>
+                <td><input type="text" name="Ptitulo" id="Ptitulo"></td>
+            </tr>
+            <tr>
+                <td><label for="Pasunto">Asunto de la playlist:</label></td>
+                <td><input type="text" name="Pasunto" id="Pasunto"></td>
+            </tr>
+            <tr>
+                <td><label for="Pdescrip">Descripcion de la playlist:</label></td>
+                <td><textarea id="Pdescrip" name="Pdescrip" rows="7" cols="30"></textarea></td>
+            </tr>
+        </table>
+        <input type="hidden" name="accion" value="NL" >
+        <input type="hidden" name="id" value="2" >
+        <button type="submit">Crear Playlist</button>
+        <a href="javascript:history.back(-1);" title="Ir la página anterior">Volver</a>
+    </form>
+</div>

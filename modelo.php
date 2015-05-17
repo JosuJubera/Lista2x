@@ -424,4 +424,20 @@
             return true;
         }
     }
+    function mcrearPlaylist($usuario,$titulo,$asunto,$descripcion){
+        $con=conexion();
+        if (!isset($usuario,$titulo,$asunto,$descripcion)){
+            return false;
+        }
+        mysql_real_escape_string($usuario);
+        mysql_real_escape_string($titulo);
+        mysql_real_escape_string($asunto);
+        mysql_real_escape_string($descripcion);
+        $resultado=mysql_query("insert into playlist(Usuario,Nombre,Asunto,Descripcion) values ('$usuario','$titulo','$asunto','$descripcion') " ,$con); 
+        if ($resultado!==false){
+            return true;
+        }else{
+            return false;
+        }
+    }
 ?>

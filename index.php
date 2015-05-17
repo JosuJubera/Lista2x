@@ -206,8 +206,24 @@
 	}
         
        //Nueva Lista
-        if ($accion=="NL"){
-            echo "falta por hacer";
+        if ($accion=="NL" && isset($_SESSION['usuario'])){
+            switch ($id){
+                case 1:vmostrarUsuario($_SESSION["usuario"]);//mostrar formulario
+			vmostrarBuscardor();
+			vmostrarRmenu();
+                        vcrearPlaylist();
+                        break;
+                case 2:$exito=mcrearPlaylist($_SESSION['usuario'],$_POST['Ptitulo'], $_POST['Pasunto'], $_POST['Pdescrip']);
+                        vmostrarBuscardor();
+			vmostrarRmenu();
+                        if ($exito){
+                            echo "Creada con exito";//cambiar
+                        }
+                        else{
+                            vcrearPlaylist();
+                        }
+                        break;
+            }
         }
         
         //Modificar Lista
