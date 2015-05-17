@@ -142,7 +142,7 @@
             vmostrarBuscardor();
             vmostrarRmenu();
         }
-        $datos = mToplistas();
+        $datos = mToplistas($_SESSION["usuario"]);
         vmostrarToplistas($datos);
 		vmostrarContactar();
     }
