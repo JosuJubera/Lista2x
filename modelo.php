@@ -18,7 +18,7 @@
         $usuario = addslashes($uid);
         $contraseña = addslashes($pw);
 		$con = conexion();
-        $resultado = mysql_query("SELECT count(Usuario) FROM usuarios WHERE Usuario='" . $usuario . "' and Contraseña='" . sha1($contraseña) . "'",$con) or die("Error en: " . mysql_error());
+        $resultado = mysql_query("SELECT count(Usuario) FROM usuarios WHERE Usuario COLLATE utf8_general_ci like '" . $usuario . "' and Contraseña='" . sha1($contraseña) . "'",$con) or die("Error en: " . mysql_error());
 		$comprobacion = mysql_fetch_array($resultado);
         if ($comprobacion[0] == 1)
         {
@@ -33,14 +33,26 @@
 	function mBuscar($buscar,$tipo)
 	{
 		$con = conexion();
+                if (!isset($buscar) || !is_numeric($tipo)){
+                    return null;
+                }
+                mysql_real_escape_string($buscar);
 		switch($tipo)
 		{
-			case 0:		$resultado = mysql_query("select p.Id, p.Nombre, p.Asunto, count(Cancion) as Canciones, p.Usuario, p.Fecha, (p.ValoracionSemanal * 8) as ValoracionSemanal from playlist p, cancionesplaylist c where p.id = c.playlist and p.Nombre COLLATE utf8_general_ci like '%$buscar%' order by ValoracionSemanal desc limit 20",$con);
+			case 0:		$resultado = mysql_query("select p.Id, p.Nombre, p.Asunto,(select count(*) from cancionesplaylist where playlist=p.id) Canciones , p.Usuario, p.Fecha, (p.ValoracionSemanal * 8) as ValoracionSemanal from playlist p where p.Nombre COLLATE utf8_general_ci like '%$buscar%' order by ValoracionSemanal desc limit 20",$con);
 						break;
 			case 1:		$resultado = mysql_query("select Id, Titulo, Artista, Genero, Album, Año, (ValoracionSemanal * 8) as ValoracionSemanal from canciones where Titulo COLLATE utf8_general_ci like '%$buscar%' or Artista COLLATE utf8_general_ci like '%$buscar%' or Album COLLATE utf8_general_ci like '%$buscar%' order by ValoracionSemanal desc limit 20;",$con);
 						break;
 		}
-		return $resultado;
+                $i=0;
+                $aux=null;
+                if ($resultado!==false) {
+                    while ($cancion = mysql_fetch_assoc($resultado)) {
+                        $aux[$i]=$cancion;
+                        $i++;
+                    }
+                }
+                return $aux;  
 	}
 	
 	function mToplistas()
@@ -236,8 +248,8 @@
     function mbuscaralbum($palabra){
         $con = conexion();
         mysql_real_escape_string($palabra);
-		$resultado = mysql_query("select autor, album,count(id) canciones from canciones where album like '%$palabra%' group by album;",$con);
-		$i=0;
+        $resultado = mysql_query("select autor, album,count(id) canciones from canciones where album like '%$palabra%' group by album;",$con);
+        $i=0;
         $aux=null;
         if ($resultado!==false) {
             while ($cancion = mysql_fetch_assoc($resultado)) {

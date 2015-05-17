@@ -103,26 +103,34 @@
 	function vmostrarBuscarlistas($buscar,$consulta)
     {
         $aux = leerfichero("fonts/buscarlista.html");
-        $partes = explode("##FILALISTA##", $aux);
-		$contenido = "";
-		$lista = "";
-		$i = 1;
-		while ($datos = mysql_fetch_assoc($consulta))
-		{
-			$lista = $partes[1];
-			$partes[0] = str_replace("##BUSCAR##", $buscar, $partes[0]);
-			$lista = str_replace("##ID##", $datos["Id"], $lista);
-			$lista = str_replace("##POSICION##", $i, $lista);
-			$lista = str_replace("##NOMBRE##", $datos["Nombre"], $lista);
-			$lista = str_replace("##ASUNTO##", $datos["Asunto"], $lista);
-			$lista = str_replace("##N##", $datos["Canciones"], $lista);
-			$lista = str_replace("##USUARIO##", $datos["Usuario"], $lista);
-			$lista = str_replace("##FECHA##", $datos["Fecha"], $lista);
-			$lista = str_replace("##VALORACION##", $datos["ValoracionSemanal"], $lista);
-			$contenido .= $lista;
-			$i++;
-		}
-        echo $partes[0] . $contenido . $partes[2];
+        $partes = explode("##RESULTADO##", $aux);
+        if ($consulta==null){//No hay resultados
+            $partes = explode("##RESULTADO##", $aux);
+            $error="<p><b>No se han obtenido resultados.</b></p>";
+            $partes[0] = str_replace("##BUSCAR##", $buscar, $partes[0]);
+            echo $partes[0] . $error . $partes[2];
+        }else{//hay resultados, los mostramos
+            $aux = str_replace("##RESULTADO##","", $aux);//quitamos la marca
+            $partes = explode("##FILALISTA##", $aux);
+            $contenido = "";
+            $lista = "";
+            $i = 1;
+            foreach($consulta as $datos){
+                $lista = $partes[1];
+                $partes[0] = str_replace("##BUSCAR##", $buscar, $partes[0]);
+                $lista = str_replace("##ID##", $datos["Id"], $lista);
+                $lista = str_replace("##POSICION##", $i, $lista);
+                $lista = str_replace("##NOMBRE##", $datos["Nombre"], $lista);
+                $lista = str_replace("##ASUNTO##", $datos["Asunto"], $lista);
+                $lista = str_replace("##N##", $datos["Canciones"], $lista);
+                $lista = str_replace("##USUARIO##", $datos["Usuario"], $lista);
+                $lista = str_replace("##FECHA##", $datos["Fecha"], $lista);
+                $lista = str_replace("##VALORACION##", $datos["ValoracionSemanal"], $lista);
+                $contenido .= $lista;
+                $i++;
+            }
+            echo $partes[0] . $contenido . $partes[2];
+        }
     }
     
     function vmostrarTopcanciones($consulta)
