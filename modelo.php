@@ -265,10 +265,9 @@
      }
      function mborrarCancion($id){
         $con = conexion();
-        if (!isset($id)){
+        if (!is_numeric($id)){
             return false;
         }
-        mysql_real_escape_string($id);
         $resultado = mysql_query("SELECT album,count(id) 'n' from canciones where album=(select album from canciones where id='$id') group by album",$con);
         if ($resultado===false || mysql_num_rows($resultado)!=1) {
             return false;//no existe el id
@@ -413,12 +412,16 @@
      }     
     function mignorar($id){
         $con = conexion();
-        mysql_escape_string($id);
+        if (!is_numeric($id)){
+            return false;
+        }
 	mysql_query("update comentarios set Ignorado='1' where Id='$id'",$con);
      }
      function mborrarComentario($id){
         $con = conexion();
-        mysql_escape_string($id);
+        if (!is_numeric($id)){
+            return false;
+        }
         $otro = mysql_query("delete from comentarios where id='$id'",$con);
         if ($otro===false){
             return false;

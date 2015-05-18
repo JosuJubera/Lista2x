@@ -5,9 +5,12 @@
         <group>
             <file>file:/C:/xampp/htdocs/Listadox/admin/reportes.html</file>
             <file>file:/C:/xampp/htdocs/Listadox/index.php</file>
+            <file>file:/C:/xampp/htdocs/Listadox/fonts/alta.html</file>
             <file>file:/C:/xampp/htdocs/Listadox/fonts/playlist.html</file>
+            <file>file:/C:/xampp/htdocs/Listadox/fonts/buscarlista.html</file>
+            <file>file:/C:/xampp/htdocs/Listadox/fonts/crearPlaylist.html</file>
+            <file>file:/C:/xampp/htdocs/Listadox/siw04.sql</file>
             <file>file:/C:/xampp/htdocs/Listadox/vista.php</file>
-            <file>file:/C:/xampp/htdocs/Listadox/modelo.php</file>
         </group>
     </open-files>
 </project-private>
