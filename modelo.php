@@ -453,4 +453,34 @@
             return false;
         }
     }
+    function mactualizarPlaylist($pid,$titulo,$asunto,$descrip){
+        $con=conexion();
+        if ($_SESSION['usuario']!=mcreadorPlaylist($pid)){//el que modifica la playlist no es el autor
+            return false;
+        }
+        mysql_real_escape_string($titulo);
+        mysql_real_escape_string($asunto);
+        mysql_real_escape_string($descrip);
+        $resultado=mysql_query("update playlist set Nombre='$titulo',Asunto='$asunto',Descripcion='$descrip'where id='$pid' " ,$con); 
+        if ($resultado!==false){
+            return true;
+        }else{
+            return false;
+        }
+    }
+    
+    
+    function mcreadorPlaylist($pid){
+        $con=conexion();
+        if (!is_numeric($pid)){
+            return false;
+        }
+        $resultado = mysql_query("select Usuario from playlist where id='$pid'",$con);
+	$i=0;
+        $aux=mysql_fetch_assoc($resultado);
+        if ($aux!=false)
+            return $aux['Usuario'];
+        else
+            return false;
+    }
 ?>

@@ -238,6 +238,15 @@
                         vmodPlaylist($infoplaylist,$canciones);
                         break;
                 case 2://modificar la info de playlist
+                        vmostrarUsuario($_SESSION["usuario"]);//muestra la playlist
+			vmostrarBuscardor();
+			vmostrarRmenu();
+                        $exito=mactualizarPlaylist($_POST['pid'],$_POST['Ptitulo'],$_POST['Pasunto'],$_POST['Pdescrip']);
+                        if ($exito==true){
+                            echo "exito al actualizar";//cambiar
+                        }else{
+                            echo "error al actualizar";//cambiar
+                        }
                 case 3://añadir cancion
                 case 4://quitar canciones
             }

@@ -512,12 +512,17 @@
         }
         function vmodPlaylist($info,$canciones){
             $pagina = leerfichero("fonts/modificarPlaylist.html");
-             if ($info==null){
+             if ($info==null){//no exite playlist
                 echo "<p><b>Error, no existe la playlist seleccionada</b>";
+                return;
+            }
+            if (!isSet($_SESSION['usuario']) || $_SESSION['usuario']!=$info['Usuario']){//no es el autor, no puede ver  esto
+                echo "<p><strong>Usted no es el autor de esta Playlist!</strong></p>";
                 return;
             }
             //Info actual de la playlist
             $pagina=str_replace("##PTITULO##", $info['Nombre'], $pagina);
+            $pagina=str_replace("##PID##", $info['Id'], $pagina);
             $pagina=str_replace("##PASUNTO##", $info['Asunto'], $pagina);
             $pagina=str_replace("##PDESCRIP##", $info['Descripcion'], $pagina);
             //canciones de la playlist
