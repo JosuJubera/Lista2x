@@ -132,7 +132,11 @@
 	function mPuntuacioncancion($id,$p,$usuario)
 	{
 		$con = conexion();
-		$resultado1 = mysql_query("UPDATE puntuacioncanciones SET Valoracion = '$p' WHERE Cancion = '$id' and Usuario = '$usuario'",$con);
+		$resultado1 = mysql_query("INSERT INTO puntuacioncanciones VALUES('$usuario', '$id', CURDATE(), '$p')",$con);
+		if ($resultado1 === false)
+		{
+			$resultado1 = mysql_query("UPDATE puntuacioncanciones SET Valoracion = '$p' WHERE Cancion = '$id' and Usuario = '$usuario'",$con);	
+		}
 		$resultado2 = mysql_query("select (p.Valoracion * 8) as Valoracion from puntuacioncanciones p WHERE Cancion = '$id' and Usuario = '$usuario'",$con);
 		return array ($resultado1, $resultado2);
 	}
@@ -140,7 +144,11 @@
 	function mPuntuacionplaylist($id,$p,$usuario)
 	{
 		$con = conexion();
-		$resultado1 = mysql_query("UPDATE puntuacionesplaylist SET Valoracion = '$p' WHERE Playlist = '$id' and Usuario = '$usuario'",$con);
+		$resultado1 = mysql_query("INSERT INTO puntuacionesplaylist VALUES('$usuario', '$id', CURDATE(), '$p')",$con);
+		if ($resultado1 === false)
+		{
+			$resultado1 = mysql_query("UPDATE puntuacionesplaylist SET Valoracion = '$p' WHERE Playlist = '$id' and Usuario = '$usuario'",$con);
+		}
 		$resultado2 = mysql_query("select (p.Valoracion * 8) as Valoracion from puntuacionesplaylist p WHERE Playlist = '$id' and Usuario = '$usuario'",$con);
 		return array ($resultado1, $resultado2);
 	}
@@ -156,7 +164,7 @@
 		$resultado=mysql_query("insert into usuarios(nombre,usuario,correo,contraseña) values ('$nombre','$apodo','$correo','$cifrado');",$con); 
 		return $resultado;   
 	}
-                /////////////////////////////////////////////////////////////////
+    /////////////////////////////////////////////////////////////////
         function mIsAdmin($usuario){
             $con=conexion();
             $resultado=mysql_query("select usuario from Administradores where usuario=$usuario",$con);
