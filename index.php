@@ -229,6 +229,18 @@
         //Modificar Lista
         if ($accion=="MODL"){
             echo "falta por hacer";
+            switch ($id){
+                case 1: vmostrarUsuario($_SESSION["usuario"]);//muestra la playlist
+			vmostrarBuscardor();
+			vmostrarRmenu();
+                        $infoplaylist=minfoplaylist($_GET['pid']);
+                        $canciones=mcancionesplaylist($_GET['pid']);
+                        vmodPlaylist($infoplaylist,$canciones);
+                        break;
+                case 2://modificar la info de playlist
+                case 3://añadir cancion
+                case 4://quitar canciones
+            }
         }
         
         //Ver Cancion (una sola cancion)

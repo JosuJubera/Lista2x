@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<!--
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+-->
+<div class="contenido">
+    <form action="index.php" method="post" name="form">
+        <h1>Modificar Playlist</h1>
+        <table>
+            <tr>
+                <td><label for="Ptitulo">Titulo de la playlist:</label></td>
+                <td><input type="text" name="Ptitulo" id="Ptitulo" value="##PTITULO##"></td>
+            </tr>
+            <tr>
+                <td><label for="Pasunto">Asunto de la playlist:</label></td>
+                <td><input type="text" name="Pasunto" id="Pasunto" value="##PASUNTO##"></td>
+            </tr>
+            <tr>
+                <td><label for="Pdescrip">Descripcion de la playlist:</label></td>
+                <td><textarea id="Pdescrip" name="Pdescrip" rows="7" cols="30">##PDESCRIP##</textarea></td>
+            </tr>
+        </table>
+        <input type="hidden" name="accion" value="MODL" >
+        <input type="hidden" name="id" value="2" >
+        <button type="submit">Guardar Cambios</button>
+    </form>
+    <p><strong>Canciones de la playlist:</strong><br/>Nota: Tras darle a borrar se borrara la cancion SIN CONFIRMACION!</p>
+    <div class="canciones">
+        <table>
+            <tr><th>#</th><th>Titulo</th><th>Artista</th><th>Genero</th><th>Album</th><th>Año</th><th>Valoracion</th></tr>
+            ##FILACANCION##
+            <tr class="lista" onclick="location='index.php?accion=VC&id=1&cid=##ID##'">
+                <td>##CPOSICION##</td>
+                <td>##CTITULO##</td>
+                <td>##CAUTOR##</td>
+                <td>##CALBUM##</td>
+                <td>##CGENERO##</td>
+                <td>##CAÑO##</td>
+                <td><ul class="star-rating"> <li style="width: ##CVALORACION##px;" id="current-rating" class="current-rating"></li></ul></td>
+                <td><img src="img/borrar.png" href="index.php?accion=MODL&accion=3&cid=##CID##"></td>
+            </tr>
+            ##FILACANCION##
+        </table>
+    </div>
+</div>

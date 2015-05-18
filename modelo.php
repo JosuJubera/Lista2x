@@ -17,12 +17,12 @@
     {
         $usuario = addslashes($uid);
         $contraseña = addslashes($pw);
-		$con = conexion();
-        $resultado = mysql_query("SELECT count(Usuario) FROM usuarios WHERE Usuario COLLATE utf8_general_ci like '" . $usuario . "' and Contraseña='" . sha1($contraseña) . "'",$con) or die("Error en: " . mysql_error());
-		$comprobacion = mysql_fetch_array($resultado);
-        if ($comprobacion[0] == 1)
+        $con = conexion();
+        $resultado = mysql_query("SELECT Usuario FROM usuarios WHERE Usuario COLLATE utf8_general_ci like '" . $usuario . "' and Contraseña='" . sha1($contraseña) . "'",$con) or die("Error en: " . mysql_error());
+	$comprobacion = mysql_fetch_array($resultado);
+        if ($comprobacion !==false )
         {
-            return $usuario;
+            return $comprobacion[0];
         }
         else
         {

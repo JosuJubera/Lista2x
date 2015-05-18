@@ -448,7 +448,8 @@
             $pagina=str_replace("##PDESCRIPCION##", $info['Descripcion'], $pagina);
             //opciones para quitar la lista o modificarla
             $partes = explode("##OPCIONES##", $pagina);
-            if (isSet($_SESSION['usuario']) && $_SESSION['usuario']==$info['Nombre']){
+            if (isSet($_SESSION['usuario']) && $_SESSION['usuario']==$info['Usuario']){
+                $partes[1]=str_replace("##ID##", $info['Id'], $partes[1]);
                 $pagina=$partes[0].$partes[1].$partes[2];
             }else{//no es el autor de la playlist
                 $pagina=$partes[0].$partes[2];
@@ -508,5 +509,40 @@
         function vcrearPlaylist(){
             $aux=leerfichero('fonts/crearPlaylist.html');
             echo $aux;  
+        }
+        function vmodPlaylist($info,$canciones){
+            $pagina = leerfichero("fonts/modificarPlaylist.html");
+             if ($info==null){
+                echo "<p><b>Error, no existe la playlist seleccionada</b>";
+                return;
+            }
+            //Info actual de la playlist
+            $pagina=str_replace("##PTITULO##", $info['Nombre'], $pagina);
+            $pagina=str_replace("##PASUNTO##", $info['Asunto'], $pagina);
+            $pagina=str_replace("##PDESCRIP##", $info['Descripcion'], $pagina);
+            //canciones de la playlist
+            $partes = explode("##FILACANCION##", $pagina);
+            if ($canciones==null){
+                $error="<p>No hay canciones en esta playlist</p>";
+                $pagina=$partes[0] . $error . $partes[2];
+            }else{
+                $contenido = "";
+                $lista = "";
+                $i=1;
+                foreach ($canciones as $cancion) {
+                    $lista = $partes[1];
+                    $lista = str_replace("##CPOSICION##", $i++, $lista);
+                    $lista = str_replace("##CTITULO##", $cancion['Titulo'], $lista);
+                    $lista = str_replace("##CAUTOR##", $cancion['Autor'], $lista);
+                    $lista = str_replace("##CALBUM##", $cancion['Album'], $lista);
+                    $lista = str_replace("##CGENERO##",$cancion['Genero'], $lista);
+                    $lista = str_replace("##CAÑO##", $cancion['Año'], $lista);
+                    $lista = str_replace("##CVALORACION##", $cancion['ValoracionSemanal'], $lista);
+                    $lista = str_replace("##CID##", $cancion['Id'], $lista);
+                    $contenido .= $lista;
+                }
+                $pagina=$partes[0] . $contenido . $partes[2];
+            }
+            echo $pagina;
         }
 ?>
