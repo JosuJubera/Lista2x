@@ -228,7 +228,6 @@
         
         //Modificar Lista
         if ($accion=="MODL"){
-            echo "falta por hacer";
             switch ($id){
                 case 1: vmostrarUsuario($_SESSION["usuario"]);//muestra la playlist
 			vmostrarBuscardor();
@@ -247,8 +246,25 @@
                         }else{
                             echo "error al actualizar";//cambiar
                         }
-                case 3://añadir cancion
-                case 4://quitar canciones
+                        break;
+                case 3://añadir cancion  AJAX
+                    var_dump($_GET['cid']);
+                    var_dump($_GET['pid']);
+                        $exito=mañadirCancionPlaylist($_GET['cid'], $_GET['pid']);
+                        if ($exito){
+                            echo "exito al añadir cancion";//cambiar
+                        }else{
+                            echo "fallo al añadir la cancion"; //cambiar
+                        }
+                        break;
+                case 4://quitar canciones 
+                        $exito=mquitarCancionPlaylist($_GET['cid'], $_GET['pid']);
+                    if ($exito){
+                            echo "exito al quitar cancion";//cambiar
+                        }else{
+                            echo "fallo al quitar la cancion"; //cambiar
+                        }
+                        break;
             }
         }
         
@@ -257,18 +273,16 @@
     {
         switch ($id)
 		{
-			case 1:		if (!isset($_SESSION["usuario"]))
-						{
-							vmostrarLogin();
-							vmostrarImenu();
-						}
-						else
-						{
-							vmostrarUsuario($_SESSION["usuario"]);
-							vmostrarBuscardor();
-							vmostrarRmenu();
-						}
-			case 2:		if (!isset($_SESSION["admin"]))
+			case 1:	if (!isset($_SESSION["usuario"])){
+                                    vmostrarLogin();
+                                    vmostrarImenu();
+				}else{
+                                        vmostrarUsuario($_SESSION["usuario"]);
+                                        vmostrarBuscardor();
+                                        vmostrarRmenu();
+                                }
+                                break;
+			case 2:		if (!isset($_SESSION["admin"]))//esto pa que sirve????
 						{
 							echo "no eres admin"; 
 						}
@@ -280,9 +294,10 @@
 						}
 		}
         $datos1 = mCancion($_GET["cid"]);
-		$datos2 = mToplistascancion($_GET["cid"]);
-        vmostrarCancion($datos1,$datos2);
-		vmostrarContactar();
+	$datos2 = mToplistascancion($_GET["cid"]);
+        $playlist=mobtenerPlaylist($_SESSION['usuario']);
+        vmostrarCancion($datos1,$datos2,$playlist);
+	vmostrarContactar();
     }
     
     //Publicar Un comentario

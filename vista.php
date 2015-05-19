@@ -230,26 +230,21 @@
         echo $partes[0] . $contenido . $partes[2];
 	}
 	
-	function vmostrarCancion($consulta1,$consulta2)
+	function vmostrarCancion($cancion,$consulta2,$playlist=null)
 	{
 		$aux = leerfichero("fonts/cancion.html");
 		$partes = explode("##FILALISTA##", $aux);
 		$contenido = "";
 		$lista = "";
 		$i = 1;
-		
-		while ($datos = mysql_fetch_assoc($consulta1))
-		{
-			$lista = $partes[0];
-			$lista = str_replace("##IDC##", $datos["Id"], $lista);
-			$lista = str_replace("##TITULO##", $datos["Titulo"], $lista);
-			$lista = str_replace("##ARTISTA##", $datos["Artista"], $lista);
-			$lista = str_replace("##GENERO##", $datos["Genero"], $lista);
-			$lista = str_replace("##ALBUM##", $datos["Album"], $lista);
-			$lista = str_replace("##AÑO##", $datos["Año"], $lista);
-			$contenido .= $lista;
-		}
-		
+                $lista = $partes[0];
+                $lista = str_replace("##IDC##", $cancion["Id"], $lista);
+                $lista = str_replace("##TITULO##", $cancion["Titulo"], $lista);
+                $lista = str_replace("##ARTISTA##", $cancion["Artista"], $lista);
+                $lista = str_replace("##GENERO##", $cancion["Genero"], $lista);
+                $lista = str_replace("##ALBUM##", $cancion["Album"], $lista);
+                $lista = str_replace("##AÑO##", $cancion["Año"], $lista);
+                $contenido .= $lista;
 		while ($datos = mysql_fetch_assoc($consulta2))
 		{
 			$lista = $partes[1];
@@ -263,7 +258,24 @@
 			$contenido .= $lista;
 			$i++;
 		}
-        echo $contenido . $partes[2];
+                $pagina=$contenido . $partes[2];
+                $partes = explode("##OPCION##", $pagina);
+                if ($playlist==null){//no hay playlist para mostrar (o no tiene o no esta registrado)
+                    echo $partes[0].$partes[2];
+                }else{//mostramos la playlist del usuario
+                    $lista="";
+                    $listacompleta="";
+                    $partes2 = explode("##FILAPLAYLIST##", $partes[1]);
+                    foreach ($playlist as $play){
+                        $lista = $partes2[1];
+                        $lista = str_replace("##PTITULO##", $play['Nombre'], $lista);
+			$lista = str_replace("##PID##", $play['Id'], $lista);
+                        $listacompleta .= $lista;
+                    }
+                    $contenido=$partes2[0].$listacompleta.$partes2[2];
+                    $contenido = str_replace("##CID##", $cancion['Id'], $contenido);
+                    echo $partes[0]. $contenido .$partes[2];
+                }
 	}
 	
 	function vmostrarContactar()
@@ -466,7 +478,7 @@
                     $lista = $partes[1];
                     $lista = str_replace("##CPOSICION##", 1, $lista);
                     $lista = str_replace("##CTITULO##", $cancion['Titulo'], $lista);
-                    $lista = str_replace("##CAUTOR##", $cancion['Autor'], $lista);
+                    $lista = str_replace("##CAUTOR##", $cancion['Artista'], $lista);
                     $lista = str_replace("##CALBUM##", $cancion['Album'], $lista);
                     $lista = str_replace("##CGENERO##",$cancion['Genero'], $lista);
                     $lista = str_replace("##CAÑO##", $cancion['Año'], $lista);

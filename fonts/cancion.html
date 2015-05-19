@@ -29,9 +29,23 @@
 			##FILALISTA##
 		</table>
 	</div>
-	<div>
-		Añadir a playlist
+    ##OPCION##
+	<div><!-- Esto es para probar, hay que hacerlo con AJAX y que no recarge la pagina -->
+            <form action="index.php" method="get" name="añadirCancion">
+                <label for="Playlist">Añadir a la Playlist:</label>
+		<select name="pid">
+                    <option value="-1" Selected >Seleccione una playlist</option>
+                     ##FILAPLAYLIST##
+                    <option value="##PID##" >##PTITULO##</option>
+                    ##FILAPLAYLIST##
+                </select>
+                <input type="hidden" name="accion" value="MODL">
+                <input type="hidden" name="id" value="3">
+                <input type="hidden" name="cid" value="##CID##">
+                <button type="submit">Añadir</button>
+            </form>
 	</div>
+    ##OPCION##
 	<div>
 		<a href="javascript:history.back(-1);" title="Ir la página anterior">Back</a>
 	</div>

@@ -97,7 +97,8 @@
 	{
 		$con = conexion();
 		$resultado = mysql_query("select Id, Titulo, Artista, Genero, Album, Año from canciones WHERE Id = '$cid'",$con);
-		return $resultado;
+                $aux=  mysql_fetch_assoc($resultado);
+		return $aux;
 	}
 
 	function mReportes()
@@ -337,7 +338,7 @@
         if (!is_numeric($id)){//nos la querian colar ¬¬
             return null;
         }
-        $resultado=mysql_query("select  Id,Titulo,Artista,Album,Genero,(ValoracionSemanal * 8) as ValoracionSemanal from canciones c join cancionesplaylist p on (p.cancion=c.id) where playlist=$id" ,$con);  
+        $resultado=mysql_query("select  Id,Titulo,Artista,Album,Genero,Año,(ValoracionSemanal * 8) as ValoracionSemanal from canciones c join cancionesplaylist p on (p.cancion=c.id) where playlist=$id" ,$con);  
         $i=0;
         $aux=null;
         if ($resultado!==false) {
@@ -483,4 +484,43 @@
         else
             return false;
     }
+    function mañadirCancionPlaylist($cid,$pid){
+        $con=conexion();
+        if (!is_numeric($cid) || !is_numeric($pid) || $_SESSION['usuario']!=mcreadorPlaylist($pid)){
+            return false;
+        }
+        $resultado = mysql_query("insert into cancionesplaylist(playlist,cancion) values ('$pid','$cid')",$con);
+        if ($resultado !== false) {
+            return true;
+        }else{
+            return false;
+        }    
+    }
+    function mquitarCancionPlaylist($cid,$pid){
+        $con=conexion();
+        if (!is_numeric($cid) || !is_numeric($pid) || $_SESSION['usuario']!=mcreadorPlaylist($pid)){
+            return false;
+        } 
+        $resultado = mysql_query("delete from cancionesplaylist where playlist='$pid' and cancion='$cid'",$con);
+        if ($resultado !== false) {
+            return true;
+        }else{
+            return false;
+        }   
+    }
+    function mobtenerPlaylist($uid){
+        $con=conexion();
+        mysql_real_escape_string($uid);
+        $resultado = mysql_query("select Nombre,Id from playlist where Usuario='$uid' order by Nombre",$con);
+        $i=0;
+        $aux=null;
+        if ($resultado!==false) {
+            while ($reporte = mysql_fetch_assoc($resultado)) {
+                $aux[$i]=$reporte;
+                $i++;
+            }
+        }
+        return $aux; 
+    }
+    
 ?>
