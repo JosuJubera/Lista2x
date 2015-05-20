@@ -105,6 +105,7 @@ p
 	left: 300px;
 	font-family: Arial, sans-serif;
     font-size: 12pt;
+	z-index:0;
 }
 .contenido .lista
 {
@@ -197,32 +198,43 @@ p
 	height:220px;
 }
 
-.info, .exito, .alerta, .error {
-       font-family:Arial, Helvetica, sans-serif; 
-       font-size:13px;
-       border: 1px solid;
-       margin: 10px 0px;
-       padding:15px 10px 15px 50px;
-       background-repeat: no-repeat;
-       background-position: 10px center;
+.info, .exito, .alerta, .error 
+{
+	font-family:Arial, Helvetica, sans-serif; 
+	font-size:14px;
+	border: 1px solid;
+	padding:15px 10px 15px 50px;
+	background-repeat: no-repeat;
+	background-position: 10px center;
+	width:30%;
+	top: 100px;
+	left: 400px;
+	z-index:5;
+	position:fixed;
+	
+
 }
-.info {
-       color: #00529B;
-       background-color: #BDE5F8;
-       background-image: url('img/info.png');
+.info 
+{
+	color: #00529B;
+	background-color: #BDE5F8;
+	background-image: url('img/info.png');
 }
-.exito {
-       color: #4F8A10;
-       background-color: #DFF2BF;
-       background-image:url('../img/Valid Green.png');
+.exito 
+{
+	color: #4F8A10;
+	background-color: #DFF2BF;
+	background-image:url('../img/Valid Green.png');
 }
-.alerta {
-       color: #9F6000;
-       background-color: #FEEFB3;
-       background-image: url('alerta.png');
+.alerta
+ {
+	color: #9F6000;
+	background-color: #FEEFB3;
+	background-image: url('alerta.png');
 }
-.error {
-       color: #D8000C;
-       background-color: #FFBABA;
-       background-image: url('error.png');
+.error 
+{
+	color: #D8000C;
+	background-color: #FFBABA;
+	background-image: url('error.png');
 }
