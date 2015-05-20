@@ -104,19 +104,21 @@
 	function vmostrarBuscarlistas($buscar,$consulta)
     {
         $aux = leerfichero("fonts/buscarlista.html");
-        $partes = explode("##RESULTADO##", $aux);
-        if ($consulta==null){//No hay resultados
-            $partes = explode("##RESULTADO##", $aux);
+		$aux = str_replace("##BUSCAR##", $buscar, $aux);
+		$partes = explode("##FILALISTA##", $aux);
+        if ($consulta == null)
+		{//No hay resultados
+ 
             $error="<p><b>No se han obtenido resultados.</b></p>";
-            $partes[0] = str_replace("##BUSCAR##", $buscar, $partes[0]);
             echo $partes[0] . $error . $partes[2];
-        }else{//hay resultados, los mostramos
-            $aux = str_replace("##RESULTADO##","", $aux);//quitamos la marca
-            $partes = explode("##FILALISTA##", $aux);
+        }
+		else
+		{//hay resultados, los mostramos
             $contenido = "";
             $lista = "";
             $i = 1;
-            foreach($consulta as $datos){
+            while ($datos = mysql_fetch_assoc($consulta))
+			{
                 $lista = $partes[1];
                 $partes[0] = str_replace("##BUSCAR##", $buscar, $partes[0]);
                 $lista = str_replace("##ID##", $datos["Id"], $lista);
@@ -177,7 +179,8 @@
 			$lista = str_replace("##GENERO##", $datos["Genero"], $lista);
 			$lista = str_replace("##ALBUM##", $datos["Album"], $lista);
 			$lista = str_replace("##AÑO##", $datos["Año"], $lista);
-			$lista = str_replace("##VALORACION##", $datos["ValoracionSemanal"], $lista);
+			$lista = str_replace("##VALORACION##", $datos["Valoracion"], $lista);
+			$lista = str_replace("##VALORACIONSEMANAL##", $datos["ValoracionSemanal"], $lista);
 			$contenido .= $lista;
 			$i++;
 		}

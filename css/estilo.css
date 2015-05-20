@@ -58,10 +58,6 @@ p
 	top:10%;
 	left:4%;
 }
-.busqueda .buscar .submit
-{
-	background: url(../img/buscar.png);
-}
 
 /* Menu */
 .menu ul 
@@ -199,11 +195,4 @@ p
 .hueco
 {
 	height:220px;
-}
-
-/* Admin */
-.contenido .lista .borrar
-{
-	background: url(../img/borrar.png);
-	background-size:100%;
 }

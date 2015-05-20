@@ -131,7 +131,7 @@
         //buscar
 	if (($accion == "B") and (isset($_GET["buscar"])))
 	{
-		$datos = mBuscar($_GET["buscar"],$_GET["tipo"]);
+		$datos = mBuscar($_GET["buscar"],$_GET["tipo"],$_SESSION["usuario"]);
 		switch($_GET["tipo"])
 		{
 			case 0:		vmostrarUsuario($_SESSION["usuario"]);

@@ -1,8 +1,8 @@
 <div class="busqueda">
-	<form class="buscar" method="get" action="index.php?accion=B">
-		<input name="buscar" id="buscar" type="text" required="" size="10" value="buscar" onFocus="this.value=''">
+	<form class="buscar" id="buscar" method="get" action="index.php">
 		<input type="hidden" name="accion" value="B" /> 
-		<input name="submit" type="submit" class="submit" value="">
+		<input name="buscar" id="buscar" type="text" required="" size="10" value="buscar" onFocus="this.value=''">
+		<img src="img/Search.png" onclick='javascript:document.forms["buscar"].submit();'>
 		<br/>
 		<input type="radio" name="tipo" value="0" checked>Lista
 		<input type="radio" name="tipo" value="1">Canción

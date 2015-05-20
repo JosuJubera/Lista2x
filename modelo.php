@@ -44,29 +44,23 @@
 		}
 	}
 	
-	function mBuscar($buscar,$tipo)
+	function mBuscar($buscar,$tipo,$usuario)
 	{
 		$con = conexion();
-                if (!isset($buscar) || !is_numeric($tipo)){
-                    return null;
-                }
-                mysql_real_escape_string($buscar);
+		if (!isset($buscar) || !is_numeric($tipo)){
+			return null;
+		}
+		mysql_real_escape_string($buscar);
 		switch($tipo)
 		{
 			case 0:		$resultado = mysql_query("select p.Id, p.Nombre, p.Asunto,(select count(*) from cancionesplaylist where playlist=p.id) Canciones , p.Usuario, p.Fecha, (p.ValoracionSemanal * 8) as ValoracionSemanal from playlist p where p.Nombre COLLATE utf8_general_ci like '%$buscar%' order by ValoracionSemanal desc limit 20",$con);
 						break;
-			case 1:		$resultado = mysql_query("select Id, Titulo, Artista, Genero, Album, Año, (ValoracionSemanal * 8) as ValoracionSemanal from canciones where Titulo COLLATE utf8_general_ci like '%$buscar%' or Artista COLLATE utf8_general_ci like '%$buscar%' or Album COLLATE utf8_general_ci like '%$buscar%' order by ValoracionSemanal desc limit 20;",$con);
+			case 1:		$resultado = mysql_query("select Id,Titulo,Artista,Album,(Valoracion * 8) as Valoracion, (ValoracionSemanal * 8) as ValoracionSemanal,Año,Genero 
+												from canciones c left join puntuacioncanciones p on p.Cancion = c.id and usuario = '$usuario' WHERE Titulo COLLATE utf8_general_ci like '%$buscar%' order by ValoracionSemanal desc limit 20",$con);
 						break;
 		}
-                $i=0;
-                $aux=null;
-                if ($resultado!==false) {
-                    while ($cancion = mysql_fetch_assoc($resultado)) {
-                        $aux[$i]=$cancion;
-                        $i++;
-                    }
-                }
-                return $aux;  
+		
+		return $resultado;  
 	}
 	
 	function mToplistas($usuario)
