@@ -4,7 +4,6 @@
     /*
      * Falta por hacer:
      * -PDF que se genere al vuelo
-     * -Modficar Playlist
      * -AJAX de playlist
      * -Mensajes de confirmacion y de error
      * -Paginacion en tablas
@@ -264,7 +263,7 @@
                         break;
                 case 4://quitar canciones 
                         $exito=mquitarCancionPlaylist($_GET['cid'], $_GET['pid']);
-                    if ($exito){
+                        if ($exito){
                             echo "exito al quitar cancion";//cambiar
                         }else{
                             echo "fallo al quitar la cancion"; //cambiar

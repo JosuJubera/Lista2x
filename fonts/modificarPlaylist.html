@@ -31,7 +31,7 @@ and open the template in the editor.
         <table>
             <tr><th>#</th><th>Titulo</th><th>Artista</th><th>Genero</th><th>Album</th><th>Año</th><th>Valoracion</th></tr>
             ##FILACANCION##
-            <tr class="lista" onclick="location='index.php?accion=VC&id=1&cid=##ID##'">
+            <tr class="lista" onclick="location='index.php?accion=VC&id=1&cid=##CID##'">
                 <td>##CPOSICION##</td>
                 <td>##CTITULO##</td>
                 <td>##CAUTOR##</td>
@@ -39,7 +39,7 @@ and open the template in the editor.
                 <td>##CGENERO##</td>
                 <td>##CAÑO##</td>
                 <td><ul class="star-rating"> <li style="width: ##CVALORACION##px;" id="current-rating" class="current-rating"></li></ul></td>
-                <td><img src="img/borrar.png" href="index.php?accion=MODL&accion=4&cid=##CID##"></td>
+                <td><a href="index.php?accion=MODL&id=4&cid=##CID##&pid=##PID##"><img src="img/borrar.png" ></a></td>
             </tr>
             ##FILACANCION##
         </table>
