@@ -51,3 +51,9 @@ function mostrarPuntuacion(valor,id)
 	document.getElementById("exito mensajes").style.visibility = "visible";
 	setTimeout(function(){ document.getElementById("exito mensajes").style.visibility = "hidden"; }, 3000);
 }
+
+function mostrarMensaje(mensaje,tipo)
+{
+	document.getElementById(tipo+" mensajes").style.visibility = "visible";
+	setTimeout(function(){ document.getElementById(tipo+" mensajes").style.visibility = "hidden"; }, 3000);
+}

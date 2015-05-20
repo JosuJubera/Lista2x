@@ -132,6 +132,10 @@
 	if (($accion == "B") and (isset($_GET["buscar"])))
 	{
 		$datos = mBuscar($_GET["buscar"],$_GET["tipo"],$_SESSION["usuario"]);
+		if ($datos == null)
+		{
+			vmensaje("No se ha podido encontrar.", "alerta");
+		}
 		switch($_GET["tipo"])
 		{
 			case 0:		vmostrarUsuario($_SESSION["usuario"]);

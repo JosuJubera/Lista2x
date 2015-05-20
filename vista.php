@@ -56,6 +56,13 @@
 		echo $aux;
 	}
 	
+	function vmensaje($mensaje)
+	{
+		$aux = leerfichero("fonts/mensaje.html");
+		$aux = str_replace("##MENSAJE##", $mensaje, $aux);
+		echo $aux;
+	}
+	
 	function vmostrarBuscardor()
 	{
 		$aux = leerfichero("fonts/buscar.html");
