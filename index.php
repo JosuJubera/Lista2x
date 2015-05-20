@@ -4,11 +4,17 @@
     /*
      * Falta por hacer:
      * -PDF que se genere al vuelo
-     * -AJAX de playlist
+     * -AJAX de playlist (Reproductor)
+     * -Refres en MF (recargar la pagina tras votar)
      * -Mensajes de confirmacion y de error
+     * -Comprobar los back
+     * -Comprobaciones SQL(limpiar entrada)
      * -Paginacion en tablas
-     * -Poner bonitas las vistas
-     * -Probar
+     * -CSS
+     * -Alta usuario (con JS y redirect)
+     * -Añadir opcion para ir a la pagina principal
+     * -Añadir mensajes de Info y de Error con JS. Si es necesario usar redirect
+     * -Probar la pagina
      */
 	$accion = "TL";
 	$id = 1;
