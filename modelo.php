@@ -1,8 +1,4 @@
 <?php
-/* dudas:
- * obtener valoracion semanal de canciones/playlist
- * limpiar datos antes de llamar a la db o hacerlo en el controlador?
- */
 
     function conexion()
     {
