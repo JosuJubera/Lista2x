@@ -1,15 +1,11 @@
 <?php
     include("modelo.php");
     include("vista.php");
-    /*
-     * Falta por hacer:
-     * -PDF que se genere al vuelo
-     * -AJAX de playlist
-     * -Mensajes de confirmacion y de error
-     * -Paginacion en tablas
-     * -Poner bonitas las vistas
-     * -Probar
-     */
+//mirar: orden de las canciones en la playlist, lo guardamos o que cada una salga como quiera 
+//al mostrar la playlist?
+    //algun sistema de path o algo? que si no la navegacion es dificil.
+    //tras añadir un comentario, no se puede recargar la pagina ¿Como arreglar eso?
+    
 	$accion = "TL";
 	$id = 1;
 
@@ -46,9 +42,21 @@
         //cambiar contraseña
 	if (($accion == "CC") and (isset($_SESSION["usuario"])))
 	{
-		vmostrarPreferencias();
-		vmostrarCambiocontraseña();
-		vmostrarContactar();
+		switch ($id)
+		{
+			case 1:		vmostrarPreferencias();
+						vmostrarCambiocontraseña();
+						vmostrarContactar();
+						break;
+			case 2:		vmostrarPreferencias();
+						vmostrarCambiocontraseña();
+						vmostrarContactar();
+						$dato1 = $_POST["uid"];
+						$dato2 = $_POST["pwa"];
+						$dato3 = $_POST["pw"];
+						$resultado = mCambiarcontraseña($dato1,$dato2,$dato3);
+						var_dump($resultado);
+		}
 	}
 	
         //cambiar correo
@@ -263,7 +271,7 @@
                         break;
                 case 4://quitar canciones 
                         $exito=mquitarCancionPlaylist($_GET['cid'], $_GET['pid']);
-                        if ($exito){
+                    if ($exito){
                             echo "exito al quitar cancion";//cambiar
                         }else{
                             echo "fallo al quitar la cancion"; //cambiar
@@ -278,14 +286,14 @@
         switch ($id)
 		{
 			case 1:	if (!isset($_SESSION["usuario"])){
-                                    vmostrarLogin();
-                                    vmostrarImenu();
-				}else{
-                                        vmostrarUsuario($_SESSION["usuario"]);
-                                        vmostrarBuscardor();
-                                        vmostrarRmenu();
-                                }
-                                break;
+						vmostrarLogin();
+						vmostrarImenu();
+					}else{
+						vmostrarUsuario($_SESSION["usuario"]);
+						vmostrarBuscardor();
+						vmostrarRmenu();
+					}
+					break;
 			case 2:		if (!isset($_SESSION["admin"]))//esto pa que sirve????
 						{
 							echo "no eres admin"; 

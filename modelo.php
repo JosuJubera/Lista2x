@@ -1,4 +1,8 @@
 <?php
+/* dudas:
+ * obtener valoracion semanal de canciones/playlist
+ * limpiar datos antes de llamar a la db o hacerlo en el controlador?
+ */
 
     function conexion()
     {
@@ -15,7 +19,7 @@
         $contraseña = addslashes($pw);
         $con = conexion();
         $resultado = mysql_query("SELECT Usuario FROM usuarios WHERE Usuario COLLATE utf8_general_ci like '" . $usuario . "' and Contraseña='" . sha1($contraseña) . "'",$con) or die("Error en: " . mysql_error());
-	$comprobacion = mysql_fetch_array($resultado);
+		$comprobacion = mysql_fetch_array($resultado);
         if ($comprobacion !==false )
         {
             return $comprobacion[0];
@@ -25,6 +29,24 @@
             return false;
         }
     }
+	
+	function mCambiarcontraseña($uid,$pwa,$pw)
+	{
+		$con = conexion();
+		$usuario = addslashes($uid);
+        $contraseñaA = addslashes($pwa);
+        $contraseña = addslashes($pw);
+		$resultado = mysql_query("UPDATE usuarios SET Contraseña = " . sha1($contraseña) . " Usuario COLLATE utf8_general_ci like '" . $usuario . "' and Contraseña = '" . sha1($contraseñaA) . "'", $con);
+		$resultado = mysql_affected_rows();
+		if ($resultado != -1)
+		{
+			return true;
+		}
+		else
+		{
+			return false;
+		}
+	}
 	
 	function mBuscar($buscar,$tipo)
 	{
@@ -78,7 +100,7 @@
 	function mMislistas($usuario)
 	{
 		$con = conexion();
-		$resultado = mysql_query("select Id, Nombre, Asunto, (select count(*) from cancionesplaylist where playlist=id) as Canciones, p.Usuario, p.Fecha,(Valoracion * 8) as Valoracion, (ValoracionSemanal * 8) as ValoracionSemanal from playlist p left join puntuacionesplaylist pp on id = playlist where p.usuario = '$usuario' order by Valoracion desc limit 20",$con);
+		$resultado = mysql_query("select Id, Nombre, Asunto, (select count(*) from cancionesplaylist where playlist=id) as Canciones, p.Usuario, p.Fecha,(Valoracion * 8) as Valoracion, (ValoracionSemanal * 8) as ValoracionSemanal from playlist p join puntuacionesplaylist pp on id = playlist and pp.usuario = '$usuario' and p.usuario = '$usuario' order by Valoracion desc limit 20",$con);
 		return $resultado;   
 	}
 	
