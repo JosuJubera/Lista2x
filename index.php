@@ -1,11 +1,16 @@
 <?php
     include("modelo.php");
     include("vista.php");
-//mirar: orden de las canciones en la playlist, lo guardamos o que cada una salga como quiera 
-//al mostrar la playlist?
-    //algun sistema de path o algo? que si no la navegacion es dificil.
-    //tras añadir un comentario, no se puede recargar la pagina ¿Como arreglar eso?
-    
+    /*
+     * Falta por hacer:
+     * -PDF que se genere al vuelo
+     * -Modficar Playlist
+     * -AJAX de playlist
+     * -Mensajes de confirmacion y de error
+     * -Paginacion en tablas
+     * -Poner bonitas las vistas
+     * -Probar
+     */
 	$accion = "TL";
 	$id = 1;
 
