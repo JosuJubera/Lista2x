@@ -48,4 +48,6 @@ var idG;
 function mostrarPuntuacion(valor,id)
 {
 	document.getElementById("valoracion-"+id).style.width = valor+"px";
+	document.getElementById("exito mensajes").style.visibility = "visible";
+	setTimeout(function(){ document.getElementById("exito mensajes").style.visibility = "hidden"; }, 3000);
 }
