@@ -162,15 +162,17 @@
 		return array ($resultado1, $resultado2);
 	}
 	
-	function altausuario($nombre,$apodo,$correo,$ucontraseña)
+	function mAlta($user,$nombre,$apellido1,$apellido2,$correo,$contraseña)
 	{
 		$con=conexion();
 		mysql_real_escape_string($nombre);
-		mysql_real_escape_string($apodo);
+		mysql_real_escape_string($user);
+		mysql_real_escape_string($apellido1);
+		mysql_real_escape_string($apellido2);
 		mysql_real_escape_string($correo);
-		mysql_real_escape_string($ucontraseña);
-		$cifrado=sha1($ucontraseña);
-		$resultado=mysql_query("insert into usuarios(nombre,usuario,correo,contraseña) values ('$nombre','$apodo','$correo','$cifrado');",$con); 
+		mysql_real_escape_string($contraseña);
+		$cifrado=sha1($contraseña);
+		$resultado=mysql_query("insert into usuarios(usuario,nombre,apellido1,apellido2,correo,contraseña) values ('$user','$nombre','$apellido1','$apellido2','$correo','$cifrado')",$con); 
 		return $resultado;   
 	}
     /////////////////////////////////////////////////////////////////

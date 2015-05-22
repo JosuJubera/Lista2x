@@ -1,26 +1,30 @@
 <div class="contenido">
-	<form action="index.php?accion=ALTA&id=1" method="post" name="form">
-		<h1>New user</h1>
+	<h1 class="titulo">Registro</h1>
+	<form action="index.php?accion=ALTA&id=2" method="post" name="form">
 		<table>
 			<tr>
 				<td><label for="uid">Nombre de usuario:</label></td>
-				<td><input type="text" name="uid" value="##USER##"></td>
+				<td><input type="text" required name="uid"></td>
 			</tr>
 			<tr>
 				<td><label for="uname">Nombre:</label></td>
-				<td><input type="text" name="uname" value="##NAME##"></td>
+				<td><input type="text" name="uname"></td>
 			</tr>
 			<tr>
 				<td><label for="lastname">Primer apellido:</label></td>
-				<td><input type="text" name="lastname" value="##LASTNAME##"></td>
+				<td><input type="text" name="lastname"></td>
 			</tr>
 			<tr>
 				<td><label for="lastname2">Segundo apellido:</label></td>
-				<td><input type="text" name="lastname2" value="##LASTNAME2##"></td>
+				<td><input type="text" name="lastname2"></td>
 			</tr>
 			<tr>
 				<td><label for="email">Correo:</label></td>
-				<td><input type="email" name="email" value="##EMAIL##"></td>
+				<td><input type="email" name="email"></td>
+			</tr>
+			<tr>
+				<td><label for="pass">Contraseña:</label></td>
+				<td><input type="password" name="pass"></td>
 			</tr>
 		</table>
 		<p><input type="checkbox" required name="terms">Acepto los <u>Terminos y Condiciones</u></p>
