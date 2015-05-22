@@ -1,7 +1,7 @@
 <?php
     include("modelo.php");
     include("vista.php");
-    error_reporting(0); //borrar esto
+    //error_reporting(0); //borrar esto
     /*
      * Falta por hacer:
      * -AJAX de playlist (Reproductor)
