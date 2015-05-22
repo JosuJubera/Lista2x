@@ -56,10 +56,9 @@
 		echo $aux;
 	}
 	
-	function vmensaje($mensaje)
+	function vmensaje()
 	{
 		$aux = leerfichero("fonts/mensaje.html");
-		$aux = str_replace("##MENSAJE##", $mensaje, $aux);
 		echo $aux;
 	}
 	

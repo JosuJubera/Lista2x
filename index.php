@@ -15,6 +15,7 @@
      * -Añadir opcion para ir a la pagina principal
      * -Añadir mensajes de Info y de Error con JS. Si es necesario usar redirect
      * -Probar la pagina
+	 -funcion mostrar mensaje
      */
 	$accion = "TL";
 	$id = 1;
@@ -131,9 +132,9 @@
 	}
 	
         //buscar
-	if (($accion == "B") and (isset($_GET["buscar"])))
+	if (($accion == "B") and (isset($_GET["search"])))
 	{
-		$datos = mBuscar($_GET["buscar"],$_GET["tipo"],$_SESSION["usuario"]);
+		$datos = mBuscar($_GET["search"],$_GET["tipo"],$_SESSION["usuario"]);
 		if ($datos == null)
 		{
 			vmensaje("No se ha podido encontrar.", "alerta");
@@ -143,14 +144,16 @@
 			case 0:		vmostrarRmenu();
 						vmostrarUsuario($_SESSION["usuario"]);
 						vmostrarBuscardor();
-						vmostrarBuscarlistas($_GET["buscar"],$datos);
+						vmensaje();
+						vmostrarBuscarlistas($_GET["search"],$datos);
 						vmostrarContactar();
 						break;
 			
 			case 1:		vmostrarRmenu();
 						vmostrarUsuario($_SESSION["usuario"]);
 						vmostrarBuscardor();
-						vmostrarBuscarcanciones($_GET["buscar"],$datos);
+						vmensaje();
+						vmostrarBuscarcanciones($_GET["search"],$datos);
 						vmostrarContactar();
 						break;
 		}
@@ -170,7 +173,8 @@
             vmostrarUsuario($_SESSION["usuario"]);
             vmostrarBuscardor();
         }
-        $datos = mToplistas($_SESSION["usuario"]);
+        vmensaje();
+		$datos = mToplistas($_SESSION["usuario"]);
         vmostrarToplistas($datos);
 		vmostrarContactar();
     }
@@ -189,6 +193,7 @@
             vmostrarUsuario($_SESSION["usuario"]);
             vmostrarBuscardor();
         }
+		vmensaje();
 		$datos = mTopcanciones($_SESSION["usuario"]);
 		vmostrarTopcanciones($datos);
 		vmostrarContactar();

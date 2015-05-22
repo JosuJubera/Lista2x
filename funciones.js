@@ -48,12 +48,24 @@ var idG;
 function mostrarPuntuacion(valor,id)
 {
 	document.getElementById("valoracion-"+id).style.width = valor+"px";
-	document.getElementById("exito mensajes").style.visibility = "visible";
-	setTimeout(function(){ document.getElementById("exito mensajes").style.visibility = "hidden"; }, 3000);
+	mostrarMensaje("Se ha actualizado correctamente la valoración", "exito");
 }
 
 function mostrarMensaje(mensaje,tipo)
 {
 	document.getElementById(tipo+" mensajes").style.visibility = "visible";
+	document.getElementById(tipo+" mensajes").innerHTML = mensaje;
 	setTimeout(function(){ document.getElementById(tipo+" mensajes").style.visibility = "hidden"; }, 3000);
+}
+
+function comprobarBuscar()
+{
+	if ((document.getElementById("search").value == "") || (document.getElementById("search").value == "buscar"))
+	{
+		mostrarMensaje("Introduce la busqueda", "alerta");
+	}
+	else
+	{
+		document.forms["buscar"].submit();
+	}
 }
