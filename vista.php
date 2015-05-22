@@ -383,7 +383,7 @@
 			foreach ($canciones as $cancion) {
 				$lista = $partes[1];
 				$lista = str_replace("##TITULO##", $cancion['Titulo'], $lista);
-				$lista = str_replace("##AUTOR##", $cancion['Artista'], $lista);
+				$lista = str_replace("##AUTOR##", $cancion['Autor'], $lista);
 				$lista = str_replace("##ALBUM##", $cancion['Album'], $lista);
 				$lista = str_replace("##GENERO##",$cancion['Genero'], $lista);
 				$lista = str_replace("##AÑO##", $cancion['Año'], $lista);
@@ -516,15 +516,15 @@
             }
             //4º Comentar si es un usuario
             $partes = explode("##COMENTAR##", $pagina);
-            $contenido = $partes[1];
+			$contenido = $partes[1];
             if (isset($_SESSION['usuario'])){//esta logeado
                 $contenido = str_replace("##UID##", $_SESSION['usuario'], $contenido);
+                $contenido = str_replace("##PID##", $info['Id'], $contenido);
                 $pagina=$partes[0] . $contenido . $partes[2]; 
             }else{
                 $contenido = "<p>Logeate para poder comentar. Si no tienes cuenta, registrate!";
                 $pagina=$partes[0] . $contenido . $partes[2]; 
             }
-            $pagina = str_replace("##PID##", $info['Id'], $pagina);
             echo $pagina;
         }
         function vcrearPlaylist(){
@@ -559,7 +559,7 @@
                     $lista = $partes[1];
                     $lista = str_replace("##CPOSICION##", $i++, $lista);
                     $lista = str_replace("##CTITULO##", $cancion['Titulo'], $lista);
-                    $lista = str_replace("##CAUTOR##", $cancion['Artista'], $lista);
+                    $lista = str_replace("##CAUTOR##", $cancion['Autor'], $lista);
                     $lista = str_replace("##CALBUM##", $cancion['Album'], $lista);
                     $lista = str_replace("##CGENERO##",$cancion['Genero'], $lista);
                     $lista = str_replace("##CAÑO##", $cancion['Año'], $lista);
@@ -570,42 +570,5 @@
                 $pagina=$partes[0] . $contenido . $partes[2];
             }
             echo $pagina;
-        }
-        function vgenerarPDF($canciones){
-            require 'html2pdf/html2pdf.class.php';
-            if ($canciones==null){
-                die ("Error al generar el PDF");//Si se puede mostrar error y redireccionar
-            }
-            $html="";
-            $contenido = "";
-            $lista = "";
-            $i=1;
-            //pasamos el html a PDF
-            $partes[0]="<table>
-            <tr><th>#</th><th>Titulo</th><th>Artista</th><th>Genero</th><th>Album</th><th>Año</th></tr>";
-            $partes[1]="<tr class='lista'>
-                <td>##CPOSICION##</td>
-                <td>##CTITULO##</td>
-                <td>##CAUTOR##</td>
-                <td>##CALBUM##</td>
-                <td>##CGENERO##</td>
-                <td>##CAÑO##</td>
-                </tr>";
-            $partes[2]="</table>";
-            foreach ($canciones as $cancion) {
-                $lista = $partes[1];
-                $lista = str_replace("##CPOSICION##", $i++, $lista);
-                $lista = str_replace("##CTITULO##", $cancion['Titulo'], $lista);
-                $lista = str_replace("##CAUTOR##", $cancion['Artista'], $lista);
-                $lista = str_replace("##CALBUM##", $cancion['Album'], $lista);
-                $lista = str_replace("##CGENERO##",$cancion['Genero'], $lista);
-                $lista = str_replace("##CAÑO##", $cancion['Año'], $lista);
-                $contenido .= $lista;
-            }
-            $html=$partes[0] . $contenido . $partes[2];
-            $html2pdf = new HTML2PDF('P', 'A4', 'es');
-            $html2pdf->writeHTML($html);
-            $html2pdf->Output('canciones.pdf');
-            echo $html2pdf; //nota: no se puede enviar nada antes del echo,si no no se envia el PDF
         }
 ?>
