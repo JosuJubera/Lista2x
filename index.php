@@ -1,9 +1,9 @@
 <?php
     include("modelo.php");
     include("vista.php");
+    error_reporting(0); //borrar esto
     /*
      * Falta por hacer:
-     * -PDF que se genere al vuelo
      * -AJAX de playlist (Reproductor)
      * -Refres en MF (recargar la pagina tras votar)
      * -Mensajes de confirmacion y de error
@@ -390,7 +390,11 @@
 			echo $datos["Valoracion"];
 		}
 	}
-	
+        //Generar PDF
+	if ($accion=="PDF"){
+            $canciones=  mcancionesplaylist($_GET['pid']);
+            vgenerarPDF($canciones);
+        }
 	////////////////////////////////////////////////////////////////////////
 	if ($accion=="admin"){//login admin
 		switch ($id){
