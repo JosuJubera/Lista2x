@@ -4,7 +4,7 @@
     //error_reporting(0); //borrar esto
     /*
      * Falta por hacer:
-     * -AJAX de playlist (Reproductor)
+     * -AJAX de playlist (Reproductor) ya mañana
      * -Refres en MF (recargar la pagina tras votar)
      * -Mensajes de confirmacion y de error
      * -Comprobar los back
