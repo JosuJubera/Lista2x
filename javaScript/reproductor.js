@@ -9,10 +9,10 @@ $(function(){
     //variable para almacenar la cancion que se esta reproduciendo
     var iCancionActual=0;
     //obtenemos la cantidad total de canciones en la lista (mas abajo la necesitaremos)
-    var iTotalCanciones=$('#olCanciones li').length;
+    var iTotalCanciones=$('#canciones >tbody >tr').length;
      
     //le asignamos al reproductor la primera cancion de la lista
-    objReproductor.src=$('#olCanciones').children().eq(0).attr('rel');
+    objReproductor.src=$('#canciones').children().eq(0).attr('rel');
      
     //clic en el boton play
     $('#btnReproducir').on('click',function(){
