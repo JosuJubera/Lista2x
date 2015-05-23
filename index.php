@@ -16,6 +16,7 @@
      * -Añadir mensajes de Info y de Error con JS. Si es necesario usar redirect
      * -Probar la pagina
 	 -funcion mostrar mensaje
+	 -contacto
      */
 	$accion = "TL";
 	$id = 1;
