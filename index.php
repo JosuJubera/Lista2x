@@ -285,7 +285,8 @@
                     $datos = minfoplaylist($_GET['pid']);
                     $canciones=mcancionesplaylist($_GET['pid']);
                     $comentarios=mcomplaylist($_GET['pid']);
-                    vmostrarLista($datos,$canciones,$comentarios);
+                    $ncomentarios=mnumcomplaylist($_GET['pid']);
+                    vmostrarLista($datos,$canciones,$comentarios,$ncomentarios);
                     vmostrarContactar();
             }
 	}
