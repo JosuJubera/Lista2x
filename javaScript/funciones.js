@@ -69,6 +69,15 @@ function comprobarBuscar()
 		document.forms["buscar"].submit();
 	}
 }
-function cargarPagina(pag){
-    
+function cargarPagina(pag,pid){ //falta por terminar
+    $.ajax({
+    url : 'index.php',
+    data :'accion=VP&id=2&pid='+pid+'&pag='+pag,
+    type : 'GET',
+    // código a ejecutar si la petición es satisfactoria;
+    // la respuesta es pasada como argumento a la función
+    success : function(res) {
+                $('#comentarios');
+            }
+    });
 }
