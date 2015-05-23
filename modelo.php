@@ -63,6 +63,13 @@
 		return $resultado;  
 	}
 	
+	function mIToplistas()
+	{
+		$con = conexion();
+		$resultado = mysql_query("select Id, p.Usuario, Nombre, Asunto, (select count(*) from cancionesplaylist where playlist=id) as Canciones, p.Fecha, (ValoracionSemanal * 8) as ValoracionSemanal from playlist p order by ValoracionSemanal desc limit 20",$con);
+		return $resultado;   
+	}
+	
 	function mToplistas($usuario)
 	{
 		$con = conexion();
@@ -77,14 +84,18 @@
 		return $resultado;   
 	}
 	
+	function mITopcanciones()
+	{
+		$con = conexion();
+		$resultado = mysql_query("select Id,Titulo,Artista,Album, (ValoracionSemanal * 8) as ValoracionSemanal,Año,Genero from canciones c order by ValoracionSemanal desc limit 20",$con);
+		return $resultado;
+	}
+	
 	function mTopcanciones($usuario)
 	{
-            $con = conexion();
-            //http://www.mysqldiary.com/mysql-left-join/
-            //Esta consulta es igual a select ... from canciones c left join puntuacioncanciones using usuario where usuario=$usuario or usuario is null 
-            $resultado = mysql_query("select Id,Titulo,Artista,Album,(Valoracion * 8) as Valoracion, (ValoracionSemanal * 8) as ValoracionSemanal,Año,Genero 
-			from canciones c left join puntuacioncanciones p on p.Cancion = c.id and usuario = '$usuario' order by ValoracionSemanal desc limit 20",$con);
-            return $resultado;
+		$con = conexion();
+		$resultado = mysql_query("select Id,Titulo,Artista,Album,(Valoracion * 8) as Valoracion, (ValoracionSemanal * 8) as ValoracionSemanal,Año,Genero from canciones c left join puntuacioncanciones p on p.Cancion = c.id and usuario = '$usuario' order by ValoracionSemanal desc limit 20",$con);
+		return $resultado;
 	}
 	
 	function mMislistas($usuario)

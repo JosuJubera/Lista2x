@@ -8,13 +8,22 @@
     <body>
         <div class="contenido">
 			<form id="recu" method="post" action="index.php?accion=C&id=2">
-				<label for="uid">Nombre de usuario:</label>
-                <input name="uid" id="uid" type="text" required="" size="10">
-				<label for="cu">Correo electronico:</label>
-                <input name="cu" id="cu" type="email" required="" size="10">
-				<label for="message">Tu mensaje:</label><br />
-				<textarea id="message" class="input" name="message" rows="7" cols="30"></textarea><br />
-				<input name="submit" type="submit" id="submit" value="Identificarse">
+				<table>
+					<tr>
+						<td><label for="uid">Nombre de usuario:</label></td>
+						<td><input name="uid" id="uid" type="text" required="" size="20"></td>
+					</tr>
+					<tr>
+						<td><label for="cu">Correo electronico:</label></td>
+						<td><input name="cu" id="cu" type="email" required="" size="20"></td>
+					</tr>
+					<tr>
+						<td><label for="message">Tu mensaje:</label></td>
+						<td><textarea id="message" class="input" name="message" rows="7" cols="30"></textarea></td>
+					</tr>
+					<tr>
+						<td><input name="submit" type="submit" id="submit" value="Identificarse"></td>
+					</tr>
             </form>
 			<a href="javascript:history.back(-1);" title="Ir la página anterior">Back</a>
         </div>
