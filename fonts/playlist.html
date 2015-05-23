@@ -21,9 +21,38 @@
 				<input id="eliminarplaylist" class="" type="button" onclick="location.href='index.php?accion=MODL&id=3&pid=##ID##'" value="Eliminar">
 		</div>
 		##OPCIONES##
-		<div class="reproductor">
-						  <!-- A buscarse la vida -->
-		</div>
+		<div class="reproductor"> <!-- Inicio reproductor-->
+                    <div id="divContenedor">
+                        <div id="divReproductor">
+                            <div id="divInfo">
+                                <div id="divLogo">
+                                    <img id="caratula" src="img/logo.png" align="left">
+                                </div>
+                                <div id="divInfoCancion">
+                                    <label id="lblCancion"><strong>Nombre: </strong><span>-</span></label>
+                                    <label id="lblArtista"><strong>Artista: </strong><span>-</span></label>
+                                    <label id="lblDuracion"><strong>Duraci&oacute;n: </strong><span>-</span></label>
+                                    <label id="lblEstado"><strong>Transcurrido: </strong><span>-</span></label>
+                                </div>
+                                <div style="clear: both"></div>
+                            </div>
+                            <div id="divControles">
+                                <input type="button" id="btnReproducir" title="Reproducir">
+                                <input type="button" id="btnPausar" title="Pausar/Continuar">
+                                <input type="button" id="btnAnterior" title="Anterior">
+                                <input type="button" id="btnSiguiente" title="Siguiente">
+                                <input type="button" id="btnSubirVolumen" title="Subir volumen">
+                                <input type="button" id="btnBajarVolumen" title="Bajar volumen">
+                                <input type="button" id="btnSilencio" title="Poner/Quitar silencio">
+                                <input type="button" id="btnRepetir" title="Repetir la lista al finalizar">
+                            </div>
+                            <div id="divProgreso">
+                                <div id="divBarra"></div>
+                            </div>
+                        </div>
+                    </div>
+                    <script type="text/javascript" src="javaScript/reproductor.js"></script>
+		</div> <!-- Fin reproductor-->
 		<div class="canciones">
 				<table>
 						<tr><th>#</th><th>Titulo</th><th>Artista</th><th>Genero</th><th>Album</th><th>Año</th><th>Valoracion</th></tr>
