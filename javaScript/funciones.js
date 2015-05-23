@@ -69,3 +69,6 @@ function comprobarBuscar()
 		document.forms["buscar"].submit();
 	}
 }
+function cargarPagina(pag){
+    
+}

@@ -608,4 +608,40 @@
             $html2pdf->Output('canciones.pdf');
             echo $html2pdf; //nota: no se puede enviar nada antes del echo,si no no se envia el PDF
         }
+        function venviarComentarios($comentarios,$total){
+            $pagina = leerfichero("fonts/playlist.html");
+            $pagina=explode("##COMENTARIOS##", $pagina);
+            //escribimos los comentarios
+            $partes = explode("##FILACOMENTARIO##", $pagina[1]);
+            if ($comentarios==null){
+                $error="<p>No hay comentarios ¡Escribe el primero!</p>";
+                $pagina=$error;  
+            }else{
+                //comentarios de los usuarios
+                $contenido = "";
+                $lista = "";
+                foreach ($comentarios as $comentario) {
+                    $lista = $partes[1];
+                    $lista = str_replace("##COMAUTOR##", $comentario['Usuario'], $lista);
+                    $lista = str_replace("##COMCOMENTARIO##", $comentario['Comentario'], $lista);
+                    $lista = str_replace("##COMID##", $comentario['Id'], $lista);
+                    $contenido .= $lista;
+                }
+                $partes=null;
+                $partes=explode("##PAGINACION##", $pagina[1]);
+                $pagina=$contenido;
+                $contenido="";
+                //paginacion
+                $i=0;
+                var_dump($total);
+                while (($i*20)<=$total){
+                    $i++;
+                    $boton=$partes[1];
+                    $boton=str_replace("##NPAG##", $i, $boton);
+                    $contenido.=$boton;   
+                }
+                $pagina.=$contenido;
+            }
+            echo $pagina;
+        }
 ?>

@@ -223,19 +223,29 @@
 	
         //Ver Playist (ver una sola lista)
 	if($accion == "VP"){
-		if (!isset($_SESSION["usuario"])){
-			vmostrarImenu();
-			vmostrarLogin();
-		}else{
-			vmostrarRmenu();
-			vmostrarUsuario($_SESSION["usuario"]);
-			vmostrarBuscardor();
-		}
-		$datos = minfoplaylist($_GET['pid']);
-		$canciones=mcancionesplaylist($_GET['pid']);
-		$comentarios=mcomplaylist($_GET['pid']);
-		vmostrarLista($datos,$canciones,$comentarios);
-		vmostrarContactar();
+            switch ($id){
+                case 2://Ver los comentarios de la pagina X (AJAX)
+                    $pagina=$_GET['pag'];
+                    $pid=$_GET['pid'];
+                    $comentarios=mcomplaylist($pid,$pagina);
+                    $ncomentarios=mnumcomplaylist($pid);
+                    venviarComentarios($comentarios,$ncomentarios);
+                    break;
+                default: //simplemente mustra la playlist
+                    if (!isset($_SESSION["usuario"])){
+                            vmostrarImenu();
+                            vmostrarLogin();
+                    }else{
+                            vmostrarRmenu();
+                            vmostrarUsuario($_SESSION["usuario"]);
+                            vmostrarBuscardor();
+                    }
+                    $datos = minfoplaylist($_GET['pid']);
+                    $canciones=mcancionesplaylist($_GET['pid']);
+                    $comentarios=mcomplaylist($_GET['pid']);
+                    vmostrarLista($datos,$canciones,$comentarios);
+                    vmostrarContactar();
+            }
 	}
         
        //Nueva Lista

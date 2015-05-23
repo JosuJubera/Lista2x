@@ -373,12 +373,13 @@
         return $info;
     } 
     
-    function mcomplaylist($id){
+    function mcomplaylist($id,$pag=0){
         $con=conexion();
-        if (!is_numeric($id)){//nos la querian colar ¬¬
+        if (!is_numeric($id) || !is_numeric($pag)){//nos la querian colar ¬¬
             return null;
         }
-        $resultado=mysql_query("select Id,Usuario,Comentario from comentarios where playlist='$id';" ,$con);  
+        $empieza=$pag*20;
+        $resultado=mysql_query("select Id,Usuario,Comentario from comentarios where playlist='$id' limit $empieza,20" ,$con);  
         $i=0;
         $aux=null;
         if ($resultado!==false) {
@@ -531,6 +532,19 @@
             }
         }
         return $aux; 
+    }
+    function mnumcomplaylist($pid){
+        $con=conexion();
+        if (!is_numeric($pid)){//nos la querian colar ¬¬
+            return null;
+        }
+        $resultado=mysql_query("select count(*) num from comentarios where playlist='$pid'" ,$con);  
+        $num=0;
+        if ($resultado!==false) {
+            $aux = mysql_fetch_assoc($resultado);
+            $num=$aux['num'];
+        }
+        return $num;   
     }
     
 ?>

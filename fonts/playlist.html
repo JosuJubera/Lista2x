@@ -41,14 +41,21 @@
 				</table>
 		</div>
                 <a href="index.php?accion=PDF&pid=##PID##" >Generar PDF</a>
-		<div class="comentarios">
-				##FILACOMENTARIO##
-				<div class="comentario">
-						<p>Autor: ##COMAUTOR##</p><b> <a href="/index.php?accion=RC&id=1&cid=##COMID##">Reportar</a></b><br/>
-						<p>##COMCOMENTARIO##</p>
-				</div>
-				##FILACOMENTARIO##
-		</div>
+                ##COMENTARIOS##
+		<div id="comentarios">
+                    ##FILACOMENTARIO##
+                    <div class="comentario">
+                                    <p>Autor: ##COMAUTOR##</p><b> <a href="/index.php?accion=RC&id=1&cid=##COMID##">Reportar</a></b><br/>
+                                    <p>##COMCOMENTARIO##</p>
+                    </div>
+                    ##FILACOMENTARIO##
+                    <div id="paginacion">
+                        ##PAGINACION##
+                        <button onclick="cargarPagina(##NPAG##)">##NPAG##</button>
+                        ##PAGINACION##
+                    </div>
+                </div>
+                ##COMENTARIOS##
 		<div class="comentar">
 			##COMENTAR##
 			<form id="nuevocomentario" method="post" action="index.php">
