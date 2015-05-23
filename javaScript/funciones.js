@@ -77,7 +77,7 @@ function cargarPagina(pag,pid){ //falta por terminar
     // código a ejecutar si la petición es satisfactoria;
     // la respuesta es pasada como argumento a la función
     success : function(res) {
-                $('#comentarios');
+                document.getElementById("comentarios").innerHTML = res;
             }
     });
 }

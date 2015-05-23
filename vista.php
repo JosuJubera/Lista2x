@@ -454,7 +454,7 @@
                 echo "<p> No hay comentarios ignorados</p>";
             }
         }
-        function vmostrarLista($info,$canciones,$comentarios){
+        function vmostrarLista($info,$canciones,$comentarios,$total){
             $pagina = leerfichero("fonts/playlist.html");
             //1º info de la playlist, si es null es que no existe
             if ($info==null){
@@ -498,23 +498,42 @@
                 $pagina=$partes[0] . $contenido . $partes[2];
             }
             //3ºComentarios de la cancion
-            $partes = explode("##FILACOMENTARIO##", $pagina);
+            $partes = explode("##COMENTARIOS##", $pagina);
             if ($comentarios==null){
                 $error="<p>No hay comentarios ¡Escribe el primero!</p>";
                 $pagina=$partes[0] . $error . $partes[2];  
             }else{
                 $contenido = "";
                 $lista = "";
+                //comentarios
+                $partes2=explode("##FILACOMENTARIO##", $partes[1]);
                 foreach ($comentarios as $comentario) {
-                    $lista = $partes[1];
+                    $lista = $partes2[1];
                     $lista = str_replace("##COMAUTOR##", $comentario['Usuario'], $lista);
                     $lista = str_replace("##COMCOMENTARIO##", $comentario['Comentario'], $lista);
                     $lista = str_replace("##COMID##", $comentario['Id'], $lista);
                     $contenido .= $lista;
                 }
-                $pagina=$partes[0] . $contenido . $partes[2]; 
+              
+                $aux=$partes2[0] . $contenido . $partes2[2]; 
+                unset($partes2);
+                $partes2=explode("##PAGINACION##", $aux);
+                $i=0;
+                $boton="";
+                $contenido="";
+                //paginacion
+                while (($i*20)<=$total){
+                    $i++;
+                    $boton=$partes2[1];
+                    $boton=str_replace("##NPAG##", $i, $boton);
+                    $boton = str_replace("##PID##", $info['Id'], $boton);
+                    $contenido.=$boton;   
+                }
+                $aux=$partes2[0].$contenido.$partes2[2];
+                $pagina=$partes[0].$aux.$partes[2];
             }
             //4º Comentar si es un usuario
+            unset($partes);
             $partes = explode("##COMENTAR##", $pagina);
             $contenido = $partes[1];
             if (isset($_SESSION['usuario'])){//esta logeado
@@ -633,7 +652,6 @@
                 $contenido="";
                 //paginacion
                 $i=0;
-                var_dump($total);
                 while (($i*20)<=$total){
                     $i++;
                     $boton=$partes[1];
