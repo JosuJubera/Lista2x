@@ -384,12 +384,12 @@
         return $info;
     } 
     
-    function mcomplaylist($id,$pag=0){
+    function mcomplaylist($id,$pag=1){
         $con=conexion();
         if (!is_numeric($id) || !is_numeric($pag)){//nos la querian colar ¬¬
             return null;
         }
-        $empieza=$pag*20;
+        $empieza=($pag-1)*20;
         $resultado=mysql_query("select Id,Usuario,Comentario from comentarios where playlist='$id' limit $empieza,20" ,$con);  
         $i=0;
         $aux=null;

@@ -704,6 +704,7 @@
                     $i++;
                     $boton=$partes[1];
                     $boton=str_replace("##NPAG##", $i, $boton);
+                    $boton = str_replace("##PID##", $_GET['pid'], $boton);
                     $contenido.=$boton;   
                 }
                 $pagina.=$contenido;
