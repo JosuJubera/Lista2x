@@ -120,8 +120,8 @@
 		session_destroy();
         vmostrarImenu();
 		vmostrarLogin();
-		$datos = mToplistas();
-        vmostrarToplistas($datos);
+		$datos = mIToplistas();
+        vmostrarIToplistas($datos);
 		vmostrarContactar();
 	}
 	
@@ -166,17 +166,21 @@
         {
             vmostrarImenu();
             vmostrarLogin();
+			vmensaje();
+			$datos = mIToplistas();
+			vmostrarIToplistas($datos);
+			vmostrarContactar();
         }
         else
         {
             vmostrarRmenu();
             vmostrarUsuario($_SESSION["usuario"]);
             vmostrarBuscardor();
-        }
-        vmensaje();
-		$datos = mToplistas($_SESSION["usuario"]);
-        vmostrarToplistas($datos);
-		vmostrarContactar();
+			vmensaje();
+			$datos = mToplistas($_SESSION["usuario"]);
+			vmostrarToplistas($datos);
+			vmostrarContactar();
+        }		
     }
 
     //mostrar Top Canciones
@@ -186,17 +190,21 @@
         {
             vmostrarImenu();
             vmostrarLogin();
+			vmensaje();
+			$datos = mITopcanciones();
+			vmostrarITopcanciones($datos);
+			vmostrarContactar();
         }
         else
         {
 		    vmostrarRmenu();
             vmostrarUsuario($_SESSION["usuario"]);
             vmostrarBuscardor();
+			vmensaje();
+			$datos = mTopcanciones($_SESSION["usuario"]);
+			vmostrarTopcanciones($datos);
+			vmostrarContactar();
         }
-		vmensaje();
-		$datos = mTopcanciones($_SESSION["usuario"]);
-		vmostrarTopcanciones($datos);
-		vmostrarContactar();
     }
 	
     //mostrar Mis Listas
