@@ -1,6 +1,5 @@
-*{
-    padding: 0;
-    margin: 0;
+.repoductor{
+    display:block;
 }
 body{
     font: normal 12px Tahoma, Verdana, Arial, sans-serif;
@@ -66,10 +65,6 @@ input[type="button"]{
             #btnPausar{background: url(img/Pause.png) center no-repeat;}
             #btnSiguiente{background: url(img/Fast_Forward.png) center no-repeat;}
             #btnAnterior{background: url(img/Fast_Rewind.png) center no-repeat;}
-           // #btnSilencio{background: url(img/silencio.png) center no-repeat;}
-          //  #btnSubirVolumen{background: url(img/subir-volumen.png) center no-repeat;}
-         //   #btnBajarVolumen{background: url(img/bajar-volumen.png) center no-repeat;}
-         //   #btnRepetir{background: url(img/repetir.png) center no-repeat;}
         #divProgreso{
             height: 15px;
             margin: 10px;

@@ -9,11 +9,14 @@ $(function(){
     //variable para almacenar la cancion que se esta reproduciendo
     var iCancionActual=0;
     //obtenemos la cantidad total de canciones en la lista (mas abajo la necesitaremos)
-    var iTotalCanciones=$('#canciones >tbody >tr').length;
-     
+    var iTotalCanciones=$('#tablacanciones >tbody >tr').length-1;
+    //Variable que almacena las id de las canciones
+    var totcanciones=new Array(iTotalCanciones);
+    for (i=1;i<=iTotalCanciones;i++){
+        totcanciones[i-1]=$('#tablacanciones >tbody >tr')[i].cells[6].innerHTML;
+    }
     //le asignamos al reproductor la primera cancion de la lista
-    objReproductor.src=$('#canciones').children().eq(0).attr('rel');
-     
+    objReproductor.src="canciones/"+totcanciones[0]+".mp3";    
     //clic en el boton play
     $('#btnReproducir').on('click',function(){
         //llamamos a la funcion que reproduce los archivos
@@ -45,17 +48,10 @@ $(function(){
      
     //funcion que reproduce los archivos de audio
     $.fntReproducir=function(){
-        //obtenemos una instancia del elemento que contiene la info. de cancion a reproducir
-        var $objContenedorCancion=$('#olCanciones').children().eq(iCancionActual);
-        //obtenemos la ruta del archivo que se va a reproducir y se lo asignamos
-        //al source del audio player de HTML5
-        objReproductor.src=$objContenedorCancion.attr('rel');
+         objReproductor.src="canciones/"+totcanciones[iCancionActual]+".mp3";
          
         //desmarcamos cualquier cancion en la lista (si es que estuviese marcada alguna)
-        $('#olCanciones li').removeClass('clsSeleccionado');
         //marcamos en la lista la cancion que vamos a reproducir
-        $objContenedorCancion.addClass('clsSeleccionado');
-         
         //reproducir la cancion con el metodo play
         objReproductor.play();
          
@@ -63,16 +59,13 @@ $(function(){
         $('#divInfoCancion').find('label').stop(true.true).animate({
             opacity: 0
         },function(){
-            //obtenemos una instancia del elemento que contiene los datos de la cancion
-            var $objContenedorCancion=$('#olCanciones').children().eq(iCancionActual);
-             
             //actualizamos la informacion de la cancion que se esta reproduciendo
             //duracion total
             $('#lblDuracion').find('span').text('00:00');
             //nombre de la cancion
-            $('#lblCancion').find('span').text($objContenedorCancion.find('strong').text());
+            $('#lblCancion').find('span').text($('#tablacanciones >tbody >tr')[iCancionActual+1].cells[1].innerHTML);
             //artista
-            $('#lblArtista').find('span').text($objContenedorCancion.find('em').text());
+            $('#lblArtista').find('span').text($('#tablacanciones >tbody >tr')[iCancionActual+1].cells[2].innerHTML);
             //tiempo transcurrido
             $('#lblEstado').find('span').text('00:00');
              
@@ -105,7 +98,7 @@ $(function(){
             iCancionActual--;
         }else{
             //pasamos a la ultima cancion de la lista
-            iCancionActual=$('#olCanciones li').length-1;
+            iCancionActual=iTotalCanciones-1;
         }
         //reproducimos la cancion
         $.fntReproducir();
