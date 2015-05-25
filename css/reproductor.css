@@ -1,80 +1,89 @@
-.repoductor{
-    display:block;
+.repoductor body{
+    font: 12px Tahoma;
+    background: #f1f1f1;
 }
-body{
-    font: normal 12px Tahoma, Verdana, Arial, sans-serif;
-    background: #f1f1f1;
+.repoductor a{
+    color: #f00;
 }
-a{
-    color: #f00;
+.repoductor img{
+    margin-left: 5px;
+    display: inline;
 }
-input[type="button"]{
-    width: 64px;
-    height: 64px;
-    margin: 2px;
-    border: solid 1px #f1f1f1;
-    background: #fff;
-    border-radius: 3px;
-    cursor: pointer;
+.repoductor input[type="button"]{
+    width: 64px;
+    height: 64px;
+    margin: 2px;
+    border: solid 1px #f1f1f1;
+    background: #fff;
+    border-radius: 3px;
+    cursor: pointer;
 }
-    input[type="button"]:hover{
-        border-color: #FF7E8A
-    }
-    input[type="button"].clsSeleccionado{
-        border-color: #21BFF2
-    }
-#divContenedor{
-    margin: 0 auto;
-    width: 600px;
-    margin-top: 20px;
+.repoductor input[type="button"]:hover{
+    border-color: #FF7E8A;
 }
-    #divReproductor{
-        border: solid 1px #ccc;
-        box-shadow: 0 0 10px #ccc;
-        border-radius: 5px;
-        background: #fff
-    }
-        #divInfo{
-            padding: 5px;
-            padding-top: 15px
-        }
-            #divLogo{
-                text-align: center;
-                display: inline-block;
-                padding-left: 10px
-            }
-            #divInfoCancion{
-                text-align: left;
-                display: inline-block;
-                vertical-align: top;
-                border-radius: 3px;
-                padding: 10px;
-                margin-left: 20px
-            }
-                #divInfoCancion label{
-                    display: block
-                }
-                    #divInfoCancion label strong{
-                        width: 100px;
-                        display: inline-block
-                    }
-        #divControles{
-            text-align: center
-        }
-            #btnReproducir{background: url(img/Play.png) center no-repeat;}
-            #btnPausar{background: url(img/Pause.png) center no-repeat;}
-            #btnSiguiente{background: url(img/Fast_Forward.png) center no-repeat;}
-            #btnAnterior{background: url(img/Fast_Rewind.png) center no-repeat;}
-        #divProgreso{
-            height: 15px;
-            margin: 10px;
-            border: inset 1px #f1f1f1;
-            border-radius: 3px;
-            overflow: hidden
-        }
-            #divBarra{
-                width: 0;
-                height: 100%;
-                background: #FF7E8A;
-                border-right: solid 2px #f00
-            }
+.repoductor input[type="button"].clsSeleccionado{
+    border-color: #21BFF2;
+}
+.repoductor #divContenedor{
+    width: 600px;
+    margin-top: 20px;
+}
+.repoductor #divReproductor{
+    border: solid 1px #CCC;
+    box-shadow: 0 0 10px #CCC;
+    border-radius: 5px;
+    background: #FFF;
+}
+.repoductor #divInfo{
+    padding: 5px;
+    padding-top: 15px;
+}
+.repoductor #divLogo{
+    text-align: center;
+    display: inline-block;
+    padding-left: 10px;
+        
+}
+.repoductor #divInfoCancion{
+    text-align: left;
+    display: inline-block;
+    vertical-align: top;
+    border-radius: 3px;
+    padding: 10px;
+    margin-left: 20px;
+}
+.repoductor #divInfoCancion label{
+    display: block;
+}
+.repoductor #divInfoCancion label strong{
+    width: 100px;
+    display: inline-block;
+}
+.repoductor #divControles{
+    text-align: center;
+}
+.repoductor #btnReproducir{
+    background: url('../img/Play.png') center no-repeat;
+}
+.repoductor #btnPausar{
+    background: url('../img/Pause.png') center no-repeat;
+}
+.repoductor #btnSiguiente{
+    background: url('../img/Fast_Forward.png') center no-repeat;
+}
+.repoductor #btnAnterior{
+    background: url(../img/Fast_Rewind.png) center no-repeat;
+}
+.repoductor #divProgreso{
+    height: 15px;
+    margin: 10px;
+    border: inset 1px #f1f1f1;
+    border-radius: 3px;
+    overflow: hidden;
+}
+.repoductor #divBarra{
+    width: 0;
+    height: 100%;
+    background: #FF7E8A;
+    border-right: solid 2px #F00;
+}
