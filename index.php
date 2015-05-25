@@ -45,10 +45,12 @@
     {
         $uid = $_POST["uid"];
         $pw = $_POST["pw"];
+		$tipo = $_POST["tipo"];
         $usuario = mLogin($uid, $pw);
 		if ($usuario != false)
 		{
 			$_SESSION["usuario"] = $usuario;
+			$_SESSION["tipo"] = $tipo;
 		}
     }
 	

@@ -72,10 +72,9 @@ function comprobarBuscar()
 
 function comprobarUser()
 {
-	var user = "<?php echo $_SESSION['user']?>"; //Guardar la sesion del user
-	var admin = "<?php echo $_SESSION['admin']?>"; // Guardar la sesion del admin
-	
-	if (null != user) // Comprobar si la sesion es de usuario
+	var tipo = "<?php echo $_SESSION['tipo']?>"; //Guardar la sesion del user
+	mostrarMensaje(tipo, "exito");
+	if (tipo == 'user') // Comprobar si la sesion es de usuario
 	{
 		var url = window.location.href;
 		var n = url.indexOf("index");
@@ -84,7 +83,7 @@ function comprobarUser()
 		window.location.assign(res);
 	}
 	
-	if (null != admin) // Comprobar si la sesion es de administrador
+	if (tipo == 'admin') // Comprobar si la sesion es de administrador
 	{
 		var url = window.location.href;
 		var n = url.indexOf("index");
