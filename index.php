@@ -17,6 +17,7 @@
      * -Probar la pagina
 	 -funcion mostrar mensaje
 	 -contacto
+	 -admin (vistas, funcionalidad...)
      */
 	$accion = "TL";
 	$id = 1;
@@ -51,7 +52,7 @@
 		}
     }
 	
-        //cambiar contraseña
+    //cambiar contraseña
 	if (($accion == "CC") and ((isset($_SESSION["usuario"])) or (isset($_SESSION["admin"]))))
 	{
 		switch ($id)
@@ -72,7 +73,7 @@
 		}
 	}
 	
-        //cambiar correo
+    //cambiar correo
 	if (($accion == "CE") and (isset($_SESSION["usuario"])))
 	{
 		vmostrarPreferencias();
@@ -80,7 +81,7 @@
 		vmostrarContactar();
 	}
 	
-        //eliminar cuenta
+	//eliminar cuenta
 	if (($accion == "EC") and (isset($_SESSION["usuario"])))
 	{
 		vmostrarPreferencias();
@@ -88,7 +89,7 @@
 		vmostrarContactar();
 	}
 	
-        //recuperar contraseña
+	//recuperar contraseña
 	if ($accion == "REC")
 	{
 		switch($id)
@@ -101,7 +102,7 @@
 		}
 	}
 	
-        //alta usuario
+	//alta usuario
 	if($accion == "ALTA")
     {
 		switch($id)
@@ -116,7 +117,7 @@
 		}
 	}
 	
-        //log out (deslogearse)
+	//log out (deslogearse)
 	if ($accion == "OUT")
 	{
 		session_destroy();
@@ -127,7 +128,7 @@
 		vmostrarContactar();
 	}
 	
-        //mostrar contacto?????
+	//mostrar contacto?????
 	/*
 	if ($accion == "C")
 	{
@@ -166,7 +167,7 @@
 		}	
 	}*/
 	
-        //buscar
+	//buscar
 	if (($accion == "B") and (isset($_GET["search"])))
 	{
 		$datos = mBuscar($_GET["search"],$_GET["tipo"],$_SESSION["usuario"]);
@@ -194,7 +195,7 @@
 		}
 	}
 	
-        //mostrar Top Listas
+	//mostrar Top Listas
     if($accion == "TL")
     {
         if (!isset($_SESSION["usuario"]))
@@ -253,7 +254,7 @@
             vmostrarContactar();
 	}
 	
-        //mostrar Mis Favoritos
+	//mostrar Mis Favoritos
 	if (($accion == "MF") and (isset($_SESSION["usuario"])))
 	{
         vmostrarRmenu();
@@ -264,7 +265,7 @@
 		vmostrarContactar();
 	}
 	
-        //Ver Playist (ver una sola lista)
+	//Ver Playist (ver una sola lista)
 	if($accion == "VP"){
             switch ($id){
                 case 2://Ver los comentarios de la pagina X (AJAX)
@@ -292,71 +293,71 @@
             }
 	}
         
-       //Nueva Lista
-        if ($accion=="NL" && isset($_SESSION['usuario'])){
-            switch ($id){
-                case 1:		vmostrarRmenu();
-							vmostrarUsuario($_SESSION["usuario"]);//mostrar formulario
-							vmostrarBuscardor();
-							vcrearPlaylist();
-							break;
-                case 2:		vmostrarRmenu();
-							$exito=mcrearPlaylist($_SESSION['usuario'],$_POST['Ptitulo'], $_POST['Pasunto'], $_POST['Pdescrip']);
-							vmostrarBuscardor();
-			
-                        if ($exito){
-                            echo "Creada con exito";//cambiar
-                        }
-                        else{
-                            vcrearPlaylist();
-                        }
-                        break;
-            }
-        }
+	//Nueva Lista
+	if ($accion=="NL" && isset($_SESSION['usuario'])){
+		switch ($id){
+			case 1:		vmostrarRmenu();
+						vmostrarUsuario($_SESSION["usuario"]);//mostrar formulario
+						vmostrarBuscardor();
+						vcrearPlaylist();
+						break;
+			case 2:		vmostrarRmenu();
+						$exito=mcrearPlaylist($_SESSION['usuario'],$_POST['Ptitulo'], $_POST['Pasunto'], $_POST['Pdescrip']);
+						vmostrarBuscardor();
+		
+					if ($exito){
+						echo "Creada con exito";//cambiar
+					}
+					else{
+						vcrearPlaylist();
+					}
+					break;
+		}
+	}
         
-        //Modificar Lista
-        if ($accion=="MODL"){
-            switch ($id){
-                case 1: 		vmostrarRmenu();
-							vmostrarUsuario($_SESSION["usuario"]);//muestra la playlist
-							vmostrarBuscardor();
-							$infoplaylist=minfoplaylist($_GET['pid']);
-							$canciones=mcancionesplaylist($_GET['pid']);
-							vmodPlaylist($infoplaylist,$canciones);
-							break;
-                case 2://modificar la info de playlist
-						vmostrarRmenu();
+	//Modificar Lista
+	if ($accion=="MODL"){
+		switch ($id){
+			case 1: 		vmostrarRmenu();
 						vmostrarUsuario($_SESSION["usuario"]);//muestra la playlist
 						vmostrarBuscardor();
-                        $exito=mactualizarPlaylist($_POST['pid'],$_POST['Ptitulo'],$_POST['Pasunto'],$_POST['Pdescrip']);
-                        if ($exito==true){
-                            echo "exito al actualizar";//cambiar
-                        }else{
-                            echo "error al actualizar";//cambiar
-                        }
-                        break;
-                case 3://añadir cancion  AJAX
-                    var_dump($_GET['cid']);
-                    var_dump($_GET['pid']);
-                        $exito=mañadirCancionPlaylist($_GET['cid'], $_GET['pid']);
-                        if ($exito){
-                            echo "exito al añadir cancion";//cambiar
-                        }else{
-                            echo "fallo al añadir la cancion"; //cambiar
-                        }
-                        break;
-                case 4://quitar canciones 
-                        $exito=mquitarCancionPlaylist($_GET['cid'], $_GET['pid']);
-                    if ($exito){
-                            echo "exito al quitar cancion";//cambiar
-                        }else{
-                            echo "fallo al quitar la cancion"; //cambiar
-                        }
-                        break;
-            }
-        }
+						$infoplaylist=minfoplaylist($_GET['pid']);
+						$canciones=mcancionesplaylist($_GET['pid']);
+						vmodPlaylist($infoplaylist,$canciones);
+						break;
+			case 2://modificar la info de playlist
+					vmostrarRmenu();
+					vmostrarUsuario($_SESSION["usuario"]);//muestra la playlist
+					vmostrarBuscardor();
+					$exito=mactualizarPlaylist($_POST['pid'],$_POST['Ptitulo'],$_POST['Pasunto'],$_POST['Pdescrip']);
+					if ($exito==true){
+						echo "exito al actualizar";//cambiar
+					}else{
+						echo "error al actualizar";//cambiar
+					}
+					break;
+			case 3://añadir cancion  AJAX
+				var_dump($_GET['cid']);
+				var_dump($_GET['pid']);
+					$exito=mañadirCancionPlaylist($_GET['cid'], $_GET['pid']);
+					if ($exito){
+						echo "exito al añadir cancion";//cambiar
+					}else{
+						echo "fallo al añadir la cancion"; //cambiar
+					}
+					break;
+			case 4://quitar canciones 
+					$exito=mquitarCancionPlaylist($_GET['cid'], $_GET['pid']);
+				if ($exito){
+						echo "exito al quitar cancion";//cambiar
+					}else{
+						echo "fallo al quitar la cancion"; //cambiar
+					}
+					break;
+		}
+	}
         
-        //Ver Cancion (una sola cancion)
+    //Ver Cancion (una sola cancion)
 	if($accion == "VC")
     {
         switch ($id)
@@ -410,11 +411,7 @@
 		$id = $_GET["id"];
 		$p = $_GET["p"];
 		$usuario = $_SESSION['usuario'];
-		//$con = conexion();
-		/* si no se ha valorau aun insert*/
 		list($resultado1, $resultado2) = mPuntuacioncancion($id,$p,$usuario);
-		//$resultado1 = mysql_query("UPDATE puntuacioncanciones SET Valoracion = '$p' WHERE Cancion = '$id' and Usuario = '$usuario';",$con);
-		//$resultado2 = mysql_query("select (p.Valoracion * 8) as Valoracion from puntuacioncanciones p WHERE Cancion = '$id' and Usuario = '$usuario'",$con);
 		$datos = mysql_fetch_assoc($resultado2);
 		if (($resultado1 == false) or ($resultado2 == false))
 		{
@@ -426,7 +423,7 @@
 		}
 	}
 	
-        //Puntuar Playlist
+	//Puntuar Playlist
 	if($accion == "PP")
 	{
 		$id = $_GET["id"];
@@ -444,7 +441,7 @@
 			echo $datos["Valoracion"];
 		}
 	}
-        //Generar PDF
+	//Generar PDF
 	if ($accion=="PDF"){
             $canciones=  mcancionesplaylist($_GET['pid']);
             vgenerarPDF($canciones);
@@ -550,47 +547,49 @@
 		}
 	}
 	if ($accion == "BC"){//borrar cancion
-		if (isset($_SESSION["admin"]) /*&& mIsAdmin($_SESSION["admin"])*/){ //es un admin
-			switch ($id){
-				case 1: vbuscarborrar(); //mostrar el buscador
-						break;
-				case 2://mostrar resultados
-					switch ($_GET['buscar']){
-						case 1:$canciones=mbuscartitulo($_GET['busqueda']);//titulo
-							vbuscarborrar($_GET['busqueda'],$_GET['buscar']);
-							vcancionesborrar($canciones);
+		if (isset($_SESSION["admin"]) /*&& mIsAdmin($_SESSION["admin"])*/)
+		{ //es un admin
+			switch ($id)
+			{
+				case 1: 	vbuscarborrar(); //mostrar el buscador
 							break;
-                                                case 2:$autores=  mbuscarautor($_GET['busqueda']);//autor
-                                                        vbuscarborrar($_GET['busqueda'],$_GET['buscar']);
-                                                        vautorborrar($autores);
-                                                        break;
-                                                case 3:$albumnes=mbuscaralbum($_GET['busqueda']);//album(disco)
-                                                        vbuscarborrar($_GET['busqueda'],$_GET['buscar']);
-                                                        valbumborrar($albumnes);
-                                                        break;
-					}
-					break;
-                                case 3: if (mborrarCancion($_GET['idcancion'])){
-                                            echo "eliminado con exito";
-                                            vmostrarAmenu();
-                                        }else{
-                                            echo 'fallo al eliminar';
-                                            vbuscarborrar($_GET['busqueda'],$_GET['buscar']);
-                                        }
-					break;
-                                case 4:$cancionesaborrar=cancionesautor($_GET['autor']);//confirmar borrar autor
-                                        $_SESSION['cancionesborrar']=$cancionesaborrar;
-                                        vmostrarconfirmacion($cancionesaborrar);
-                                        break;
-                                case 5:$cancionesaborrar=cancionesalbum($_GET['album']);//confirmar borrar disco
-                                        $_SESSION['cancionesborrar']=$cancionesaborrar;
-                                        vmostrarconfirmacion($cancionesaborrar);
-                                        break;
-                                case 6:$res=mborrarCanciones($_SESSION['cancionesborrar']);
-                                        vmostrarExito($res);
-                                        break;
-                                    
-                                }//fin switch $id
+				case 2:		//mostrar resultados
+							switch ($_GET['buscar'])
+							{
+								case 1:		$canciones=mbuscartitulo($_GET['busqueda']);//titulo
+											vbuscarborrar($_GET['busqueda'],$_GET['buscar']);
+											vcancionesborrar($canciones);
+											break;
+								case 2: 	$autores=  mbuscarautor($_GET['busqueda']);//autor
+											vbuscarborrar($_GET['busqueda'],$_GET['buscar']);
+											vautorborrar($autores);
+											break;
+								case 3: 	$albumnes=mbuscaralbum($_GET['busqueda']);//album(disco)
+											vbuscarborrar($_GET['busqueda'],$_GET['buscar']);
+											valbumborrar($albumnes);
+											break;
+							}
+							break;
+                case 3: 	if (mborrarCancion($_GET['idcancion'])){
+								echo "eliminado con exito";
+								vmostrarAmenu();
+							}else{
+								echo 'fallo al eliminar';
+								vbuscarborrar($_GET['busqueda'],$_GET['buscar']);
+							}
+							break;
+				case 4:$cancionesaborrar=cancionesautor($_GET['autor']);//confirmar borrar autor
+						$_SESSION['cancionesborrar']=$cancionesaborrar;
+						vmostrarconfirmacion($cancionesaborrar);
+						break;
+				case 5:$cancionesaborrar=cancionesalbum($_GET['album']);//confirmar borrar disco
+						$_SESSION['cancionesborrar']=$cancionesaborrar;
+						vmostrarconfirmacion($cancionesaborrar);
+						break;
+				case 6:$res=mborrarCanciones($_SESSION['cancionesborrar']);
+						vmostrarExito($res);
+						break;                   
+			}//fin switch $id
 		}else{
 			echo "necesitas ser administrador";
 		}
