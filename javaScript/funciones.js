@@ -73,7 +73,8 @@ function comprobarBuscar()
 function comprobarUser()
 {
 	var tipo = "<?php echo $_SESSION['tipo']?>"; //Guardar la sesion del user
-	mostrarMensaje(tipo, "exito");
+	console.log(tipo);
+	mostrarMensaje(tipo+"$_SESSION['tipo'] no valido", "error");
 	if (tipo == 'user') // Comprobar si la sesion es de usuario
 	{
 		var url = window.location.href;
