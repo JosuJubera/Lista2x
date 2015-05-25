@@ -469,34 +469,50 @@
 		}
 	}
 	
-        if ($accion== "AR"){ //administrar reportes
-            if (isset($_SESSION["admin"]) /*&& mIsAdmin($_SESSION["admin"])*/){
-                vmostrarAmenu();
-                switch ($id){
-                    case 1: //mostrar reportes
-                            if (isset($_GET['verignorados'])&& $_GET['verignorados']==1){//mostramos los reportes ignorados por el admin anteriormente
-                                $ignorados=mobtenerReportesIgnorados();
-                                vmostrarReportesIgnorados($ignorados);    
-                            }else{//mostramos los reportes de los comentarios
-                                $reportes=mobtenerReportes();
-                                vmostrarReportes($reportes);
-                            }
-                            break;
-                    case 2:$rest=mborrarComentario($_GET['idcomentario']);//eliminar comentario
-                            if ($rest==false){
-                                mostrarError("No se ha podido eliminar", "Error al eliminar el comentario");
-                            }
-                            $reportes=mobtenerReportes();
-                            vmostrarReportes($reportes);
-                            break;
-                    case 3:mignorar($_GET['ignorar']);//ignorar comentario
-                           vmostrarReportes($reportes);
-                           break;
-                    default:vmostrarAmenu();
-               }
-            }else{
-               mostrarError("Acceso denegado", "Usted no tiene permisos para ver esta seccion");
-            }
+	if ($accion== "AR"){ //administrar reportes
+		if (isset($_SESSION["admin"]) /*&& mIsAdmin($_SESSION["admin"])*/){
+			vmostrarAmenu();
+			switch ($id){
+				case 1: //mostrar reportes
+						if (isset($_GET['verignorados'])&& $_GET['verignorados']==1){//mostramos los reportes ignorados por el admin anteriormente
+							$ignorados=mobtenerReportesIgnorados();
+							vmostrarReportesIgnorados($ignorados);    
+						}else{//mostramos los reportes de los comentarios
+							$reportes=mobtenerReportes();
+							vmostrarReportes($reportes);
+						}
+						break;
+				case 2:$rest=mborrarComentario($_GET['idcomentario']);//eliminar comentario
+						if ($rest==false){
+							mostrarError("No se ha podido eliminar", "Error al eliminar el comentario");
+						}
+						$reportes=mobtenerReportes();
+						vmostrarReportes($reportes);
+						break;
+				case 3:mignorar($_GET['ignorar']);//ignorar comentario
+					   vmostrarReportes($reportes);
+					   break;
+				default:vmostrarAmenu();
+		   }
+		}else{
+		   mostrarError("Acceso denegado", "Usted no tiene permisos para ver esta seccion");
+		}
+	}
+	
+	if ($accion == "AU")
+	{
+		if (isset($_SESSION["admin"]))
+		{
+			switch ($id)
+			{
+				case 1:		vmostrarAmenu();
+							$datos = mUsuarios();
+							vmostrarUsuarios($datos);
+							vmostrarAUsuario($_SESSION["admin"]);
+							break;
+				case 2:		mborrarUsuario();
+			}
+		}
 	}
 	
 	if ($accion == "AC"){//alta cancion
