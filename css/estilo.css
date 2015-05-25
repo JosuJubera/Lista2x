@@ -60,6 +60,12 @@ p
 }
 
 /* Menu */
+.menu img{
+    margin-left: 60px;
+    top: 20%;
+    display: inline;
+    position: fixed;
+}
 .menu ul 
 {
     list-style-type: none;

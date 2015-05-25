@@ -19,10 +19,14 @@
 	 -contacto
 	 -admin (vistas, funcionalidad...)
      */
-	$accion = "TL";
-	$id = 1;
-
-	session_start();
+    session_start();
+    //Vistas por defecto
+    $accion = "TL";
+    $id = 1;
+    if (isset($_SESSION['admin'])){
+        $accion = "AR";
+        $id = 1; 
+    }
 	
     if(isset($_GET["accion"]))
     {
