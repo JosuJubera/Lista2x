@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 16-05-2015 a las 00:09:24
+-- Tiempo de generación: 25-05-2015 a las 17:15:17
 -- Versión del servidor: 5.6.21
 -- Versión de PHP: 5.6.3
 
@@ -93,6 +93,7 @@ CREATE TABLE IF NOT EXISTS `cancionesplaylist` (
 
 INSERT INTO `cancionesplaylist` (`playlist`, `cancion`) VALUES
 (1, 1),
+(5, 1),
 (1, 2);
 
 -- --------------------------------------------------------
@@ -108,14 +109,14 @@ CREATE TABLE IF NOT EXISTS `comentarios` (
   `Comentario` text COLLATE utf8_bin NOT NULL,
   `Playlist` int(11) NOT NULL,
   `Ignorado` tinyint(1) NOT NULL DEFAULT '0'
-) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
+) ENGINE=InnoDB AUTO_INCREMENT=9 DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
 
 --
 -- Volcado de datos para la tabla `comentarios`
 --
 
 INSERT INTO `comentarios` (`Id`, `Usuario`, `Reportes`, `Comentario`, `Playlist`, `Ignorado`) VALUES
-(3, 'Usergio', 5, 'cabron!', 2, 0);
+(8, 'Jub3r', 0, 'Josu puto amo', 1, 0);
 
 -- --------------------------------------------------------
 
@@ -131,7 +132,7 @@ CREATE TABLE IF NOT EXISTS `playlist` (
   `Descripcion` text COLLATE utf8_bin NOT NULL,
   `Fecha` datetime DEFAULT NULL,
   `ValoracionSemanal` int(11) NOT NULL DEFAULT '0'
-) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
+) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
 
 --
 -- Volcado de datos para la tabla `playlist`
@@ -139,7 +140,11 @@ CREATE TABLE IF NOT EXISTS `playlist` (
 
 INSERT INTO `playlist` (`Id`, `Usuario`, `Nombre`, `Asunto`, `Descripcion`, `Fecha`, `ValoracionSemanal`) VALUES
 (1, 'Jub3r', 'Caribe Mix', 'CAnciones verano', 'Las mejores canciones del verano 2015', '2015-05-10 00:00:00', 9),
-(2, 'Jub3r', 'Lista 2', 'CAnciones verano', 'Las mejores canciones del verano 2015', '2015-05-10 00:00:00', 9);
+(2, 'Jub3r', 'Lista 2', 'CAnciones verano', 'Las mejores canciones del verano 2015', '2015-05-10 00:00:00', 9),
+(3, 'muyñ', 'uyetjh', 'rtyhtyj', 'dyjdty', NULL, 4),
+(4, 'Jub3r', 'fqe', 'reaqgf', 'egw', NULL, 7),
+(5, 'Jub3r', 'PruebaCrear', 'Probando', 'Prueba pa ver si va, el font porque cambia?', NULL, 0),
+(6, 'Jub3r', 'Serio sergio', 'eere', 'peoeooe', NULL, 0);
 
 -- --------------------------------------------------------
 
@@ -159,8 +164,15 @@ CREATE TABLE IF NOT EXISTS `puntuacioncanciones` (
 --
 
 INSERT INTO `puntuacioncanciones` (`Usuario`, `Cancion`, `Fecha`, `Valoracion`) VALUES
-('Jub3r', 1, '2015-05-10 00:00:00', 9),
-('Jub3r', 2, NULL, 9),
+('Jub3r', 1, '2015-05-10 00:00:00', 8),
+('Jub3r', 2, '2015-05-18 00:00:00', 4),
+('Jub3r', 3, '2015-05-20 00:00:00', 6),
+('Jub3r', 5, '2015-05-18 00:00:00', 7),
+('Jub3r', 6, '2015-05-18 00:00:00', 3),
+('Jub3r', 11, '2015-05-18 00:00:00', 7),
+('Jub3r', 12, '2015-05-18 00:00:00', 6),
+('Jub3r', 13, '2015-05-18 00:00:00', 6),
+('Jub3r', 14, '2015-05-18 00:00:00', 5),
 ('muyñ', 1, NULL, 1),
 ('muyñ', 2, NULL, 2);
 
@@ -182,8 +194,12 @@ CREATE TABLE IF NOT EXISTS `puntuacionesplaylist` (
 --
 
 INSERT INTO `puntuacionesplaylist` (`Usuario`, `Playlist`, `Fecha`, `Valoracion`) VALUES
-('Jub3r', 1, '0000-00-00 00:00:00', 7),
-('Jub3r', 2, '0000-00-00 00:00:00', 3);
+('Jub3r', 1, '0000-00-00 00:00:00', 9),
+('Jub3r', 2, '0000-00-00 00:00:00', 8),
+('Jub3r', 3, '0000-00-00 00:00:00', 6),
+('Jub3r', 4, '2015-05-18 00:00:00', 7),
+('Jub3r', 5, '2015-05-20 00:00:00', 6),
+('Jub3r', 6, '2015-05-20 00:00:00', 6);
 
 -- --------------------------------------------------------
 
@@ -206,6 +222,7 @@ CREATE TABLE IF NOT EXISTS `usuarios` (
 
 INSERT INTO `usuarios` (`Usuario`, `Nombre`, `Apellido1`, `Apellido2`, `Correo`, `Contraseña`) VALUES
 ('Jub3r', '', '', '', '', '7110eda4d09e062aa5e4a390b0a572ac0d2c0220'),
+('Jub3r2', 'Josu', 'Jubera', 'Mariezcurrena', 'sergio@tonto.com', '8cb2237d0679ca88db6464eac60da96345513964'),
 ('Usergio', 'sergio', '', '', 'asd@asd.asd', '8cb2237d0679ca88db6464eac60da96345513964'),
 ('muyñ', 'muyñ', '', '', 'asd@asd.asd', '8cb2237d0679ca88db6464eac60da96345513964');
 
@@ -274,12 +291,12 @@ MODIFY `Id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=15;
 -- AUTO_INCREMENT de la tabla `comentarios`
 --
 ALTER TABLE `comentarios`
-MODIFY `Id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=4;
+MODIFY `Id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=9;
 --
 -- AUTO_INCREMENT de la tabla `playlist`
 --
 ALTER TABLE `playlist`
-MODIFY `Id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=3;
+MODIFY `Id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=7;
 --
 -- Restricciones para tablas volcadas
 --
