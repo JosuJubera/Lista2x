@@ -355,7 +355,15 @@
 		$aux=  leerfichero('admin/menu.html');
 		echo $aux;
 	}
-		
+	
+	function vmostrarAUsuario($user)
+    {
+        $aux = leerfichero("admin/login.html");
+        $partes = explode("##INVITADO##", $aux);
+		$partes[2] = str_replace("##USER##", $user, $partes[2]);
+        echo $partes[0] . $partes[2];
+    }
+	
 	function vmostrarUsuarios($consulta)
 	{
 		$aux=  leerfichero('admin/usuarios.html');

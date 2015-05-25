@@ -1,27 +1,14 @@
-<!DOCTYPE html>
-<html lang="es">
-    <head>
-		<title>Gestion de reportes</title>
-        <meta charset="utf-8">
-        <link rel="stylesheet" type="text/css" href="css/estilo.css">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    </head>
-    <body>
-		<table class="contenido">
-			<h1 class="titulo">Administrar reportes</h1>
-			<tr><th>Usuario</th><th>Nº de reportes</th><th>Comentario</th>
-			##FILALISTA##
-			<div>
-				<tr class="lista" onclick="location='index.php?accion=VR&id=1'">
-					<td>##USUARIO##</td>
-					<td>##NREPORTES##</td>
-					<td>##COMENTARIO##</td>
-					<td><a href="index.php?accion=AR&id=2&idcomentario=##ID##">
-					<img src="img/Remove Red.png">
-					</a></td>
-				</tr>
-			</div>
-			##FILALISTA##
-		</table>
-    </body>
-</html>
+<table class="contenido">
+	<h1 class="titulo">Administrar reportes</h1>
+	<tr><th>Usuario</th><th>Nº de reportes</th><th>Comentario</th>
+	##FILALISTA##
+	<tr class="lista" onclick="location='index.php?accion=VR&id=1'">
+		<td>##USUARIO##</td>
+		<td>##NREPORTES##</td>
+		<td>##COMENTARIO##</td>
+		<td><a href="index.php?accion=AR&id=2&idcomentario=##ID##">
+		<img src="img/Remove Red.png">
+		</a></td>
+	</tr>
+	##FILALISTA##
+</table>

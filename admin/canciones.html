@@ -1,28 +1,16 @@
-<!DOCTYPE html>
-<html lang="es">
-    <head>
-		<title>Canciones</title>
-        <meta charset="utf-8">
-        <link rel="stylesheet" type="text/css" href="css/estilo.css">
-    </head>
-	<body>
-		<table class="contenido">
-			<h1 class="titulo">Administrar canciones</h1>
-			<tr><th>Titulo</th><th>Artista</th><th>Genero</th><th>Album</th><th>Año</th>
-			##FILALISTA##
-			<div>
-				<tr class="lista" onclick="location='index.php?accion=VC&id=2&cid=##ID##'">
-					<td>##TITULO##</td>
-					<td>##ARTISTA##</td>
-					<td>##GENERO##</td>
-					<td>##ALBUM##</td>
-					<td>##AÑO##</td>
-					<td><a href="/index.php?accion=AC&id=4&idc=##ID##">
-					<img src="img/Remove Red.png">
-					</a></td>
-				</tr>
-			</div>
-			##FILALISTA##
-		</table>
-    </body>
-</html>
+<table class="contenido">
+	<h1 class="titulo">Administrar canciones</h1>
+	<tr><th>Titulo</th><th>Artista</th><th>Genero</th><th>Album</th><th>Año</th>
+	##FILALISTA##
+	<tr class="lista" onclick="location='index.php?accion=VC&id=2&cid=##ID##'">
+		<td>##TITULO##</td>
+		<td>##ARTISTA##</td>
+		<td>##GENERO##</td>
+		<td>##ALBUM##</td>
+		<td>##AÑO##</td>
+		<td><a href="/index.php?accion=AC&id=4&idc=##ID##">
+		<img src="img/Remove Red.png">
+		</a></td>
+	</tr>
+	##FILALISTA##
+</table>

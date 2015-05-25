@@ -458,7 +458,7 @@
 					$_SESSION['admin']=$nombre;
 					$datos = mReportes();
 					vmostrarReportes($datos);
-					vmostrarUsuario($_SESSION["admin"]);
+					vmostrarAUsuario($_SESSION["admin"]);
 				}
 				else
 				{//error ususario incorrecto
@@ -506,7 +506,7 @@
 				case 1: 	vmostrarAmenu();
 							$datos = mCanciones();
 							vmostrarCanciones($datos);
-							vmostrarUsuario($_SESSION["admin"]);
+							vmostrarAUsuario($_SESSION["admin"]);
 							 //mostrar el formulario
 							break;
 				case 2: 	valtaCancion();

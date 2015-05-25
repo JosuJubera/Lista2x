@@ -1,27 +1,15 @@
-<!DOCTYPE html>
-<html lang="es">
-    <head>
-		<title>Administrar usuarios</title>
-        <meta charset="utf-8">
-        <link rel="stylesheet" type="text/css" href="css/estilo.css">
-    </head>
-	<body>
-		<table class="contenido">
-			<h1 class="titulo">Administrar usuarios</h1>
-			<tr><th>Usuario</th><th>Nombre</th><th>Apellido1</th><th>Apellido2</th><th>Correo</th>
-			##FILALISTA##
-			<div>
-				<tr class="lista" onclick="location='index.php?accion=VU&id=1'">
-					<td>##USUARIO##</td>
-					<td>##NOMBRE##</td>
-					<td>##APELLIDO1##</td>
-					<td>##APELLIDO2##</td>
-					<td>##CORREO##</td>
-					<td><a class="borrar" href="/index.php?accion=AU&id=2&user=##USUARIO##"> &nbsp &nbsp &nbsp <!--- Aqui iria una imagen de borrar--> 
-					</a></td>
-				</tr>
-			</div>
-			##FILALISTA##
-		</table>
-	</body>
-</html>	
+<table class="contenido">
+	<h1 class="titulo">Administrar usuarios</h1>
+	<tr><th>Usuario</th><th>Nombre</th><th>Apellido1</th><th>Apellido2</th><th>Correo</th>
+	##FILALISTA##
+	<tr class="lista" onclick="location='index.php?accion=VU&id=1'">
+		<td>##USUARIO##</td>
+		<td>##NOMBRE##</td>
+		<td>##APELLIDO1##</td>
+		<td>##APELLIDO2##</td>
+		<td>##CORREO##</td>
+		<td><a class="borrar" href="/index.php?accion=AU&id=2&user=##USUARIO##"> &nbsp &nbsp &nbsp <!--- Aqui iria una imagen de borrar--> 
+		</a></td>
+	</tr>
+	##FILALISTA##
+</table>
