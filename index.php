@@ -52,11 +52,12 @@
     }
 	
         //cambiar contraseña
-	if (($accion == "CC") and (isset($_SESSION["usuario"])))
+	if (($accion == "CC") and ((isset($_SESSION["usuario"])) or (isset($_SESSION["admin"]))))
 	{
 		switch ($id)
 		{
 			case 1:		vmostrarPreferencias();
+						vmensaje();
 						vmostrarCambiocontraseña();
 						vmostrarContactar();
 						break;

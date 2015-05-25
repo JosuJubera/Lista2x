@@ -69,6 +69,31 @@ function comprobarBuscar()
 		document.forms["buscar"].submit();
 	}
 }
+
+function comprobarUser()
+{
+	var user = "<?php echo $_SESSION['user']?>"; //Guardar la sesion del user
+	var admin = "<?php echo $_SESSION['admin']?>"; // Guardar la sesion del admin
+	
+	if (null != user) // Comprobar si la sesion es de usuario
+	{
+		var url = window.location.href;
+		var n = url.indexOf("?");
+		var m = url.substring(0,n);
+		var res = m.concat("?accion=TL&id=1");
+		window.location.assign(res);
+	}
+	
+	if (null != admin) // Comprobar si la sesion es de administrador
+	{
+		var url = window.location.href;
+		var n = url.indexOf("?");
+		var m = url.substring(0,n);
+		var res = m.concat("?accion=AR&id=1");
+		window.location.assign(res);
+	}
+}
+
 function cargarPagina(pag,pid){ //falta por terminar
     $.ajax({
     url : 'index.php',
