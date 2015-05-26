@@ -1,17 +1,17 @@
-<table class="contenido">
-	<h1 class="titulo">Borrar canciones</h1>
-        <p>Atencion: Se borraran las siguientes canciones: </p>
-	<tr><th>Titulo</th><th>Artista</th><th>Genero</th><th>Album</th><th>Año</th>
-	##FILALISTA##
-	<tr class="lista" onclick="location='index.php?accion=VC&id=2&cid=##ID##'">
-		<td>##TITULO##</td>
-		<td>##ARTISTA##</td>
-		<td>##GENERO##</td>
-		<td>##ALBUM##</td>
-		<td>##AÑO##</td>
-	</tr>
-	##FILALISTA##
-        <p>Se borraran las canciones. ¿Esta seguro de que desea continuar?</p>
-        <a href="index.php?accion=BC&id=6">Si</a>
-        <a href="index.php?accion=BC&id=1">No</a>
-</table>
+<div class="contenido">
+    <table>
+        <tr><th>Titulo</th><th>Artista</th><th>Genero</th><th>Album</th><th>Año</th>
+        ##FILALISTA##
+        <tr class="lista" onclick="location='index.php?accion=VC&id=2&cid=##ID##'">
+            <td>##TITULO##</td>
+            <td>##ARTISTA##</td>
+            <td>##GENERO##</td>
+            <td>##ALBUM##</td>
+            <td>##AÑO##</td>
+        </tr>
+        ##FILALISTA##
+        <p>Se borraran todas esas canciones. ¿Esta seguro de que desea continuar?</p>
+        <a href="index.php?accion=BC&id=6"><img src="img/Valid Blue.png"></a>&ensp;
+        <a href="index.php?accion=BC&id=1"><img src="img/Cancel.png"></a>
+    </table>
+</div>

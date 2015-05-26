@@ -317,7 +317,7 @@
      function cancionesautor($autor){
         $con = conexion();
         mysql_real_escape_string($autor);
-        $resultado = mysql_query("select * from canciones where Artista like '$autor'",$con);
+        $resultado = mysql_query("select Id,Titulo,Artista,Genero,Album,Año from canciones where Artista like '$autor'",$con);
         $i=0;
         $aux=null;
         if ($resultado!==false) {
@@ -326,7 +326,6 @@
                 $i++;
             }
         }
-        echo 'Modelo: '.var_dump($aux);
         return $aux; 
      }
      function cancionesalbum($album){

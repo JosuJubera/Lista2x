@@ -600,14 +600,17 @@
                                                 vbuscarborrar($_GET['busqueda'],$_GET['buscar']);
                                             }
                                             break;
-				case 4:$    $cancionesaborrar=cancionesautor($_GET['autor']);//confirmar borrar autor
-                                            echo 'Index:'. var_dump($cancionesaborrar);
+				case 4:     $cancionesaborrar=  cancionesautor($_GET['autor']);
                                             $_SESSION['cancionesborrar']=$cancionesaborrar;//guardamos en la sesion (tambien se podria x cookies)
+                                            vmostrarAmenu();
                                             vmostrarconfirmacion($cancionesaborrar);
+                                            vmostrarAUsuario($_SESSION["admin"]);
                                             break;
                                 case 5:     $cancionesaborrar=cancionesalbum($_GET['album']);//confirmar borrar disco
                                             $_SESSION['cancionesborrar']=$cancionesaborrar;//guardamos en sesion (tambien se podria x cookies)
+                                            vmostrarAmenu();
                                             vmostrarconfirmacion($cancionesaborrar);
+                                            vmostrarAUsuario($_SESSION["admin"]);
                                             break;
 				case 6:     $res=mborrarCanciones($_SESSION['cancionesborrar']);//borramos
                                             vmostrarExito($res);
