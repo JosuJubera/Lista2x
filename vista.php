@@ -449,7 +449,7 @@
 
 			echo $partes[0] . $contenido . $partes[2];
 		}else{
-			echo "<p> No se han encontrado canciones con ese criterio</p>";
+			echo "<p class='contenido'> No se han encontrado canciones con ese criterio</p>";
 		}
 	}
         function confimacionBorrar($canciones){
@@ -488,7 +488,7 @@
                 }
                 echo $partes[0] . $contenido . $partes[2];
             }else{
-                echo "<p> No hay comentarios reportados ¡Buen trabajo!</p>";
+                echo "<p class='contenido'> No hay comentarios reportados ¡Buen trabajo!</p>";
             }
         }
         function vmostrarReportesIgnorados($ignorados){
@@ -718,5 +718,63 @@
                 $pagina.=$contenido;
             }
             echo $pagina;
+        }
+        function vmostrarconfirmacion($canciones){
+            $aux=  leerfichero('admin/confirmarBorrar.html');
+            $partes = explode("##FILALISTA##", $aux);
+            $contenido = "";
+            $lista = "";
+            foreach ($canciones as $datos)
+            {
+                $lista = $partes[1];
+                $lista = str_replace("##ID##", $datos["Id"], $lista);
+                $lista = str_replace("##TITULO##", $datos["Titulo"], $lista);
+                $lista = str_replace("##ARTISTA##", $datos["Artista"], $lista);
+                $lista = str_replace("##GENERO##", $datos["Genero"], $lista);
+                $lista = str_replace("##ALBUM##", $datos["Album"], $lista);
+                $lista = str_replace("##AÑO##", $datos["Año"], $lista);
+                $contenido .= $lista;
+            }
+        echo $partes[0] . $contenido . $partes[2];
+        }
+        
+        function vautorborrar($autores){
+            $aux = leerfichero("admin/autor.html");
+            $partes = explode("##FILALISTA##", $aux);
+            $contenido = "";
+            $lista = "";
+            if ($autores!=null){
+                foreach ($autores as $autor) {
+                    $lista = $partes[1];
+                    $lista = str_replace("##AUTOR##", $autor['Artista'], $lista);
+                    $lista = str_replace("##NALBUM##",$autor['albumnes'], $lista);
+                    $lista = str_replace("##NCANCION##", $autor['canciones'], $lista);
+                    $contenido .= $lista;
+                }
+
+                echo $partes[0] . $contenido . $partes[2];
+            }else{
+                echo "<p class='contenido'> No se han encontrado artistas con ese criterio</p>";
+            }
+        }
+        
+        function valbumborrar($albumnes){
+            $aux = leerfichero("admin/disco.html");
+            $partes = explode("##FILALISTA##", $aux);
+            $contenido = "";
+            $lista = "";
+            if ($albumnes!=null){
+                foreach ($albumnes as $album) {
+                    $lista = $partes[1];
+                    $lista = str_replace("##AUTOR##", $album['Artista'], $lista);
+                    $lista = str_replace("##ALBUM##",$album['album'], $lista);
+                    $lista = str_replace("##NCANCION##", $album['canciones'], $lista);
+                    $contenido .= $lista;
+                }
+
+                echo $partes[0] . $contenido . $partes[2];
+            }else{
+                echo "<p class='contenido'> No se han encontrado albumnes con ese criterio</p>";
+            } 
         }
 ?>

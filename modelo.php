@@ -232,7 +232,7 @@
             mysql_real_escape_string($genero);
             mysql_real_escape_string($año);
             mysql_query("begin",$con);
-            $result=  mysql_query("insert into canciones(Titulo,Autor,Album,Genero,Año) values ('$titulo','$autor','$album','$genero','$año')",$con);
+            $result=  mysql_query("insert into canciones(Titulo,Artista,Album,Genero,Año) values ('$titulo','$autor','$album','$genero','$año')",$con);
             if ($result===false){ //ya existe en la DB, no lo subimos de nuevo
                 mysql_query("rollback",$con);
                 return false;
@@ -268,7 +268,7 @@
      function mbuscarautor($palabra){
         $con = conexion();
         mysql_real_escape_string($palabra);
-		$resultado = mysql_query("select autor,count(distinct album) albumnes,count(id) canciones from canciones where autor like '%$palabra%' group by autor;",$con);
+		$resultado = mysql_query("select Artista,count(distinct album) albumnes,count(id) canciones from canciones where Artista like '%$palabra%' group by Artista;",$con);
 		$i=0;
         $aux=null;
         if ($resultado!==false) {
@@ -282,7 +282,7 @@
     function mbuscaralbum($palabra){
         $con = conexion();
         mysql_real_escape_string($palabra);
-        $resultado = mysql_query("select autor, album,count(id) canciones from canciones where album like '%$palabra%' group by album;",$con);
+        $resultado = mysql_query("select Artista, album,count(id) canciones from canciones where album like '%$palabra%' group by album;",$con);
         $i=0;
         $aux=null;
         if ($resultado!==false) {
@@ -316,8 +316,9 @@
      }
      function cancionesautor($autor){
         $con = conexion();
-		$resultado = mysql_query("select * from canciones where autor like '$autor'",$con);
-		$i=0;
+        mysql_real_escape_string($autor);
+        $resultado = mysql_query("select * from canciones where Artista like '$autor'",$con);
+        $i=0;
         $aux=null;
         if ($resultado!==false) {
             while ($cancion = mysql_fetch_assoc($resultado)) {
@@ -325,6 +326,7 @@
                 $i++;
             }
         }
+        echo 'Modelo: '.var_dump($aux);
         return $aux; 
      }
      function cancionesalbum($album){

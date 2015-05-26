@@ -244,3 +244,13 @@ p
 	background-color: #FFBABA;
 	background-image: url('../img/cancel.png');
 }
+.menu li ul {
+   display: none;
+   position: relative;
+   min-width: 140px;
+}
+.menu li:hover > ul {
+   display: block;
+    top: 0;
+    position: relative;
+}

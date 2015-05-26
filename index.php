@@ -525,82 +525,93 @@
             }
         }
 	
-	if ($accion == "AC"){//alta cancion
-		if (isset($_SESSION["admin"]) /*&& mIsAdmin($_SESSION["admin"])*/){ //es un admin
-			switch ($id)
-			{
-				case 1: 	vmostrarAmenu();
-							$datos = mCanciones();
-							vmostrarCanciones($datos);
-							vmostrarAUsuario($_SESSION["admin"]);
-							 //mostrar el formulario
-							break;
-				case 2: 	valtaCancion();
-							break;
-				
-				case 3: 	if (añadirCancion($_POST['titulo'], $_POST['autor'], $_POST['album'], $_POST['genero'], $_POST['año'], $_FILES["caratula"],$_FILES["cancion"]))
-							{
-							//exito, añadido. mostrar mensaje y pa dejar pa añadir otra
-							vmostrarAmenu();
-							echo "cancion añadida con exito";
-							}
-							else
-							{
-								//fallo, enviar mensajede fallo y k vuelva a intentarlo
-								echo "fallo";
-								valtacancion();
-							}
-							break;
-				case 4: 	mborrarCancion($_GET["idc"]);
-							break;
-			}
-		}else{
-			echo "necesitas ser administrador";
-		}
+    if ($accion == "AC"){//alta cancion
+        if (isset($_SESSION["admin"]) /*&& mIsAdmin($_SESSION["admin"])*/){ //es un admin
+                switch ($id)
+                {
+                    case 1:     vmostrarAmenu();
+                                $datos = mCanciones();
+                                vmostrarCanciones($datos);
+                                vmostrarAUsuario($_SESSION["admin"]);
+                                break;
+                    case 2: 	vmostrarAmenu();
+                                vmostrarAUsuario($_SESSION["admin"]);
+                                valtaCancion();
+                                break;
+                            
+                    case 3: 	if (añadirCancion($_POST['titulo'], $_POST['autor'], $_POST['album'], $_POST['genero'], $_POST['año'], $_FILES["caratula"],$_FILES["cancion"]))
+                                    {
+                                    //exito, añadido. mostrar mensaje y pa dejar pa añadir otra
+                                    vmostrarAmenu();
+                                    echo "cancion añadida con exito";
+                                    }
+                                    else
+                                    {
+                                        //fallo, enviar mensajede fallo y k vuelva a intentarlo
+                                        echo "fallo";
+                                        valtacancion();
+                                    }
+                                    break;
+                    case 4:     mborrarCancion($_GET["idc"]);
+                                break;
+                    }
+            }else{
+                    echo "necesitas ser administrador";
+            }
 	}
 	if ($accion == "BC"){//borrar cancion
 		if (isset($_SESSION["admin"]) /*&& mIsAdmin($_SESSION["admin"])*/)
 		{ //es un admin
 			switch ($id)
 			{
-				case 1: 	vbuscarborrar(); //mostrar el buscador
-							break;
+				case 1:     vmostrarAmenu();
+                                            vmostrarAUsuario($_SESSION["admin"]);
+                                            vbuscarborrar(); //mostrar el buscador
+                                            break;
 				case 2:		//mostrar resultados
-							switch ($_GET['buscar'])
-							{
-								case 1:		$canciones=mbuscartitulo($_GET['busqueda']);//titulo
-											vbuscarborrar($_GET['busqueda'],$_GET['buscar']);
-											vcancionesborrar($canciones);
-											break;
-								case 2: 	$autores=  mbuscarautor($_GET['busqueda']);//autor
-											vbuscarborrar($_GET['busqueda'],$_GET['buscar']);
-											vautorborrar($autores);
-											break;
-								case 3: 	$albumnes=mbuscaralbum($_GET['busqueda']);//album(disco)
-											vbuscarborrar($_GET['busqueda'],$_GET['buscar']);
-											valbumborrar($albumnes);
-											break;
-							}
-							break;
-                case 3: 	if (mborrarCancion($_GET['idcancion'])){
-								echo "eliminado con exito";
-								vmostrarAmenu();
-							}else{
-								echo 'fallo al eliminar';
-								vbuscarborrar($_GET['busqueda'],$_GET['buscar']);
-							}
-							break;
-				case 4:$cancionesaborrar=cancionesautor($_GET['autor']);//confirmar borrar autor
-						$_SESSION['cancionesborrar']=$cancionesaborrar;
-						vmostrarconfirmacion($cancionesaborrar);
-						break;
-				case 5:$cancionesaborrar=cancionesalbum($_GET['album']);//confirmar borrar disco
-						$_SESSION['cancionesborrar']=$cancionesaborrar;
-						vmostrarconfirmacion($cancionesaborrar);
-						break;
-				case 6:$res=mborrarCanciones($_SESSION['cancionesborrar']);
-						vmostrarExito($res);
-						break;                   
+                                            switch ($_GET['buscar'])
+                                            {
+                                                case 1:     vmostrarAmenu();
+                                                            vmostrarAUsuario($_SESSION["admin"]);     
+                                                            $canciones=mbuscartitulo($_GET['busqueda']);//titulo
+                                                            vbuscarborrar($_GET['busqueda'],$_GET['buscar']);
+                                                            vcancionesborrar($canciones);
+                                                            break;
+                                                case 2:     vmostrarAmenu();
+                                                            vmostrarAUsuario($_SESSION["admin"]);     
+                                                            $autores= mbuscarautor($_GET['busqueda']);//autor
+                                                            vbuscarborrar($_GET['busqueda'],$_GET['buscar']);
+                                                            vautorborrar($autores);
+                                                            break;
+                                                case 3:     vmostrarAmenu();
+                                                            vmostrarAUsuario($_SESSION["admin"]);
+                                                            $albumnes=mbuscaralbum($_GET['busqueda']);//album(disco)
+                                                            vbuscarborrar($_GET['busqueda'],$_GET['buscar']);
+                                                            valbumborrar($albumnes);
+                                                            break;
+                                            }
+                                            break;
+                                case 3:     if (mborrarCancion($_GET['idcancion'])){
+                                                mostrarInfo("Cancion borrada correctamente");
+                                            }else{
+                                                mostrarError("Error al eliminar", "No se ha podido eliminar la cancion");
+                                                vmostrarAmenu();
+                                                vmostrarAUsuario($_SESSION["admin"]);
+                                                vbuscarborrar($_GET['busqueda'],$_GET['buscar']);
+                                            }
+                                            break;
+				case 4:$    $cancionesaborrar=cancionesautor($_GET['autor']);//confirmar borrar autor
+                                            echo 'Index:'. var_dump($cancionesaborrar);
+                                            $_SESSION['cancionesborrar']=$cancionesaborrar;//guardamos en la sesion (tambien se podria x cookies)
+                                            vmostrarconfirmacion($cancionesaborrar);
+                                            break;
+                                case 5:     $cancionesaborrar=cancionesalbum($_GET['album']);//confirmar borrar disco
+                                            $_SESSION['cancionesborrar']=$cancionesaborrar;//guardamos en sesion (tambien se podria x cookies)
+                                            vmostrarconfirmacion($cancionesaborrar);
+                                            break;
+				case 6:     $res=mborrarCanciones($_SESSION['cancionesborrar']);//borramos
+                                            vmostrarExito($res);
+                                            break;                   
 			}//fin switch $id
 		}else{
 			echo "necesitas ser administrador";

@@ -1,5 +1,6 @@
 <table class="contenido">
-	<h1 class="titulo">Administrar canciones</h1>
+	<h1 class="titulo">Borrar canciones</h1>
+        <p>Atencion: Se borraran las siguientes canciones: </p>
 	<tr><th>Titulo</th><th>Artista</th><th>Genero</th><th>Album</th><th>Año</th>
 	##FILALISTA##
 	<tr class="lista" onclick="location='index.php?accion=VC&id=2&cid=##ID##'">
@@ -8,9 +9,9 @@
 		<td>##GENERO##</td>
 		<td>##ALBUM##</td>
 		<td>##AÑO##</td>
-		<td><a href="index.php?accion=AC&id=4&idc=##ID##">
-		<img src="img/Remove Red.png">
-		</a></td>
 	</tr>
 	##FILALISTA##
+        <p>Se borraran las canciones. ¿Esta seguro de que desea continuar?</p>
+        <a href="index.php?accion=BC&id=6">Si</a>
+        <a href="index.php?accion=BC&id=1">No</a>
 </table>
