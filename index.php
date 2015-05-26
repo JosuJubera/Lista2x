@@ -613,7 +613,7 @@
                                             vmostrarAUsuario($_SESSION["admin"]);
                                             break;
 				case 6:     $res=mborrarCanciones($_SESSION['cancionesborrar']);//borramos
-                                            vmostrarExito($res);
+                                            header("Location: index.php");//volvemos al index
                                             break;                   
 			}//fin switch $id
 		}else{

@@ -777,4 +777,7 @@
                 echo "<p class='contenido'> No se han encontrado albumnes con ese criterio</p>";
             } 
         }
+        function vmostrarExito($exito){
+            
+        }
 ?>
