@@ -505,19 +505,25 @@
 	
 	if ($accion == "AU")
 	{
-		if (isset($_SESSION["admin"]))
-		{
-			switch ($id)
-			{
-				case 1:		vmostrarAmenu();
-							$datos = mUsuarios();
-							vmostrarUsuarios($datos);
-							vmostrarAUsuario($_SESSION["admin"]);
-							break;
-				case 2:		mborrarUsuario();
-			}
-		}
-	}
+            if (isset($_SESSION["admin"]))
+            {
+                switch ($id)
+                {
+                    case 1: vmostrarAmenu();
+                            $datos = mUsuarios();
+                            vmostrarUsuarios($datos);
+                            vmostrarAUsuario($_SESSION["admin"]);
+                            break;
+                    case 2: if (mborrarUsuario($_GET['user'])){
+                                mostrarInfo("Usuario eliminado con exito!");
+                            }else{
+                                mostrarError("Imposible eliminar",
+                                "No se ha podido eliminar el usuario. Puede que ya haya sido eliminado o no exista");
+                            }
+                            break;
+                }
+            }
+        }
 	
 	if ($accion == "AC"){//alta cancion
 		if (isset($_SESSION["admin"]) /*&& mIsAdmin($_SESSION["admin"])*/){ //es un admin

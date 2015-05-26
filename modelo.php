@@ -558,4 +558,17 @@
         return $num;   
     }
     
+    function mborrarUsuario($uid){
+        $con=conexion();
+        if (!isset($uid)){
+            return false;
+        }
+        mysql_real_escape_string($uid);
+        $resultado=mysql_query("delete from usuarios where Usuario='$uid'" ,$con);  
+         if ($resultado!==false) {
+            return true;
+        }else{
+            return false;
+        } 
+    }
 ?>

@@ -305,35 +305,35 @@ MODIFY `Id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=7;
 -- Filtros para la tabla `cancionesplaylist`
 --
 ALTER TABLE `cancionesplaylist`
-ADD CONSTRAINT `fk_cancion` FOREIGN KEY (`cancion`) REFERENCES `canciones` (`Id`),
-ADD CONSTRAINT `fk_playlist` FOREIGN KEY (`playlist`) REFERENCES `playlist` (`Id`);
+ADD CONSTRAINT `fk_cancion` FOREIGN KEY (`cancion`) REFERENCES `canciones` (`Id`) ON DELETE CASCADE,
+ADD CONSTRAINT `fk_playlist` FOREIGN KEY (`playlist`) REFERENCES `playlist` (`Id`) ON DELETE CASCADE;
 
 --
 -- Filtros para la tabla `comentarios`
 --
 ALTER TABLE `comentarios`
-ADD CONSTRAINT `comentarios_ibfk_1` FOREIGN KEY (`Usuario`) REFERENCES `usuarios` (`Usuario`),
-ADD CONSTRAINT `fk_playlist_coment` FOREIGN KEY (`Playlist`) REFERENCES `playlist` (`Id`);
+ADD CONSTRAINT `comentarios_ibfk_1` FOREIGN KEY (`Usuario`) REFERENCES `usuarios` (`Usuario`) ON DELETE CASCADE,
+ADD CONSTRAINT `fk_playlist_coment` FOREIGN KEY (`Playlist`) REFERENCES `playlist` (`Id`) ON DELETE CASCADE;
 
 --
 -- Filtros para la tabla `playlist`
 --
 ALTER TABLE `playlist`
-ADD CONSTRAINT `playlist_ibfk_1` FOREIGN KEY (`Usuario`) REFERENCES `usuarios` (`Usuario`);
+ADD CONSTRAINT `playlist_ibfk_1` FOREIGN KEY (`Usuario`) REFERENCES `usuarios` (`Usuario`) ON DELETE CASCADE;
 
 --
 -- Filtros para la tabla `puntuacioncanciones`
 --
 ALTER TABLE `puntuacioncanciones`
-ADD CONSTRAINT `puntuacioncanciones_ibfk_1` FOREIGN KEY (`Usuario`) REFERENCES `usuarios` (`Usuario`),
-ADD CONSTRAINT `puntuacioncanciones_ibfk_2` FOREIGN KEY (`Cancion`) REFERENCES `canciones` (`Id`);
+ADD CONSTRAINT `puntuacioncanciones_ibfk_1` FOREIGN KEY (`Usuario`) REFERENCES `usuarios` (`Usuario`) ON DELETE CASCADE,
+ADD CONSTRAINT `puntuacioncanciones_ibfk_2` FOREIGN KEY (`Cancion`) REFERENCES `canciones` (`Id`) ON DELETE CASCADE;
 
 --
 -- Filtros para la tabla `puntuacionesplaylist`
 --
 ALTER TABLE `puntuacionesplaylist`
-ADD CONSTRAINT `puntuacionesplaylist_ibfk_1` FOREIGN KEY (`Usuario`) REFERENCES `usuarios` (`Usuario`),
-ADD CONSTRAINT `puntuacionesplaylist_ibfk_2` FOREIGN KEY (`Playlist`) REFERENCES `playlist` (`Id`);
+ADD CONSTRAINT `puntuacionesplaylist_ibfk_1` FOREIGN KEY (`Usuario`) REFERENCES `usuarios` (`Usuario`) ON DELETE CASCADE,
+ADD CONSTRAINT `puntuacionesplaylist_ibfk_2` FOREIGN KEY (`Playlist`) REFERENCES `playlist` (`Id`) ON DELETE CASCADE;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
