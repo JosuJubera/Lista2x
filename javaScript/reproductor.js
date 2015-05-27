@@ -11,16 +11,20 @@ $(function(){
     //obtenemos la cantidad total de canciones en la lista (mas abajo la necesitaremos)
     var iTotalCanciones=$('#tablacanciones >tbody >tr').length-1;
     //Variable que almacena las id de las canciones
+    if (iTotalCanciones>0){
     var totcanciones=new Array(iTotalCanciones);
     for (i=1;i<=iTotalCanciones;i++){
         totcanciones[i-1]=$('#tablacanciones >tbody >tr')[i].cells[6].innerHTML;
     }
     //le asignamos al reproductor la primera cancion de la lista
-    objReproductor.src="canciones/"+totcanciones[0]+".mp3";    
+    objReproductor.src="canciones/"+totcanciones[0]+".mp3"; 
+    }   
     //clic en el boton play
     $('#btnReproducir').on('click',function(){
+        if (iTotalCanciones!=0){//hay canciones pa reproducir
         //llamamos a la funcion que reproduce los archivos
         $.fntReproducir();
+        }
     });
      
     //reproducir el siguiente archivo de la lista

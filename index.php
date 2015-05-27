@@ -473,6 +473,7 @@
 	if ($accion== "AR"){ //administrar reportes
 		if (isset($_SESSION["admin"]) /*&& mIsAdmin($_SESSION["admin"])*/){
 			vmostrarAmenu();
+                        vmostrarAUsuario($_SESSION["admin"]);
 			switch ($id){
 				case 1: //mostrar reportes
 						if (isset($_GET['verignorados'])&& $_GET['verignorados']==1){//mostramos los reportes ignorados por el admin anteriormente
