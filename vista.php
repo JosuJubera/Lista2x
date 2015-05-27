@@ -26,6 +26,12 @@
         echo $aux;
     }
 	
+	function vmostrarAPreferencias()
+    {
+        $aux = leerfichero("admin/preferencias.html");
+        echo $aux;
+    }
+	
 	function vmostrarCambiocontraseña()
 	{
 		$aux = leerfichero("fonts/prefcontraseina.html");

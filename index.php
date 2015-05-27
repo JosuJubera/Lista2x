@@ -50,12 +50,10 @@
     {
         $uid = $_POST["uid"];
         $pw = $_POST["pw"];
-		$tipo = $_POST["tipo"];
         $usuario = mLogin($uid, $pw);
 		if ($usuario != false)
 		{
 			$_SESSION["usuario"] = $usuario;
-			$_SESSION["tipo"] = $tipo;
 		}
     }
 	
@@ -64,12 +62,26 @@
 	{
 		switch ($id)
 		{
-			case 1:		vmostrarPreferencias();
+			case 1:		if (isset($_SESSION["usuario"]))
+						{
+							vmostrarPreferencias();
+						}
+						if (isset($_SESSION["admin"]))
+						{
+							vmostrarAPreferencias();
+						}
 						vmensaje();
 						vmostrarCambiocontraseña();
 						vmostrarContactar();
 						break;
-			case 2:		vmostrarPreferencias();
+			case 2:		if (isset($_SESSION["usuario"]))
+						{
+							vmostrarPreferencias();
+						}
+						else
+						{
+							vmostrarAPreferencias();
+						}
 						vmostrarCambiocontraseña();
 						vmostrarContactar();
 						$dato1 = $_POST["uid"];
@@ -81,17 +93,31 @@
 	}
 	
     //cambiar correo
-	if (($accion == "CE") and (isset($_SESSION["usuario"])))
+	if (($accion == "CE") and (isset($_SESSION["usuario"]))or (isset($_SESSION["admin"])))
 	{
-		vmostrarPreferencias();
+		if (isset($_SESSION["usuario"]))
+		{
+			vmostrarPreferencias();
+		}
+		else
+		{
+			vmostrarAPreferencias();
+		}
 		vmostrarCambiocorreo();
 		vmostrarContactar();
 	}
 	
 	//eliminar cuenta
-	if (($accion == "EC") and (isset($_SESSION["usuario"])))
+	if (($accion == "EC") and (isset($_SESSION["usuario"]))or (isset($_SESSION["admin"])))
 	{
-		vmostrarPreferencias();
+		if (isset($_SESSION["usuario"]))
+		{
+			vmostrarPreferencias();
+		}
+		else
+		{
+			vmostrarAPreferencias();
+		}
 		vmostrarEliminarcuenta();
 		vmostrarContactar();
 	}
@@ -134,45 +160,6 @@
         vmostrarIToplistas($datos);
 		vmostrarContactar();
 	}
-	
-	//mostrar contacto?????
-	/*
-	if ($accion == "C")
-	{
-		switch($id)
-		{
-			case 1: 	vmostrarContacto();
-						break;
-			case 2: 	@$nombre = addslashes($_POST['uid']);
-						@$email = addslashes($_POST['cu']);
-						@$mensaje = addslashes($_POST['message']);
-						 
-						//Preparamos el mensaje de contacto
-						$cabeceras = "From: $email\n" //La persona que envia el correo
-						 . "Reply-To: $email\n";
-						$asunto = "Contacto Lista2x"; //asunto aparecera en la bandeja del servidor de correo
-						$email_to = "josujubera@hotmail.com"; //cambiar por tu email
-						$contenido = "$nombre ha enviado un mensaje desde la web de Lista2x\n"
-						. "\n"
-						. "Nombre: $nombre\n"
-						. "Email: $email\n"
-						. "Mensaje: $mensaje\n"
-						. "\n";
-						 
-						//Enviamos el mensaje y comprobamos el resultado
-						if (@mail($email_to, $asunto ,$contenido ,$cabeceras ))
-						{
-							//Si el mensaje se envía muestra una confirmación
-							die("Gracias, su mensaje se envio correctamente.");
-						}
-						else
-						{
-							//Si el mensaje no se envía muestra el mensaje de error
-							die("Error: Su información no pudo ser enviada, intente más tarde");
-						}
-						break;
-		}	
-	}*/
 	
 	//buscar
 	if (($accion == "B") and (isset($_GET["search"])))
@@ -253,12 +240,12 @@
     //mostrar Mis Listas
 	if (($accion == "ML") and (isset($_SESSION["usuario"])))
 	{
-            vmostrarRmenu();
-            vmostrarUsuario($_SESSION["usuario"]);
-            vmostrarBuscardor();
-            $datos = mMislistas($_SESSION["usuario"]);
-            vmostrarMislistas($datos);
-            vmostrarContactar();
+		vmostrarRmenu();
+		vmostrarUsuario($_SESSION["usuario"]);
+		vmostrarBuscardor();
+		$datos = mMislistas($_SESSION["usuario"]);
+		vmostrarMislistas($datos);
+		vmostrarContactar();
 	}
 	
 	//mostrar Mis Favoritos
@@ -325,7 +312,7 @@
 	//Modificar Lista
 	if ($accion=="MODL"){
 		switch ($id){
-			case 1: 		vmostrarRmenu();
+			case 1: 	vmostrarRmenu();
 						vmostrarUsuario($_SESSION["usuario"]);//muestra la playlist
 						vmostrarBuscardor();
 						$infoplaylist=minfoplaylist($_GET['pid']);
@@ -513,7 +500,7 @@
                             vmostrarUsuarios($datos);
                             vmostrarAUsuario($_SESSION["admin"]);
                             break;
-                    case 2: if (mborrarUsuario($_GET['user'])){
+                    case 2: if (mborrarAUsuario($_GET['user'])){
                                 mostrarInfo("Usuario eliminado con exito!");
                             }else{
                                 mostrarError("Imposible eliminar",
@@ -564,9 +551,9 @@
 			switch ($id)
 			{
 				case 1:     vmostrarAmenu();
-                                            vmostrarAUsuario($_SESSION["admin"]);
-                                            vbuscarborrar(); //mostrar el buscador
-                                            break;
+							vmostrarAUsuario($_SESSION["admin"]);
+							vbuscarborrar(); //mostrar el buscador
+							break;
 				case 2:		//mostrar resultados
                                             switch ($_GET['buscar'])
                                             {
