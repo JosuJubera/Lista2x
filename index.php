@@ -10,12 +10,14 @@
      * -Comprobaciones SQL(limpiar entrada)
      * -Paginacion en tablas
      * -CSS
+     * -Votar en vista cancion y playlist
      * -en registro usuario comprobar que se registra bien
      * -arreglar preferencias admin
-     * -Añadir mensajes de Info y de Error con JS. Si es necesario usar redirect
+     * -Añadir mensajes de Info y de Error con JS en Regisgtro.
+     * -Añadir mensaje error o no en alta cancion.
+     * -Al borrar comentario ir a los reportes
      * -Probar la pagina
 	 -funcion mostrar mensaje
-	 -contacto
 	 -admin (vistas, funcionalidad...)
      */
     session_start();
