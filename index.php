@@ -5,20 +5,21 @@
     /*
      * Falta por hacer:
      * -Refres en MF (recargar la pagina tras votar)
-     * -Mensajes de confirmacion y de error
-     * -Comprobar los back
+     * -Comprobar los back                             ////hecho
      * -Comprobaciones SQL(limpiar entrada)
      * -Paginacion en tablas
      * -CSS
      * -Votar en vista cancion y playlist
-     * -en registro usuario comprobar que se registra bien
-     * -arreglar preferencias admin
+     * -arreglar preferencias admin                      ////hecho
+     * -Mensajes de confirmacion y de error
      * -Añadir mensajes de Info y de Error con JS en Regisgtro.
+     * -en registro usuario comprobar que se registra bien
      * -Añadir mensaje error o no en alta cancion.
      * -Al borrar comentario ir a los reportes
-     * -Probar la pagina
+	 * -Reportes
 	 -funcion mostrar mensaje
 	 -admin (vistas, funcionalidad...)
+     * -Probar la pagina
      */
     session_start();
     //Vistas por defecto
