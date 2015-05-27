@@ -1,33 +1,35 @@
 <div class="exito mensajes" id="exito mensajes" style="visibility:hidden;">Éxito en la operación realizada</div>
-<table class="contenido">
-	<h1 class="titulo">Mis listas</h1>
-	<tr><th>Nombre</th><th>Asunto</th><th>Nº</th><th>Fecha</th><th>Mi valoración</th><th>Valoración semanal</th></tr>
-	##FILALISTA##
-		<tr class="lista">
-			<td onclick="location='index.php?accion=VP&id=1&pid=##ID##'">##NOMBRE##</td>
-			<td onclick="location='index.php?accion=VP&id=1&pid=##ID##'">##ASUNTO##</td>
-			<td onclick="location='index.php?accion=VP&id=1&pid=##ID##'">##N##</td>
-			<td onclick="location='index.php?accion=VP&id=1&pid=##ID##'">##FECHA##</td>
-			<td><ul class="star-rating">
-					<li style="width: ##VALORACION##px;" id="valoracion-##ID##" class="current-rating">##VALORACION##</li>
-					
-					<li><a class="one-star" title="1 estrella de 10" href="javascript:puntuar(1,##ID##,'P')">1</a></li>
-					<li><a class="two-stars" title="2 estrellas de 10" href="javascript:puntuar(2,##ID##,'P')">2</a></li>
-					<li><a class="three-stars" title="3 estrellas de 10" href="javascript:puntuar(3,##ID##,'P')">3</a></li>
-					<li><a class="four-stars" title="4 estrellas de 10" href="javascript:puntuar(4,##ID##,'P')">4</a></li>
-					<li><a class="five-stars" title="5 estrellas de 10" href="javascript:puntuar(5,##ID##,'P')">5</a></li>
-					
-					<li><a class="six-stars" title="6 estrellas de 10" href="javascript:puntuar(6,##ID##,'P')">6</a></li>
-					<li><a class="seven-stars" title="7 estrellas de 10" href="javascript:puntuar(7,##ID##,'P')">7</a></li>
-					<li><a class="eight-stars" title="8 estrellas de 10" href="javascript:puntuar(8,##ID##,'P')">8</a></li>
-					<li><a class="nine-stars" title="9 estrellas de 10" href="javascript:puntuar(9,##ID##,'P')">9</a></li>
-					<li><a class="ten-stars" title="10 estrellas de 10" href="javascript:puntuar(10,##ID##,'P')">10</a></li>
-				</ul></td>
-			<td><ul class="star-rating"> <li style="width: ##VALORACIONSEMANAL##px;" id="valoracionsemanal" class="current-rating"></li></ul></td>
-            <td><a href="index.php?accion=MODL&id=1&pid=##ID##">Modificar</a></td>
-		</tr>
-	##FILALISTA##
-</table>
+<div class="contenido">
+    <h1 class="titulo">Mis listas</h1>
+    <table>
+            <tr><th>Nombre</th><th>Asunto</th><th>Nº</th><th>Fecha</th><th>Mi valoración</th><th>Valoración semanal</th></tr>
+            ##FILALISTA##
+                    <tr class="lista">
+                            <td onclick="location='index.php?accion=VP&id=1&pid=##ID##'">##NOMBRE##</td>
+                            <td onclick="location='index.php?accion=VP&id=1&pid=##ID##'">##ASUNTO##</td>
+                            <td onclick="location='index.php?accion=VP&id=1&pid=##ID##'">##N##</td>
+                            <td onclick="location='index.php?accion=VP&id=1&pid=##ID##'">##FECHA##</td>
+                            <td><ul class="star-rating">
+                                            <li style="width: ##VALORACION##px;" id="valoracion-##ID##" class="current-rating">##VALORACION##</li>
+
+                                            <li><a class="one-star" title="1 estrella de 10" href="javascript:puntuar(1,##ID##,'P')">1</a></li>
+                                            <li><a class="two-stars" title="2 estrellas de 10" href="javascript:puntuar(2,##ID##,'P')">2</a></li>
+                                            <li><a class="three-stars" title="3 estrellas de 10" href="javascript:puntuar(3,##ID##,'P')">3</a></li>
+                                            <li><a class="four-stars" title="4 estrellas de 10" href="javascript:puntuar(4,##ID##,'P')">4</a></li>
+                                            <li><a class="five-stars" title="5 estrellas de 10" href="javascript:puntuar(5,##ID##,'P')">5</a></li>
+
+                                            <li><a class="six-stars" title="6 estrellas de 10" href="javascript:puntuar(6,##ID##,'P')">6</a></li>
+                                            <li><a class="seven-stars" title="7 estrellas de 10" href="javascript:puntuar(7,##ID##,'P')">7</a></li>
+                                            <li><a class="eight-stars" title="8 estrellas de 10" href="javascript:puntuar(8,##ID##,'P')">8</a></li>
+                                            <li><a class="nine-stars" title="9 estrellas de 10" href="javascript:puntuar(9,##ID##,'P')">9</a></li>
+                                            <li><a class="ten-stars" title="10 estrellas de 10" href="javascript:puntuar(10,##ID##,'P')">10</a></li>
+                                    </ul></td>
+                            <td><ul class="star-rating"> <li style="width: ##VALORACIONSEMANAL##px;" id="valoracionsemanal" class="current-rating"></li></ul></td>
+                <td><a href="index.php?accion=MODL&id=1&pid=##ID##">Modificar</a></td>
+                    </tr>
+            ##FILALISTA##
+    </table>
+    <a href="index.php?accion=NL&id=1"><img src="img/Add.png">Nueva lista</a>
+</div>
 <div class="hueco">
 </div>
-<a href="index.php?accion=NL&id=1">Nueva lista</a>

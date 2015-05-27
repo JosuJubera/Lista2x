@@ -347,8 +347,9 @@
 	}
 
 	/////////////////////////////////////////////////////////////
-	function vloginadmin(){
+	function vloginadmin($error=null){
 		$aux=  leerfichero('admin/adminlogin.html');
+                $aux=  str_replace("##ERROR##", $error, $aux);
 		echo $aux;
 	}
 	function vmostrarAmenu(){

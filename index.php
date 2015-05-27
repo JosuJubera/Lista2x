@@ -458,15 +458,12 @@
 			case 2:$nombre=adminlogin($_POST['aid'], $_POST['apw']);
 				if ($nombre!==false)
 				{
-					vmostrarAmenu();
 					$_SESSION['admin']=$nombre;
-					$datos = mReportes();
-					vmostrarReportes($datos);
-					vmostrarAUsuario($_SESSION["admin"]);
+                                        header("Location: index.php");
 				}
 				else
 				{//error ususario incorrecto
-					vloginadmin();
+					vloginadmin("Usuario o contraseña incorrecta");
 				}
 				break;
 			default:vloginadmin();
