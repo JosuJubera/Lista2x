@@ -4,15 +4,14 @@
     //error_reporting(0); //borrar esto
     /*
      * Falta por hacer:
-     * -AJAX de playlist (Reproductor) ya mañana
      * -Refres en MF (recargar la pagina tras votar)
      * -Mensajes de confirmacion y de error
      * -Comprobar los back
      * -Comprobaciones SQL(limpiar entrada)
      * -Paginacion en tablas
      * -CSS
-     * -Alta usuario (con JS y redirect)
-     * -Añadir opcion para ir a la pagina principal
+     * -en registro usuario comprobar que se registra bien
+     * -arreglar preferencias admin
      * -Añadir mensajes de Info y de Error con JS. Si es necesario usar redirect
      * -Probar la pagina
 	 -funcion mostrar mensaje
@@ -118,7 +117,7 @@
 						vmostrarContactar();
 						break;
 			case 2:		mAlta($_POST["uid"],$_POST["uname"],$_POST["lastname"],$_POST["lastname2"],$_POST["email"],$_POST["pass"]);
-						vmostrarRmenu();
+						header("Location: index.php");
 						break;
 		}
 	}
