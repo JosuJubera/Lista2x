@@ -128,10 +128,17 @@
 		switch($id)
 		{
 			case 1:		vmostrarImenu();
+						vmensaje();
 						vmostrarRegistro();
 						vmostrarContactar();
 						break;
 			case 2:		mAlta($_POST["uid"],$_POST["uname"],$_POST["lastname"],$_POST["lastname2"],$_POST["email"],$_POST["pass"]);
+						$usuario = mLogin($_POST["uid"], $_POST["pass"]);
+						if ($usuario != false)
+						{
+							$_SESSION["usuario"] = $_POST["uid"];
+							$_SESSION["tipo"] = "user";
+						}
 						header("Location: index.php");
 						break;
 		}
