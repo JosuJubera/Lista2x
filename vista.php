@@ -20,15 +20,10 @@
         echo $partes[0] . $partes[2];
     }
 	
-	function vmostrarPreferencias()
+	function vmostrarPreferencias($tipo)
     {
         $aux = leerfichero("fonts/preferencias.html");
-        echo $aux;
-    }
-	
-	function vmostrarAPreferencias()
-    {
-        $aux = leerfichero("admin/preferencias.html");
+		$aux = str_replace("##TIPO##", $tipo, $aux);
         echo $aux;
     }
 	

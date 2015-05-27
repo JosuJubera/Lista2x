@@ -50,38 +50,26 @@
     {
         $uid = $_POST["uid"];
         $pw = $_POST["pw"];
+		$tipo = $_POST["tipo"];
         $usuario = mLogin($uid, $pw);
 		if ($usuario != false)
 		{
 			$_SESSION["usuario"] = $usuario;
+			$_SESSION["tipo"] = $tipo;
 		}
     }
 	
     //cambiar contraseña
-	if (($accion == "CC") and ((isset($_SESSION["usuario"])) or (isset($_SESSION["admin"]))))
+	if (($accion == "CC") && ((isset($_SESSION["usuario"])) || (isset($_SESSION["admin"]))))
 	{
 		switch ($id)
 		{
-			case 1:		if (isset($_SESSION["usuario"]))
-						{
-							vmostrarPreferencias();
-						}
-						if (isset($_SESSION["admin"]))
-						{
-							vmostrarAPreferencias();
-						}
+			case 1:		vmostrarPreferencias($_SESSION["tipo"]);
 						vmensaje();
 						vmostrarCambiocontraseña();
 						vmostrarContactar();
 						break;
-			case 2:		if (isset($_SESSION["usuario"]))
-						{
-							vmostrarPreferencias();
-						}
-						else
-						{
-							vmostrarAPreferencias();
-						}
+			case 2:		vmostrarPreferencias($_SESSION["tipo"]);
 						vmostrarCambiocontraseña();
 						vmostrarContactar();
 						$dato1 = $_POST["uid"];
@@ -93,31 +81,17 @@
 	}
 	
     //cambiar correo
-	if (($accion == "CE") and (isset($_SESSION["usuario"]))or (isset($_SESSION["admin"])))
+	if (($accion == "CE") && ((isset($_SESSION["usuario"])) || (isset($_SESSION["admin"]))))
 	{
-		if (isset($_SESSION["usuario"]))
-		{
-			vmostrarPreferencias();
-		}
-		else
-		{
-			vmostrarAPreferencias();
-		}
+		vmostrarPreferencias($_SESSION["tipo"]);
 		vmostrarCambiocorreo();
 		vmostrarContactar();
 	}
 	
 	//eliminar cuenta
-	if (($accion == "EC") and (isset($_SESSION["usuario"]))or (isset($_SESSION["admin"])))
+	if (($accion == "EC") && ((isset($_SESSION["usuario"])) || (isset($_SESSION["admin"]))))
 	{
-		if (isset($_SESSION["usuario"]))
-		{
-			vmostrarPreferencias();
-		}
-		else
-		{
-			vmostrarAPreferencias();
-		}
+		vmostrarPreferencias($_SESSION["tipo"]);
 		vmostrarEliminarcuenta();
 		vmostrarContactar();
 	}
@@ -447,7 +421,8 @@
 				if ($nombre!==false)
 				{
 					$_SESSION['admin']=$nombre;
-                                        header("Location: index.php");
+					$_SESSION["tipo"] = "admin";
+                    header("Location: index.php");
 				}
 				else
 				{//error ususario incorrecto
@@ -461,7 +436,7 @@
 	if ($accion== "AR"){ //administrar reportes
 		if (isset($_SESSION["admin"]) /*&& mIsAdmin($_SESSION["admin"])*/){
 			vmostrarAmenu();
-                        vmostrarAUsuario($_SESSION["admin"]);
+            vmostrarAUsuario($_SESSION["admin"]);
 			switch ($id){
 				case 1: //mostrar reportes
 						if (isset($_GET['verignorados'])&& $_GET['verignorados']==1){//mostramos los reportes ignorados por el admin anteriormente

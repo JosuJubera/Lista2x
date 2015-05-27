@@ -70,6 +70,27 @@ function comprobarBuscar()
 	}
 }
 
+function comprobarUser(tipo)
+ {
+ 	if (tipo == 'user') // Comprobar si la sesion es de usuario
+ 	{
+ 		var url = window.location.href;
+ 		var n = url.indexOf("index");
+ 		var m = url.substring(0,n);
+ 		var res = m.concat("index.php?accion=TL&id=1");
+ 		window.location.assign(res);
+ 	}
+ 	
+ 	if (tipo == 'admin') // Comprobar si la sesion es de administrador
+ 	{
+ 		var url = window.location.href;
+ 		var n = url.indexOf("index");
+ 		var m = url.substring(0,n);
+ 		var res = m.concat("index.php?accion=AR&id=1");
+ 		window.location.assign(res);
+ 	}
+ }
+
 function cargarPagina(pag,pid){ //falta por terminar
     $.ajax({
     url : 'index.php',
