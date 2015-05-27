@@ -67,11 +67,17 @@
 			case 1:		vmostrarPreferencias($_SESSION["tipo"]);
 						vmensaje();
 						vmostrarCambiocontraseña();
-						vmostrarContactar();
+						if (!(isset($_SESSION["admin"])))
+						{
+							vmostrarContactar();
+						}
 						break;
 			case 2:		vmostrarPreferencias($_SESSION["tipo"]);
 						vmostrarCambiocontraseña();
-						vmostrarContactar();
+						if (!(isset($_SESSION["admin"])))
+						{
+							vmostrarContactar();
+						}
 						$dato1 = $_POST["uid"];
 						$dato2 = $_POST["pwa"];
 						$dato3 = $_POST["pw"];
@@ -85,7 +91,10 @@
 	{
 		vmostrarPreferencias($_SESSION["tipo"]);
 		vmostrarCambiocorreo();
-		vmostrarContactar();
+		if (!(isset($_SESSION["admin"])))
+		{
+			vmostrarContactar();
+		}
 	}
 	
 	//eliminar cuenta
@@ -93,7 +102,10 @@
 	{
 		vmostrarPreferencias($_SESSION["tipo"]);
 		vmostrarEliminarcuenta();
-		vmostrarContactar();
+		if (!(isset($_SESSION["admin"])))
+		{
+			vmostrarContactar();
+		}
 	}
 	
 	//recuperar contraseña

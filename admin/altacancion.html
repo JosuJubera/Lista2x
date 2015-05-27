@@ -1,38 +1,36 @@
-<div class="contenido">
-    <h1>Añadir cancion</h1>
-	<form action="index.php" enctype="multipart/form-data" method="POST" name="altacancion">
-		<table>
-		<tr>
-			<td><label for="titulo">Titulo:</label></td>
-			<td><input type="text" id="titulo" name="titulo"></td>
-		</tr>
-		<tr>
-			<td><label for="autor">Autor:</label></td>
-			<td><input type="text" id="autor" name="autor"></td>
-		</tr>
-		<tr>
-			<td><label for="album">Album:</label></td>
-			<td><input type="text" id="album" name="album"></td>
-		</tr>
-		<tr>
-			<td><label for="genero">Genero:</label></td>
-			<td><input type="text" id="genero" name="genero"></td>
-		</tr>
-		 <tr>
-			<td><label for="año">Año</label></td>
-			<td><input type="text" id="año" name="año"></td>
-		</tr>
-		<tr>
-			<td><label for="imagen">Caratula del album:</label></td>
-			<td><input type="file" id="imagen" name="caratula" ></td>
-		</tr>
-		 <tr>
-			<td><label for="cancion">Cancion:</label></td>
-			<td><input type="file" id="cancion" name="cancion" ></td>
-		</tr>
-		</table>
-		<input type="hidden" name="accion" value="AC" >
-		<input type="hidden" name="id" value="2" >
-		<button type="submit">Añadir</button>
-	<a href="index.php?accion=AR&id=1">Volver</a>
-</div>
+<h1 class="titulo">Añadir cancion</h1>
+<form action="index.php" enctype="multipart/form-data" method="POST" name="altacancion">
+	<table class="contenido">
+	<tr>
+		<td><label for="titulo">Titulo:</label></td>
+		<td><input type="text" id="titulo" name="titulo"></td>
+	</tr>
+	<tr>
+		<td><label for="autor">Autor:</label></td>
+		<td><input type="text" id="autor" name="autor"></td>
+	</tr>
+	<tr>
+		<td><label for="album">Album:</label></td>
+		<td><input type="text" id="album" name="album"></td>
+	</tr>
+	<tr>
+		<td><label for="genero">Genero:</label></td>
+		<td><input type="text" id="genero" name="genero"></td>
+	</tr>
+	 <tr>
+		<td><label for="año">Año</label></td>
+		<td><input type="text" id="año" name="año"></td>
+	</tr>
+	<tr>
+		<td><label for="imagen">Caratula del album:</label></td>
+		<td><input type="file" id="imagen" name="caratula" ></td>
+	</tr>
+	 <tr>
+		<td><label for="cancion">Cancion:</label></td>
+		<td><input type="file" id="cancion" name="cancion" ></td>
+	</tr>
+	</table>
+	<input type="hidden" name="accion" value="AC" >
+	<input type="hidden" name="id" value="2" >
+	<button type="submit">Añadir</button>
+<a href="index.php?accion=AR&id=1">Volver</a>

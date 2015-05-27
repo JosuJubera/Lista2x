@@ -6,6 +6,7 @@ p
 {
     font-family: "Times New Roman";
     font-size: 20px;
+	width:50%;
 }
 
 /* Login */
@@ -94,6 +95,16 @@ p
     border-left: 10px solid #333;
     color: #fff;
 }
+.menu li ul {
+   display: none;
+   position: relative;
+   min-width: 140px;
+}
+.menu li:hover > ul {
+   display: block;
+    top: 0;
+    position: relative;
+}
 
 /* Contenido */
 .titulo
@@ -106,7 +117,7 @@ p
 }
 .contenido 
 {
-	position: relative ;
+	position: relative;
 	top: 200px;
 	left: 300px;
 	font-family: Arial, sans-serif;
@@ -217,8 +228,6 @@ p
 	left: 400px;
 	z-index:5;
 	position:fixed;
-	
-
 }
 .info 
 {
@@ -243,14 +252,4 @@ p
 	color: #D8000C;
 	background-color: #FFBABA;
 	background-image: url('../img/cancel.png');
-}
-.menu li ul {
-   display: none;
-   position: relative;
-   min-width: 140px;
-}
-.menu li:hover > ul {
-   display: block;
-    top: 0;
-    position: relative;
 }

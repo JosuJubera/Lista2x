@@ -1,14 +1,19 @@
-<div class="contenido">
-    <h1>Quitar cancion</h1>
-	<form id="buscar" method="get" action="index.php">
-		<input name="busqueda" id="busqueda" type="text" required="" size="10" value="##BUSCAR##">
-		<input name="submit" type="submit" id="submit" value="Buscar">
-		<br/>
-		<input type="radio" name="buscar" value="1" ##TCHK## >Titulo
-		<input type="radio" name="buscar" value="2" ##ACHK## >Autor
-		<input type="radio" name="buscar" value="3" ##DCHK## >Disco
-		<input type="hidden" name="accion" value="BC"> 
-		<input type="hidden" name="id" value="2"> 
-	</form>
-	<a href="index.php?accion=AR&id=1">Volver</a>
-</div>
+<h1 class="titulo">Quitar cancion</h1>
+<form id="buscar" method="get" action="index.php">
+	<table class="contenido">
+		<tr>
+			<td><input name="busqueda" id="busqueda" type="text" required="" size="20" value="##BUSCAR##"></td>
+			<td><input name="submit" type="submit" id="submit" value="Buscar"></td>
+		</tr>
+		<tr>
+			<td><input type="radio" name="buscar" value="1" ##TCHK## >Titulo
+			<input type="radio" name="buscar" value="2" ##ACHK## >Autor
+			<input type="radio" name="buscar" value="3" ##DCHK## >Disco</td>
+			<td><input type="hidden" name="accion" value="BC"> </td>
+			<td><input type="hidden" name="id" value="2"></td>
+		</tr>
+		<tr>
+			<td><a href="index.php?accion=AR&id=1">Volver</a><td>
+		</tr>
+	</table>
+</form>
