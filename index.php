@@ -49,12 +49,10 @@
     {
         $uid = $_POST["uid"];
         $pw = $_POST["pw"];
-		$tipo = $_POST["tipo"];
         $usuario = mLogin($uid, $pw);
 		if ($usuario != false)
 		{
 			$_SESSION["usuario"] = $usuario;
-			$_SESSION["tipo"] = $tipo;
 		}
     }
 	
@@ -80,7 +78,7 @@
 	}
 	
     //cambiar correo
-	if (($accion == "CE") and (isset($_SESSION["usuario"])))
+	if (($accion == "CE") and (isset($_SESSION["usuario"]))or (isset($_SESSION["admin"])))
 	{
 		vmostrarPreferencias();
 		vmostrarCambiocorreo();
@@ -88,7 +86,7 @@
 	}
 	
 	//eliminar cuenta
-	if (($accion == "EC") and (isset($_SESSION["usuario"])))
+	if (($accion == "EC") and (isset($_SESSION["usuario"]))or (isset($_SESSION["admin"])))
 	{
 		vmostrarPreferencias();
 		vmostrarEliminarcuenta();
