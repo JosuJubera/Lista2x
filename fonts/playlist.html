@@ -1,8 +1,22 @@
 <h1 class="titulo">##PNOMBRE##</h1>
 <div class= contenido>
 		<div class="cabecera">
-				<p><strong>Valoracion</strong></p>
-				<ul class="star-rating"> <li style="width: ##PVALORACION##px;" id="current-rating" class="current-rating"></li></ul>
+				<p><strong>Valoracion:</strong></p>
+				<ul class="star-rating">
+					<li style="width: ##VALORACION##px;" id="valoracion-##PID##" class="current-rating">##VALORACION##</li>
+					##VOTAR##
+					<li><a class="one-star" title="1 estrella de 10" href="javascript:puntuar(1,##PID##,'P')">1</a></li>
+					<li><a class="two-stars" title="2 estrellas de 10" href="javascript:puntuar(2,##PID##,'P')">2</a></li>
+					<li><a class="three-stars" title="3 estrellas de 10" href="javascript:puntuar(3,##PID##,'P')">3</a></li>
+					<li><a class="four-stars" title="4 estrellas de 10" href="javascript:puntuar(4,##PID##,'P')">4</a></li>
+					<li><a class="five-stars" title="5 estrellas de 10" href="javascript:puntuar(5,##PID##,'P')">5</a></li>
+					<li><a class="six-stars" title="6 estrellas de 10" href="javascript:puntuar(6,##PID##,'P')">6</a></li>
+					<li><a class="seven-stars" title="7 estrellas de 10" href="javascript:puntuar(7,##PID##,'P')">7</a></li>
+					<li><a class="eight-stars" title="8 estrellas de 10" href="javascript:puntuar(8,##PID##,'P')">8</a></li>
+					<li><a class="nine-stars" title="9 estrellas de 10" href="javascript:puntuar(9,##PID##,'P')">9</a></li>
+					<li><a class="ten-stars" title="10 estrellas de 10" href="javascript:puntuar(10,##PID##,'P')">10</a></li>
+                                        ##VOTAR##
+				</ul>
 		</div>
 		<div class="infoplaylist">
 				<p><b>Asunto: </b>##PASUNTO##</p>
@@ -71,9 +85,9 @@
 		<div id="comentarios">
                     ##FILACOMENTARIO##
                     <div class="comentario">
-                                    <p class="autor">Autor: ##COMAUTOR##</p>
-                                    <p>##COMCOMENTARIO##</p>
-									<b class="reportar"> <a href="/index.php?accion=RC&id=1&cid=##COMID##">Reportar</a></b><br/>
+                        <p class="autor">Autor: ##COMAUTOR##</p>
+                        <p>##COMCOMENTARIO##</p>
+                        <b class="reportar"> <a href="/index.php?accion=RC&id=1&cid=##COMID##">Reportar</a></b><br/>
                     </div>
                     ##FILACOMENTARIO##
                     <div id="paginacion">

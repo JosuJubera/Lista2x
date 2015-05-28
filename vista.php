@@ -291,12 +291,20 @@
 	function vmostrarCancion($cancion,$consulta2,$playlist=null)
 	{
 		$aux = leerfichero("fonts/cancion.html");
+                $partes = explode("##VOTAR##", $aux);
+                if (isset($_SESSION['usuario'])){
+                    $aux=$partes[0].$partes[1].$partes[2];
+                }else{//no mostramos pa que vote
+                    $aux=$partes[0].$partes[2];
+                }
+                unset($partes);
 		$partes = explode("##FILALISTA##", $aux);
 		$contenido = "";
 		$lista = "";
 		$i = 1;
                 $lista = $partes[0];
-                $lista = str_replace("##IDC##", $cancion["Id"], $lista);
+                $lista = str_replace("##CID##", $cancion["Id"], $lista);
+                $lista = str_replace("##VALORACION##", $cancion["Valoracion"], $lista);
                 $lista = str_replace("##TITULO##", $cancion["Titulo"], $lista);
                 $lista = str_replace("##ARTISTA##", $cancion["Artista"], $lista);
                 $lista = str_replace("##GENERO##", $cancion["Genero"], $lista);
@@ -519,7 +527,16 @@
                 echo "<p><b>Error, no existe la playlist seleccionada</b><br/>Utilice el buscador para buscar</p>";
                 return;
             }
+            $partes = explode("##VOTAR##", $pagina);
+            if (isset($_SESSION['usuario'])){//mostramos pa votar
+                $partes[1]=str_replace("##PID##", $info['Id'], $partes[1]);
+                $pagina=$partes[0].$partes[1].$partes[2];
+            }else{//no mostramos pa que vote
+                $pagina=$partes[0].$partes[2];
+            }
+            unset($partes);
             $pagina=str_replace("##PNOMBRE##", $info['Nombre'], $pagina);
+            $pagina=str_replace("##PID##", $info['Id'], $pagina);
             $pagina=str_replace("##PVALORACION##", $info['ValoracionSemanal'], $pagina);
             $pagina=str_replace("##PASUNTO##", $info['Asunto'], $pagina);
             $pagina=str_replace("##PAUTOR##", $info['Usuario'], $pagina);

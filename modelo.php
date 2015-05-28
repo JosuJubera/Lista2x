@@ -115,7 +115,7 @@
 	function mCancion($cid)
 	{
 		$con = conexion();
-		$resultado = mysql_query("select Id, Titulo, Artista, Genero, Album, Año from canciones WHERE Id = '$cid'",$con);
+		$resultado = mysql_query("select Id, Titulo, Artista, Genero, Album, Año,ValoracionSemanal*8 Valoracion from canciones WHERE Id = '$cid'",$con);
                 $aux=  mysql_fetch_assoc($resultado);
 		return $aux;
 	}

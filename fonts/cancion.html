@@ -1,15 +1,32 @@
 <h1 class="titulo">##TITULO##</h1>
 <div class="contenido">
 	<div>
+            <div class="cabecera">
+                <p><strong>Valoracion:</strong></p>
+                    <ul class="star-rating">
+                        <li style="width: ##VALORACION##px;" id="valoracion-##CID##" class="current-rating">##VALORACION##</li>
+                        ##VOTAR##
+                        <li><a class="one-star" title="1 estrella de 10" href="javascript:puntuar(1,##CID##,'C')">1</a></li>
+                        <li><a class="two-stars" title="2 estrellas de 10" href="javascript:puntuar(2,##CID##,'C')">2</a></li>
+                        <li><a class="three-stars" title="3 estrellas de 10" href="javascript:puntuar(3,##CID##,'C')">3</a></li>
+                        <li><a class="four-stars" title="4 estrellas de 10" href="javascript:puntuar(4,##CID##,'C')">4</a></li>
+                        <li><a class="five-stars" title="5 estrellas de 10" href="javascript:puntuar(5,##CID##,'C')">5</a></li>
+                        <li><a class="six-stars" title="6 estrellas de 10" href="javascript:puntuar(6,##CID##,'C')">6</a></li>
+                        <li><a class="seven-stars" title="7 estrellas de 10" href="javascript:puntuar(7,##CID##,'C')">7</a></li>
+                        <li><a class="eight-stars" title="8 estrellas de 10" href="javascript:puntuar(8,##CID##,'C')">8</a></li>
+                        <li><a class="nine-stars" title="9 estrellas de 10" href="javascript:puntuar(9,##CID##,'C')">9</a></li>
+                        <li><a class="ten-stars" title="10 estrellas de 10" href="javascript:puntuar(10,##CID##,'C')">10</a></li>
+                    ##VOTAR##
+                    </ul>
 		<table>
 			<tr><td>Artista:</td><td>##ARTISTA##</td><td>Género:</td><td>##GENERO##</td></tr>
 			<tr><td>Álbum:</td><td>##ALBUM##</td><td>Año:</td><td>##AÑO##</td></tr>
 		</table>
-		<img src="img/##IDC##.png" alt="##ALBUM##" height="60" width="60">
+		<img src="img/##CID##.png" alt="##ALBUM##" height="60" width="60">
 	</div>
 	<div>
 		<audio controls>
-			<source src="canciones/##IDC##.mp3" type="audio/mpeg">
+			<source src="canciones/##CID##.mp3" type="audio/mpeg">
 		Your browser does not support the audio element.
 		</audio>
 	</div>
