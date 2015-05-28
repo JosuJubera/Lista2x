@@ -253,3 +253,27 @@ p
 	background-color: #FFBABA;
 	background-image: url('../img/cancel.png');
 }
+
+/* Comentarios*/
+.comentarios
+{
+	font-family:Arial, Helvetica, sans-serif; 
+	font-size:10px;
+	background-position: 10px center;
+	position:fixed;
+}
+.comentario
+{
+	border: 1px solid;
+	color: #000000;
+	width:30%;
+	background: rgba(173,234,234,0.5);
+}
+.autor
+{
+	color: rgba(255,150,155,1);
+}
+.reportar
+{
+	text-align: right;
+}
