@@ -453,7 +453,33 @@
 			default:vloginadmin();
 		}
 	}
-	
+	//Actualizar puntuaciones
+        if ($accion=="ACTU"){
+            if (isset($_SESSION["admin"])){
+                switch ($id){
+                    case 1://Ver Opciones
+                            vmostrarAmenu();
+                            vactualizar();
+                            vmostrarAUsuario($_SESSION["admin"]);
+                            break;
+                    case 2://Actualizar
+                            vmostrarAmenu();
+                            $exito=mactualizar();
+                            if ($exito){
+                                mostrarInfo("Actualizado con exito");
+                            }else{
+                                mostrarError("Error al actualizar", "No se puede actualizar las canciones");
+                            }
+                            vactualizar();
+                            vmostrarAUsuario($_SESSION["admin"]);
+                            break;
+                }
+                
+            }else{
+                 mostrarError("Acceso denegado", "Usted no tiene permisos para ver esta seccion"); 
+            }
+        }
+        
 	if ($accion== "AR"){ //administrar reportes
 		if (isset($_SESSION["admin"]) /*&& mIsAdmin($_SESSION["admin"])*/){
 			vmostrarAmenu();

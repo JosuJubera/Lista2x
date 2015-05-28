@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 25-05-2015 a las 17:15:17
+-- Tiempo de generación: 28-05-2015 a las 19:14:32
 -- Versión del servidor: 5.6.21
 -- Versión de PHP: 5.6.3
 
@@ -19,6 +19,31 @@ SET time_zone = "+00:00";
 --
 -- Base de datos: `siw04`
 --
+
+DELIMITER $$
+--
+-- Procedimientos
+--
+CREATE DEFINER=`root`@`localhost` PROCEDURE `ACTUALIZAR`()
+    MODIFIES SQL DATA
+    COMMENT 'Actualiza la valoracion semanal de las playlist y de las cancion'
+begin
+
+    update playlist set ValoracionSemanal=(
+    select IFNULL(sum(Valoracion)/count(*),0) Valoracion
+    from puntuacionesplaylist
+    where Fecha>DATE_SUB(NOW(), INTERVAL 1 WEEK)
+    AND playlist=Id);
+
+    update canciones set ValoracionSemanal=(
+    select IFNULL(sum(Valoracion)/count(*),0) Valoracion
+    from puntuacioncanciones
+    where Fecha>DATE_SUB(NOW(), INTERVAL 1 WEEK)
+	AND cancion=Id);
+
+end$$
+
+DELIMITER ;
 
 -- --------------------------------------------------------
 
@@ -64,17 +89,15 @@ CREATE TABLE IF NOT EXISTS `canciones` (
 --
 
 INSERT INTO `canciones` (`Id`, `Titulo`, `Artista`, `Album`, `Genero`, `Año`, `ValoracionSemanal`) VALUES
-(2, 'Loba', 'Shakira', 'album', 'Pop', 2009, 4),
-(1, 'Sugar', 'Maroon 5', 'V', 'Disco', 2015, 10),
-(3, 'dws', 'yo', 'otroalbum', 'iug', 1995, 2),
-(5, 'erfqerfc', 'refqerf', 'eqrfqerf', 'qrfqer', 2014, 9),
-(4, 'juu', 'otro', 'otromas', 'ghjv', 1995, 3),
-(14, 'mnbcv', 'bvcb', 'ouyio', 'uioy', 2053, 7),
-(6, 'qwerqwefc', 'bbyujtyujn', 'tyrhyb', 'ehgbeyhty', 2017, 6),
-(9, 'wegvwrgv', 'cvbfgb ', 'rtcwtg rt', 'vtyhvthn', 2014, 6),
-(11, 'wertfwerf', 'gfergvrth', 'gsdvfertyh', 'hethbvertb', 2053, 7),
-(12, 'wtrf vgfer', 'sdfgsfh', 'hjyj', 'htyhr', 2053, 7),
-(13, 'wwrgffer', 'sdfgzcvzdfssfh', 'hsdfgjyj', 'hsdfgsftyhr', 2053, 7);
+(2, 'Loba', 'Shakira', 'album', 'Pop', 2009, 0),
+(1, 'Sugar', 'Maroon 5', 'V', 'Disco', 2015, 9),
+(3, 'dws', 'yo', 'otroalbum', 'iug', 1995, 0),
+(4, 'juu', 'otro', 'otromas', 'ghjv', 1995, 0),
+(14, 'mnbcv', 'bvcb', 'ouyio', 'uioy', 2053, 5),
+(6, 'qwerqwefc', 'bbyujtyujn', 'tyrhyb', 'ehgbeyhty', 2017, 0),
+(11, 'wertfwerf', 'gfergvrth', 'gsdvfertyh', 'hethbvertb', 2053, 1),
+(12, 'wtrf vgfer', 'sdfgsfh', 'hjyj', 'htyhr', 2053, 3),
+(13, 'wwrgffer', 'sdfgzcvzdfssfh', 'hsdfgjyj', 'hsdfgsftyhr', 2053, 0);
 
 -- --------------------------------------------------------
 
@@ -92,9 +115,7 @@ CREATE TABLE IF NOT EXISTS `cancionesplaylist` (
 --
 
 INSERT INTO `cancionesplaylist` (`playlist`, `cancion`) VALUES
-(1, 1),
-(5, 1),
-(1, 2);
+(8, 1);
 
 -- --------------------------------------------------------
 
@@ -105,18 +126,20 @@ INSERT INTO `cancionesplaylist` (`playlist`, `cancion`) VALUES
 CREATE TABLE IF NOT EXISTS `comentarios` (
 `Id` int(11) NOT NULL,
   `Usuario` varchar(30) COLLATE utf8_bin NOT NULL,
-  `Reportes` int(11) NOT NULL,
+  `Reportes` int(11) NOT NULL DEFAULT '0',
   `Comentario` text COLLATE utf8_bin NOT NULL,
   `Playlist` int(11) NOT NULL,
   `Ignorado` tinyint(1) NOT NULL DEFAULT '0'
-) ENGINE=InnoDB AUTO_INCREMENT=9 DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
+) ENGINE=InnoDB AUTO_INCREMENT=15 DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
 
 --
 -- Volcado de datos para la tabla `comentarios`
 --
 
 INSERT INTO `comentarios` (`Id`, `Usuario`, `Reportes`, `Comentario`, `Playlist`, `Ignorado`) VALUES
-(8, 'Jub3r', 0, 'Josu puto amo', 1, 0);
+(12, 'Usergio', 1, 'gdhgdh', 7, 1),
+(13, 'Usergio', 0, 'iieeee', 8, 0),
+(14, 'Usergio', 0, 'iieeee', 8, 0);
 
 -- --------------------------------------------------------
 
@@ -130,21 +153,17 @@ CREATE TABLE IF NOT EXISTS `playlist` (
   `Nombre` varchar(30) COLLATE utf8_bin NOT NULL,
   `Asunto` varchar(60) COLLATE utf8_bin NOT NULL,
   `Descripcion` text COLLATE utf8_bin NOT NULL,
-  `Fecha` datetime DEFAULT NULL,
+  `Fecha` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
   `ValoracionSemanal` int(11) NOT NULL DEFAULT '0'
-) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
+) ENGINE=InnoDB AUTO_INCREMENT=9 DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
 
 --
 -- Volcado de datos para la tabla `playlist`
 --
 
 INSERT INTO `playlist` (`Id`, `Usuario`, `Nombre`, `Asunto`, `Descripcion`, `Fecha`, `ValoracionSemanal`) VALUES
-(1, 'Jub3r', 'Caribe Mix', 'CAnciones verano', 'Las mejores canciones del verano 2015', '2015-05-10 00:00:00', 9),
-(2, 'Jub3r', 'Lista 2', 'CAnciones verano', 'Las mejores canciones del verano 2015', '2015-05-10 00:00:00', 9),
-(3, 'muyñ', 'uyetjh', 'rtyhtyj', 'dyjdty', NULL, 4),
-(4, 'Jub3r', 'fqe', 'reaqgf', 'egw', NULL, 7),
-(5, 'Jub3r', 'PruebaCrear', 'Probando', 'Prueba pa ver si va, el font porque cambia?', NULL, 0),
-(6, 'Jub3r', 'Serio sergio', 'eere', 'peoeooe', NULL, 0);
+(7, 'Usergio', 'nada', 'asd', 'asdasd', '2015-05-28 15:36:27', 9),
+(8, 'Usergio', 'aux', 'auz', 'asd', '2015-05-28 15:36:27', 9);
 
 -- --------------------------------------------------------
 
@@ -155,7 +174,7 @@ INSERT INTO `playlist` (`Id`, `Usuario`, `Nombre`, `Asunto`, `Descripcion`, `Fec
 CREATE TABLE IF NOT EXISTS `puntuacioncanciones` (
   `Usuario` varchar(30) COLLATE utf8_bin NOT NULL,
   `Cancion` int(11) NOT NULL,
-  `Fecha` datetime DEFAULT NULL,
+  `Fecha` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
   `Valoracion` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
 
@@ -164,17 +183,10 @@ CREATE TABLE IF NOT EXISTS `puntuacioncanciones` (
 --
 
 INSERT INTO `puntuacioncanciones` (`Usuario`, `Cancion`, `Fecha`, `Valoracion`) VALUES
-('Jub3r', 1, '2015-05-10 00:00:00', 8),
-('Jub3r', 2, '2015-05-18 00:00:00', 4),
-('Jub3r', 3, '2015-05-20 00:00:00', 6),
-('Jub3r', 5, '2015-05-18 00:00:00', 7),
-('Jub3r', 6, '2015-05-18 00:00:00', 3),
-('Jub3r', 11, '2015-05-18 00:00:00', 7),
-('Jub3r', 12, '2015-05-18 00:00:00', 6),
-('Jub3r', 13, '2015-05-18 00:00:00', 6),
-('Jub3r', 14, '2015-05-18 00:00:00', 5),
-('muyñ', 1, NULL, 1),
-('muyñ', 2, NULL, 2);
+('Usergio', 1, '2015-05-26 22:00:00', 9),
+('Usergio', 11, '2015-05-27 22:00:00', 1),
+('Usergio', 12, '2015-05-27 22:00:00', 3),
+('Usergio', 14, '2015-05-27 22:00:00', 5);
 
 -- --------------------------------------------------------
 
@@ -185,7 +197,7 @@ INSERT INTO `puntuacioncanciones` (`Usuario`, `Cancion`, `Fecha`, `Valoracion`) 
 CREATE TABLE IF NOT EXISTS `puntuacionesplaylist` (
   `Usuario` varchar(30) COLLATE utf8_bin NOT NULL,
   `Playlist` int(11) NOT NULL,
-  `Fecha` datetime NOT NULL,
+  `Fecha` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
   `Valoracion` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
 
@@ -194,12 +206,8 @@ CREATE TABLE IF NOT EXISTS `puntuacionesplaylist` (
 --
 
 INSERT INTO `puntuacionesplaylist` (`Usuario`, `Playlist`, `Fecha`, `Valoracion`) VALUES
-('Jub3r', 1, '0000-00-00 00:00:00', 9),
-('Jub3r', 2, '0000-00-00 00:00:00', 8),
-('Jub3r', 3, '0000-00-00 00:00:00', 6),
-('Jub3r', 4, '2015-05-18 00:00:00', 7),
-('Jub3r', 5, '2015-05-20 00:00:00', 6),
-('Jub3r', 6, '2015-05-20 00:00:00', 6);
+('Usergio', 7, '2015-05-26 22:00:00', 9),
+('Usergio', 8, '2015-05-26 22:00:00', 9);
 
 -- --------------------------------------------------------
 
@@ -221,10 +229,9 @@ CREATE TABLE IF NOT EXISTS `usuarios` (
 --
 
 INSERT INTO `usuarios` (`Usuario`, `Nombre`, `Apellido1`, `Apellido2`, `Correo`, `Contraseña`) VALUES
-('Jub3r', '', '', '', '', '7110eda4d09e062aa5e4a390b0a572ac0d2c0220'),
 ('Jub3r2', 'Josu', 'Jubera', 'Mariezcurrena', 'sergio@tonto.com', '8cb2237d0679ca88db6464eac60da96345513964'),
 ('Usergio', 'sergio', '', '', 'asd@asd.asd', '8cb2237d0679ca88db6464eac60da96345513964'),
-('muyñ', 'muyñ', '', '', 'asd@asd.asd', '8cb2237d0679ca88db6464eac60da96345513964');
+('nuevo', 'yo', 'soy', 'especial', 'asd.asd@asd.asd', '8cb2237d0679ca88db6464eac60da96345513964');
 
 --
 -- Índices para tablas volcadas
@@ -291,12 +298,12 @@ MODIFY `Id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=15;
 -- AUTO_INCREMENT de la tabla `comentarios`
 --
 ALTER TABLE `comentarios`
-MODIFY `Id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=9;
+MODIFY `Id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=15;
 --
 -- AUTO_INCREMENT de la tabla `playlist`
 --
 ALTER TABLE `playlist`
-MODIFY `Id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=7;
+MODIFY `Id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=9;
 --
 -- Restricciones para tablas volcadas
 --
@@ -334,6 +341,14 @@ ADD CONSTRAINT `puntuacioncanciones_ibfk_2` FOREIGN KEY (`Cancion`) REFERENCES `
 ALTER TABLE `puntuacionesplaylist`
 ADD CONSTRAINT `puntuacionesplaylist_ibfk_1` FOREIGN KEY (`Usuario`) REFERENCES `usuarios` (`Usuario`) ON DELETE CASCADE,
 ADD CONSTRAINT `puntuacionesplaylist_ibfk_2` FOREIGN KEY (`Playlist`) REFERENCES `playlist` (`Id`) ON DELETE CASCADE;
+
+DELIMITER $$
+--
+-- Eventos
+--
+CREATE DEFINER=`root`@`localhost` EVENT `CRON_ACTUALIZAR` ON SCHEDULE EVERY 1 DAY STARTS '2015-05-28 18:13:43' ON COMPLETION NOT PRESERVE ENABLE COMMENT 'Calcula la puntuacion de las listas todos los dias' DO CALL `ACTUALIZAR`()$$
+
+DELIMITER ;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;

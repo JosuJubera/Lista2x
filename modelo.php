@@ -564,4 +564,13 @@
             return false;
         } 
     }
+    function mactualizar(){
+         $con=conexion();
+        $resultado=mysql_query("CALL `ACTUALIZAR`();",$con);  
+         if ($resultado!==false) {
+            return true;
+        }else{
+            return false;
+        } 
+    }
 ?>

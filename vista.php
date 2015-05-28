@@ -625,6 +625,10 @@
             $aux=leerfichero('fonts/crearPlaylist.html');
             echo $aux;  
         }
+        function vactualizar(){
+            $aux=  leerfichero('admin/actualizar.html');
+            echo $aux;
+        }
         function vmodPlaylist($info,$canciones){
             $pagina = leerfichero("fonts/modificarPlaylist.html");
              if ($info==null){//no exite playlist
@@ -795,8 +799,5 @@
             }else{
                 echo "<p class='contenido'> No se han encontrado albumnes con ese criterio</p>";
             } 
-        }
-        function vmostrarExito($exito){
-            
         }
 ?>
