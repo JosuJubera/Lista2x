@@ -17,6 +17,7 @@
      * -Añadir mensaje error o no en alta cancion.
      * -Al borrar comentario ir a los reportes
 	 * -Reportes
+	 -preferencias no va CC, EC, CE
 	 -funcion mostrar mensaje
 	 -admin (vistas, funcionalidad...)
      * -Probar la pagina
