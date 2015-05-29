@@ -509,7 +509,7 @@
             return false;
         }
         $resultado = mysql_query("select Usuario from playlist where id='$pid'",$con);
-	$i=0;
+        $i=0;
         $aux=mysql_fetch_assoc($resultado);
         if ($aux!=false)
             return $aux['Usuario'];
@@ -582,8 +582,23 @@
         } 
     }
     function mactualizar(){
-         $con=conexion();
+        $con=conexion();
         $resultado=mysql_query("CALL `ACTUALIZAR`();",$con);  
+         if ($resultado!==false) {
+            return true;
+        }else{
+            return false;
+        } 
+    }
+    function meliminarPlaylist($pid,$uid){
+        if (!is_numeric($pid)||!is_numeric($uid)){
+            return false;
+        }
+        if (!($uid==mcreadorPlaylist($pid))){//no es el creador de la playlist
+            return false;
+        }
+        $con=conexion();
+        $resultado=mysql_query("delete from playlist where Id='$pid'" ,$con);  
          if ($resultado!==false) {
             return true;
         }else{
