@@ -53,7 +53,9 @@ $(function(){
     //funcion que reproduce los archivos de audio
     $.fntReproducir=function(){
          objReproductor.src="canciones/"+totcanciones[iCancionActual]+".mp3";
-         
+        console.log(iCancionActual);
+        // $("#caratula").src="caratulas/"+$('#tablacanciones >tbody >tr')[iCancionActual+1].cells[3].innerHTML+".jpg";//Por que no va???   
+        document.getElementById('caratula').src = "caratulas/"+$('#tablacanciones >tbody >tr')[iCancionActual+1].cells[3].innerHTML+".jpg";
         //desmarcamos cualquier cancion en la lista (si es que estuviese marcada alguna)
         //marcamos en la lista la cancion que vamos a reproducir
         //reproducir la cancion con el metodo play
