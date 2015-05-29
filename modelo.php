@@ -15,7 +15,7 @@
         $contraseña = addslashes($pw);
         $con = conexion();
         $resultado = mysql_query("SELECT Usuario FROM usuarios WHERE Usuario COLLATE utf8_general_ci like '" . $usuario . "' and Contraseña='" . sha1($contraseña) . "'",$con) or die("Error en: " . mysql_error());
-		$comprobacion = mysql_fetch_array($resultado);
+        $comprobacion = mysql_fetch_array($resultado);
         if ($comprobacion !==false )
         {
             return $comprobacion[0];
@@ -50,7 +50,7 @@
 		if (!isset($buscar) || !is_numeric($tipo)){
 			return null;
 		}
-		mysql_real_escape_string($buscar);
+		$buscar=mysql_real_escape_string($buscar);
 		switch($tipo)
 		{
 			case 0:		$resultado = mysql_query("select p.Id, p.Nombre, p.Asunto,(select count(*) from cancionesplaylist where playlist=p.id) Canciones , p.Usuario, p.Fecha, (p.ValoracionSemanal * 8) as ValoracionSemanal from playlist p where p.Nombre COLLATE utf8_general_ci like '%$buscar%' order by ValoracionSemanal desc limit 20",$con);
@@ -176,12 +176,17 @@
 	function mAlta($user,$nombre,$apellido1,$apellido2,$correo,$contraseña)
 	{
 		$con=conexion();
-		mysql_real_escape_string($nombre);
-		mysql_real_escape_string($user);
-		mysql_real_escape_string($apellido1);
-		mysql_real_escape_string($apellido2);
-		mysql_real_escape_string($correo);
-		mysql_real_escape_string($contraseña);
+		$nombre=mysql_real_escape_string($nombre);
+                $nombre=  htmlentities($nombre);
+		$user=mysql_real_escape_string($user);
+                $user=  htmlentities($user);
+		$apellido1=mysql_real_escape_string($apellido1);
+                $apellido1=htmlentities($apellido1);
+		$apellido2=mysql_real_escape_string($apellido2);
+                $apellido2=htmlentities($apellido2);
+		$correo=mysql_real_escape_string($correo);
+                $correo=htmlentities($correo);
+		$contraseña=mysql_real_escape_string($contraseña);
 		$cifrado=sha1($contraseña);
 		$resultado=mysql_query("insert into usuarios(usuario,nombre,apellido1,apellido2,correo,contraseña) values ('$user','$nombre','$apellido1','$apellido2','$correo','$cifrado')",$con); 
 		return $resultado;   
@@ -197,8 +202,8 @@
                 return true;
             }
         }
-        function subirArchivo($archivo,$path,$nombre,$extension,$tamMaximo){
-            if ($archivo['size']>$tamMaximo/* || !substr_compare($archivo['name'],$extension, strlen($archivo['name'])-3,3,true)*/){
+        function subirArchivo($archivo,$path,$nombre,$tamMaximo){
+            if ($archivo['size']>$tamMaximo){
                 return false;
             }
             $res= move_uploaded_file ($archivo['tmp_name'] ,$path.'/'.$nombre);
@@ -209,8 +214,8 @@
                     return false;
             }
             $con=conexion();
-            mysql_real_escape_string($admin);
-            mysql_real_escape_string($contraseña);
+            $admin=mysql_real_escape_string($admin);
+            $contraseña=mysql_real_escape_string($contraseña);
             $cifrado=sha1($contraseña);
             $consulta="select usuario from administradores where contraseña='$cifrado' and usuario='$admin'";
             $resultado=mysql_query($consulta,$con);
@@ -226,11 +231,16 @@
                 return false;
             }
             $con=conexion();
-            mysql_real_escape_string($titulo);
-            mysql_real_escape_string($autor);
-            mysql_real_escape_string($album);
-            mysql_real_escape_string($genero);
-            mysql_real_escape_string($año);
+            $titulo=mysql_real_escape_string($titulo);
+            $titulo=htmlentities($titulo);
+            $autor=mysql_real_escape_string($autor);
+            $autor=htmlentities($autor);
+            $album=mysql_real_escape_string($album);
+            $album=htmlentities($album);
+            $genero=mysql_real_escape_string($genero);
+            $genero=htmlentities($genero);
+            $año=mysql_real_escape_string($año);
+            $año=htmlentities($año);
             mysql_query("begin",$con);
             $result=  mysql_query("insert into canciones(Titulo,Artista,Album,Genero,Año) values ('$titulo','$autor','$album','$genero','$año')",$con);
             if ($result===false){ //ya existe en la DB, no lo subimos de nuevo
@@ -238,8 +248,9 @@
                 return false;
             }
             $nomarchivo= mysql_insert_id();
-            $ar1=subirArchivo($imagen, "./caratulas",$album.'.jpg', 'jpg',3000000);
-            $ar2=subirArchivo($cancion, "./canciones",$nomarchivo.'.mp3', 'mp3',10000000);
+            $ar1=subirArchivo($imagen, "./caratulas",$album.'.jpg',3000000);
+            $ar1 &=imagejpeg($ar1,"./caratulas/$album.jpg",85); //cambiamos la imagen a jpg
+            $ar2=subirArchivo($cancion, "./canciones",$nomarchivo.'.mp3',10000000);
             if ($ar1 ==true && $ar2==true){ //compruebo si se han subido los archivos
                 mysql_query("commit",$con);//correcto, confirmo cambios
                 return true;
@@ -251,7 +262,7 @@
         }
      function mbuscartitulo($palabra){
         $con = conexion();
-        mysql_real_escape_string($palabra);
+        $palabra=mysql_real_escape_string($palabra);
         $resultado = mysql_query("select * from canciones WHERE titulo like '%$palabra%'",$con);
         $i=0;
         $resultado = mysql_query("select * from canciones WHERE titulo like '%$palabra%'",$con);
@@ -267,7 +278,7 @@
      }
      function mbuscarautor($palabra){
         $con = conexion();
-        mysql_real_escape_string($palabra);
+        $palabra=mysql_real_escape_string($palabra);
 		$resultado = mysql_query("select Artista,count(distinct album) albumnes,count(id) canciones from canciones where Artista like '%$palabra%' group by Artista;",$con);
 		$i=0;
         $aux=null;
@@ -281,7 +292,7 @@
      }
     function mbuscaralbum($palabra){
         $con = conexion();
-        mysql_real_escape_string($palabra);
+        $palabra=mysql_real_escape_string($palabra);
         $resultado = mysql_query("select Artista, album,count(id) canciones from canciones where album like '%$palabra%' group by album;",$con);
         $i=0;
         $aux=null;
@@ -316,7 +327,7 @@
      }
      function cancionesautor($autor){
         $con = conexion();
-        mysql_real_escape_string($autor);
+        $autor=mysql_real_escape_string($autor);
         $resultado = mysql_query("select Id,Titulo,Artista,Genero,Album,Año from canciones where Artista like '$autor'",$con);
         $i=0;
         $aux=null;
@@ -400,7 +411,7 @@
         }
         $con=conexion();
         $comentario=htmlentities($comentario,ENT_SUBSTITUTE);
-        mysql_real_escape_string($comentario);
+        $comentario=mysql_real_escape_string($comentario);
         $resultado=mysql_query("insert into comentarios(Usuario,Playlist,Comentario) values ('$uid','$pid','$comentario') " ,$con); 
         if ($resultado!==false){
             return true;
@@ -458,10 +469,13 @@
         if (!isset($usuario,$titulo,$asunto,$descripcion)){
             return false;
         }
-        mysql_real_escape_string($usuario);
-        mysql_real_escape_string($titulo);
-        mysql_real_escape_string($asunto);
-        mysql_real_escape_string($descripcion);
+        $usuario=mysql_real_escape_string($usuario);
+        $titulo=mysql_real_escape_string($titulo);
+        $titulo=htmlentities($titulo);
+        $asunto=mysql_real_escape_string($asunto);
+        $asunto= htmlentities($asunto);
+        $descripcion=mysql_real_escape_string($descripcion);
+        $descripcion= htmlentities($descripcion);
         $resultado=mysql_query("insert into playlist(Usuario,Nombre,Asunto,Descripcion) values ('$usuario','$titulo','$asunto','$descripcion') " ,$con); 
         if ($resultado!==false){
             return true;
@@ -474,9 +488,12 @@
         if ($_SESSION['usuario']!=mcreadorPlaylist($pid)){//el que modifica la playlist no es el autor
             return false;
         }
-        mysql_real_escape_string($titulo);
-        mysql_real_escape_string($asunto);
-        mysql_real_escape_string($descrip);
+        $titulo=mysql_real_escape_string($titulo);
+        $titulo= htmlentities($titulo);
+        $asunto=mysql_real_escape_string($asunto);
+        $asunto=  htmlentities($asunto);
+        $descrip=mysql_real_escape_string($descrip);
+        $descrip=  htmlentities($descrip);
         $resultado=mysql_query("update playlist set Nombre='$titulo',Asunto='$asunto',Descripcion='$descrip'where id='$pid' " ,$con); 
         if ($resultado!==false){
             return true;
@@ -525,7 +542,7 @@
     }
     function mobtenerPlaylist($uid){
         $con=conexion();
-        mysql_real_escape_string($uid);
+        $uid=mysql_real_escape_string($uid);
         $resultado = mysql_query("select Nombre,Id from playlist where Usuario='$uid' order by Nombre",$con);
         $i=0;
         $aux=null;
@@ -556,7 +573,7 @@
         if (!isset($uid)){
             return false;
         }
-        mysql_real_escape_string($uid);
+        $uid=mysql_real_escape_string($uid);
         $resultado=mysql_query("delete from usuarios where Usuario='$uid'" ,$con);  
          if ($resultado!==false) {
             return true;

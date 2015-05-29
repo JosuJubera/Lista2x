@@ -371,10 +371,10 @@
 						}
 		}
         $datos1 = mCancion($_GET["cid"]);
-		$datos2 = mToplistascancion($_GET["cid"]);
-        $playlist=mobtenerPlaylist($_SESSION['usuario']);
+        $datos2 = mToplistascancion($_GET["cid"]);
+        $playlist=mobtenerPlaylist(isset($_SESSION['usuario'])? $_SESSION['usuario']:null);
         vmostrarCancion($datos1,$datos2,$playlist);
-		vmostrarContactar();
+	vmostrarContactar();
     }
     
     //Publicar Un comentario
@@ -481,30 +481,30 @@
         
 	if ($accion== "AR"){ //administrar reportes
 		if (isset($_SESSION["admin"]) /*&& mIsAdmin($_SESSION["admin"])*/){
-			vmostrarAmenu();
-            vmostrarAUsuario($_SESSION["admin"]);
-			switch ($id){
-				case 1: //mostrar reportes
-						if (isset($_GET['verignorados'])&& $_GET['verignorados']==1){//mostramos los reportes ignorados por el admin anteriormente
-							$ignorados=mobtenerReportesIgnorados();
-							vmostrarReportesIgnorados($ignorados);    
-						}else{//mostramos los reportes de los comentarios
-							$reportes=mobtenerReportes();
-							vmostrarReportes($reportes);
-						}
-						break;
-				case 2:$rest=mborrarComentario($_GET['idcomentario']);//eliminar comentario
-						if ($rest==false){
-							mostrarError("No se ha podido eliminar", "Error al eliminar el comentario");
-						}
-						$reportes=mobtenerReportes();
-						vmostrarReportes($reportes);
-						break;
-				case 3:mignorar($_GET['ignorar']);//ignorar comentario
-					   vmostrarReportes($reportes);
-					   break;
-				default:vmostrarAmenu();
+                    vmostrarAmenu();
+                    switch ($id){
+                        case 1: //mostrar reportes
+                                if (isset($_GET['verignorados'])&& $_GET['verignorados']==1){//mostramos los reportes ignorados por el admin anteriormente
+                                        $ignorados=mobtenerReportesIgnorados();
+                                        vmostrarReportesIgnorados($ignorados);    
+                                }else{//mostramos los reportes de los comentarios
+                                        $reportes=mobtenerReportes();
+                                        vmostrarReportes($reportes);
+                                }
+                                break;
+                        case 2:$rest=mborrarComentario($_GET['idcomentario']);//eliminar comentario
+                                if ($rest==false){
+                                        mostrarError("No se ha podido eliminar", "Error al eliminar el comentario");
+                                }
+                                $reportes=mobtenerReportes();
+                                vmostrarReportes($reportes);
+                                break;
+                        case 3:mignorar($_GET['ignorar']);//ignorar comentario
+                                vmostrarReportes($reportes);
+                                break;
+                        default:vmostrarAmenu();
 		   }
+                   vmostrarAUsuario($_SESSION["admin"]);
 		}else{
 		   mostrarError("Acceso denegado", "Usted no tiene permisos para ver esta seccion");
 		}
@@ -514,13 +514,11 @@
 	{
             if (isset($_SESSION["admin"]))
             {
+                vmostrarAmenu();
+                $datos = mUsuarios();
+                vmostrarUsuarios($datos);
                 switch ($id)
                 {
-                    case 1: vmostrarAmenu();
-                            $datos = mUsuarios();
-                            vmostrarUsuarios($datos);
-                            vmostrarAUsuario($_SESSION["admin"]);
-                            break;
                     case 2: if (mborrarAUsuario($_GET['user'])){
                                 mostrarInfo("Usuario eliminado con exito!");
                             }else{
@@ -529,6 +527,9 @@
                             }
                             break;
                 }
+                vmostrarAUsuario($_SESSION["admin"]);
+            }else{//no es admin
+                 mostrarError("Acceso denegado", "Usted no tiene permisos para ver esta seccion");
             }
         }
 	
@@ -536,34 +537,47 @@
         if (isset($_SESSION["admin"]) /*&& mIsAdmin($_SESSION["admin"])*/){ //es un admin
                 switch ($id)
                 {
-                    case 1:     vmostrarAmenu();
+                    case 1:     vmostrarAmenu(); //esto pa que esta???
                                 $datos = mCanciones();
                                 vmostrarCanciones($datos);
                                 vmostrarAUsuario($_SESSION["admin"]);
                                 break;
                     case 2: 	vmostrarAmenu();
-                                vmostrarAUsuario($_SESSION["admin"]);
                                 valtaCancion();
+                                vmostrarAUsuario($_SESSION["admin"]);
                                 break;
                             
                     case 3: 	if (añadirCancion($_POST['titulo'], $_POST['autor'], $_POST['album'], $_POST['genero'], $_POST['año'], $_FILES["caratula"],$_FILES["cancion"]))
                                     {
                                     //exito, añadido. mostrar mensaje y pa dejar pa añadir otra
                                     vmostrarAmenu();
-                                    echo "cancion añadida con exito";
+                                    valtaCancion();
+                                    mostrarInfo("Cancion añadida con exito");
+                                    vmostrarAUsuario($_SESSION["admin"]);
                                     }
                                     else
                                     {
-                                        //fallo, enviar mensajede fallo y k vuelva a intentarlo
-                                        echo "fallo";
-                                        valtacancion();
+                                        vmostrarAmenu();
+                                        valtaCancion();
+                                        mostrarError("Imposible añadir", "No ha sido posible añadir la cancion.");
+                                        vmostrarAUsuario($_SESSION["admin"]);
                                     }
                                     break;
-                    case 4:     mborrarCancion($_GET["idc"]);
+                    case 4:    
+                                vmostrarAmenu();
+                                $exito=mborrarCancion($_GET["idc"]);
+                                $datos = mCanciones();
+                                vmostrarCanciones($datos);
+                                if ($exito){
+                                    mostrarInfo("Cancion eliminada");
+                                }else{
+                                    mostrarError("Imposible eliminar", "No ha sido posible eliminar la cancion");
+                                }
+                                vmostrarAUsuario($_SESSION["admin"]);
                                 break;
                     }
             }else{
-                    echo "necesitas ser administrador";
+                mostrarError("Acceso denegado", "Usted no tiene permisos para ver esta seccion");
             }
 	}
 	if ($accion == "BC"){//borrar cancion
@@ -572,29 +586,29 @@
 			switch ($id)
 			{
 				case 1:     vmostrarAmenu();
-							vmostrarAUsuario($_SESSION["admin"]);
-							vbuscarborrar(); //mostrar el buscador
-							break;
+                                            vbuscarborrar(); //mostrar el buscador
+                                            vmostrarAUsuario($_SESSION["admin"]);
+                                            break;
 				case 2:		//mostrar resultados
                                             switch ($_GET['buscar'])
                                             {
                                                 case 1:     vmostrarAmenu();
-                                                            vmostrarAUsuario($_SESSION["admin"]);     
                                                             $canciones=mbuscartitulo($_GET['busqueda']);//titulo
                                                             vbuscarborrar($_GET['busqueda'],$_GET['buscar']);
                                                             vcancionesborrar($canciones);
+                                                            vmostrarAUsuario($_SESSION["admin"]);     
                                                             break;
                                                 case 2:     vmostrarAmenu();
-                                                            vmostrarAUsuario($_SESSION["admin"]);     
                                                             $autores= mbuscarautor($_GET['busqueda']);//autor
                                                             vbuscarborrar($_GET['busqueda'],$_GET['buscar']);
                                                             vautorborrar($autores);
+                                                            vmostrarAUsuario($_SESSION["admin"]);    
                                                             break;
                                                 case 3:     vmostrarAmenu();
-                                                            vmostrarAUsuario($_SESSION["admin"]);
                                                             $albumnes=mbuscaralbum($_GET['busqueda']);//album(disco)
                                                             vbuscarborrar($_GET['busqueda'],$_GET['buscar']);
                                                             valbumborrar($albumnes);
+                                                            vmostrarAUsuario($_SESSION["admin"]);
                                                             break;
                                             }
                                             break;
@@ -603,8 +617,8 @@
                                             }else{
                                                 mostrarError("Error al eliminar", "No se ha podido eliminar la cancion");
                                                 vmostrarAmenu();
-                                                vmostrarAUsuario($_SESSION["admin"]);
                                                 vbuscarborrar($_GET['busqueda'],$_GET['buscar']);
+                                                vmostrarAUsuario($_SESSION["admin"]);
                                             }
                                             break;
 				case 4:     $cancionesaborrar=  cancionesautor($_GET['autor']);
@@ -624,7 +638,7 @@
                                             break;                   
 			}//fin switch $id
 		}else{
-			echo "necesitas ser administrador";
+                    mostrarError("Acceso denegado", "Usted no tiene permisos para ver esta seccion");
 		}
 	}
 	/////////////////////////////////////////////////////////////////////////

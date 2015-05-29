@@ -1,6 +1,6 @@
 <h1 class="titulo">Añadir cancion</h1>
-<form action="index.php" enctype="multipart/form-data" method="POST" name="altacancion">
-	<table class="contenido">
+<form action="index.php" enctype="multipart/form-data" method="POST" name="altacancion" class="contenido">
+	<table>
 	<tr>
 		<td><label for="titulo">Titulo:</label></td>
 		<td><input type="text" id="titulo" name="titulo"></td>
@@ -31,6 +31,9 @@
 	</tr>
 	</table>
 	<input type="hidden" name="accion" value="AC" >
-	<input type="hidden" name="id" value="2" >
+	<input type="hidden" name="id" value="3" >
+        <div>
 	<button type="submit">Añadir</button>
-<a href="index.php?accion=AR&id=1">Volver</a>
+        <a href="index.php?accion=AR&id=1">Volver</a>
+        </div>
+</form>
