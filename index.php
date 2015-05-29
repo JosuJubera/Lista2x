@@ -9,7 +9,7 @@
      * -Comprobaciones SQL(limpiar entrada)
      * -Paginacion en tablas
      * -CSS
-     * -Votar en vista cancion y playlist
+     * -Votar en vista cancion y playlist				////canciones no va y a playlist le falta la valoración inicial
      * -arreglar preferencias admin                      ////hecho
      * -Mensajes de confirmacion y de error
      * -Añadir mensajes de Info y de Error con JS en Regisgtro.
