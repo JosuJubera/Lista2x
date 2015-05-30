@@ -378,6 +378,13 @@
 						break;
 			case 3:		//añadir cancion  AJAX
 						$exito=mañadirCancionPlaylist($_GET['cid'], $_GET['pid']);
+                 /*       if ($exito){
+                            echo '1';
+                        }else{
+                            echo '-1';
+                        }
+                  */
+                
 						if ($exito)
 						{
 							echo '<div class="exito mensajes" id="exito mensajes" style="visibility:visible;">Canción añadida con exito.</div>';
@@ -387,6 +394,7 @@
 							echo '<div class="error mensajes" id="error mensajes" style="visibility:visible;">No se ha podido añadir la canción.</div>';
 							header('Refresh: 3; url=index.php?accion=MODL&id=1');
 						}
+                 
 						break;
 			case 4:		//quitar canciones 
 						$exito=mquitarCancionPlaylist($_GET['cid'], $_GET['pid']);
