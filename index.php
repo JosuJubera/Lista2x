@@ -19,6 +19,7 @@
 	 -preferencias no va CC, EC, CE
 	 -funcion mostrar mensaje
 	 -admin (vistas, funcionalidad...)
+	 - poner añadir lista como añadir cancion y borrar pero que salga en horizontal es decir desplegable
      * -Probar la pagina
      */
     session_start();
@@ -83,12 +84,21 @@
 						$dato2 = $_POST["pwa"];
 						$dato3 = $_POST["pw"];
 						$resultado = mCambiarcontraseña($dato1,$dato2,$dato3);
-						var_dump($resultado);
+						if ($resultado)
+						{
+							echo '<div class="exito mensajes" id="exito mensajes" style="visibility:visible;">Se ha cambiado la contraseña correctamente.</div>';
+							header('Refresh: 3; url=index.php?accion=CC&id=1');
+						}
+						else
+						{
+							echo '<div class="error mensajes" id="error mensajes" style="visibility:visible;">No se ha podido cambiar la contraseña.</div>';
+							header('Refresh: 3; url=index.php?accion=CC&id=1');
+						}
 		}
 	}
 	
     //cambiar correo
-	if (($accion == "CE") && ((isset($_SESSION["usuario"])) || (isset($_SESSION["admin"]))))
+	if (($accion == "CE") && ((isset($_SESSION["usuario"])) || (isset($_SESSION["admin"]))))////////////////////////////TERMINAR
 	{
 		vmostrarPreferencias($_SESSION["tipo"]);
 		vmostrarCambiocorreo();
@@ -99,7 +109,7 @@
 	}
 	
 	//eliminar cuenta
-	if (($accion == "EC") && ((isset($_SESSION["usuario"])) || (isset($_SESSION["admin"]))))
+	if (($accion == "EC") && ((isset($_SESSION["usuario"])) || (isset($_SESSION["admin"]))))////////////////////////////TERMINAR
 	{
 		vmostrarPreferencias($_SESSION["tipo"]);
 		vmostrarEliminarcuenta();
@@ -110,7 +120,7 @@
 	}
 	
 	//recuperar contraseña
-	if ($accion == "REC")
+	if ($accion == "REC")////////////////////////////////////////////////////////////TERMINAR
 	{
 		switch($id)
 		{
@@ -132,14 +142,32 @@
 						vmostrarRegistro();
 						vmostrarContactar();
 						break;
-			case 2:		mAlta($_POST["uid"],$_POST["uname"],$_POST["lastname"],$_POST["lastname2"],$_POST["email"],$_POST["pass"]);
-						$usuario = mLogin($_POST["uid"], $_POST["pass"]);
-						if ($usuario != false)
+			case 2:		vmostrarImenu();
+						vmensaje();
+						vmostrarRegistro();
+						vmostrarContactar();
+						$resultado = mAlta($_POST["uid"],$_POST["uname"],$_POST["lastname"],$_POST["lastname2"],$_POST["email"],$_POST["pass"]);
+						if ($resultado)
 						{
-							$_SESSION["usuario"] = $_POST["uid"];
-							$_SESSION["tipo"] = "user";
+							$usuario = mLogin($_POST["uid"], $_POST["pass"]);
+							if ($usuario != false)
+							{
+								$_SESSION["usuario"] = $_POST["uid"];
+								$_SESSION["tipo"] = "user";
+								echo '<div class="exito mensajes" id="exito mensajes" style="visibility:visible;">Te has registrado correctamente.</div>';
+								header('Refresh: 3; url=index.php'); 
+							}
+							else
+							{
+								echo '<div class="error mensajes" id="error mensajes" style="visibility:visible;">No se ha podido logear.</div>';
+								header('Refresh: 3; url=index.php?accion=ALTA&id=1');
+							}
 						}
-						header("Location: index.php");
+						else
+						{
+							echo '<div class="error mensajes" id="error mensajes" style="visibility:visible;">No se ha podido registrar.</div>';
+							header('Refresh: 3; url=index.php?accion=ALTA&id=1');
+						}
 						break;
 		}
 	}
@@ -291,12 +319,25 @@
                         vmostrarContactar();
 						break;
 			case 2:		vmostrarRmenu();
+						vmostrarUsuario($_SESSION["usuario"]);
                         vmostrarUsuario($_SESSION["usuario"]);//mostrar formulario
 						vmostrarBuscardor();
 						vcrearPlaylist();
 						$exito=mcrearPlaylist($_SESSION['usuario'],$_POST['Ptitulo'], $_POST['Pasunto'], $_POST['Pdescrip']);
 						vmostrarBuscardor();
-                        if ($exito){
+						if ($exito)
+						{
+							echo '<div class="exito mensajes" id="exito mensajes" style="visibility:visible;">Lista creada correctamente.</div>';
+							header('Refresh: 3; url=index.php?accion=NL&id=1');
+						}
+						else
+						{
+							echo '<div class="error mensajes" id="error mensajes" style="visibility:visible;">No se ha podido crear la lista.</div>';
+							header('Refresh: 3; url=index.php?accion=NL&id=1');
+						}
+						break;
+						/*
+						if ($exito){
                             mostrarInfo("Playlist creada con exito");
                         }
                         else{
@@ -304,6 +345,7 @@
                         }
                         vmostrarContactar();
                         break;
+						*/
 		}
 	}
         
@@ -318,52 +360,71 @@
                         vmodPlaylist($infoplaylist,$canciones);
                         vmostrarContactar();
                         break;
-			case 2://modificar la info de playlist
-                        vmostrarRmenu();
-                        vmostrarUsuario($_SESSION["usuario"]);//muestra la playlist
-                        vmostrarBuscardor();
-                        $exito=mactualizarPlaylist($_POST['pid'],$_POST['Ptitulo'],$_POST['Pasunto'],$_POST['Pdescrip']);
-                        if ($exito==true){
-                            mostrarInfo("Actualizado con exito");
-                        }else{
-                            mostrarError("Error", "No se ha podido modificar la lista");
-                        }
-                        vmostrarContactar();
-                        break;
-			case 3://añadir cancion  AJAX
-                $exito=mañadirCancionPlaylist($_GET['cid'], $_GET['pid']);
-                if ($exito){
-                        echo "exito al añadir cancion";//cambiar
-                }else{
-                        echo "fallo al añadir la cancion"; //cambiar
-                }
-                break;
-			case 4://quitar canciones 
-                    $exito=mquitarCancionPlaylist($_GET['cid'], $_GET['pid']);
-                    vmostrarRmenu();
-                    vmostrarUsuario($_SESSION["usuario"]);//muestra la playlist
-                    vmostrarBuscardor();
-                    if ($exito){
-                        mostrarInfo("Cancion eliminada");
-                    }else{
-                        mostrarError("Error", "Imposible eliminar la cancion");
-                    }
-                    vmostrarContactar();
-                    break;
-            case 5://eliminar playlist
-                    $exito=meliminarPlaylist($_GET['pid'],$_SESSION['usuario']);
-                    vmostrarRmenu();
-                    if ($exito){
-                        mostrarInfo("Lista eliminada");
-                    }else{
-                        mostrarError("Error", "No se ha podido eliminar la lista");
-                    }
-                    vmostrarUsuario($_SESSION["usuario"]);
-                    vmostrarBuscardor();
-                    $datos = mTopcanciones($_SESSION["usuario"]);
-                    vmostrarTopcanciones($datos);
-                    vmostrarContactar();
-                    break;
+			case 2:		//modificar la info de playlist
+						vmostrarRmenu();
+						vmostrarUsuario($_SESSION["usuario"]);//muestra la playlist
+						vmostrarBuscardor();
+						$exito=mactualizarPlaylist($_POST['pid'],$_POST['Ptitulo'],$_POST['Pasunto'],$_POST['Pdescrip']);
+						if ($exito==true)
+						{
+							echo '<div class="exito mensajes" id="exito mensajes" style="visibility:visible;">Lista modificada con exito.</div>';
+							header('Refresh: 3; url=index.php?accion=MODL&id=1');
+						}else
+						{
+							echo '<div class="error mensajes" id="error mensajes" style="visibility:visible;">No se ha podido modificar la lista.</div>';
+							header('Refresh: 3; url=index.php?accion=MODL&id=1');
+						}
+						vmostrarContactar();
+						break;
+			case 3:		//añadir cancion  AJAX
+						$exito=mañadirCancionPlaylist($_GET['cid'], $_GET['pid']);
+						if ($exito)
+						{
+							echo '<div class="exito mensajes" id="exito mensajes" style="visibility:visible;">Canción añadida con exito.</div>';
+							header('Refresh: 3; url=index.php?accion=MODL&id=1');
+						}else
+						{
+							echo '<div class="error mensajes" id="error mensajes" style="visibility:visible;">No se ha podido añadir la canción.</div>';
+							header('Refresh: 3; url=index.php?accion=MODL&id=1');
+						}
+						break;
+			case 4:		//quitar canciones 
+						$exito=mquitarCancionPlaylist($_GET['cid'], $_GET['pid']);
+						vmostrarRmenu();
+						vmostrarUsuario($_SESSION["usuario"]);//muestra la playlist
+						vmostrarBuscardor();
+						if ($exito)
+						{
+							echo '<div class="exito mensajes" id="exito mensajes" style="visibility:visible;">Canción eliminada de la lista.</div>';
+							header('Refresh: 3; url=index.php?accion=MODL&id=1');
+						}else
+						{
+							echo '<div class="error mensajes" id="error mensajes" style="visibility:visible;">No se ha podido eliminar la canción de la lista.</div>';
+							header('Refresh: 3; url=index.php?accion=MODL&id=1');
+						}
+						/*
+						if ($exito){
+							mostrarInfo("Cancion eliminada");
+						}else{
+							mostrarError("Error", "Imposible eliminar la cancion");
+						}
+						*/
+						vmostrarContactar();
+						break;
+            case 5:		//eliminar playlist
+						$exito=meliminarPlaylist($_GET['pid'],$_SESSION['usuario']);
+						vmostrarRmenu();
+						if ($exito){
+							mostrarInfo("Lista eliminada");
+						}else{
+							mostrarError("Error", "No se ha podido eliminar la lista");
+						}
+						vmostrarUsuario($_SESSION["usuario"]);
+						vmostrarBuscardor();
+						$datos = mTopcanciones($_SESSION["usuario"]);
+						vmostrarTopcanciones($datos);
+						vmostrarContactar();
+						break;
 		}
 	}
         
@@ -411,7 +472,9 @@
             vmostrarLista($datos,$canciones,$comentarios);
             vmostrarContactar();
         }else{
-            mostrarError("Autorizacion Necesaria", "Necesita estar logueado para hacer eso");
+			echo '<div class="error mensajes" id="error mensajes" style="visibility:visible;">No puede hacer eso.</div>'; ////////////////////aki ke hay que poner?
+			header('Refresh: 3; url=index.php?accion=PUC&id=1');
+            /*mostrarError("Autorizacion Necesaria", "Necesita estar logueado para hacer eso");*/
         }
     }
 	
@@ -439,7 +502,6 @@
 		$id = $_GET["id"];
 		$p = $_GET["p"];
 		$usuario = $_SESSION['usuario'];
-		/* si no se ha valorau aun insert*/
 		list($resultado1, $resultado2) = mPuntuacionplaylist($id,$p,$usuario);
 		$datos = mysql_fetch_assoc($resultado2);
 		if (($resultado1 == false) or ($resultado2 == false))
