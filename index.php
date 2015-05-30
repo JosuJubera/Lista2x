@@ -83,7 +83,14 @@
 						$uid = $_POST["uid"];
 						$pwa = $_POST["pwa"];
 						$pw = $_POST["pw"];
-						$resultado = mCambiarcontraseña($uid,$pwa,$pw);
+						if (!(isset($_SESSION["admin"])))
+						{
+							$resultado = mCambiarcontraseña($uid,$pwa,$pw);
+						}
+						else
+						{
+							$resultado = mACambiarcontraseña($uid,$pwa,$pw);
+						}
 						if ($resultado)
 						{
 							echo '<div class="exito mensajes" id="exito mensajes" style="visibility:visible;">Se ha cambiado la contraseña correctamente.</div>';
@@ -118,7 +125,14 @@
 						$uid = $_POST["uid"];
 						$emaila = $_POST["cau"];
 						$email = $_POST["cu"];
-						$resultado = mCambiaremail($uid,$emaila,$email);
+						if (!(isset($_SESSION["admin"])))
+						{
+							$resultado = mCambiaremail($uid,$emaila,$email);
+						}
+						else
+						{
+							$resultado = mACambiaremail($uid,$emaila,$email);
+						}
 						if ($resultado)
 						{
 							echo '<div class="exito mensajes" id="exito mensajes" style="visibility:visible;">Se ha cambiado el correo correctamente.</div>';
@@ -153,7 +167,14 @@
 						$uid = $_POST["uid"];
 						$email = $_POST["cu"];
 						$pass = $_POST["pw"];
-						$resultado = mEliminarcuenta($uid,$email,$pass);
+						if (!(isset($_SESSION["admin"])))
+						{
+							$resultado = mEliminarcuenta($uid,$email,$pass);
+						}
+						else
+						{
+							$resultado = mAEliminarcuenta($uid,$email,$pass);
+						}
 						if ($resultado)
 						{
 							echo '<div class="exito mensajes" id="exito mensajes" style="visibility:visible;">Se ha eliminado la cuenta correctamente.</div>';
