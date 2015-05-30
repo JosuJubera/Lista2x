@@ -558,9 +558,10 @@
             }else{
                 $contenido = "";
                 $lista = "";
+                $i=1;
                 foreach ($canciones as $cancion) {
                     $lista = $partes[1];
-                    $lista = str_replace("##CPOSICION##", 1, $lista);
+                    $lista = str_replace("##CPOSICION##", $i++, $lista);
                     $lista = str_replace("##CTITULO##", $cancion['Titulo'], $lista);
                     $lista = str_replace("##CAUTOR##", $cancion['Artista'], $lista);
                     $lista = str_replace("##CALBUM##", $cancion['Album'], $lista);

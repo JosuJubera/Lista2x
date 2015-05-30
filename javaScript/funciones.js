@@ -103,3 +103,21 @@ function cargarPagina(pag,pid){ //falta por terminar
             }
     });
 }
+function añadirCancionPlaylist(){
+    var pid=$('#cidselect').val();
+    var cid=$('#pidenviar').val();
+    $.ajax({
+        url: 'index.php',
+        data: 'accion=MODL&id=3&pid='+pid+'&cid='+cid,
+        type: 'GET',
+        succes: function(res){
+            if (parseInt(res)===1){//exito
+                //mostrarMensaje("Cancion añadida con exito", "alerta");
+                alert('exito');
+            }else{//fallo
+                //mostrarMensaje("Error, la cancion ya esta en la lista","alerta");
+                alert('fallo');
+            }
+        }   
+    });
+}
