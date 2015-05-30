@@ -10,7 +10,7 @@
      * -Paginacion en tablas
      * -CSS
      * -arreglar preferencias admin                      ////hecho
-	 * -preferencias  CC, EC, CE ////////////falta comprobar que lo haga el user de sesion
+	 * -preferencias  CC, EC, CE ////////////habria que comprobar que realmente se hacen los cambios, iwal probar con un select despues
      * -Mensajes de confirmacion y de error
      * -Añadir mensajes de Info y de Error con JS en Regisgtro.
      * -en registro usuario comprobar que se registra bien //////////////creo que hecho bien
@@ -80,25 +80,33 @@
 						{
 							vmostrarContactar();
 						}
-						$uid = $_POST["uid"];
-						$pwa = $_POST["pwa"];
-						$pw = $_POST["pw"];
-						if (!(isset($_SESSION["admin"])))
+						if (($_POST["uid"] == $_SESSION["admin"]) || ($_POST["uid"] == $_SESSION["usuario"]))
 						{
-							$resultado = mCambiarcontraseña($uid,$pwa,$pw);
+							$uid = $_POST["uid"];
+							$pwa = $_POST["pwa"];
+							$pw = $_POST["pw"];
+							if (!(isset($_SESSION["admin"])))
+							{
+								$resultado = mCambiarcontraseña($uid,$pwa,$pw);
+							}
+							else
+							{
+								$resultado = mACambiarcontraseña($uid,$pwa,$pw);
+							}
+							if ($resultado)
+							{
+								echo '<div class="exito mensajes" id="exito mensajes" style="visibility:visible;">Se ha cambiado la contraseña correctamente.</div>';
+								header('Refresh: 3; url=index.php?accion=CC&id=1');
+							}
+							else
+							{
+								echo '<div class="error mensajes" id="error mensajes" style="visibility:visible;">No se ha podido cambiar la contraseña.</div>';
+								header('Refresh: 3; url=index.php?accion=CC&id=1');
+							}
 						}
 						else
 						{
-							$resultado = mACambiarcontraseña($uid,$pwa,$pw);
-						}
-						if ($resultado)
-						{
-							echo '<div class="exito mensajes" id="exito mensajes" style="visibility:visible;">Se ha cambiado la contraseña correctamente.</div>';
-							header('Refresh: 3; url=index.php?accion=CC&id=1');
-						}
-						else
-						{
-							echo '<div class="error mensajes" id="error mensajes" style="visibility:visible;">No se ha podido cambiar la contraseña.</div>';
+							echo '<div class="error mensajes" id="error mensajes" style="visibility:visible;">Introduce tu nombre de usuario.</div>';
 							header('Refresh: 3; url=index.php?accion=CC&id=1');
 						}
 		}
@@ -122,25 +130,33 @@
 						{
 							vmostrarContactar();
 						}
-						$uid = $_POST["uid"];
-						$emaila = $_POST["cau"];
-						$email = $_POST["cu"];
-						if (!(isset($_SESSION["admin"])))
+						if (($_POST["uid"] == $_SESSION["admin"]) || ($_POST["uid"] == $_SESSION["usuario"]))
 						{
-							$resultado = mCambiaremail($uid,$emaila,$email);
+							$uid = $_POST["uid"];
+							$emaila = $_POST["cau"];
+							$email = $_POST["cu"];
+							if (!(isset($_SESSION["admin"])))
+							{
+								$resultado = mCambiaremail($uid,$emaila,$email);
+							}
+							else
+							{
+								$resultado = mACambiaremail($uid,$emaila,$email);
+							}
+							if ($resultado)
+							{
+								echo '<div class="exito mensajes" id="exito mensajes" style="visibility:visible;">Se ha cambiado el correo correctamente.</div>';
+								header('Refresh: 3; url=index.php?accion=CE&id=1');
+							}
+							else
+							{
+								echo '<div class="error mensajes" id="error mensajes" style="visibility:visible;">No se ha podido cambiar el correo.</div>';
+								header('Refresh: 3; url=index.php?accion=CE&id=1');
+							}
 						}
 						else
 						{
-							$resultado = mACambiaremail($uid,$emaila,$email);
-						}
-						if ($resultado)
-						{
-							echo '<div class="exito mensajes" id="exito mensajes" style="visibility:visible;">Se ha cambiado el correo correctamente.</div>';
-							header('Refresh: 3; url=index.php?accion=CE&id=1');
-						}
-						else
-						{
-							echo '<div class="error mensajes" id="error mensajes" style="visibility:visible;">No se ha podido cambiar el correo.</div>';
+							echo '<div class="error mensajes" id="error mensajes" style="visibility:visible;">Introduce tu nombre de usuario.</div>';
 							header('Refresh: 3; url=index.php?accion=CE&id=1');
 						}
 		}
@@ -164,26 +180,34 @@
 						{
 							vmostrarContactar();
 						}
-						$uid = $_POST["uid"];
-						$email = $_POST["cu"];
-						$pass = $_POST["pw"];
-						if (!(isset($_SESSION["admin"])))
+						if (($_POST["uid"] == $_SESSION["admin"]) || ($_POST["uid"] == $_SESSION["usuario"]))
 						{
-							$resultado = mEliminarcuenta($uid,$email,$pass);
+							$uid = $_POST["uid"];
+							$email = $_POST["cu"];
+							$pass = $_POST["pw"];
+							if (!(isset($_SESSION["admin"])))
+							{
+								$resultado = mEliminarcuenta($uid,$email,$pass);
+							}
+							else
+							{
+								$resultado = mAEliminarcuenta($uid,$email,$pass);
+							}
+							if ($resultado)
+							{
+								echo '<div class="exito mensajes" id="exito mensajes" style="visibility:visible;">Se ha eliminado la cuenta correctamente.</div>';
+								header('Refresh: 3; url=index.php?accion=OUT&id=1');
+							}
+							else
+							{
+								echo '<div class="error mensajes" id="error mensajes" style="visibility:visible;">No se ha podido eliminar la cuenta.</div>';
+								header('Refresh: 3; url=index.php?accion=EC&id=1');
+							}
 						}
 						else
 						{
-							$resultado = mAEliminarcuenta($uid,$email,$pass);
-						}
-						if ($resultado)
-						{
-							echo '<div class="exito mensajes" id="exito mensajes" style="visibility:visible;">Se ha eliminado la cuenta correctamente.</div>';
-							header('Refresh: 3; url=index.php?accion=OUT&id=1');
-						}
-						else
-						{
-							echo '<div class="error mensajes" id="error mensajes" style="visibility:visible;">No se ha podido eliminar la cuenta.</div>';
-							header('Refresh: 3; url=index.php?accion=CE&id=1');
+							echo '<div class="error mensajes" id="error mensajes" style="visibility:visible;">Introduce tu nombre de usuario.</div>';
+							header('Refresh: 3; url=index.php?accion=EC&id=1');
 						}
 		}
 	}
