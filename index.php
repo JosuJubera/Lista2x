@@ -133,7 +133,15 @@
 						if (($_POST["uid"] == $_SESSION["admin"]) || ($_POST["uid"] == $_SESSION["usuario"]))
 						{
 							$uid = $_POST["uid"];
-							$emaila = $_POST["cau"];
+							if ($_POST['email'] == '' or preg_match("/^[a-zA-Z0-9_\.\-]+@[a-zA-Z0-9\-]+\.[a-zA-Z0-9\-\.]+$/",$_POST['email']))
+							{
+								echo '<div class="error mensajes" id="error mensajes" style="visibility:visible;">El correo no es válido.</div>';
+								header('Refresh: 3; url=index.php?accion=CE&id=1');
+							}
+							else
+							{
+								$emaila = $_POST["cau"];
+							}
 							$email = $_POST["cu"];
 							if (!(isset($_SESSION["admin"])))
 							{
