@@ -16,7 +16,7 @@
      * -Añadir mensaje error o no en alta cancion.
      * -Al borrar comentario ir a los reportes
 	 * -Reportes
-	 -preferencias no va CC, EC, CE
+	 -preferencias  CC, EC, CE ////////////falta comprobar que lo haga el user de sesion
 	 -funcion mostrar mensaje
 	 -admin (vistas, funcionalidad...)
 	 - poner añadir lista como añadir cancion y borrar pero que salga en horizontal es decir desplegable
