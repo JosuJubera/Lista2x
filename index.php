@@ -48,7 +48,7 @@
          $id = $_POST["id"];
     }
     
-    if(isset($_POST["uid"],$_POST["pw"]))
+    if(isset($_POST["uid"],$_POST["pw"],$_POST["tipo"]))
     {
         $uid = $_POST["uid"];
         $pw = $_POST["pw"];
@@ -62,7 +62,7 @@
     }
 	
     //cambiar contraseña
-	if (($accion == "CC") && ((isset($_SESSION["usuario"])) || (isset($_SESSION["admin"]))))
+	if (($accion == "CC") && ((isset($_SESSION["usuario"])) || (isset($_SESSION["admin"]))))///////////////Limitar quien puede cambiar la pass
 	{
 		switch ($id)
 		{
@@ -80,10 +80,10 @@
 						{
 							vmostrarContactar();
 						}
-						$dato1 = $_POST["uid"];
-						$dato2 = $_POST["pwa"];
-						$dato3 = $_POST["pw"];
-						$resultado = mCambiarcontraseña($dato1,$dato2,$dato3);
+						$uid = $_POST["uid"];
+						$pwa = $_POST["pwa"];
+						$pw = $_POST["pw"];
+						$resultado = mCambiarcontraseña($uid,$pwa,$pw);
 						if ($resultado)
 						{
 							echo '<div class="exito mensajes" id="exito mensajes" style="visibility:visible;">Se ha cambiado la contraseña correctamente.</div>';
@@ -100,22 +100,70 @@
     //cambiar correo
 	if (($accion == "CE") && ((isset($_SESSION["usuario"])) || (isset($_SESSION["admin"]))))////////////////////////////TERMINAR
 	{
-		vmostrarPreferencias($_SESSION["tipo"]);
-		vmostrarCambiocorreo();
-		if (!(isset($_SESSION["admin"])))
+		switch ($id)
 		{
-			vmostrarContactar();
+			case 1:		vmostrarPreferencias($_SESSION["tipo"]);
+						vmostrarCambiocorreo();
+						if (!(isset($_SESSION["admin"])))
+						{
+							vmostrarContactar();
+						}
+						break;
+			case 2: 	vmostrarPreferencias($_SESSION["tipo"]);
+						vmostrarCambiocontraseña();
+						if (!(isset($_SESSION["admin"])))
+						{
+							vmostrarContactar();
+						}
+						$uid = $_POST["uid"];
+						$emaila = $_POST["cau"];
+						$email = $_POST["cu"];
+						$resultado = mCambiaremail($uid,$emaila,$email);
+						if ($resultado)
+						{
+							echo '<div class="exito mensajes" id="exito mensajes" style="visibility:visible;">Se ha cambiado el correo correctamente.</div>';
+							header('Refresh: 3; url=index.php?accion=CE&id=1');
+						}
+						else
+						{
+							echo '<div class="error mensajes" id="error mensajes" style="visibility:visible;">No se ha podido cambiar el correo.</div>';
+							header('Refresh: 3; url=index.php?accion=CE&id=1');
+						}
 		}
 	}
 	
 	//eliminar cuenta
 	if (($accion == "EC") && ((isset($_SESSION["usuario"])) || (isset($_SESSION["admin"]))))////////////////////////////TERMINAR
 	{
-		vmostrarPreferencias($_SESSION["tipo"]);
-		vmostrarEliminarcuenta();
-		if (!(isset($_SESSION["admin"])))
+		switch ($id)
 		{
-			vmostrarContactar();
+			case 1:		vmostrarPreferencias($_SESSION["tipo"]);
+						vmostrarEliminarcuenta();
+						if (!(isset($_SESSION["admin"])))
+						{
+							vmostrarContactar();
+						}
+						break;
+			case 2:		vmostrarPreferencias($_SESSION["tipo"]);
+						vmostrarCambiocontraseña();
+						if (!(isset($_SESSION["admin"])))
+						{
+							vmostrarContactar();
+						}
+						$uid = $_POST["uid"];
+						$email = $_POST["cu"];
+						$pass = $_POST["pw"];
+						$resultado = mEliminarcuenta($uid,$email,$pass);
+						if ($resultado)
+						{
+							echo '<div class="exito mensajes" id="exito mensajes" style="visibility:visible;">Se ha eliminado la cuenta correctamente.</div>';
+							header('Refresh: 3; url=index.php?accion=OUT&id=1');
+						}
+						else
+						{
+							echo '<div class="error mensajes" id="error mensajes" style="visibility:visible;">No se ha podido eliminar la cuenta.</div>';
+							header('Refresh: 3; url=index.php?accion=CE&id=1');
+						}
 		}
 	}
 	

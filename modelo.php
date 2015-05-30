@@ -32,7 +32,46 @@
 		$usuario = addslashes($uid);
         $contraseñaA = addslashes($pwa);
         $contraseña = addslashes($pw);
-		$resultado = mysql_query("UPDATE usuarios SET Contraseña = " . sha1($contraseña) . " Usuario COLLATE utf8_general_ci like '" . $usuario . "' and Contraseña = '" . sha1($contraseñaA) . "'", $con);
+		$pass1 = sha1($contraseña);
+		$pass2 = sha1($contraseñaA);
+		$resultado = mysql_query("UPDATE usuarios SET Contraseña = '$pass1' WHERE Usuario COLLATE utf8_general_ci like '$usuario' and Contraseña = '$pass2'", $con);
+		$resultado = mysql_affected_rows();
+		if ($resultado != -1)
+		{
+			return true;
+		}
+		else
+		{
+			return false;
+		}
+	}
+	
+	function mCambiaremail($uid,$emaila,$email)
+	{
+		$con = conexion();
+		$usuario = addslashes($uid);
+        $email1 = addslashes($emaila);
+        $email2 = addslashes($email);
+		$resultado = mysql_query("UPDATE usuarios SET Correo = '$email2' WHERE Usuario COLLATE utf8_general_ci like '$usuario' and Correo = '$email1'", $con);
+		$resultado = mysql_affected_rows();
+		if ($resultado != -1)
+		{
+			return true;
+		}
+		else
+		{
+			return false;
+		}
+	}
+	
+	function mEliminarcuenta($uid,$email,$pass)
+	{
+		$con = conexion();
+		$usuario = addslashes($uid);
+        $correo = addslashes($email);
+        $contraseña = addslashes($pass);
+		$pass1 = sha1($contraseña);
+		$resultado = mysql_query("DELETE FROM usuarios WHERE Usuario COLLATE utf8_general_ci like '$usuario' and Correo = '$correo' and Contraseña ='$pass1'", $con);
 		$resultado = mysql_affected_rows();
 		if ($resultado != -1)
 		{
