@@ -10,13 +10,13 @@
      * -Paginacion en tablas
      * -CSS
      * -arreglar preferencias admin                      ////hecho
+	 * -preferencias  CC, EC, CE ////////////falta comprobar que lo haga el user de sesion
      * -Mensajes de confirmacion y de error
      * -Añadir mensajes de Info y de Error con JS en Regisgtro.
-     * -en registro usuario comprobar que se registra bien
+     * -en registro usuario comprobar que se registra bien //////////////creo que hecho bien
      * -Añadir mensaje error o no en alta cancion.
      * -Al borrar comentario ir a los reportes
 	 * -Reportes
-	 -preferencias  CC, EC, CE ////////////falta comprobar que lo haga el user de sesion
 	 -funcion mostrar mensaje
 	 -admin (vistas, funcionalidad...)
 	 - poner añadir lista como añadir cancion y borrar pero que salga en horizontal es decir desplegable
