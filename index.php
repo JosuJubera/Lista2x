@@ -589,17 +589,10 @@
     if ($accion=="PUC"){
         if (isset($_POST['uid']) && $_POST['uid']==$_SESSION['usuario']){//es quien dice ser
             $exito=mpublicarComentario($_POST['uid'],$_POST['pid'],$_POST['comentario']);
-            vmostrarImenu();//hacerlo en nueva pagina o con js sin recargar???
-            vmostrarLogin();
-            $datos = minfoplaylist($_POST['pid']);
-            $canciones=mcancionesplaylist($_POST['pid']);
-            $comentarios=mcomplaylist($_POST['pid']);
-            vmostrarLista($datos,$canciones,$comentarios);
-            vmostrarContactar();
+            header("Location: index.php?accion=VP&id=1&pid=".$_POST['pid']);
         }else{
-			echo '<div class="error mensajes" id="error mensajes" style="visibility:visible;">No puede hacer eso.</div>'; ////////////////////aki ke hay que poner?
-			header('Refresh: 3; url=index.php?accion=PUC&id=1');
-            /*mostrarError("Autorizacion Necesaria", "Necesita estar logueado para hacer eso");*/
+			header('Refresh: 3; url=index.php');
+            mostrarError("Autorizacion Necesaria", "Necesita estar logueado para hacer eso");
         }
     }
 	
