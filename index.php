@@ -892,7 +892,7 @@
                             vmostrarconfirmacion($cancionesaborrar);
                             vmostrarAUsuario($_SESSION["admin"]);
                             break;
-				case 6:     $res=mborrarCanciones($_SESSION['cancionesborrar']);//borramos
+				case 6:     mborrarCanciones($_SESSION['cancionesborrar']);//borramos
                             header("Location: index.php");//volvemos al index
                             break;                   
 			}//fin switch $id

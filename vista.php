@@ -449,7 +449,7 @@
 			foreach ($canciones as $cancion) {
 				$lista = $partes[1];
 				$lista = str_replace("##TITULO##", $cancion['Titulo'], $lista);
-				$lista = str_replace("##AUTOR##", $cancion['Artista'], $lista);
+				$lista = str_replace("##ARTISTA##", $cancion['Artista'], $lista);
 				$lista = str_replace("##ALBUM##", $cancion['Album'], $lista);
 				$lista = str_replace("##GENERO##",$cancion['Genero'], $lista);
 				$lista = str_replace("##AÑO##", $cancion['Año'], $lista);

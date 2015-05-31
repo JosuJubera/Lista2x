@@ -414,7 +414,7 @@
         }
         $datos = mysql_fetch_assoc($resultado);
         mysql_free_result($resultado);
-        $otro = mysql_query("delete from canciones where id='$id'",$con);
+        $otro = mysql_query("delete from final_canciones where id='$id'",$con);
         if ($otro===false){
             return false;//no se ha podido eliminar la cancion
         }
