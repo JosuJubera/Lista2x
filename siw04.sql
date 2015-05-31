@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 28-05-2015 a las 19:14:32
+-- Tiempo de generación: 31-05-2015 a las 12:11:25
 -- Versión del servidor: 5.6.21
 -- Versión de PHP: 5.6.3
 
@@ -48,10 +48,10 @@ DELIMITER ;
 -- --------------------------------------------------------
 
 --
--- Estructura de tabla para la tabla `administradores`
+-- Estructura de tabla para la tabla `final_administradores`
 --
 
-CREATE TABLE IF NOT EXISTS `administradores` (
+CREATE TABLE IF NOT EXISTS `final_administradores` (
   `Nombre` varchar(30) COLLATE utf8_bin NOT NULL,
   `Apellido1` varchar(30) COLLATE utf8_bin NOT NULL,
   `Apellido2` varchar(30) COLLATE utf8_bin NOT NULL,
@@ -61,20 +61,20 @@ CREATE TABLE IF NOT EXISTS `administradores` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
 
 --
--- Volcado de datos para la tabla `administradores`
+-- Volcado de datos para la tabla `final_administradores`
 --
 
-INSERT INTO `administradores` (`Nombre`, `Apellido1`, `Apellido2`, `Usuario`, `Correo`, `Contraseña`) VALUES
+INSERT INTO `final_administradores` (`Nombre`, `Apellido1`, `Apellido2`, `Usuario`, `Correo`, `Contraseña`) VALUES
 ('', '', '', 'Jub3r', '', '7110eda4d09e062aa5e4a390b0a572ac0d2c0220'),
 ('ser', 'ser', 'ser', 'usergio', 'asd.asd.asd', '8cb2237d0679ca88db6464eac60da96345513964');
 
 -- --------------------------------------------------------
 
 --
--- Estructura de tabla para la tabla `canciones`
+-- Estructura de tabla para la tabla `final_canciones`
 --
 
-CREATE TABLE IF NOT EXISTS `canciones` (
+CREATE TABLE IF NOT EXISTS `final_canciones` (
 `Id` int(11) NOT NULL,
   `Titulo` varchar(30) COLLATE utf8_bin NOT NULL,
   `Artista` varchar(30) COLLATE utf8_bin NOT NULL,
@@ -85,10 +85,10 @@ CREATE TABLE IF NOT EXISTS `canciones` (
 ) ENGINE=InnoDB AUTO_INCREMENT=15 DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
 
 --
--- Volcado de datos para la tabla `canciones`
+-- Volcado de datos para la tabla `final_canciones`
 --
 
-INSERT INTO `canciones` (`Id`, `Titulo`, `Artista`, `Album`, `Genero`, `Año`, `ValoracionSemanal`) VALUES
+INSERT INTO `final_canciones` (`Id`, `Titulo`, `Artista`, `Album`, `Genero`, `Año`, `ValoracionSemanal`) VALUES
 (2, 'Loba', 'Shakira', 'album', 'Pop', 2009, 0),
 (1, 'Sugar', 'Maroon 5', 'V', 'Disco', 2015, 9),
 (3, 'dws', 'yo', 'otroalbum', 'iug', 1995, 0),
@@ -102,52 +102,51 @@ INSERT INTO `canciones` (`Id`, `Titulo`, `Artista`, `Album`, `Genero`, `Año`, `
 -- --------------------------------------------------------
 
 --
--- Estructura de tabla para la tabla `cancionesplaylist`
+-- Estructura de tabla para la tabla `final_cancionesplaylist`
 --
 
-CREATE TABLE IF NOT EXISTS `cancionesplaylist` (
+CREATE TABLE IF NOT EXISTS `final_cancionesplaylist` (
   `playlist` int(11) NOT NULL,
   `cancion` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
 
 --
--- Volcado de datos para la tabla `cancionesplaylist`
+-- Volcado de datos para la tabla `final_cancionesplaylist`
 --
 
-INSERT INTO `cancionesplaylist` (`playlist`, `cancion`) VALUES
+INSERT INTO `final_cancionesplaylist` (`playlist`, `cancion`) VALUES
 (8, 1);
 
 -- --------------------------------------------------------
 
 --
--- Estructura de tabla para la tabla `comentarios`
+-- Estructura de tabla para la tabla `final_comentarios`
 --
 
-CREATE TABLE IF NOT EXISTS `comentarios` (
+CREATE TABLE IF NOT EXISTS `final_comentarios` (
 `Id` int(11) NOT NULL,
   `Usuario` varchar(30) COLLATE utf8_bin NOT NULL,
   `Reportes` int(11) NOT NULL DEFAULT '0',
   `Comentario` text COLLATE utf8_bin NOT NULL,
-  `Playlist` int(11) NOT NULL,
-  `Ignorado` tinyint(1) NOT NULL DEFAULT '0'
+  `Playlist` int(11) NOT NULL
 ) ENGINE=InnoDB AUTO_INCREMENT=15 DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
 
 --
--- Volcado de datos para la tabla `comentarios`
+-- Volcado de datos para la tabla `final_comentarios`
 --
 
-INSERT INTO `comentarios` (`Id`, `Usuario`, `Reportes`, `Comentario`, `Playlist`, `Ignorado`) VALUES
-(12, 'Usergio', 1, 'gdhgdh', 7, 1),
-(13, 'Usergio', 0, 'iieeee', 8, 0),
-(14, 'Usergio', 0, 'iieeee', 8, 0);
+INSERT INTO `final_comentarios` (`Id`, `Usuario`, `Reportes`, `Comentario`, `Playlist`) VALUES
+(12, 'Usergio', 1, 'gdhgdh', 7),
+(13, 'Usergio', 0, 'iieeee', 8),
+(14, 'Usergio', 0, 'iieeee', 8);
 
 -- --------------------------------------------------------
 
 --
--- Estructura de tabla para la tabla `playlist`
+-- Estructura de tabla para la tabla `final_playlist`
 --
 
-CREATE TABLE IF NOT EXISTS `playlist` (
+CREATE TABLE IF NOT EXISTS `final_playlist` (
 `Id` int(11) NOT NULL,
   `Usuario` varchar(30) COLLATE utf8_bin NOT NULL,
   `Nombre` varchar(30) COLLATE utf8_bin NOT NULL,
@@ -158,20 +157,20 @@ CREATE TABLE IF NOT EXISTS `playlist` (
 ) ENGINE=InnoDB AUTO_INCREMENT=9 DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
 
 --
--- Volcado de datos para la tabla `playlist`
+-- Volcado de datos para la tabla `final_playlist`
 --
 
-INSERT INTO `playlist` (`Id`, `Usuario`, `Nombre`, `Asunto`, `Descripcion`, `Fecha`, `ValoracionSemanal`) VALUES
+INSERT INTO `final_playlist` (`Id`, `Usuario`, `Nombre`, `Asunto`, `Descripcion`, `Fecha`, `ValoracionSemanal`) VALUES
 (7, 'Usergio', 'nada', 'asd', 'asdasd', '2015-05-28 15:36:27', 9),
 (8, 'Usergio', 'aux', 'auz', 'asd', '2015-05-28 15:36:27', 9);
 
 -- --------------------------------------------------------
 
 --
--- Estructura de tabla para la tabla `puntuacioncanciones`
+-- Estructura de tabla para la tabla `final_puntuacioncanciones`
 --
 
-CREATE TABLE IF NOT EXISTS `puntuacioncanciones` (
+CREATE TABLE IF NOT EXISTS `final_puntuacioncanciones` (
   `Usuario` varchar(30) COLLATE utf8_bin NOT NULL,
   `Cancion` int(11) NOT NULL,
   `Fecha` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
@@ -179,10 +178,10 @@ CREATE TABLE IF NOT EXISTS `puntuacioncanciones` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
 
 --
--- Volcado de datos para la tabla `puntuacioncanciones`
+-- Volcado de datos para la tabla `final_puntuacioncanciones`
 --
 
-INSERT INTO `puntuacioncanciones` (`Usuario`, `Cancion`, `Fecha`, `Valoracion`) VALUES
+INSERT INTO `final_puntuacioncanciones` (`Usuario`, `Cancion`, `Fecha`, `Valoracion`) VALUES
 ('Usergio', 1, '2015-05-26 22:00:00', 9),
 ('Usergio', 11, '2015-05-27 22:00:00', 1),
 ('Usergio', 12, '2015-05-27 22:00:00', 3),
@@ -191,10 +190,10 @@ INSERT INTO `puntuacioncanciones` (`Usuario`, `Cancion`, `Fecha`, `Valoracion`) 
 -- --------------------------------------------------------
 
 --
--- Estructura de tabla para la tabla `puntuacionesplaylist`
+-- Estructura de tabla para la tabla `final_puntuacionesplaylist`
 --
 
-CREATE TABLE IF NOT EXISTS `puntuacionesplaylist` (
+CREATE TABLE IF NOT EXISTS `final_puntuacionesplaylist` (
   `Usuario` varchar(30) COLLATE utf8_bin NOT NULL,
   `Playlist` int(11) NOT NULL,
   `Fecha` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
@@ -202,20 +201,20 @@ CREATE TABLE IF NOT EXISTS `puntuacionesplaylist` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
 
 --
--- Volcado de datos para la tabla `puntuacionesplaylist`
+-- Volcado de datos para la tabla `final_puntuacionesplaylist`
 --
 
-INSERT INTO `puntuacionesplaylist` (`Usuario`, `Playlist`, `Fecha`, `Valoracion`) VALUES
+INSERT INTO `final_puntuacionesplaylist` (`Usuario`, `Playlist`, `Fecha`, `Valoracion`) VALUES
 ('Usergio', 7, '2015-05-26 22:00:00', 9),
 ('Usergio', 8, '2015-05-26 22:00:00', 9);
 
 -- --------------------------------------------------------
 
 --
--- Estructura de tabla para la tabla `usuarios`
+-- Estructura de tabla para la tabla `final_usuarios`
 --
 
-CREATE TABLE IF NOT EXISTS `usuarios` (
+CREATE TABLE IF NOT EXISTS `final_usuarios` (
   `Usuario` varchar(30) COLLATE utf8_bin NOT NULL,
   `Nombre` varchar(30) COLLATE utf8_bin NOT NULL,
   `Apellido1` varchar(30) COLLATE utf8_bin NOT NULL,
@@ -225,11 +224,11 @@ CREATE TABLE IF NOT EXISTS `usuarios` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
 
 --
--- Volcado de datos para la tabla `usuarios`
+-- Volcado de datos para la tabla `final_usuarios`
 --
 
-INSERT INTO `usuarios` (`Usuario`, `Nombre`, `Apellido1`, `Apellido2`, `Correo`, `Contraseña`) VALUES
-('Jub3r2', 'Josu', 'Jubera', 'Mariezcurrena', 'sergio@tonto.com', '8cb2237d0679ca88db6464eac60da96345513964'),
+INSERT INTO `final_usuarios` (`Usuario`, `Nombre`, `Apellido1`, `Apellido2`, `Correo`, `Contraseña`) VALUES
+('Jub3r', 'Josu', 'Jubera', 'Mariezcurrena', 'sergio@tonto.com', '8cb2237d0679ca88db6464eac60da96345513964'),
 ('Usergio', 'sergio', '', '', 'asd@asd.asd', '8cb2237d0679ca88db6464eac60da96345513964'),
 ('nuevo', 'yo', 'soy', 'especial', 'asd.asd@asd.asd', '8cb2237d0679ca88db6464eac60da96345513964');
 
@@ -238,51 +237,51 @@ INSERT INTO `usuarios` (`Usuario`, `Nombre`, `Apellido1`, `Apellido2`, `Correo`,
 --
 
 --
--- Indices de la tabla `administradores`
+-- Indices de la tabla `final_administradores`
 --
-ALTER TABLE `administradores`
+ALTER TABLE `final_administradores`
  ADD PRIMARY KEY (`Nombre`), ADD UNIQUE KEY `Usuario` (`Usuario`);
 
 --
--- Indices de la tabla `canciones`
+-- Indices de la tabla `final_canciones`
 --
-ALTER TABLE `canciones`
+ALTER TABLE `final_canciones`
  ADD PRIMARY KEY (`Titulo`,`Artista`), ADD UNIQUE KEY `Id` (`Id`);
 
 --
--- Indices de la tabla `cancionesplaylist`
+-- Indices de la tabla `final_cancionesplaylist`
 --
-ALTER TABLE `cancionesplaylist`
+ALTER TABLE `final_cancionesplaylist`
  ADD PRIMARY KEY (`playlist`,`cancion`), ADD KEY `fk_cancion` (`cancion`);
 
 --
--- Indices de la tabla `comentarios`
+-- Indices de la tabla `final_comentarios`
 --
-ALTER TABLE `comentarios`
+ALTER TABLE `final_comentarios`
  ADD PRIMARY KEY (`Id`), ADD KEY `Usuario` (`Usuario`), ADD KEY `fk_playlist_coment` (`Playlist`);
 
 --
--- Indices de la tabla `playlist`
+-- Indices de la tabla `final_playlist`
 --
-ALTER TABLE `playlist`
+ALTER TABLE `final_playlist`
  ADD PRIMARY KEY (`Id`), ADD KEY `Usuario` (`Usuario`);
 
 --
--- Indices de la tabla `puntuacioncanciones`
+-- Indices de la tabla `final_puntuacioncanciones`
 --
-ALTER TABLE `puntuacioncanciones`
+ALTER TABLE `final_puntuacioncanciones`
  ADD PRIMARY KEY (`Usuario`,`Cancion`), ADD KEY `Cancion` (`Cancion`);
 
 --
--- Indices de la tabla `puntuacionesplaylist`
+-- Indices de la tabla `final_puntuacionesplaylist`
 --
-ALTER TABLE `puntuacionesplaylist`
+ALTER TABLE `final_puntuacionesplaylist`
  ADD PRIMARY KEY (`Usuario`,`Playlist`), ADD KEY `Playlist` (`Playlist`);
 
 --
--- Indices de la tabla `usuarios`
+-- Indices de la tabla `final_usuarios`
 --
-ALTER TABLE `usuarios`
+ALTER TABLE `final_usuarios`
  ADD PRIMARY KEY (`Usuario`);
 
 --
@@ -290,57 +289,57 @@ ALTER TABLE `usuarios`
 --
 
 --
--- AUTO_INCREMENT de la tabla `canciones`
+-- AUTO_INCREMENT de la tabla `final_canciones`
 --
-ALTER TABLE `canciones`
+ALTER TABLE `final_canciones`
 MODIFY `Id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=15;
 --
--- AUTO_INCREMENT de la tabla `comentarios`
+-- AUTO_INCREMENT de la tabla `final_comentarios`
 --
-ALTER TABLE `comentarios`
+ALTER TABLE `final_comentarios`
 MODIFY `Id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=15;
 --
--- AUTO_INCREMENT de la tabla `playlist`
+-- AUTO_INCREMENT de la tabla `final_playlist`
 --
-ALTER TABLE `playlist`
+ALTER TABLE `final_playlist`
 MODIFY `Id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=9;
 --
 -- Restricciones para tablas volcadas
 --
 
 --
--- Filtros para la tabla `cancionesplaylist`
+-- Filtros para la tabla `final_cancionesplaylist`
 --
-ALTER TABLE `cancionesplaylist`
-ADD CONSTRAINT `fk_cancion` FOREIGN KEY (`cancion`) REFERENCES `canciones` (`Id`) ON DELETE CASCADE,
-ADD CONSTRAINT `fk_playlist` FOREIGN KEY (`playlist`) REFERENCES `playlist` (`Id`) ON DELETE CASCADE;
+ALTER TABLE `final_cancionesplaylist`
+ADD CONSTRAINT `fk_cancion` FOREIGN KEY (`cancion`) REFERENCES `final_canciones` (`Id`) ON DELETE CASCADE,
+ADD CONSTRAINT `fk_playlist` FOREIGN KEY (`playlist`) REFERENCES `final_playlist` (`Id`) ON DELETE CASCADE;
 
 --
--- Filtros para la tabla `comentarios`
+-- Filtros para la tabla `final_comentarios`
 --
-ALTER TABLE `comentarios`
-ADD CONSTRAINT `comentarios_ibfk_1` FOREIGN KEY (`Usuario`) REFERENCES `usuarios` (`Usuario`) ON DELETE CASCADE,
-ADD CONSTRAINT `fk_playlist_coment` FOREIGN KEY (`Playlist`) REFERENCES `playlist` (`Id`) ON DELETE CASCADE;
+ALTER TABLE `final_comentarios`
+ADD CONSTRAINT `final_comentarios_ibfk_1` FOREIGN KEY (`Usuario`) REFERENCES `final_usuarios` (`Usuario`) ON DELETE CASCADE,
+ADD CONSTRAINT `fk_playlist_coment` FOREIGN KEY (`Playlist`) REFERENCES `final_playlist` (`Id`) ON DELETE CASCADE;
 
 --
--- Filtros para la tabla `playlist`
+-- Filtros para la tabla `final_playlist`
 --
-ALTER TABLE `playlist`
-ADD CONSTRAINT `playlist_ibfk_1` FOREIGN KEY (`Usuario`) REFERENCES `usuarios` (`Usuario`) ON DELETE CASCADE;
+ALTER TABLE `final_playlist`
+ADD CONSTRAINT `final_playlist_ibfk_1` FOREIGN KEY (`Usuario`) REFERENCES `final_usuarios` (`Usuario`) ON DELETE CASCADE;
 
 --
--- Filtros para la tabla `puntuacioncanciones`
+-- Filtros para la tabla `final_puntuacioncanciones`
 --
-ALTER TABLE `puntuacioncanciones`
-ADD CONSTRAINT `puntuacioncanciones_ibfk_1` FOREIGN KEY (`Usuario`) REFERENCES `usuarios` (`Usuario`) ON DELETE CASCADE,
-ADD CONSTRAINT `puntuacioncanciones_ibfk_2` FOREIGN KEY (`Cancion`) REFERENCES `canciones` (`Id`) ON DELETE CASCADE;
+ALTER TABLE `final_puntuacioncanciones`
+ADD CONSTRAINT `final_puntuacioncanciones_ibfk_1` FOREIGN KEY (`Usuario`) REFERENCES `final_usuarios` (`Usuario`) ON DELETE CASCADE,
+ADD CONSTRAINT `final_puntuacioncanciones_ibfk_2` FOREIGN KEY (`Cancion`) REFERENCES `final_canciones` (`Id`) ON DELETE CASCADE;
 
 --
--- Filtros para la tabla `puntuacionesplaylist`
+-- Filtros para la tabla `final_puntuacionesplaylist`
 --
-ALTER TABLE `puntuacionesplaylist`
-ADD CONSTRAINT `puntuacionesplaylist_ibfk_1` FOREIGN KEY (`Usuario`) REFERENCES `usuarios` (`Usuario`) ON DELETE CASCADE,
-ADD CONSTRAINT `puntuacionesplaylist_ibfk_2` FOREIGN KEY (`Playlist`) REFERENCES `playlist` (`Id`) ON DELETE CASCADE;
+ALTER TABLE `final_puntuacionesplaylist`
+ADD CONSTRAINT `final_puntuacionesplaylist_ibfk_1` FOREIGN KEY (`Usuario`) REFERENCES `final_usuarios` (`Usuario`) ON DELETE CASCADE,
+ADD CONSTRAINT `final_puntuacionesplaylist_ibfk_2` FOREIGN KEY (`Playlist`) REFERENCES `final_playlist` (`Id`) ON DELETE CASCADE;
 
 DELIMITER $$
 --
