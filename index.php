@@ -609,7 +609,7 @@
 							if ($resultado)
 							{
 								echo '<div class="exito mensajes" id="exito mensajes" style="visibility:visible;">Comentario reportado.</div>';
-								header('Refresh: 3; url=index.php?accion=VP&id=1&pid='. $pid);////////////parece que no va
+								header("Refresh: 3; url=index.php?accion=VP&id=1&pid=1");////////////parece que vmostrarLista no deja
 							}
 							else
 							{
