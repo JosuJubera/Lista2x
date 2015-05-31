@@ -1,20 +1,10 @@
-<!DOCTYPE html>
-<html lang="es">
-    <head>
-		<title>Recuperar</title>
-        <meta charset="utf-8">
-        <link rel="stylesheet" type="text/css" href="css/estilo.css">
-    </head>
-    <body>
-        <div class="recu">
-			<form id="recu" method="post" action="index.php?accion=REC&id=1">
-				<label for="uid">Nombre de usuario:</label>
-                <input name="uid" id="uid" type="text" required="" size="10">
-				<label for="cu">Correo electronico:</label>
-                <input name="cu" id="cu" type="email" required="" size="10">
-				<input name="submit" type="submit" id="submit" value="Enviar">
-            </form>
-			<a href="index.php?accion=TL&id=1"><img src="img/Left.png" id="imagen"></a>
-        </div>
-    </body>
-</html>
+<h1 class="titulo">Recuperar contraseña</h1>
+<div class="contenido">
+	<form id="recu" method="post" action="index.php?accion=REC&id=2">
+		<label for="uid">Nombre de usuario:</label>
+		<input name="uid" id="uid" type="text" required="" size="20"><br/><br/>
+		<label for="cu">Correo electronico:</label>
+		<input name="cu" id="cu" type="email" required="" size="20"><br/><br/>
+		<input name="submit" type="submit" id="submit" value="Enviar">
+	</form>
+</div>
