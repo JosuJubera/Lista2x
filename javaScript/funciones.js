@@ -103,21 +103,41 @@ function cargarPagina(pag,pid){ //falta por terminar
             }
     });
 }
+function mostrarInfo(texto){
+    var html="<div class='info'><p>"+texto+"</p></div>";
+    $("body").append(html);
+    setTimeout(function(){ $('.info').css('visibility',"hidden"); }, 3000);
+}
+function mostrarError(texto){
+    var html="<div class='error'><p>"+texto+"</p></div>";
+    $("body").append(html);
+     setTimeout(function(){ $('.error').css('visibility',"hidden"); }, 3000);
+}
 function añadirCancionPlaylist(){
     var pid=$('#cidselect').val();
     var cid=$('#pidenviar').val();
-    $.ajax({
+    var vivaJS=$.ajax({
         url: 'index.php',
         data: 'accion=MODL&id=3&pid='+pid+'&cid='+cid,
         type: 'GET',
         succes: function(res){
+             alert('nunca llama a esta funcion');
+            console.log(myvar);
             if (parseInt(res)===1){//exito
                 //mostrarMensaje("Cancion añadida con exito", "alerta");
-                alert('exito');
+                alert('esto nunca se vera');
             }else{//fallo
                 //mostrarMensaje("Error, la cancion ya esta en la lista","alerta");
-                alert('fallo');
+                alert('y esto aun menos');
+            }},
+            error: function(xhs,status,error){
+                 alert('a esta tampoco esta');
             }
-        }   
+           
     });
+    if (parseInt(vivaJS.responseText)===1){
+        mostrarInfo("Cancion añadida con exito");
+    }else{
+        mostrarError("Error, la cancion ya esta en la lista");
+    }
 }
