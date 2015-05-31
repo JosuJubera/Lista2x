@@ -1,87 +1,84 @@
-/* reproductor de musica con html5 y jquery
- * autor: cali rojas
- * sitio web: www.lewebmonster.com
- */
- 
+ //Basado en el reproductor de: www.lewebmonster.com
+
 $(function(){
-    //creamos un objeto Audio de HTML5 para reproducir archivos
-    var objReproductor=new Audio();
-    //variable para almacenar la cancion que se esta reproduciendo
-    var iCancionActual=0;
-    //obtenemos la cantidad total de canciones en la lista (mas abajo la necesitaremos)
-    var iTotalCanciones=$('#tablacanciones >tbody >tr').length-1;
+    //creamos un objeto Audio de HTML5 para reproducir archivos
+    var objReproductor=new Audio();
+    //variable para almacenar la cancion que se esta reproduciendo
+    var iCancionActual=0;
+    //obtenemos la cantidad total de canciones en la lista (mas abajo la necesitaremos)
+    var iTotalCanciones=$('#tablacanciones >tbody >tr').length-1;
     //Variable que almacena las id de las canciones
     if (iTotalCanciones>0){
     var totcanciones=new Array(iTotalCanciones);
     for (i=1;i<=iTotalCanciones;i++){
         totcanciones[i-1]=$('#tablacanciones >tbody >tr')[i].cells[6].innerHTML;
     }
-    //le asignamos al reproductor la primera cancion de la lista
-    objReproductor.src="canciones/"+totcanciones[0]+".mp3"; 
+    //le asignamos al reproductor la primera cancion de la lista
+    objReproductor.src="canciones/"+totcanciones[0]+".mp3"; 
     }   
-    //clic en el boton play
-    $('#btnReproducir').on('click',function(){
+//clic en el boton play
+   $('#btnReproducir').on('click',function(){
         if (iTotalCanciones!=0){//hay canciones pa reproducir
-        //llamamos a la funcion que reproduce los archivos
-        $.fntReproducir();
+    //llamamos a la funcion que reproduce los archivos
+    $.fntReproducir();
         }
-    });
-     
-    //reproducir el siguiente archivo de la lista
-    $('#btnSiguiente').on('click',function(){
-        //verificamos si siguen mas canciones en la lista
-        if(iCancionActual<iTotalCanciones-1){
-            //pasamos a la siguiente cancion
-            iCancionActual++;
-        }else{
-            //volvemos a la primera cancion de la lista
-            iCancionActual=0;
-        }
-        //reproducimos el archivo que sigue
-        $.fntReproducir();
-    });
-     
-    //clic en el boton silencio
-    $('#btnSilencio').on('click',function(){
-        //colocamos el estado mute a su contrario, es decir... si esta mudo
-        //volvemos a activar el sonido; si el sonido esta activado lo desactivamos
-        objReproductor.muted=!objReproductor.muted;
-        //quitamos o agregamos la clase que indica si el sonido esta activado o no
-        $(this).toggleClass('clsSeleccionado');
-    });
-     
-    //funcion que reproduce los archivos de audio
-    $.fntReproducir=function(){
-         objReproductor.src="canciones/"+totcanciones[iCancionActual]+".mp3";
+    });
+    //reproducir el siguiente archivo de la lista
+    $('#btnSiguiente').on('click',function(){
+        //verificamos si siguen mas canciones en la lista
+        if(iCancionActual<iTotalCanciones-1){
+            //pasamos a la siguiente cancion
+            iCancionActual++;
+        }else{
+            //volvemos a la primera cancion de la lista
+            iCancionActual=0;
+        }
+        //reproducimos el archivo que sigue
+        $.fntReproducir();
+    });
+    //clic en el boton silencio
+    $('#btnSilencio').on('click',function(){
+        //colocamos el estado mute a su contrario, es decir... si esta mudo
+        //volvemos a activar el sonido; si el sonido esta activado lo desactivamos
+        objReproductor.muted=!objReproductor.muted;
+        //quitamos o agregamos la clase que indica si el sonido esta activado o no
+        $(this).toggleClass('clsSeleccionado');
+    });
+
+    //funcion que reproduce los archivos de audio
+    $.fntReproducir=function(){
+        objReproductor.src="canciones/"+totcanciones[iCancionActual]+".mp3";
         console.log(iCancionActual);
-        // $("#caratula").src="caratulas/"+$('#tablacanciones >tbody >tr')[iCancionActual+1].cells[3].innerHTML+".jpg";//Por que no va???   
+        // $("#caratula").src="caratulas/"+$('#tablacanciones >tbody >tr')[iCancionActual+1].cells[3].innerHTML+".jpg";//Por que no va???   
         document.getElementById('caratula').src = "caratulas/"+$('#tablacanciones >tbody >tr')[iCancionActual+1].cells[3].innerHTML+".jpg";
-        //desmarcamos cualquier cancion en la lista (si es que estuviese marcada alguna)
-        //marcamos en la lista la cancion que vamos a reproducir
-        //reproducir la cancion con el metodo play
-        objReproductor.play();
-         
-        //ocultamos suavemente los datos de la cancion anterior 
-        $('#divInfoCancion').find('label').stop(true.true).animate({
-            opacity: 0
-        },function(){
-            //actualizamos la informacion de la cancion que se esta reproduciendo
-            //duracion total
-            $('#lblDuracion').find('span').text('00:00');
-            //nombre de la cancion
-            $('#lblCancion').find('span').text($('#tablacanciones >tbody >tr')[iCancionActual+1].cells[1].innerHTML);
-            //artista
-            $('#lblArtista').find('span').text($('#tablacanciones >tbody >tr')[iCancionActual+1].cells[2].innerHTML);
-            //tiempo transcurrido
-            $('#lblEstado').find('span').text('00:00');
-             
-            //mostramos suavemente la info. de la nueva cancion
-            $(this).stop(true,true).animate({
-                opacity: 1
-            });
-        });
-    };
-     
+        //desmarcamos cualquier cancion en la lista (si es que estuviese marcada alguna)
+        $('#tablacanciones >tbody >tr').css('background','#adeaea');
+         //marcamos en la lista la cancion que vamos a reproducir
+        $('#tablacanciones >tbody >tr')[iCancionActual+1].style.background='#22FF3B';
+        //reproducir la cancion con el metodo play
+        objReproductor.play();
+
+        //ocultamos suavemente los datos de la cancion anterior 
+        $('#divInfoCancion').find('label').stop(true.true).animate({
+            opacity: 0
+        },function(){
+            //actualizamos la informacion de la cancion que se esta reproduciendo
+            //duracion total
+                $('#lblDuracion').find('span').text('00:00');
+            //nombre de la cancion
+            $('#lblCancion').find('span').text($('#tablacanciones >tbody >tr')[iCancionActual+1].cells[1].innerHTML);
+            //artista
+            $('#lblArtista').find('span').text($('#tablacanciones >tbody >tr')[iCancionActual+1].cells[2].innerHTML);
+            //tiempo transcurrido
+            $('#lblEstado').find('span').text('00:00');
+
+            //mostramos suavemente la info. de la nueva cancion
+            $(this).stop(true,true).animate({
+                opacity: 1
+            });
+        });
+    };
+
     //subir el volumen del reproductor
     $('#btnSubirVolumen').on('click',function(){
         //si el volumen es diferente que uno (100%) entonces lo aumentamos en 0.1
