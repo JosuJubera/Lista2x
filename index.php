@@ -753,7 +753,7 @@
 							vmostrarUsuarios($datos);
 							vmostrarAUsuario($_SESSION["admin"]);
 						}
-						else
+						else 
 						{
 							echo '<div class="error mensajes" id="error mensajes" style="visibility:visible;">No eres administrador.</div>';
 							header('Refresh: 3; url=index.php?accion=admin&id=1');
@@ -761,10 +761,10 @@
 						break;
 			case 2: 	if (isset($_SESSION["admin"]))
 						{
+                            $resultado = mborrarAUsuario($_GET['user']);
 							vmostrarAmenu();
 							$datos = mUsuarios();
 							vmostrarUsuarios($datos);
-							$resultado = mborrarAUsuario($_GET['user']);
 							if ($resultado)
 							{
 								 mostrarInfo("Usuario eliminado con exito!");
