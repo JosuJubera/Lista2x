@@ -225,10 +225,26 @@
 	{
 		switch($id)
 		{
-			case 1:		vmostrarRecuperar();
+			case 1:		vmostrarImenu();
+						vmensaje();
+						vmostrarRecuperar();
 						vmostrarContactar();
 						break;
-			case 2:		mensajeOK();
+			case 2:		vmostrarImenu();
+						vmensaje();
+						vmostrarRecuperar();
+						vmostrarContactar();
+						$resultado = mail($_POST["cu"],"Como recuperar la contraseña.","No se puede". $_POST["uid"] ." :).");
+						if ($resultado)
+						{
+							echo '<div class="exito mensajes" id="exito mensajes" style="visibility:visible;">Te mandaremos un correo para que puedas cambiar la contraseña.</div>';
+							header('Refresh: 3; url=index.php?accion=TL&id=1');
+						}
+						else
+						{
+							echo '<div class="error mensajes" id="error mensajes" style="visibility:visible;">Ha surgido un error. Intentalo más tarde.</div>';
+							header('Refresh: 3; url=index.php?accion=REC&id=1');
+						}
 						break;
 		}
 	}

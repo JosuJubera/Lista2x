@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 31-05-2015 a las 12:11:25
+-- Tiempo de generación: 31-05-2015 a las 13:45:38
 -- Versión del servidor: 5.6.21
 -- Versión de PHP: 5.6.3
 
@@ -24,7 +24,7 @@ DELIMITER $$
 --
 -- Procedimientos
 --
-CREATE DEFINER=`root`@`localhost` PROCEDURE `ACTUALIZAR`()
+CREATE DEFINER=`siw06`@`localhost` PROCEDURE `ACTUALIZAR`()
     MODIFIES SQL DATA
     COMMENT 'Actualiza la valoracion semanal de las playlist y de las cancion'
 begin
@@ -205,6 +205,7 @@ CREATE TABLE IF NOT EXISTS `final_puntuacionesplaylist` (
 --
 
 INSERT INTO `final_puntuacionesplaylist` (`Usuario`, `Playlist`, `Fecha`, `Valoracion`) VALUES
+('Jub3r', 7, '2015-05-30 22:00:00', 7),
 ('Usergio', 7, '2015-05-26 22:00:00', 9),
 ('Usergio', 8, '2015-05-26 22:00:00', 9);
 
@@ -228,7 +229,7 @@ CREATE TABLE IF NOT EXISTS `final_usuarios` (
 --
 
 INSERT INTO `final_usuarios` (`Usuario`, `Nombre`, `Apellido1`, `Apellido2`, `Correo`, `Contraseña`) VALUES
-('Jub3r', 'Josu', 'Jubera', 'Mariezcurrena', 'sergio@tonto.com', '8cb2237d0679ca88db6464eac60da96345513964'),
+('Jub3r', 'Josu', 'Jubera', 'Mariezcurrena', 'sergio@tonto.com', '7110eda4d09e062aa5e4a390b0a572ac0d2c0220'),
 ('Usergio', 'sergio', '', '', 'asd@asd.asd', '8cb2237d0679ca88db6464eac60da96345513964'),
 ('nuevo', 'yo', 'soy', 'especial', 'asd.asd@asd.asd', '8cb2237d0679ca88db6464eac60da96345513964');
 
@@ -345,7 +346,7 @@ DELIMITER $$
 --
 -- Eventos
 --
-CREATE DEFINER=`root`@`localhost` EVENT `CRON_ACTUALIZAR` ON SCHEDULE EVERY 1 DAY STARTS '2015-05-28 18:13:43' ON COMPLETION NOT PRESERVE ENABLE COMMENT 'Calcula la puntuacion de las listas todos los dias' DO CALL `ACTUALIZAR`()$$
+CREATE DEFINER=`siw06`@`localhost` EVENT `CRON_ACTUALIZAR` ON SCHEDULE EVERY 1 DAY STARTS '2015-05-28 18:13:43' ON COMPLETION NOT PRESERVE ENABLE COMMENT 'Calcula la puntuacion de las listas todos los dias' DO CALL `ACTUALIZAR`()$$
 
 DELIMITER ;
 
