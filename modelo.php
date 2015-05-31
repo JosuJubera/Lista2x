@@ -149,10 +149,10 @@
 		$buscar=mysql_real_escape_string($buscar);
 		switch($tipo)
 		{
-			case 0:		$resultado = mysql_query("select p.Id, p.Nombre, p.Asunto,(select count(*) from final_cancionesplaylist where playlist=p.id) Canciones , p.Usuario, p.Fecha, (p.ValoracionSemanal * 8) as ValoracionSemanal from playlist p where p.Nombre COLLATE utf8_general_ci like '%$buscar%' order by ValoracionSemanal desc limit 20",$con);
+			case 0:		$resultado = mysql_query("select p.Id, p.Nombre, p.Asunto,(select count(*) from final_cancionesplaylist where playlist=p.id) Canciones , p.Usuario, p.Fecha, (p.ValoracionSemanal * 8) as ValoracionSemanal from final_playlist p where p.Nombre COLLATE utf8_general_ci like '%$buscar%' order by ValoracionSemanal desc",$con);
 						break;
 			case 1:		$resultado = mysql_query("select Id,Titulo,Artista,Album,(Valoracion * 8) as Valoracion, (ValoracionSemanal * 8) as ValoracionSemanal,Año,Genero 
-												from final_canciones c left join final_puntuacioncanciones p on p.Cancion = c.id and usuario = '$usuario' WHERE Titulo COLLATE utf8_general_ci like '%$buscar%' order by ValoracionSemanal desc limit 20",$con);
+												from final_canciones c left join final_puntuacioncanciones p on p.Cancion = c.id and usuario = '$usuario' WHERE Titulo COLLATE utf8_general_ci like '%$buscar%' order by ValoracionSemanal desc",$con);
 						break;
 		}
 		

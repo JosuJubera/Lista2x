@@ -1,7 +1,7 @@
 <?php
     include("modelo.php");
     include("vista.php");
-    error_reporting(0); //borrar esto
+    //error_reporting(0); //borrar esto
     /*
      * Falta por hacer:
      * -Refres en MF (recargar la pagina tras votar)
@@ -288,7 +288,7 @@
 	if (($accion == "B") and (isset($_GET["search"])))
 	{
 		$datos = mBuscar($_GET["search"],$_GET["tipo"],$_SESSION["usuario"]);
-		if ($datos == null)
+		if ($datos === false)
 		{
 			vmensaje("No se ha podido encontrar.", "alerta");
 		}

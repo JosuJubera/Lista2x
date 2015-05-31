@@ -219,26 +219,26 @@
 	function vmostrarBuscarcanciones($buscar,$consulta)
     {
 		$aux = leerfichero("fonts/buscarcancion.html");
+        $aux = str_replace("##BUSCAR##", $buscar, $aux);
         $partes = explode("##FILALISTA##", $aux);
 		$contenido = "";
 		$lista = "";
 		$i = 1;
-		while ($datos = mysql_fetch_assoc($consulta))
-		{
-			$lista = $partes[1];
-			$partes[0] = str_replace("##BUSCAR##", $buscar, $partes[0]);
-			$lista = str_replace("##ID##", $datos["Id"], $lista);
-			$lista = str_replace("##POSICION##", $i, $lista);
-			$lista = str_replace("##TITULO##", $datos["Titulo"], $lista);
-			$lista = str_replace("##ARTISTA##", $datos["Artista"], $lista);
-			$lista = str_replace("##GENERO##", $datos["Genero"], $lista);
-			$lista = str_replace("##ALBUM##", $datos["Album"], $lista);
-			$lista = str_replace("##AÑO##", $datos["Año"], $lista);
-			$lista = str_replace("##VALORACION##", $datos["Valoracion"], $lista);
-			$lista = str_replace("##VALORACIONSEMANAL##", $datos["ValoracionSemanal"], $lista);
-			$contenido .= $lista;
-			$i++;
-		}
+        while ($datos = mysql_fetch_assoc($consulta))
+        {
+            $lista = $partes[1];
+            $lista = str_replace("##ID##", $datos["Id"], $lista);
+            $lista = str_replace("##POSICION##", $i, $lista);
+            $lista = str_replace("##TITULO##", $datos["Titulo"], $lista);
+            $lista = str_replace("##ARTISTA##", $datos["Artista"], $lista);
+            $lista = str_replace("##GENERO##", $datos["Genero"], $lista);
+            $lista = str_replace("##ALBUM##", $datos["Album"], $lista);
+            $lista = str_replace("##AÑO##", $datos["Año"], $lista);
+            $lista = str_replace("##VALORACION##", $datos["Valoracion"], $lista);
+            $lista = str_replace("##VALORACIONSEMANAL##", $datos["ValoracionSemanal"], $lista);
+            $contenido .= $lista;
+            $i++;
+        }
         echo $partes[0] . $contenido . $partes[2];
     }
 	
