@@ -572,6 +572,15 @@
             return true;
         }
     }
+	
+	function mborrarAUsuario($usuario)
+	{
+		$con = conexion();
+		$usuario = mysql_real_escape_string($usuario);
+		$resultado = mysql_query("DELETE FROM usuarios WHERE Usuario = '$usuario'" ,$con);
+		return $resultado;
+	}
+	
     function mcrearPlaylist($usuario,$titulo,$asunto,$descripcion){
         $con=conexion();
         if (!isset($usuario,$titulo,$asunto,$descripcion)){
@@ -609,7 +618,6 @@
             return false;
         }
     }
-    
     
     function mcreadorPlaylist($pid){
         $con=conexion();

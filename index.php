@@ -744,26 +744,47 @@
 	
 	if ($accion == "AU")
 	{
-            if (isset($_SESSION["admin"]))
-            {
-                vmostrarAmenu();
-                $datos = mUsuarios();
-                vmostrarUsuarios($datos);
-                switch ($id)
-                {
-                    case 2: if (mborrarAUsuario($_GET['user'])){
-                                mostrarInfo("Usuario eliminado con exito!");
-                            }else{
-                                mostrarError("Imposible eliminar",
-                                "No se ha podido eliminar el usuario. Puede que ya haya sido eliminado o no exista");
-                            }
-                            break;
-                }
-                vmostrarAUsuario($_SESSION["admin"]);
-            }else{//no es admin
-                 mostrarError("Acceso denegado", "Usted no tiene permisos para ver esta seccion");
-            }
+		switch ($id)
+		{
+            case 1:		if (isset($_SESSION["admin"]))
+						{
+							vmostrarAmenu();
+							$datos = mUsuarios();
+							vmostrarUsuarios($datos);
+							vmostrarAUsuario($_SESSION["admin"]);
+						}
+						else
+						{
+							echo '<div class="error mensajes" id="error mensajes" style="visibility:visible;">No eres administrador.</div>';
+							header('Refresh: 3; url=index.php?accion=admin&id=1');
+						}
+						break;
+			case 2: 	if (isset($_SESSION["admin"]))
+						{
+							vmostrarAmenu();
+							$datos = mUsuarios();
+							vmostrarUsuarios($datos);
+							vmostrarAUsuario($_SESSION["admin"]);
+							$resultado = mborrarAUsuario($_GET['user']);
+							if ($resultado)
+							{
+								echo '<div class="exito mensajes" id="exito mensajes" style="visibility:visible;">Usuario eliminado.</div>';
+								header('Refresh: 3; url=index.php?accion=AU&id=1');
+							}
+							else
+							{
+								echo '<div class="error mensajes" id="error mensajes" style="visibility:visible;">No se ha podido eliminar al usuario.</div>';
+								header('Refresh: 3; url=index.php?accion=AU&id=1');
+							}
+						}
+						else
+						{
+							echo '<div class="error mensajes" id="error mensajes" style="visibility:visible;">No eres administrador.</div>';
+							header('Refresh: 3; url=index.php?accion=admin&id=1');
+						}
+						break;
         }
+	}
 	
     if ($accion == "AC"){//alta cancion
         if (isset($_SESSION["admin"]) /*&& mIsAdmin($_SESSION["admin"])*/){ //es un admin
