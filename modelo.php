@@ -198,7 +198,7 @@
 	{
 		$con = conexion();
         $usuario=mysql_real_escape_string($usuario);
-		$resultado = mysql_query("select Id, Nombre, Asunto, (select count(*) from final_cancionesplaylist where playlist=id) as Canciones, Usuario, Fecha,IFNULL((select  Valoracion *8 from final_puntuacionesplaylist where Usuario='$usuario' and playlist=Id),0) as Valoracion, (ValoracionSemanal * 8) as ValoracionSemanal from playlist
+		$resultado = mysql_query("select Id, Nombre, Asunto, (select count(*) from final_cancionesplaylist where playlist=id) as Canciones, Usuario, Fecha,IFNULL((select  Valoracion *8 from final_puntuacionesplaylist where Usuario='$usuario' and playlist=Id),0) as Valoracion, (ValoracionSemanal * 8) as ValoracionSemanal from final_playlist
         where Usuario = '$usuario' 
         order by Valoracion desc",$con);
 		return $resultado;   

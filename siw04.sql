@@ -29,13 +29,13 @@ CREATE DEFINER=`root`@`localhost` PROCEDURE `ACTUALIZAR`()
     COMMENT 'Actualiza la valoracion semanal de las playlist y de las cancion'
 begin
 
-    update playlist set ValoracionSemanal=(
+    update final_playlist set ValoracionSemanal=(
     select IFNULL(sum(Valoracion)/count(*),0) Valoracion
     from final_puntuacionesplaylist
     where Fecha>DATE_SUB(NOW(), INTERVAL 1 WEEK)
     AND playlist=Id);
 
-    update canciones set ValoracionSemanal=(
+    update final_canciones set ValoracionSemanal=(
     select IFNULL(sum(Valoracion)/count(*),0) Valoracion
     from final_puntuacioncanciones
     where Fecha>DATE_SUB(NOW(), INTERVAL 1 WEEK)
