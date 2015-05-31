@@ -25,7 +25,7 @@ p
 	width: 18%;
     font-family: Arial, sans-serif;
     font-size: 11pt;
-	position: fixed;
+	position: absolute;
 	top: 5%;
 	right: 0.5%;
 }

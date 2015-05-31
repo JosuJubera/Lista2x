@@ -514,7 +514,19 @@
         }else{
             return false;
         }
-    } 
+    }
+	
+	function mReportar($id)
+	{
+		if (!is_numeric($id))
+		{
+            return false;
+        }
+		$con = conexion();
+		$resultado = mysql_query("UPDATE comentarios SET reportes = reportes + 1 WHERE Id = '$id'");
+		return $resultado;
+	}
+	
     function mobtenerReportes(){
         $con = conexion();
 	$resultado = mysql_query("select Id,Usuario,Comentario,Reportes from comentarios where ignorado='0' and Reportes>'0' order by reportes desc",$con);

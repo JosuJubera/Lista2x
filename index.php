@@ -587,6 +587,45 @@
         }
     }
 	
+	// Reportar
+	if ($accion == "RC")
+	{
+		switch ($id)
+		{
+			case 1:		vmostrarRmenu();
+						vmostrarUsuario($_SESSION["usuario"]);
+						vmostrarBuscardor();
+						$datos = minfoplaylist($_GET['pid']);
+						$canciones = mcancionesplaylist($_GET['pid']);
+						$comentarios = mcomplaylist($_GET['pid']);
+						$ncomentarios = mnumcomplaylist($_GET['pid']);
+						vmostrarLista($datos,$canciones,$comentarios,$ncomentarios);
+						vmostrarContactar();
+						if (isset($_GET["cid"]))
+						{
+							$cid = $_GET["cid"];
+							$pid = $_GET["pid"];
+							$resultado = mReportar($cid);
+							if ($resultado)
+							{
+								echo '<div class="exito mensajes" id="exito mensajes" style="visibility:visible;">Comentario reportado.</div>';
+								header('Refresh: 3; url=index.php?accion=VP&id=1&pid='. $pid);////////////parece que no va
+							}
+							else
+							{
+								echo '<div class="error mensajes" id="error mensajes" style="visibility:visible;">No se ha podido reportar.</div>';
+								header('Refresh: 3; url=index.php?accion=VP&id=1&pid='. $pid);
+							}
+						}
+						else
+						{
+							echo '<div class="error mensajes" id="error mensajes" style="visibility:visible;">No se ha podido reportar.</div>';
+							header('Refresh: 3; url=index.php?accion=VP&id=1&pid='. $pid);
+						}
+						break;
+		}
+	}
+	
 	//Puntuar Cancion AJAX
 	if($accion == "PC")
 	{
