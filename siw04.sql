@@ -31,13 +31,13 @@ begin
 
     update playlist set ValoracionSemanal=(
     select IFNULL(sum(Valoracion)/count(*),0) Valoracion
-    from puntuacionesplaylist
+    from final_puntuacionesplaylist
     where Fecha>DATE_SUB(NOW(), INTERVAL 1 WEEK)
     AND playlist=Id);
 
     update canciones set ValoracionSemanal=(
     select IFNULL(sum(Valoracion)/count(*),0) Valoracion
-    from puntuacioncanciones
+    from final_puntuacioncanciones
     where Fecha>DATE_SUB(NOW(), INTERVAL 1 WEEK)
 	AND cancion=Id);
 
