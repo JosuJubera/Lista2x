@@ -14,7 +14,7 @@
         $usuario = addslashes($uid);
         $contraseña = addslashes($pw);
         $con = conexion();
-        $resultado = mysql_query("SELECT Usuario FROM usuarios WHERE Usuario COLLATE utf8_general_ci like '" . $usuario . "' and Contraseña='" . sha1($contraseña) . "'",$con) or die("Error en: " . mysql_error());
+        $resultado = mysql_query("SELECT Usuario FROM final_usuarios WHERE Usuario COLLATE utf8_general_ci like '" . $usuario . "' and Contraseña='" . sha1($contraseña) . "'",$con) or die("Error en: " . mysql_error());
         $comprobacion = mysql_fetch_array($resultado);
         if ($comprobacion !==false )
         {
@@ -34,7 +34,7 @@
         $contraseña = addslashes($pw);
 		$pass1 = sha1($contraseña);
 		$pass2 = sha1($contraseñaA);
-		$resultado = mysql_query("UPDATE usuarios SET Contraseña = '$pass1' WHERE Usuario COLLATE utf8_general_ci like '$usuario' and Contraseña = '$pass2'", $con);
+		$resultado = mysql_query("UPDATE final_usuarios SET Contraseña = '$pass1' WHERE Usuario COLLATE utf8_general_ci like '$usuario' and Contraseña = '$pass2'", $con);
 		$resultado = mysql_affected_rows();
 		if ($resultado != -1)
 		{
@@ -54,7 +54,7 @@
         $contraseña = addslashes($pw);
 		$pass1 = sha1($contraseña);
 		$pass2 = sha1($contraseñaA);
-		$resultado = mysql_query("UPDATE administradores SET Contraseña = '$pass1' WHERE Usuario COLLATE utf8_general_ci like '$usuario' and Contraseña = '$pass2'", $con);
+		$resultado = mysql_query("UPDATE final_administradores SET Contraseña = '$pass1' WHERE Usuario COLLATE utf8_general_ci like '$usuario' and Contraseña = '$pass2'", $con);
 		$resultado = mysql_affected_rows();
 		if ($resultado != -1)
 		{
@@ -72,7 +72,7 @@
 		$usuario = addslashes($uid);
         $email1 = addslashes($emaila);
         $email2 = addslashes($email);
-		$resultado = mysql_query("UPDATE usuarios SET Correo = '$email2' WHERE Usuario COLLATE utf8_general_ci like '$usuario' and Correo = '$email1'", $con);
+		$resultado = mysql_query("UPDATE final_usuarios SET Correo = '$email2' WHERE Usuario COLLATE utf8_general_ci like '$usuario' and Correo = '$email1'", $con);
 		$resultado = mysql_affected_rows();
 		if ($resultado != -1)
 		{
@@ -90,7 +90,7 @@
 		$usuario = addslashes($uid);
         $email1 = addslashes($emaila);
         $email2 = addslashes($email);
-		$resultado = mysql_query("UPDATE administradores SET Correo = '$email2' WHERE Usuario COLLATE utf8_general_ci like '$usuario' and Correo = '$email1'", $con);
+		$resultado = mysql_query("UPDATE final_administradores SET Correo = '$email2' WHERE Usuario COLLATE utf8_general_ci like '$usuario' and Correo = '$email1'", $con);
 		$resultado = mysql_affected_rows();
 		if ($resultado != -1)
 		{
@@ -109,7 +109,7 @@
         $correo = addslashes($email);
         $contraseña = addslashes($pass);
 		$pass1 = sha1($contraseña);
-		$resultado = mysql_query("DELETE FROM usuarios WHERE Usuario COLLATE utf8_general_ci like '$usuario' and Correo = '$correo' and Contraseña ='$pass1'", $con);
+		$resultado = mysql_query("DELETE FROM final_usuarios WHERE Usuario COLLATE utf8_general_ci like '$usuario' and Correo = '$correo' and Contraseña ='$pass1'", $con);
 		$resultado = mysql_affected_rows();
 		if ($resultado != -1)
 		{
@@ -128,7 +128,7 @@
         $correo = addslashes($email);
         $contraseña = addslashes($pass);
 		$pass1 = sha1($contraseña);
-		$resultado = mysql_query("DELETE FROM administradores WHERE Usuario COLLATE utf8_general_ci like '$usuario' and Correo = '$correo' and Contraseña ='$pass1'", $con);
+		$resultado = mysql_query("DELETE FROM final_administradores WHERE Usuario COLLATE utf8_general_ci like '$usuario' and Correo = '$correo' and Contraseña ='$pass1'", $con);
 		$resultado = mysql_affected_rows();
 		if ($resultado != -1)
 		{
@@ -149,10 +149,10 @@
 		$buscar=mysql_real_escape_string($buscar);
 		switch($tipo)
 		{
-			case 0:		$resultado = mysql_query("select p.Id, p.Nombre, p.Asunto,(select count(*) from cancionesplaylist where playlist=p.id) Canciones , p.Usuario, p.Fecha, (p.ValoracionSemanal * 8) as ValoracionSemanal from playlist p where p.Nombre COLLATE utf8_general_ci like '%$buscar%' order by ValoracionSemanal desc limit 20",$con);
+			case 0:		$resultado = mysql_query("select p.Id, p.Nombre, p.Asunto,(select count(*) from final_cancionesplaylist where playlist=p.id) Canciones , p.Usuario, p.Fecha, (p.ValoracionSemanal * 8) as ValoracionSemanal from playlist p where p.Nombre COLLATE utf8_general_ci like '%$buscar%' order by ValoracionSemanal desc limit 20",$con);
 						break;
 			case 1:		$resultado = mysql_query("select Id,Titulo,Artista,Album,(Valoracion * 8) as Valoracion, (ValoracionSemanal * 8) as ValoracionSemanal,Año,Genero 
-												from canciones c left join puntuacioncanciones p on p.Cancion = c.id and usuario = '$usuario' WHERE Titulo COLLATE utf8_general_ci like '%$buscar%' order by ValoracionSemanal desc limit 20",$con);
+												from final_canciones c left join final_puntuacioncanciones p on p.Cancion = c.id and usuario = '$usuario' WHERE Titulo COLLATE utf8_general_ci like '%$buscar%' order by ValoracionSemanal desc limit 20",$con);
 						break;
 		}
 		
@@ -162,35 +162,35 @@
 	function mIToplistas()
 	{
 		$con = conexion();
-		$resultado = mysql_query("select Id, p.Usuario, Nombre, Asunto, (select count(*) from cancionesplaylist where playlist=id) as Canciones, p.Fecha, (ValoracionSemanal * 8) as ValoracionSemanal from playlist p order by ValoracionSemanal desc limit 20",$con);
+		$resultado = mysql_query("select Id, p.Usuario, Nombre, Asunto, (select count(*) from final_cancionesplaylist where playlist=id) as Canciones, p.Fecha, (ValoracionSemanal * 8) as ValoracionSemanal from final_playlist p order by ValoracionSemanal desc limit 20",$con);
 		return $resultado;   
 	}
 	
 	function mToplistas($usuario)
 	{
 		$con = conexion();
-		$resultado = mysql_query("select Id, p.Usuario, Nombre, Asunto, (select count(*) from cancionesplaylist where playlist=id) as Canciones, p.Fecha, (Valoracion * 8) as Valoracion, (ValoracionSemanal * 8) as ValoracionSemanal from playlist p left join puntuacionesplaylist pp on id = playlist and pp.usuario = '$usuario' order by ValoracionSemanal desc limit 20",$con);
+		$resultado = mysql_query("select Id, p.Usuario, Nombre, Asunto, (select count(*) from final_cancionesplaylist where playlist=id) as Canciones, p.Fecha, (Valoracion * 8) as Valoracion, (ValoracionSemanal * 8) as ValoracionSemanal from final_playlist p left join final_puntuacionesplaylist pp on id = playlist and pp.usuario = '$usuario' order by ValoracionSemanal desc limit 20",$con);
 		return $resultado;   
 	}
 	
 	function mToplistascancion($cid)
 	{
 		$con = conexion();
-		$resultado = mysql_query("select p.Id, p.Nombre, p.Asunto, count(Cancion) as Canciones, p.Usuario, p.Fecha, (p.ValoracionSemanal * 8) as ValoracionSemanal from playlist p, cancionesplaylist c where p.id = c.playlist and c.cancion = '$cid' order by ValoracionSemanal desc limit 20",$con);
+		$resultado = mysql_query("select p.Id, p.Nombre, p.Asunto, count(Cancion) as Canciones, p.Usuario, p.Fecha, (p.ValoracionSemanal * 8) as ValoracionSemanal from final_playlist p, final_cancionesplaylist c where p.id = c.playlist and c.cancion = '$cid' order by ValoracionSemanal desc limit 20",$con);
 		return $resultado;   
 	}
 	
 	function mITopcanciones()
 	{
 		$con = conexion();
-		$resultado = mysql_query("select Id,Titulo,Artista,Album, (ValoracionSemanal * 8) as ValoracionSemanal,Año,Genero from canciones c order by ValoracionSemanal desc limit 20",$con);
+		$resultado = mysql_query("select Id,Titulo,Artista,Album, (ValoracionSemanal * 8) as ValoracionSemanal,Año,Genero from final_canciones c order by ValoracionSemanal desc limit 20",$con);
 		return $resultado;
 	}
 	
 	function mTopcanciones($usuario)
 	{
 		$con = conexion();
-		$resultado = mysql_query("select Id,Titulo,Artista,Album,(Valoracion * 8) as Valoracion, (ValoracionSemanal * 8) as ValoracionSemanal,Año,Genero from canciones c left join puntuacioncanciones p on p.Cancion = c.id and usuario = '$usuario' order by ValoracionSemanal desc limit 20",$con);
+		$resultado = mysql_query("select Id,Titulo,Artista,Album,(Valoracion * 8) as Valoracion, (ValoracionSemanal * 8) as ValoracionSemanal,Año,Genero from final_canciones c left join final_puntuacioncanciones p on p.Cancion = c.id and usuario = '$usuario' order by ValoracionSemanal desc limit 20",$con);
 		return $resultado;
 	}
 	
@@ -198,23 +198,23 @@
 	{
 		$con = conexion();
         $usuario=mysql_real_escape_string($usuario);
-		$resultado = mysql_query("select Id, Nombre, Asunto, (select count(*) from cancionesplaylist where playlist=id) as Canciones, Usuario, Fecha,IFNULL((select  Valoracion *8 from puntuacionesplaylist where Usuario='$usuario' and playlist=Id),0) as Valoracion, (ValoracionSemanal * 8) as ValoracionSemanal from playlist
-where Usuario = '$usuario' 
-order by Valoracion desc",$con);
+		$resultado = mysql_query("select Id, Nombre, Asunto, (select count(*) from final_cancionesplaylist where playlist=id) as Canciones, Usuario, Fecha,IFNULL((select  Valoracion *8 from final_puntuacionesplaylist where Usuario='$usuario' and playlist=Id),0) as Valoracion, (ValoracionSemanal * 8) as ValoracionSemanal from playlist
+        where Usuario = '$usuario' 
+        order by Valoracion desc",$con);
 		return $resultado;   
 	}
 	
 	function mMisfavoritos($usuario)
 	{
         $con = conexion();
-		$resultado = mysql_query("select Id, Titulo, Artista, Genero, Album, Año, (p.Valoracion * 8) as Valoracion, (ValoracionSemanal * 8) as ValoracionSemanal from canciones c join puntuacioncanciones p on (id = Cancion) WHERE usuario = '$usuario' order by Valoracion desc limit 20",$con);
+		$resultado = mysql_query("select Id, Titulo, Artista, Genero, Album, Año, (p.Valoracion * 8) as Valoracion, (ValoracionSemanal * 8) as ValoracionSemanal from final_canciones c join final_puntuacioncanciones p on (id = Cancion) WHERE usuario = '$usuario' order by Valoracion desc limit 20",$con);
 		return $resultado;
 	}
 	
 	function mCancion($cid)
 	{
 		$con = conexion();
-		$resultado = mysql_query("select Id, Titulo, Artista, Genero, Album, Año,ValoracionSemanal*8 Valoracion from canciones WHERE Id = '$cid'",$con);
+		$resultado = mysql_query("select Id, Titulo, Artista, Genero, Album, Año,ValoracionSemanal*8 Valoracion from final_canciones WHERE Id = '$cid'",$con);
                 $aux=  mysql_fetch_assoc($resultado);
 		return $aux;
 	}
@@ -222,7 +222,7 @@ order by Valoracion desc",$con);
 	function mReportes()
 	{
             $con = conexion();
-            $resultado=mysql_query("select Id, Usuario, Reportes, Comentario, Playlist, Ignorado from comentarios order by reportes limit 20;",$con);
+            $resultado=mysql_query("select Id, Usuario, Reportes, Comentario, Playlist, Ignorado from final_comentarios order by reportes limit 20;",$con);
             $i=0;
             $aux=null;
             if ($resultado!==false) {
@@ -237,38 +237,38 @@ order by Valoracion desc",$con);
 	function mUsuarios()
 	{
 		$con = conexion();
-		$resultado=mysql_query("select  Usuario, Nombre, Apellido1, Apellido2, Correo from usuarios order by Usuario limit 20;",$con);
+		$resultado=mysql_query("select  Usuario, Nombre, Apellido1, Apellido2, Correo from final_usuarios order by Usuario limit 20;",$con);
 		return $resultado;   
 	}
 	
 	function mCanciones()
 	{
 		$con = conexion();
-		$resultado=mysql_query("select  Id, Titulo, Artista, Genero, Album, Año from canciones order by Id limit 20;",$con);
+		$resultado=mysql_query("select  Id, Titulo, Artista, Genero, Album, Año from final_canciones order by Id limit 20;",$con);
 		return $resultado;   
 	}
 	
 	function mPuntuacioncancion($id,$p,$usuario)
 	{
 		$con = conexion();
-		$resultado1 = mysql_query("INSERT INTO puntuacioncanciones VALUES('$usuario', '$id', CURDATE(), '$p')",$con);
+		$resultado1 = mysql_query("INSERT INTO final_puntuacioncanciones VALUES('$usuario', '$id', CURDATE(), '$p')",$con);
 		if ($resultado1 === false)
 		{
-			$resultado1 = mysql_query("UPDATE puntuacioncanciones SET Valoracion = '$p' WHERE Cancion = '$id' and Usuario = '$usuario'",$con);	
+			$resultado1 = mysql_query("UPDATE final_puntuacioncanciones SET Valoracion = '$p' WHERE Cancion = '$id' and Usuario = '$usuario'",$con);	
 		}
-		$resultado2 = mysql_query("select (p.Valoracion * 8) as Valoracion from puntuacioncanciones p WHERE Cancion = '$id' and Usuario = '$usuario'",$con);
+		$resultado2 = mysql_query("select (p.Valoracion * 8) as Valoracion from final_puntuacioncanciones p WHERE Cancion = '$id' and Usuario = '$usuario'",$con);
 		return array ($resultado1, $resultado2);
 	}
 	
 	function mPuntuacionplaylist($id,$p,$usuario)
 	{
 		$con = conexion();
-		$resultado1 = mysql_query("INSERT INTO puntuacionesplaylist VALUES('$usuario', '$id', CURDATE(), '$p')",$con);
+		$resultado1 = mysql_query("INSERT INTO final_puntuacionesplaylist VALUES('$usuario', '$id', CURDATE(), '$p')",$con);
 		if ($resultado1 === false)
 		{
-			$resultado1 = mysql_query("UPDATE puntuacionesplaylist SET Valoracion = '$p' WHERE Playlist = '$id' and Usuario = '$usuario'",$con);
+			$resultado1 = mysql_query("UPDATE final_puntuacionesplaylist SET Valoracion = '$p' WHERE Playlist = '$id' and Usuario = '$usuario'",$con);
 		}
-		$resultado2 = mysql_query("select (p.Valoracion * 8) as Valoracion from puntuacionesplaylist p WHERE Playlist = '$id' and Usuario = '$usuario'",$con);
+		$resultado2 = mysql_query("select (p.Valoracion * 8) as Valoracion from final_puntuacionesplaylist p WHERE Playlist = '$id' and Usuario = '$usuario'",$con);
 		return array ($resultado1, $resultado2);
 	}
 	
@@ -287,13 +287,13 @@ order by Valoracion desc",$con);
                 $correo=htmlentities($correo);
 		$contraseña=mysql_real_escape_string($contraseña);
 		$cifrado=sha1($contraseña);
-		$resultado=mysql_query("insert into usuarios(usuario,nombre,apellido1,apellido2,correo,contraseña) values ('$user','$nombre','$apellido1','$apellido2','$correo','$cifrado')",$con); 
+		$resultado=mysql_query("insert into final_usuarios(usuario,nombre,apellido1,apellido2,correo,contraseña) values ('$user','$nombre','$apellido1','$apellido2','$correo','$cifrado')",$con); 
 		return $resultado;   
 	}
     /////////////////////////////////////////////////////////////////
         function mIsAdmin($usuario){
             $con=conexion();
-            $resultado=mysql_query("select usuario from Administradores where usuario=$usuario",$con);
+            $resultado=mysql_query("select usuario from final_Administradores where usuario=$usuario",$con);
             $isusuario = mysql_fetch_array($resultado);
             if ($isusuario==false){
                 return false;
@@ -316,7 +316,7 @@ order by Valoracion desc",$con);
             $admin=mysql_real_escape_string($admin);
             $contraseña=mysql_real_escape_string($contraseña);
             $cifrado=sha1($contraseña);
-            $consulta="select usuario from administradores where contraseña='$cifrado' and usuario='$admin'";
+            $consulta="select usuario from final_administradores where contraseña='$cifrado' and usuario='$admin'";
             $resultado=mysql_query($consulta,$con);
             $fusuario = mysql_fetch_assoc($resultado);
             if ($fusuario==false) {        
@@ -341,7 +341,7 @@ order by Valoracion desc",$con);
             $año=mysql_real_escape_string($año);
             $año=htmlentities($año);
             mysql_query("begin",$con);
-            $result=  mysql_query("insert into canciones(Titulo,Artista,Album,Genero,Año) values ('$titulo','$autor','$album','$genero','$año')",$con);
+            $result=  mysql_query("insert into final_canciones(Titulo,Artista,Album,Genero,Año) values ('$titulo','$autor','$album','$genero','$año')",$con);
             if ($result===false){ //ya existe en la DB, no lo subimos de nuevo
                 mysql_query("rollback",$con);
                 return false;
@@ -362,9 +362,9 @@ order by Valoracion desc",$con);
      function mbuscartitulo($palabra){
         $con = conexion();
         $palabra=mysql_real_escape_string($palabra);
-        $resultado = mysql_query("select * from canciones WHERE titulo like '%$palabra%'",$con);
+        $resultado = mysql_query("select * from final_canciones WHERE titulo like '%$palabra%'",$con);
         $i=0;
-        $resultado = mysql_query("select * from canciones WHERE titulo like '%$palabra%'",$con);
+        $resultado = mysql_query("select * from final_canciones WHERE titulo like '%$palabra%'",$con);
         $i=0;
         $aux=null;
         if ($resultado!==false) {
@@ -378,7 +378,7 @@ order by Valoracion desc",$con);
      function mbuscarautor($palabra){
         $con = conexion();
         $palabra=mysql_real_escape_string($palabra);
-		$resultado = mysql_query("select Artista,count(distinct album) albumnes,count(id) canciones from canciones where Artista like '%$palabra%' group by Artista;",$con);
+		$resultado = mysql_query("select Artista,count(distinct album) albumnes,count(id) canciones from final_canciones where Artista like '%$palabra%' group by Artista;",$con);
 		$i=0;
         $aux=null;
         if ($resultado!==false) {
@@ -392,7 +392,7 @@ order by Valoracion desc",$con);
     function mbuscaralbum($palabra){
         $con = conexion();
         $palabra=mysql_real_escape_string($palabra);
-        $resultado = mysql_query("select Artista, album,count(id) canciones from canciones where album like '%$palabra%' group by album;",$con);
+        $resultado = mysql_query("select Artista, album,count(id) canciones from final_canciones where album like '%$palabra%' group by album;",$con);
         $i=0;
         $aux=null;
         if ($resultado!==false) {
@@ -408,7 +408,7 @@ order by Valoracion desc",$con);
         if (!is_numeric($id)){
             return false;
         }
-        $resultado = mysql_query("SELECT album,count(id) 'n' from canciones where album=(select album from canciones where id='$id') group by album",$con);
+        $resultado = mysql_query("SELECT album,count(id) 'n' from final_canciones where album=(select album from final_canciones where id='$id') group by album",$con);
         if ($resultado===false || mysql_num_rows($resultado)!=1) {
             return false;//no existe el id
         }
@@ -427,7 +427,7 @@ order by Valoracion desc",$con);
      function cancionesautor($autor){
         $con = conexion();
         $autor=mysql_real_escape_string($autor);
-        $resultado = mysql_query("select Id,Titulo,Artista,Genero,Album,Año from canciones where Artista like '$autor'",$con);
+        $resultado = mysql_query("select Id,Titulo,Artista,Genero,Album,Año from final_canciones where Artista like '$autor'",$con);
         $i=0;
         $aux=null;
         if ($resultado!==false) {
@@ -440,7 +440,7 @@ order by Valoracion desc",$con);
      }
      function cancionesalbum($album){
         $con = conexion();
-		$resultado = mysql_query("select * from canciones where album like '$album'",$con);
+		$resultado = mysql_query("select * from final_canciones where album like '$album'",$con);
 		$i=0;
         $aux=null;
         if ($resultado!==false) {
@@ -462,7 +462,7 @@ order by Valoracion desc",$con);
         if (!is_numeric($id)){//nos la querian colar ¬¬
             return null;
         }
-        $resultado=mysql_query("select  Id,Titulo,Artista,Album,Genero,Año,(ValoracionSemanal * 8) as ValoracionSemanal from canciones c join cancionesplaylist p on (p.cancion=c.id) where playlist=$id" ,$con);  
+        $resultado=mysql_query("select Id,Titulo,Artista,Album,Genero,Año,(ValoracionSemanal * 8) as ValoracionSemanal from final_canciones c join final_cancionesplaylist p on (p.cancion=c.id) where playlist=$id" ,$con);  
         $i=0;
         $aux=null;
         if ($resultado!==false) {
@@ -480,7 +480,7 @@ order by Valoracion desc",$con);
             return null;
         }
         $info=null;
-        $resultado=mysql_query("SELECT Id,Usuario,Nombre,Asunto,Descripcion,Fecha,(ValoracionSemanal * 8) as ValoracionSemanal FROM `playlist` WHERE id='$id'",$con);
+        $resultado=mysql_query("SELECT Id,Usuario,Nombre,Asunto,Descripcion,Fecha,(ValoracionSemanal * 8) as ValoracionSemanal FROM final_playlist WHERE id='$id'",$con);
         if ($resultado !== false) {
             $info = mysql_fetch_assoc($resultado);
         }
@@ -493,7 +493,7 @@ order by Valoracion desc",$con);
             return null;
         }
         $empieza=($pag-1)*20;
-        $resultado=mysql_query("select Id,Usuario,Comentario from comentarios where playlist='$id' limit $empieza,20" ,$con);  
+        $resultado=mysql_query("select Id,Usuario,Comentario from final_comentarios where playlist='$id' limit $empieza,20" ,$con);  
         $i=0;
         $aux=null;
         if ($resultado!==false) {
@@ -511,7 +511,7 @@ order by Valoracion desc",$con);
         $con=conexion();
         $comentario=htmlentities($comentario,ENT_SUBSTITUTE);
         $comentario=mysql_real_escape_string($comentario);
-        $resultado=mysql_query("insert into comentarios(Usuario,Playlist,Comentario) values ('$uid','$pid','$comentario') " ,$con); 
+        $resultado=mysql_query("insert into final_comentarios(Usuario,Playlist,Comentario) values ('$uid','$pid','$comentario') " ,$con); 
         if ($resultado!==false){
             return true;
         }else{
@@ -526,13 +526,13 @@ order by Valoracion desc",$con);
             return false;
         }
 		$con = conexion();
-		$resultado = mysql_query("UPDATE comentarios SET reportes = reportes + 1 WHERE Id = '$id'");
+		$resultado = mysql_query("UPDATE final_comentarios SET reportes = reportes + 1 WHERE Id = '$id'");
 		return $resultado;
 	}
 	
     function mobtenerReportes(){
         $con = conexion();
-	$resultado = mysql_query("select Id,Usuario,Comentario,Reportes from comentarios where ignorado='0' and Reportes>'0' order by reportes desc",$con);
+	$resultado = mysql_query("select Id,Usuario,Comentario,Reportes from final_comentarios where Reportes>'5' order by reportes desc",$con);
 	$i=0;
         $aux=null;
         if ($resultado!==false) {
@@ -545,7 +545,7 @@ order by Valoracion desc",$con);
      }
     function mobtenerReportesIgnorados(){
         $con = conexion();
-	$resultado = mysql_query("select Id,Usuario,Comentario from comentarios where ignorado=1 order by reportes desc",$con);
+	$resultado = mysql_query("select Id,Usuario,Comentario from final_comentarios where ignorado=1 order by reportes desc",$con);
 	$i=0;
         $aux=null;
         if ($resultado!==false) {
@@ -561,14 +561,14 @@ order by Valoracion desc",$con);
         if (!is_numeric($id)){
             return false;
         }
-	mysql_query("update comentarios set Ignorado='1' where Id='$id'",$con);
+	mysql_query("update final_comentarios set Ignorado='1' where Id='$id'",$con);
      }
      function mborrarComentario($id){
         $con = conexion();
         if (!is_numeric($id)){
             return false;
         }
-        $otro = mysql_query("delete from comentarios where id='$id'",$con);
+        $otro = mysql_query("delete from final_comentarios where id='$id'",$con);
         if ($otro===false){
             return false;
         }else{
@@ -580,7 +580,7 @@ order by Valoracion desc",$con);
 	{
 		$con = conexion();
 		$usuario = mysql_real_escape_string($usuario);
-		$resultado = mysql_query("DELETE FROM usuarios WHERE Usuario = '$usuario'" ,$con);
+		$resultado = mysql_query("DELETE FROM final_usuarios WHERE Usuario = '$usuario'" ,$con);
 		return $resultado;
 	}
 	
@@ -596,7 +596,7 @@ order by Valoracion desc",$con);
         $asunto= htmlentities($asunto);
         $descripcion=mysql_real_escape_string($descripcion);
         $descripcion= htmlentities($descripcion);
-        $resultado=mysql_query("insert into playlist(Usuario,Nombre,Asunto,Descripcion) values ('$usuario','$titulo','$asunto','$descripcion') " ,$con); 
+        $resultado=mysql_query("insert into final_playlist(Usuario,Nombre,Asunto,Descripcion) values ('$usuario','$titulo','$asunto','$descripcion') " ,$con); 
         if ($resultado!==false){
             return true;
         }else{
@@ -614,7 +614,7 @@ order by Valoracion desc",$con);
         $asunto=  htmlentities($asunto);
         $descrip=mysql_real_escape_string($descrip);
         $descrip=  htmlentities($descrip);
-        $resultado=mysql_query("update playlist set Nombre='$titulo',Asunto='$asunto',Descripcion='$descrip'where id='$pid' " ,$con); 
+        $resultado=mysql_query("update final_playlist set Nombre='$titulo',Asunto='$asunto',Descripcion='$descrip'where id='$pid' " ,$con); 
         if ($resultado!==false){
             return true;
         }else{
@@ -627,7 +627,7 @@ order by Valoracion desc",$con);
         if (!is_numeric($pid)){
             return false;
         }
-        $resultado = mysql_query("select Usuario from playlist where id='$pid'",$con);
+        $resultado = mysql_query("select Usuario from final_playlist where id='$pid'",$con);
         $i=0;
         $aux=mysql_fetch_assoc($resultado);
         if ($aux!=false)
@@ -640,7 +640,7 @@ order by Valoracion desc",$con);
         if (!is_numeric($cid) || !is_numeric($pid) || $_SESSION['usuario']!=mcreadorPlaylist($pid)){
             return false;
         }
-        $resultado = mysql_query("insert into cancionesplaylist(playlist,cancion) values ('$pid','$cid')",$con);
+        $resultado = mysql_query("insert into final_cancionesplaylist(playlist,cancion) values ('$pid','$cid')",$con);
         if ($resultado !== false) {
             return true;
         }else{
@@ -652,7 +652,7 @@ order by Valoracion desc",$con);
         if (!is_numeric($cid) || !is_numeric($pid) || $_SESSION['usuario']!=mcreadorPlaylist($pid)){
             return false;
         } 
-        $resultado = mysql_query("delete from cancionesplaylist where playlist='$pid' and cancion='$cid'",$con);
+        $resultado = mysql_query("delete from final_cancionesplaylist where playlist='$pid' and cancion='$cid'",$con);
         if ($resultado !== false) {
             return true;
         }else{
@@ -662,7 +662,7 @@ order by Valoracion desc",$con);
     function mobtenerPlaylist($uid){
         $con=conexion();
         $uid=mysql_real_escape_string($uid);
-        $resultado = mysql_query("select Nombre,Id from playlist where Usuario='$uid' order by Nombre",$con);
+        $resultado = mysql_query("select Nombre,Id from final_playlist where Usuario='$uid' order by Nombre",$con);
         $i=0;
         $aux=null;
         if ($resultado!==false) {
@@ -678,7 +678,7 @@ order by Valoracion desc",$con);
         if (!is_numeric($pid)){//nos la querian colar ¬¬
             return null;
         }
-        $resultado=mysql_query("select count(*) num from comentarios where playlist='$pid'" ,$con);  
+        $resultado=mysql_query("select count(*) num from final_comentarios where playlist='$pid'" ,$con);  
         $num=0;
         if ($resultado!==false) {
             $aux = mysql_fetch_assoc($resultado);
@@ -693,7 +693,7 @@ order by Valoracion desc",$con);
             return false;
         }
         $uid=mysql_real_escape_string($uid);
-        $resultado=mysql_query("delete from usuarios where Usuario='$uid'" ,$con);  
+        $resultado=mysql_query("delete from final_usuarios where Usuario='$uid'" ,$con);  
          if ($resultado!==false) {
             return true;
         }else{
@@ -717,7 +717,7 @@ order by Valoracion desc",$con);
             return false;
         }
         $con=conexion();
-        $resultado=mysql_query("delete from playlist where Id='$pid'" ,$con);  
+        $resultado=mysql_query("delete from final_playlist where Id='$pid'" ,$con);  
          if ($resultado!==false) {
             return true;
         }else{
