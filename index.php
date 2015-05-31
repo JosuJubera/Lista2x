@@ -764,20 +764,17 @@
 							vmostrarAmenu();
 							$datos = mUsuarios();
 							vmostrarUsuarios($datos);
-							vmostrarAUsuario($_SESSION["admin"]);
 							$resultado = mborrarAUsuario($_GET['user']);
 							if ($resultado)
 							{
-								echo '<div class="exito mensajes" id="exito mensajes" style="visibility:visible;">Usuario eliminado.</div>';
-								header('Refresh: 3; url=index.php?accion=AU&id=1');
+								 mostrarInfo("Usuario eliminado con exito!");
+                            }else{
+								 mostrarError("Imposible eliminar",
+-                                "No se ha podido eliminar el usuario. Puede que ya haya sido eliminado o no exista");
 							}
-							else
-							{
-								echo '<div class="error mensajes" id="error mensajes" style="visibility:visible;">No se ha podido eliminar al usuario.</div>';
-								header('Refresh: 3; url=index.php?accion=AU&id=1');
-							}
+                            vmostrarAUsuario($_SESSION["admin"]);
 						}
-						else
+						else//no es admin
 						{
 							echo '<div class="error mensajes" id="error mensajes" style="visibility:visible;">No eres administrador.</div>';
 							header('Refresh: 3; url=index.php?accion=admin&id=1');
