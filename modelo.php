@@ -276,15 +276,15 @@
 	{
 		$con=conexion();
 		$nombre=mysql_real_escape_string($nombre);
-                $nombre=  htmlentities($nombre);
+        $nombre=  htmlspecialchars ($nombre,ENT_QUOTES | ENT_HTML401,'UTF-8');
 		$user=mysql_real_escape_string($user);
-                $user=  htmlentities($user);
+        $user=  htmlspecialchars ($user,ENT_QUOTES | ENT_HTML401,'UTF-8');
 		$apellido1=mysql_real_escape_string($apellido1);
-                $apellido1=htmlentities($apellido1);
+        $apellido1=htmlspecialchars ($apellido1);
 		$apellido2=mysql_real_escape_string($apellido2);
-                $apellido2=htmlentities($apellido2);
+        $apellido2=htmlspecialchars ($apellido2);
 		$correo=mysql_real_escape_string($correo);
-                $correo=htmlentities($correo);
+        $correo=htmlspecialchars ($correo);
 		$contraseña=mysql_real_escape_string($contraseña);
 		$cifrado=sha1($contraseña);
 		$resultado=mysql_query("insert into final_usuarios(usuario,nombre,apellido1,apellido2,correo,contraseña) values ('$user','$nombre','$apellido1','$apellido2','$correo','$cifrado')",$con); 
@@ -331,15 +331,15 @@
             }
             $con=conexion();
             $titulo=mysql_real_escape_string($titulo);
-            $titulo=htmlentities($titulo);
+            $titulo=htmlspecialchars ($titulo);
             $autor=mysql_real_escape_string($autor);
-            $autor=htmlentities($autor);
+            $autor=htmlspecialchars ($autor);
             $album=mysql_real_escape_string($album);
-            $album=htmlentities($album);
+            $album=htmlspecialchars ($album);
             $genero=mysql_real_escape_string($genero);
-            $genero=htmlentities($genero);
+            $genero=htmlspecialchars ($genero);
             $año=mysql_real_escape_string($año);
-            $año=htmlentities($año);
+            $año=htmlspecialchars ($año);
             mysql_query("begin",$con);
             $result=  mysql_query("insert into final_canciones(Titulo,Artista,Album,Genero,Año) values ('$titulo','$autor','$album','$genero','$año')",$con);
             if ($result===false){ //ya existe en la DB, no lo subimos de nuevo
@@ -348,7 +348,7 @@
             }
             $nomarchivo= mysql_insert_id();
             $ar1=subirArchivo($imagen, "./caratulas",$album.'.jpg',3000000);
-            $ar1 &=imagejpeg($ar1,"./caratulas/$album.jpg",85); //cambiamos la imagen a jpg
+            //$ar1 &=imagejpeg($imagen['tmp_name'],"./caratulas/$album.jpg",85); //cambiamos la imagen a jpg
             $ar2=subirArchivo($cancion, "./canciones",$nomarchivo.'.mp3',10000000);
             if ($ar1 ==true && $ar2==true){ //compruebo si se han subido los archivos
                 mysql_query("commit",$con);//correcto, confirmo cambios
@@ -509,7 +509,7 @@
             return false;
         }
         $con=conexion();
-        $comentario=htmlentities($comentario,ENT_SUBSTITUTE);
+        $comentario=htmlspecialchars ($comentario,ENT_SUBSTITUTE);
         $comentario=mysql_real_escape_string($comentario);
         $resultado=mysql_query("insert into final_comentarios(Usuario,Playlist,Comentario) values ('$uid','$pid','$comentario') " ,$con); 
         if ($resultado!==false){
@@ -591,11 +591,11 @@
         }
         $usuario=mysql_real_escape_string($usuario);
         $titulo=mysql_real_escape_string($titulo);
-        $titulo=htmlentities($titulo);
+        $titulo=htmlspecialchars ($titulo);
         $asunto=mysql_real_escape_string($asunto);
-        $asunto= htmlentities($asunto);
+        $asunto= htmlspecialchars ($asunto);
         $descripcion=mysql_real_escape_string($descripcion);
-        $descripcion= htmlentities($descripcion);
+        $descripcion= htmlspecialchars ($descripcion);
         $resultado=mysql_query("insert into final_playlist(Usuario,Nombre,Asunto,Descripcion) values ('$usuario','$titulo','$asunto','$descripcion') " ,$con); 
         if ($resultado!==false){
             return true;
@@ -609,11 +609,11 @@
             return false;
         }
         $titulo=mysql_real_escape_string($titulo);
-        $titulo= htmlentities($titulo);
+        $titulo= htmlspecialchars ($titulo);
         $asunto=mysql_real_escape_string($asunto);
-        $asunto=  htmlentities($asunto);
+        $asunto=  htmlspecialchars ($asunto);
         $descrip=mysql_real_escape_string($descrip);
-        $descrip=  htmlentities($descrip);
+        $descrip=  htmlspecialchars ($descrip);
         $resultado=mysql_query("update final_playlist set Nombre='$titulo',Asunto='$asunto',Descripcion='$descrip'where id='$pid' " ,$con); 
         if ($resultado!==false){
             return true;

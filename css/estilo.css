@@ -1,7 +1,7 @@
 body 
 {
     background-color: #FFFFFF;
-	overflow-x: hidden;
+    overflow-x: hidden;
 }
 p 
 {
@@ -134,7 +134,13 @@ p
 {
 	background-color: rgba(173,234,234,1);
 }
-
+.listado {
+  border: 1px solid #000;
+  border-collapse: collapse;
+}
+.listado th {
+  border: 1px solid #000;
+}
 .star-rating
 {
 	list-style:none;
