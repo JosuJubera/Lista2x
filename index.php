@@ -601,15 +601,19 @@
 	{
 		switch ($id)
 		{
-			case 1:		vmostrarRmenu();
-						vmostrarUsuario($_SESSION["usuario"]);
-						vmostrarBuscador();
+            case 1:		if (isset($_SESSION["usuario"])){
+                            vmostrarRmenu();
+                            vmostrarUsuario($_SESSION["usuario"]);
+                            vmostrarBuscador();
+                        }else{
+                            vmostrarImenu();
+                            vmostrarLogin();
+                        }
 						$datos = minfoplaylist($_GET['pid']);
 						$canciones = mcancionesplaylist($_GET['pid']);
 						$comentarios = mcomplaylist($_GET['pid']);
 						$ncomentarios = mnumcomplaylist($_GET['pid']);
 						vmostrarLista($datos,$canciones,$comentarios,$ncomentarios);
-						vmostrarContactar();
 						if (isset($_GET["cid"]))
 						{
 							$cid = $_GET["cid"];
@@ -617,14 +621,15 @@
 							$resultado = mReportar($cid);
 							if ($resultado)
 							{
-								echo '<div class="exito mensajes" id="exito mensajes" style="visibility:visible;">Comentario reportado.</div>';
-								header("Refresh: 3; url=index.php?accion=VP&id=1&pid=1");////////////parece que vmostrarLista no deja
+								mostrarInfo('Comentario reportado.');
+								vmostrarLista($datos,$canciones,$comentarios,$ncomentarios);
 							}
 							else
 							{
-								echo '<div class="error mensajes" id="error mensajes" style="visibility:visible;">No se ha podido reportar.</div>';
-								header('Refresh: 3; url=index.php?accion=VP&id=1&pid='. $pid);
+								mostrarError("Error", 'No se ha podido reportar.');
+								vmostrarLista($datos,$canciones,$comentarios,$ncomentarios);
 							}
+                            vmostrarContactar();
 						}
 						else
 						{
