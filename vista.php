@@ -63,7 +63,7 @@
 		echo $aux;
 	}
 	
-	function vmostrarBuscardor()
+	function vmostrarBuscador()
 	{
 		$aux = leerfichero("fonts/buscar.html");
 		echo $aux;
@@ -140,7 +140,7 @@
         if ($consulta == null)
 		{//No hay resultados
  
-            $error="<p><b>No se han obtenido resultados.</b></p>";
+            $error="<p><b class='contenido'>No se han obtenido resultados.</b></p>";
             echo $partes[0] . $error . $partes[2];
         }
 		else

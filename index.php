@@ -296,7 +296,7 @@
 		{
 			case 0:		vmostrarRmenu();
 						vmostrarUsuario($_SESSION["usuario"]);
-						vmostrarBuscardor();
+						vmostrarBuscador();
 						vmensaje();
 						vmostrarBuscarlistas($_GET["search"],$datos);
 						vmostrarContactar();
@@ -304,7 +304,7 @@
 			
 			case 1:		vmostrarRmenu();
 						vmostrarUsuario($_SESSION["usuario"]);
-						vmostrarBuscardor();
+						vmostrarBuscador();
 						vmensaje();
 						vmostrarBuscarcanciones($_GET["search"],$datos);
 						vmostrarContactar();
@@ -328,7 +328,7 @@
         {
             vmostrarRmenu();
             vmostrarUsuario($_SESSION["usuario"]);
-            vmostrarBuscardor();
+            vmostrarBuscador();
 			vmensaje();
 			$datos = mToplistas($_SESSION["usuario"]);
 			vmostrarToplistas($datos);
@@ -352,7 +352,7 @@
         {
 		    vmostrarRmenu();
             vmostrarUsuario($_SESSION["usuario"]);
-            vmostrarBuscardor();
+            vmostrarBuscador();
 			vmensaje();
 			$datos = mTopcanciones($_SESSION["usuario"]);
 			vmostrarTopcanciones($datos);
@@ -365,7 +365,7 @@
 	{
 		vmostrarRmenu();
 		vmostrarUsuario($_SESSION["usuario"]);
-		vmostrarBuscardor();
+		vmostrarBuscador();
 		$datos = mMislistas($_SESSION["usuario"]);
 		vmostrarMislistas($datos);
 		vmostrarContactar();
@@ -376,7 +376,7 @@
 	{
         vmostrarRmenu();
 		vmostrarUsuario($_SESSION["usuario"]);
-		vmostrarBuscardor();
+		vmostrarBuscador();
 		$datos = mMisfavoritos($_SESSION["usuario"]);
 		vmostrarMisfavoritos($datos);
 		vmostrarContactar();
@@ -399,7 +399,7 @@
                     }else{
                             vmostrarRmenu();
                             vmostrarUsuario($_SESSION["usuario"]);
-                            vmostrarBuscardor();
+                            vmostrarBuscador();
                     }
                     $datos = minfoplaylist($_GET['pid']);
                     $canciones=mcancionesplaylist($_GET['pid']);
@@ -415,17 +415,17 @@
 		switch ($id){
 			case 1:		vmostrarRmenu();
 						vmostrarUsuario($_SESSION["usuario"]);//mostrar formulario
-						vmostrarBuscardor();
+						vmostrarBuscador();
 						vcrearPlaylist();
                         vmostrarContactar();
 						break;
 			case 2:		vmostrarRmenu();
 						vmostrarUsuario($_SESSION["usuario"]);
                         vmostrarUsuario($_SESSION["usuario"]);//mostrar formulario
-						vmostrarBuscardor();
+						vmostrarBuscador();
 						vcrearPlaylist();
 						$exito=mcrearPlaylist($_SESSION['usuario'],$_POST['Ptitulo'], $_POST['Pasunto'], $_POST['Pdescrip']);
-						vmostrarBuscardor();
+						vmostrarBuscador();
 						if ($exito)
 						{
 							echo '<div class="exito mensajes" id="exito mensajes" style="visibility:visible;">Lista creada correctamente.</div>';
@@ -455,7 +455,7 @@
 		switch ($id){
             case 1:     vmostrarRmenu();
                         vmostrarUsuario($_SESSION["usuario"]);//muestra la playlist
-                        vmostrarBuscardor();
+                        vmostrarBuscador();
                         $infoplaylist=minfoplaylist($_GET['pid']);
                         $canciones=mcancionesplaylist($_GET['pid']);
                         vmodPlaylist($infoplaylist,$canciones);
@@ -464,7 +464,7 @@
 			case 2:		//modificar la info de playlist
 						vmostrarRmenu();
 						vmostrarUsuario($_SESSION["usuario"]);//muestra la playlist
-						vmostrarBuscardor();
+						vmostrarBuscador();
 						$exito=mactualizarPlaylist($_POST['pid'],$_POST['Ptitulo'],$_POST['Pasunto'],$_POST['Pdescrip']);
 						if ($exito==true)
 						{
@@ -501,7 +501,7 @@
 						$exito=mquitarCancionPlaylist($_GET['cid'], $_GET['pid']);
 						vmostrarRmenu();
 						vmostrarUsuario($_SESSION["usuario"]);//muestra la playlist
-						vmostrarBuscardor();
+						vmostrarBuscador();
 						if ($exito)
 						{
 							echo '<div class="exito mensajes" id="exito mensajes" style="visibility:visible;">Canción eliminada de la lista.</div>';
@@ -529,7 +529,7 @@
 							mostrarError("Error", "No se ha podido eliminar la lista");
 						}
 						vmostrarUsuario($_SESSION["usuario"]);
-						vmostrarBuscardor();
+						vmostrarBuscador();
 						$datos = mTopcanciones($_SESSION["usuario"]);
 						vmostrarTopcanciones($datos);
 						vmostrarContactar();
@@ -548,7 +548,7 @@
 					}else{
 						vmostrarRmenu();
 						vmostrarUsuario($_SESSION["usuario"]);
-						vmostrarBuscardor();
+						vmostrarBuscador();
 					}
 					break;
 			case 2:		if (!isset($_SESSION["admin"]))//esto pa que sirve????
@@ -559,7 +559,7 @@
 						{
 							vmostrarAmenu();
 							vmostrarUsuario($_SESSION["admin"]);
-							vmostrarBuscardor();
+							vmostrarBuscador();
 						}
 		}
         $datos1 = mCancion($_GET["cid"]);
@@ -594,7 +594,7 @@
 		{
 			case 1:		vmostrarRmenu();
 						vmostrarUsuario($_SESSION["usuario"]);
-						vmostrarBuscardor();
+						vmostrarBuscador();
 						$datos = minfoplaylist($_GET['pid']);
 						$canciones = mcancionesplaylist($_GET['pid']);
 						$comentarios = mcomplaylist($_GET['pid']);
