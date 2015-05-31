@@ -5,22 +5,22 @@
     /*
      * Falta por hacer:
      * -Refres en MF (recargar la pagina tras votar)
-     * -Comprobar los back                             ////hecho
+     * -Comprobar los back                             ////quedan algunos que iwal mejor cambiar a imagen pa tener todos iwal
      * -Comprobaciones SQL(limpiar entrada)
      * -Paginacion en tablas
      * -CSS
      * -arreglar preferencias admin                      ////hecho
 	 * -preferencias  CC, EC, CE ////////////habria que comprobar que realmente se hacen los cambios, iwal probar con un select despues
      * -Mensajes de confirmacion y de error
+	 -funcion mostrar mensaje
      * -Añadir mensajes de Info y de Error con JS en Regisgtro.
      * -en registro usuario comprobar que se registra bien //////////////creo que hecho bien
      * -Añadir mensaje error o no en alta cancion.
      * -Al borrar comentario ir a los reportes
-	 * -Reportes
-	 -funcion mostrar mensaje
+	 * -Reportes   ///////////////////////////redirigir falla
 	 -admin (vistas, funcionalidad...)
 	 - poner añadir lista como añadir cancion y borrar pero que salga en horizontal es decir desplegable
-     * -Probar la pagina
+	 * -Probar la pagina
      */
     session_start();
     //Vistas por defecto
