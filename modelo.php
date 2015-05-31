@@ -197,7 +197,10 @@
 	function mMislistas($usuario)
 	{
 		$con = conexion();
-		$resultado = mysql_query("select Id, Nombre, Asunto, (select count(*) from cancionesplaylist where playlist=id) as Canciones, p.Usuario, p.Fecha,(Valoracion * 8) as Valoracion, (ValoracionSemanal * 8) as ValoracionSemanal from playlist p join puntuacionesplaylist pp on id = playlist and pp.usuario = '$usuario' and p.usuario = '$usuario' order by Valoracion desc limit 20",$con);
+        $usuario=mysql_real_escape_string($usuario);
+		$resultado = mysql_query("select Id, Nombre, Asunto, (select count(*) from cancionesplaylist where playlist=id) as Canciones, Usuario, Fecha,IFNULL((select  Valoracion *8 from puntuacionesplaylist where Usuario='$usuario' and playlist=Id),0) as Valoracion, (ValoracionSemanal * 8) as ValoracionSemanal from playlist
+where Usuario = '$usuario' 
+order by Valoracion desc",$con);
 		return $resultado;   
 	}
 	
